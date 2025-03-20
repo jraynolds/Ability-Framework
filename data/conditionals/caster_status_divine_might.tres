@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EntityStatusConditionalResource" load_steps=3 format=3 uid="uid://do4dubxamjt0u"]
+
+[ext_resource type="Script" uid="uid://y5lbihft5yxd" path="res://data/conditionals/entity_status_conditional_resource.gd" id="1_p2sby"]
+[ext_resource type="Resource" uid="uid://nsj5sk4al1cc" path="res://data/effects/status_divine_might.tres" id="2_anghn"]
+
+[resource]
+script = ExtResource("1_p2sby")
+status = ExtResource("2_anghn")
+status_entity = 0
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://y5lbihft5yxd"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=9 format=3 uid="uid://dlqd0to47bo6r"]
+
+[ext_resource type="Resource" uid="uid://dgny3unq0eubi" path="res://data/values/caster_attack_2x.tres" id="1_8tdlc"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_yr6lj"]
+[ext_resource type="Resource" uid="uid://do4dubxamjt0u" path="res://data/conditionals/caster_status_divine_might.tres" id="3_6v31x"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="4_ruxuw"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="5_3h1xr"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="6_6v48k"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_32rqu"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_7jkv8"]
+
+[resource]
+script = ExtResource("5_3h1xr")
+entity_target = 11
+stat = ExtResource("6_6v48k")
+addition = ExtResource("1_8tdlc")
+negative = true
+title = "Damage 2x attack"
+description = "Inflict damage to the target equal to 2x your attack when you have Divine Might."
+triggers = Array[ExtResource("7_32rqu")]([ExtResource("8_7jkv8")])
+lifetimes = Array[ExtResource("4_ruxuw")]([])
+conditionals_positive = Array[ExtResource("2_yr6lj")]([ExtResource("3_6v31x")])
+conditionals_negative = Array[ExtResource("2_yr6lj")]([])
+metadata/_custom_type_script = "uid://8lptu87j3jgg"

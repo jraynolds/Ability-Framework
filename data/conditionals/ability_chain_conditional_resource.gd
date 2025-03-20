@@ -7,7 +7,7 @@ class_name AbilityChainConditionalResource
 @export var chain_position : ValueResource ## How many Abilities back we're checking.
 
 ## Returns whether the ability caster last cast the given Ability.
-func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
 	assert(ability, "No valid AbilityResource set")
 	var entity : Entity = null
 	match ability_caster:
@@ -17,4 +17,4 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 			assert(len(targets), "No valid Entity target")
 			entity = targets[0]
 	assert(entity, "No valid Entity found")
-	return entity.abilities_component.get_ability_in_chain(chain_position.get_value(caster, targets)).is_resource_equal(ability)
+	return entity.abilities_component.get_ability_in_chain(chain_position.get_value(caster, targets)).is_resource_equal(ability._resource)

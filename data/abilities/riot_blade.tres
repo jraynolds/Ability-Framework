@@ -1,10 +1,17 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://clt017r223853"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=7 format=3 uid="uid://clt017r223853"]
 
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="1_1b1y5"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_bm57d"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="2_a0das"]
+[ext_resource type="Resource" uid="uid://bg7hcavbpwak7" path="res://data/effects/damage_caster_attack_1_2x_chain_fast_blade.tres" id="3_nayct"]
+[ext_resource type="Resource" uid="uid://xs0gxdb273kt" path="res://data/effects/mana_add_caster_1000_chain_fast_blade.tres" id="4_7xkw1"]
+[ext_resource type="Resource" uid="uid://n50bjeoejw2r" path="res://data/effects/damage_caster_attack__8x_no_chain_fast_blade.tres" id="5_85ent"]
 
 [resource]
 script = ExtResource("2_a0das")
-title = ""
-effects = Array[ExtResource("1_1b1y5")]([])
+title = "Riot Blade"
+effects = Array[ExtResource("1_1b1y5")]([ExtResource("3_nayct"), ExtResource("4_7xkw1"), ExtResource("5_85ent")])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_bm57d")]([])
+conditionals_negative = Array[ExtResource("1_bm57d")]([])
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"

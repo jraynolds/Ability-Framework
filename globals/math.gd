@@ -8,3 +8,12 @@ enum Rounding {
 	Nearest,
 	Ceiling
 }
+
+## Math comparisons.
+enum Comparison {
+	Equal,
+	GreaterThan,
+	GreaterThanOrEqual,
+	LessThan,
+	LessThanOrEqual
+}

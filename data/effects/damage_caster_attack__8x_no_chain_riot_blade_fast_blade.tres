@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=10 format=3 uid="uid://b6lo7b3v346me"]
+
+[ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/caster_attack__8x.tres" id="1_kqb6w"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_623tq"]
+[ext_resource type="Resource" uid="uid://cd43lu3pdhexh" path="res://data/conditionals/caster_chain_0_riot_blade.tres" id="3_623tq"]
+[ext_resource type="Resource" uid="uid://dhhbvttxhm6kx" path="res://data/conditionals/caster_chain_1_fast_blade.tres" id="4_hpxbx"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="4_uysgb"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="5_18e1q"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="6_fgx8e"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_26lrv"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_qf8vp"]
+
+[resource]
+script = ExtResource("5_18e1q")
+entity_target = 11
+stat = ExtResource("6_fgx8e")
+addition = ExtResource("1_kqb6w")
+negative = true
+title = "Damage .8x attack"
+description = "Inflict damage to the target equal to .8x your attack. Occurs when not combo'd with Riot Blade and Fast Blade."
+triggers = Array[ExtResource("7_26lrv")]([ExtResource("8_qf8vp")])
+lifetimes = Array[ExtResource("4_uysgb")]([])
+conditionals_positive = Array[ExtResource("2_623tq")]([])
+conditionals_negative = Array[ExtResource("2_623tq")]([ExtResource("3_623tq"), ExtResource("4_hpxbx")])
+metadata/_custom_type_script = "uid://8lptu87j3jgg"

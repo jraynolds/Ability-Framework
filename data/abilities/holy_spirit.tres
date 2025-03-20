@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=9 format=3 uid="uid://b7lf65t78afe8"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_8xofb"]
+[ext_resource type="Resource" uid="uid://canx04w7a0bwo" path="res://data/values/caster_ability_speed.tres" id="1_s58eq"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_bfdda"]
+[ext_resource type="Resource" uid="uid://g2rnr4drci7i" path="res://data/effects/mana_subtract_caster_2000.tres" id="3_bfdda"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_s58eq"]
+[ext_resource type="Resource" uid="uid://drqbhi85i031" path="res://data/conditionals/caster_mana_gte_2000.tres" id="3_yv3j4"]
+[ext_resource type="Resource" uid="uid://dlqd0to47bo6r" path="res://data/effects/damage_caster_attack_2x_status_divine_might.tres" id="5_px55c"]
+[ext_resource type="Resource" uid="uid://cdiruioekneqv" path="res://data/effects/damage_caster_attack_1_3x_no_status_divine_might.tres" id="6_xo8i7"]
+
+[resource]
+script = ExtResource("3_s58eq")
+title = "Holy Spirit"
+effects = Array[ExtResource("2_bfdda")]([ExtResource("5_px55c"), ExtResource("6_xo8i7"), ExtResource("3_bfdda")])
+casting_time = ExtResource("1_s58eq")
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_8xofb")]([ExtResource("3_yv3j4")])
+conditionals_negative = Array[ExtResource("1_8xofb")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

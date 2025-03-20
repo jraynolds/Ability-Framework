@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StatValueConditionalResource" load_steps=4 format=3 uid="uid://drqbhi85i031"]
+
+[ext_resource type="Script" uid="uid://bw4yy682t5m1y" path="res://data/conditionals/value_comparison_conditional_resource.gd" id="1_t8fvo"]
+[ext_resource type="Resource" uid="uid://vwjeldojr4q3" path="res://data/values/caster_mana.tres" id="2_1cdgm"]
+[ext_resource type="Resource" uid="uid://30npkdbm0y5i" path="res://data/values/flat_2000.tres" id="3_jh5uj"]
+
+[resource]
+script = ExtResource("1_t8fvo")
+value_1 = ExtResource("2_1cdgm")
+value_2 = ExtResource("3_jh5uj")
+comparison = 2
+reversed = false
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://bw4yy682t5m1y"

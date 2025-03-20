@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EntityAddStatusResource" load_steps=8 format=3 uid="uid://csfu8q8648el3"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_482ov"]
+[ext_resource type="Resource" uid="uid://cd43lu3pdhexh" path="res://data/conditionals/caster_chain_0_riot_blade.tres" id="2_bnnja"]
+[ext_resource type="Resource" uid="uid://dhhbvttxhm6kx" path="res://data/conditionals/caster_chain_1_fast_blade.tres" id="3_0kuue"]
+[ext_resource type="Resource" uid="uid://nsj5sk4al1cc" path="res://data/effects/status_divine_might.tres" id="4_vtgnj"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="5_hqrt0"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/entity_add_status_effect_resource.gd" id="6_4by8a"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_edbga"]
+
+[resource]
+script = ExtResource("6_4by8a")
+entity_target = 0
+effect = ExtResource("4_vtgnj")
+stacking_behavior = 0
+title = "Add Divine Might"
+description = "Adds a stack of Divine Might to the caster, allowing them to cast enhanced Holy Spirit."
+triggers = Array[ExtResource("7_edbga")]([])
+lifetimes = Array[ExtResource("5_hqrt0")]([])
+conditionals_positive = Array[ExtResource("1_482ov")]([ExtResource("2_bnnja"), ExtResource("3_0kuue")])
+conditionals_negative = Array[ExtResource("1_482ov")]([])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

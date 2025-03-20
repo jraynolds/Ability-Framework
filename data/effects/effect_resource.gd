@@ -6,7 +6,9 @@ class_name EffectResource
 @export_multiline var description : String ## The description of this Effect.
 @export var icon : Texture2D ## The icon for this Effect.
 @export var triggers : Array[TriggerResource] ## The triggers for this Effect.
-@export var conditionals : Array[ConditionalResource] ## The conditions for this Effect to take place.
+@export var lifetimes : Array[LifetimeResource] ## The lifetimes before this Effect expires.
+@export var conditionals_positive : Array[ConditionalResource] ## The conditionals that allow this Effect.
+@export var conditionals_negative : Array[ConditionalResource] ## The conditionals that disallow this Effect.
 
 func affect(caster: Entity, targets: Array[Entity]):
 	pass

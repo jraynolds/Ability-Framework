@@ -3,3 +3,5 @@ extends Node
 class_name Entity
 
 @export var stats_component : StatsEntityComponent ## The Stats component for this Entity.
+@export var statuses_component : StatusesEntityComponent ## The Statuses component for this Entity.
+@export var abilities_component : AbilitiesEntityComponent ## The Abilities component for this Entity.

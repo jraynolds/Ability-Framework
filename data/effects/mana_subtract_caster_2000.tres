@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=9 format=3 uid="uid://g2rnr4drci7i"]
+
+[ext_resource type="Resource" uid="uid://30npkdbm0y5i" path="res://data/values/flat_2000.tres" id="1_so46w"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_osc4j"]
+[ext_resource type="Resource" uid="uid://cv87rbcu48v" path="res://data/conditionals/caster_chain_0_fast_blade.tres" id="3_scorf"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="4_8e4dv"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="5_sl1e6"]
+[ext_resource type="Resource" uid="uid://o4t2v2iun48f" path="res://data/stats/mana.tres" id="6_mrbre"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_lou0y"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_p2w6j"]
+
+[resource]
+script = ExtResource("5_sl1e6")
+entity_target = 0
+stat = ExtResource("6_mrbre")
+addition = ExtResource("1_so46w")
+negative = false
+title = "Cost 2000 mana"
+description = "Spends 2000 mana."
+triggers = Array[ExtResource("7_lou0y")]([ExtResource("8_p2w6j")])
+lifetimes = Array[ExtResource("4_8e4dv")]([])
+conditionals_positive = Array[ExtResource("2_osc4j")]([ExtResource("3_scorf")])
+conditionals_negative = Array[ExtResource("2_osc4j")]([])
+metadata/_custom_type_script = "uid://8lptu87j3jgg"

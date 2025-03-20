@@ -12,6 +12,8 @@ var _cooldown : ValueResource ## The duration in seconds before this Ability can
 var _gcd_type : AbilityResource.GCD
 ## The duration in seconds this Ability will put all GCDs into cooldown. Ignored if the Ability is OffGCD.
 var _gcd_cooldown : ValueResource
+var _conditionals_positive : Array[ConditionalResource] = [] ## The conditionals that allow this Ability to be cast.
+var _conditionals_negative : Array[ConditionalResource] = [] ## The conditionals restricting this Ability from being cast.
 
 signal on_cast ## emitted when this Ability is successfully cast.
 
@@ -26,11 +28,15 @@ func from_resource(resource: AbilityResource) -> Ability:
 	_cooldown = resource.cooldown
 	_gcd_type = resource.gcd_type
 	_gcd_cooldown = resource.gcd_cooldown
+	for conditional in resource.conditionals_positive:
+		_conditionals_positive.append(conditional)
+	for conditional in resource.conditionals_negative:
+		_conditionals_negative.append(conditional)
 	return self
 
 
 ## Performs this ability on the given targets, from the given caster.
-func perform(caster: Entity, targets: Array[Entity]):
+func cast(caster: Entity, targets: Array[Entity]):
 	for effect in _effects:
 		effect.register(self, caster, targets)
 	on_cast.emit()
@@ -39,3 +45,14 @@ func perform(caster: Entity, targets: Array[Entity]):
 ## Returns whether this Ability's resource is equal to the given AbilityResource.
 func is_resource_equal(resource: AbilityResource):
 	return resource == _resource
+
+
+## Returns whether this Ability can be cast.
+func _is_castable(caster: Entity, targets: Array[Entity]):
+	for conditional in _conditionals_positive:
+		if !conditional.is_met(null, self, caster, targets):
+			return false
+	for conditional in _conditionals_negative:
+		if conditional.is_met(null, self, caster, targets):
+			return false
+	return true

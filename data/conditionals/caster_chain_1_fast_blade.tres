@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityChainConditionalResource" load_steps=4 format=3 uid="uid://dhhbvttxhm6kx"]
+
+[ext_resource type="Script" uid="uid://cd3ofyhxxxaks" path="res://data/conditionals/ability_chain_conditional_resource.gd" id="1_f5mha"]
+[ext_resource type="Resource" uid="uid://bv1t64wvoiic5" path="res://data/abilities/fast_blade.tres" id="1_hy48y"]
+[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flat_1.tres" id="2_7xsh0"]
+
+[resource]
+script = ExtResource("1_f5mha")
+ability = ExtResource("1_hy48y")
+ability_caster = 0
+chain_position = ExtResource("2_7xsh0")
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://cd3ofyhxxxaks"

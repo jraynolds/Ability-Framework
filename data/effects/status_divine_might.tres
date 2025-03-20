@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EffectResource" load_steps=5 format=3 uid="uid://nsj5sk4al1cc"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_u8ifr"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_lbuy7"]
+[ext_resource type="Resource" uid="uid://5l3u8lht3d35" path="res://data/lifetimes/duration_30.tres" id="2_u8eow"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_u8eow"]
+
+[resource]
+script = ExtResource("2_lbuy7")
+title = "Divine Might"
+description = "Allows the casting of Holy Spirit."
+triggers = Array[ExtResource("3_u8eow")]([])
+lifetime = ExtResource("2_u8eow")
+conditionals_positive = Array[ExtResource("1_u8ifr")]([])
+conditionals_negative = Array[ExtResource("1_u8ifr")]([])
+metadata/_custom_type_script = "uid://des8hnti281sm"

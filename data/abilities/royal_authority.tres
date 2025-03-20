@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=7 format=3 uid="uid://skg3gvuhe2jj"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_bu3gv"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_4sgkr"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_e7rnp"]
+[ext_resource type="Resource" uid="uid://eikm0s4kxsel" path="res://data/effects/damage_caster_attack_1_5x_chain_riot_blade_fast_blade.tres" id="3_j7duq"]
+[ext_resource type="Resource" uid="uid://b6lo7b3v346me" path="res://data/effects/damage_caster_attack__8x_no_chain_riot_blade_fast_blade.tres" id="4_j7duq"]
+[ext_resource type="Resource" uid="uid://csfu8q8648el3" path="res://data/effects/status_caster_add_divine_might_chain_riot_blade_fast_blade.tres" id="5_lxppp"]
+
+[resource]
+script = ExtResource("3_e7rnp")
+title = "Royal Authority"
+effects = Array[ExtResource("2_4sgkr")]([ExtResource("3_j7duq"), ExtResource("4_j7duq"), ExtResource("5_lxppp")])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_bu3gv")]([])
+conditionals_negative = Array[ExtResource("1_bu3gv")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"
