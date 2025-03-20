@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://dodhwet73lma8"]
+
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="1_epc3b"]
+
+[resource]
+script = ExtResource("1_epc3b")
+title = "GCD Cooldown"
+description = "The duration in seconds each GCD puts your GCDs into cooldown."
+is_int = false
+rounding_behavior = 0
+max = 9999.0
+min = 0.0
+metadata/_custom_type_script = "uid://6ssi82iq1dbg"

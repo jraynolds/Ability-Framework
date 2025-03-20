@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=4 format=3 uid="uid://w8nlfb65jqmw"]
+
+[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flat_1.tres" id="1_60tic"]
+[ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="1_y7hmh"]
+[ext_resource type="Resource" uid="uid://dodhwet73lma8" path="res://data/stats/gcd_cooldown.tres" id="3_caqhv"]
+
+[resource]
+script = ExtResource("1_y7hmh")
+stat_entity = 0
+stat = ExtResource("3_caqhv")
+amount = ExtResource("1_60tic")
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://fqonh0m4k5ow"

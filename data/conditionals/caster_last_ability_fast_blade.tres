@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LastAbilityConditionalResource" load_steps=3 format=3 uid="uid://cv87rbcu48v"]
+
+[ext_resource type="Script" uid="uid://cd3ofyhxxxaks" path="res://data/conditionals/last_ability_conditional_resource.gd" id="1_7ovhk"]
+[ext_resource type="Resource" uid="uid://bv1t64wvoiic5" path="res://data/abilities/fast_blade.tres" id="1_m2g7h"]
+
+[resource]
+script = ExtResource("1_7ovhk")
+ability = ExtResource("1_m2g7h")
+ability_caster = 0
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://cd3ofyhxxxaks"

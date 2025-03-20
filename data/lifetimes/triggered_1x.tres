@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TriggersLifetimeResource" load_steps=2 format=3 uid="uid://bp168puf75ktn"]
+
+[ext_resource type="Script" uid="uid://ch1arv3x60nkm" path="res://data/lifetimes/triggers_lifetime_resource.gd" id="1_d5l3g"]
+
+[resource]
+script = ExtResource("1_d5l3g")
+triggers = 1.0
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://ch1arv3x60nkm"

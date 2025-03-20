@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=3 format=3 uid="uid://clt017r223853"]
+
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="1_1b1y5"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="2_a0das"]
+
+[resource]
+script = ExtResource("2_a0das")
+title = ""
+effects = Array[ExtResource("1_1b1y5")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

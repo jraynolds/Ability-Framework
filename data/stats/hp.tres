@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://b2ievbk4n2m7u"]
+
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="1_576uf"]
+
+[resource]
+script = ExtResource("1_576uf")
+title = "HP"
+description = "Hit points."
+is_int = true
+value = 0.0
+max = 9999.0
+min = 0.0
+metadata/_custom_type_script = "uid://6ssi82iq1dbg"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=6 format=3 uid="uid://bv1t64wvoiic5"]
+
+[ext_resource type="Resource" uid="uid://canx04w7a0bwo" path="res://data/values/caster_ability_speed_1x.tres" id="1_8gpdb"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="1_wync6"]
+[ext_resource type="Resource" uid="uid://d12fi1sn21yhk" path="res://data/effects/damage_caster_attack_1x.tres" id="2_8gpdb"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="2_u6jni"]
+[ext_resource type="Resource" uid="uid://w8nlfb65jqmw" path="res://data/values/caster_gcd_cooldown_1x.tres" id="4_2h3kh"]
+
+[resource]
+script = ExtResource("2_u6jni")
+title = "Fast Blade"
+effects = Array[ExtResource("1_wync6")]([ExtResource("2_8gpdb")])
+casting_time = ExtResource("1_8gpdb")
+gcd_type = 0
+gcd_cooldown = ExtResource("4_2h3kh")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

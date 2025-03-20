@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://o4t2v2iun48f"]
+
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="1_e0kge"]
+
+[resource]
+script = ExtResource("1_e0kge")
+title = "Mana"
+description = "Resource used for casting spells."
+is_int = true
+value = 0.0
+max = 9999.0
+min = 0.0
+metadata/_custom_type_script = "uid://6ssi82iq1dbg"

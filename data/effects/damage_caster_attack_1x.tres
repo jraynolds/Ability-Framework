@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=6 format=3 uid="uid://d12fi1sn21yhk"]
+
+[ext_resource type="Resource" uid="uid://vrai8rbym5ym" path="res://data/values/caster_attack_1x.tres" id="1_3qkkk"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="1_v1ky1"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="3_oi14c"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_oi14c"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_p1gn1"]
+
+[resource]
+script = ExtResource("1_v1ky1")
+entity = "Target"
+stat = ExtResource("3_oi14c")
+addition = ExtResource("1_3qkkk")
+negative = true
+title = "Damage 1x attack"
+description = "Inflict damage to the target equal to 1x your attack."
+triggers = Array[ExtResource("4_oi14c")]([ExtResource("5_p1gn1")])
+metadata/_custom_type_script = "uid://8lptu87j3jgg"

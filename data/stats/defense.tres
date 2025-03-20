@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://bk53y5hldyf1u"]
+
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="1_iykok"]
+
+[resource]
+script = ExtResource("1_iykok")
+title = "Defense"
+description = "Reduces damage received."
+is_int = false
+value = 0.0
+max = 9999.0
+min = -9999.0
+metadata/_custom_type_script = "uid://6ssi82iq1dbg"

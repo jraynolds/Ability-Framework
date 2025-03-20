@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TriggerResource" load_steps=2 format=3 uid="uid://dswjtbjgx24kd"]
+
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="1_bh17s"]
+
+[resource]
+script = ExtResource("1_bh17s")
+title = "OnThisAbilityCast"
+description = "Triggered when the associated Ability is cast."
+trigger = 0
+metadata/_custom_type_script = "uid://bwdmmov3abjck"
