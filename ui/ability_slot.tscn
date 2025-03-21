@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctf10mm2m3nry"]
+
+[ext_resource type="Script" uid="uid://wdbf8xeqtskp" path="res://ui/ability_slot.gd" id="1_77mnq"]
+[ext_resource type="PackedScene" uid="uid://66p1r58i6jcx" path="res://ui/ability_button.tscn" id="2_vojnw"]
+[ext_resource type="Texture2D" uid="uid://b4w485w6w2ohv" path="res://assets/black square.png" id="3_77mnq"]
+
+[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "progress_bar")]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 60.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_77mnq")
+_button = NodePath("AbilityButton")
+key_label = NodePath("Key")
+progress_bar = NodePath("TextureProgressBar")
+metadata/_custom_type_script = "uid://wdbf8xeqtskp"
+
+[node name="AbilityButton" parent="." instance=ExtResource("2_vojnw")]
+custom_minimum_size = Vector2(74, 74)
+layout_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+self_modulate = Color(1, 1, 1, 0.541176)
+z_index = 5
+clip_contents = true
+custom_minimum_size = Vector2(74, 74)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 30.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = ExtResource("3_77mnq")
+
+[node name="Label" type="Label" parent="TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2.5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Key" type="Label" parent="."]
+z_index = 10
+custom_minimum_size = Vector2(74, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1"

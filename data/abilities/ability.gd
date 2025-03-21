@@ -7,6 +7,7 @@ var _title : String ## The title of the Ability.
 var _icon : Texture2D ## The icon for this Ability.
 var _effects : Array[Effect] = [] ## An Array of Effects this Ability will perform.
 var _casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
+var _cast_time_left : float ## The duration in seconds remaining before this Ability is fully cast.
 var _cooldown : ValueResource ## The duration in seconds before this Ability can be cast again.
 ## This Ability's interaction with the Global Cooldown. GCDs put all GCD Abilities on a shared cooldown; oGCDs don't.
 var _gcd_type : AbilityResource.GCD
@@ -15,6 +16,7 @@ var _gcd_cooldown : ValueResource
 var _conditionals_positive : Array[ConditionalResource] = [] ## The conditionals that allow this Ability to be cast.
 var _conditionals_negative : Array[ConditionalResource] = [] ## The conditionals restricting this Ability from being cast.
 
+signal on_cast_begin ## emitted when this Ability begins to cast.
 signal on_cast ## emitted when this Ability is successfully cast.
 
 ## Returns an instance of this initialized with the given AbilityResource.
@@ -33,6 +35,12 @@ func from_resource(resource: AbilityResource) -> Ability:
 	for conditional in resource.conditionals_negative:
 		_conditionals_negative.append(conditional)
 	return self
+
+
+## Begins to cast this ability.
+func begin_cast(caster: Entity, targets: Array[Entity]):
+	on_cast_begin.emit()
+	_cast_time_left = _casting_time.get_value(caster, targets)
 
 
 ## Performs this ability on the given targets, from the given caster.
