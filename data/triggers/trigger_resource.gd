@@ -15,7 +15,6 @@ enum Trigger {
 func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Variant):
 	match trigger :
 		Trigger.OnThisAbilityCast:
-			print("Registered")
 			ability.on_cast.connect(function.bind(caster, targets))
 
 

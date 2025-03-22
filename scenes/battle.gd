@@ -24,6 +24,16 @@ func _ready() -> void:
 	)
 
 
+## Called every frame.
+func _process(delta: float) -> void:
+	for ability_slot in ability_overlay.ability_slots:
+		var highlighted = false
+		if ability_slot.button.ability:
+			if ability_slot.button.ability._is_highlighted(player, [enemy]):
+				highlighted = true
+		ability_slot.highlighted = highlighted
+
+
 ## Begins a battle between the given entities. Adds the Enemy entity as a child.
 func start_battle(player_entity: Entity, enemy_entity: Entity):
 	player = player_entity

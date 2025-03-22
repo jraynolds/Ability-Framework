@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctf10mm2m3nry"]
+[gd_scene load_steps=10 format=3 uid="uid://ctf10mm2m3nry"]
 
 [ext_resource type="Script" uid="uid://wdbf8xeqtskp" path="res://ui/ability_slot.gd" id="1_77mnq"]
 [ext_resource type="PackedScene" uid="uid://66p1r58i6jcx" path="res://ui/ability_button.tscn" id="2_vojnw"]
 [ext_resource type="Texture2D" uid="uid://b4w485w6w2ohv" path="res://assets/black square.png" id="3_77mnq"]
 [ext_resource type="Texture2D" uid="uid://ilpoafipynnu" path="res://assets/white square.png" id="4_gf30w"]
+[ext_resource type="Shader" uid="uid://jw2n7i2u4mmi" path="res://ui/ants.gdshader" id="5_lxj2w"]
 
 [sub_resource type="Animation" id="Animation_f435q"]
 length = 0.25
@@ -16,26 +17,26 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:visible")
+tracks/0/path = NodePath("Activation:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"update": 0,
+"values": [Color(1, 1, 0, 1), Color(1, 1, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:modulate")
+tracks/1/path = NodePath("Activation:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 0, 1), Color(1, 1, 0, 0)]
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i0qpk"]
@@ -44,7 +45,15 @@ _data = {
 &"activated_flash": SubResource("Animation_lxj2w")
 }
 
-[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "progress_bar", "animation_player")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f435q"]
+shader = ExtResource("5_lxj2w")
+shader_parameter/ant_color_1 = Color(1, 1, 1, 1)
+shader_parameter/ant_color_2 = Color(0, 0, 0, 1)
+shader_parameter/ant_width = 2.0
+shader_parameter/ant_length = 10.0
+shader_parameter/ant_speed = 30.0
+
+[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "progress_bar", "animation_player", "highlight")]
 self_modulate = Color(1, 1, 0.0235294, 1)
 custom_minimum_size = Vector2(80, 80)
 offset_right = 60.0
@@ -56,6 +65,7 @@ _button = NodePath("AbilityButton")
 key_label = NodePath("Key")
 progress_bar = NodePath("TextureProgressBar")
 animation_player = NodePath("AnimationPlayer")
+highlight = NodePath("Highlight")
 metadata/_custom_type_script = "uid://wdbf8xeqtskp"
 
 [node name="AbilityButton" parent="." instance=ExtResource("2_vojnw")]
@@ -105,9 +115,21 @@ libraries = {
 &"": SubResource("AnimationLibrary_i0qpk")
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Activation" type="TextureRect" parent="."]
 visible = false
 modulate = Color(1, 1, 0, 1)
 layout_mode = 2
+texture = ExtResource("4_gf30w")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.0392157)
+z_index = 20
+material = SubResource("ShaderMaterial_f435q")
+custom_minimum_size = Vector2(74, 74)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("4_gf30w")
 expand_mode = 1

@@ -14,5 +14,9 @@ enum GCD {
 }
 ## The duration in seconds this Ability will put all GCDs into cooldown. Ignored if the Ability is OffGCD.
 @export var gcd_cooldown : ValueResource
-@export var conditionals_positive : Array[ConditionalResource] ## The conditionals that allow this Ability to be cast.
-@export var conditionals_negative : Array[ConditionalResource] ## The conditionals restricting this Ability from being cast.
+## The conditionals that allow this Ability to be cast.
+@export var conditionals_positive : Array[ConditionalResource]
+## The conditionals restricting this Ability from being cast.
+@export var conditionals_negative : Array[ConditionalResource]
+## The conditionals that highlight the Ability on the hotbar.
+@export var conditionals_highlight : Array[ConditionalResource]

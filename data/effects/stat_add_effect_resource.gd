@@ -10,7 +10,6 @@ class_name StatAddEffectResource
  
 func affect(caster: Entity, targets: Array[Entity]):
 	var addition_value = addition.get_value(caster, targets)
-	print(addition_value)
 	if negative:
 		addition_value *= -1
 	match entity_target :

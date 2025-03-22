@@ -21,6 +21,11 @@ var button : AbilityButton :
 @export var key_label : Label ## The Label that depicts the keystroke that activates this slot.
 @export var progress_bar : TextureProgressBar ## The progress overlay for an Ability in cooldown.
 @export var animation_player : AnimationPlayer ## The animation player for this slot.
+@export var highlight : TextureRect ## A highlight overlay for the button.
+var highlighted : bool : ## Whether the contained Ability should be highlighted. Toggles the highlight.
+	set(val):
+		highlighted = val
+		highlight.visible = highlighted
 
 @export var locked : bool ## Whether this slot can be dropped on.
 @export var key : Key ## The keystroke that activates this slot.

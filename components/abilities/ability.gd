@@ -21,6 +21,8 @@ var _resource : AbilityResource :
 			_conditionals_positive.append(conditional)
 		for conditional in _resource.conditionals_negative:
 			_conditionals_negative.append(conditional)
+		for conditional in _resource.conditionals_highlight:
+			_conditionals_highlight.append(conditional)
 var _title : String ## The title of the Ability.
 var _icon : Texture2D ## The icon for this Ability.
 var _effects : Array[Effect] = [] ## An Array of Effects this Ability will perform.
@@ -36,6 +38,8 @@ var _gcd_cooldown : ValueResource
 var _conditionals_positive : Array[ConditionalResource] = [] 
 ## The conditionals restricting this Ability from being cast.
 var _conditionals_negative : Array[ConditionalResource] = [] 
+## The conditionals that highlight the Ability on the hotbar.
+var _conditionals_highlight : Array[ConditionalResource] = []
 
 @export var effect_scene : PackedScene ## The default Effect scene.
 
@@ -58,7 +62,6 @@ func begin_cast(caster: Entity, targets: Array[Entity]):
 func cast(caster: Entity, targets: Array[Entity]):
 	for effect in _effects:
 		effect.register(self, caster, targets)
-	print("Cast")
 	on_cast.emit()
 
 
@@ -74,5 +77,15 @@ func _is_castable(caster: Entity, targets: Array[Entity]):
 			return false
 	for conditional in _conditionals_negative:
 		if conditional.is_met(null, self, caster, targets):
+			return false
+	return true
+
+
+## Returns whether this Ability is highlit.
+func _is_highlighted(caster: Entity, targets: Array[Entity]):
+	if _conditionals_highlight.is_empty():
+		return false
+	for conditional in _conditionals_highlight:
+		if !conditional.is_met(null, self, caster, targets):
 			return false
 	return true

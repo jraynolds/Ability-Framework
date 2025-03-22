@@ -12,4 +12,5 @@ effects = Array[ExtResource("1_wync6")]([ExtResource("2_8gpdb")])
 gcd_type = 0
 conditionals_positive = Array[ExtResource("1_8gpdb")]([])
 conditionals_negative = Array[ExtResource("1_8gpdb")]([])
+conditionals_highlight = Array[ExtResource("1_8gpdb")]([])
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"
