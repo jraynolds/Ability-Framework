@@ -5,10 +5,10 @@
 [resource]
 script = ExtResource("1_dpgn8")
 title = "Ability Speed"
+type = 40
 description = "The duration in seconds a typical Ability takes to cast."
 is_int = false
-rounding_behavior = "Floor"
-value = 0.0
+rounding_behavior = 0
 max = 9999.0
 min = 0.0
 metadata/_custom_type_script = "uid://6ssi82iq1dbg"

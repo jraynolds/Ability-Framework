@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_epc3b")
 title = "GCD Cooldown"
+type = 41
 description = "The duration in seconds each GCD puts your GCDs into cooldown."
 is_int = false
 rounding_behavior = 0

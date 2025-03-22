@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgbw223ib8ddx"]
+[gd_scene load_steps=2 format=3 uid="uid://ngaorlvir3mf"]
 
 [ext_resource type="PackedScene" uid="uid://ctf10mm2m3nry" path="res://ui/ability_slot.tscn" id="1_ilpki"]
 
@@ -16,10 +16,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -177.0
-offset_right = -25.0
-offset_bottom = -22.0
+offset_left = 167.0
+offset_top = -259.0
+offset_right = -140.0
+offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
 

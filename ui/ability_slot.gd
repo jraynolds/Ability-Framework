@@ -20,12 +20,20 @@ var button : AbilityButton :
 		_button = val
 @export var key_label : Label ## The Label that depicts the keystroke that activates this slot.
 @export var progress_bar : TextureProgressBar ## The progress overlay for an Ability in cooldown.
+@export var animation_player : AnimationPlayer ## The animation player for this slot.
 
 @export var locked : bool ## Whether this slot can be dropped on.
 @export var key : Key ## The keystroke that activates this slot.
 @export var shift : bool ## Whether the Shift modifier is required to activate this slot.
 @export var control : bool ## Whether the Control modifier is required to activate this slot.
 @export var alt : bool ## Whether the Alt modifier is required to activate this slot.
+var activated : bool : ## Whether the button is currently activated. When set to true, emits on_actived.
+	set(val):
+		var old_val = activated
+		activated = val
+		if val and not old_val:
+			on_activated.emit(button.ability)
+			animation_player.play("activated_flash")
 
 signal on_drop_accept(data: Variant) ## emitted when an element is successfully dropped on this slot.
 signal on_activated(ability: Ability) ## emitted when the slot's keystroke is pressed.
@@ -47,8 +55,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	var key_event = event as InputEventKey
 	if !key_event:
 		return
-	if !key_event.pressed:
-		return
 	if !key_event:
 		return
 	if key_event.keycode != key:
@@ -57,7 +63,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if control != key_event.is_command_or_control_pressed():
 		return
-	on_activated.emit(button.ability)
+	activated = key_event.pressed
 	get_viewport().set_input_as_handled()
 
 

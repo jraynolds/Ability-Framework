@@ -5,9 +5,10 @@
 [resource]
 script = ExtResource("1_5lhcc")
 title = "Attack"
+type = 20
 description = "Used as a modifier for attacks to determine damage dealt."
 is_int = false
-value = 0.0
+rounding_behavior = 0
 max = 9999.0
 min = -9999.0
 metadata/_custom_type_script = "uid://6ssi82iq1dbg"

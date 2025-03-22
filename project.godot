@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="AbilityFramework"
-run/main_scene="uid://dgbw223ib8ddx"
+run/main_scene="uid://27bka5t3aalm"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"

@@ -5,9 +5,10 @@
 [resource]
 script = ExtResource("1_e0kge")
 title = "Mana"
+type = 10
 description = "Resource used for casting spells."
 is_int = true
-value = 0.0
+rounding_behavior = 0
 max = 9999.0
 min = 0.0
 metadata/_custom_type_script = "uid://6ssi82iq1dbg"

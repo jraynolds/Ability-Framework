@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://4acjdjarxqkn"]
+
+[ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="1_i7fop"]
+[ext_resource type="Script" uid="uid://bw5ujhdum2lmq" path="res://ui/health_bar.gd" id="2_hdqs1"]
+
+[node name="HealthBars" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" parent="." instance=ExtResource("1_i7fop")]
+layout_mode = 1
+offset_bottom = 49.0
+script = ExtResource("2_hdqs1")
+
+[node name="HealthBar2" parent="." instance=ExtResource("1_i7fop")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_vertical = 0
