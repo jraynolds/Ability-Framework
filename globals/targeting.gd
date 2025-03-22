@@ -1,4 +1,3 @@
-extends Node
 ## Helper class for targeting operations.
 class_name Targeting
 

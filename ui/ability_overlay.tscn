@@ -1,0 +1,128 @@
+[gd_scene load_steps=3 format=3 uid="uid://ngaorlvir3mf"]
+
+[ext_resource type="PackedScene" uid="uid://ctf10mm2m3nry" path="res://ui/ability_slot.tscn" id="1_ilpki"]
+[ext_resource type="Script" uid="uid://d2mco34psblb3" path="res://ui/ability_overlay.gd" id="1_jrbqd"]
+
+[node name="AbilityOverlay" type="Control" node_paths=PackedStringArray("ability_slots")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jrbqd")
+ability_slots = [NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot2"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot3"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot4"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot5"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot6"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot7"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot8"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot9"), NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AbilitySlot10"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot11"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot12"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot13"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot14"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot15"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot16"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot17"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot18"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot19"), NodePath("PanelContainer/VBoxContainer/HBoxContainer/AbilitySlot20")]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 167.0
+offset_top = -259.0
+offset_right = -140.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AbilitySlot11" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 49
+shift = true
+
+[node name="AbilitySlot12" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 50
+shift = true
+
+[node name="AbilitySlot13" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 51
+shift = true
+
+[node name="AbilitySlot14" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 52
+shift = true
+
+[node name="AbilitySlot15" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 53
+shift = true
+
+[node name="AbilitySlot16" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 54
+shift = true
+
+[node name="AbilitySlot17" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 55
+shift = true
+
+[node name="AbilitySlot18" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 56
+shift = true
+
+[node name="AbilitySlot19" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 57
+shift = true
+
+[node name="AbilitySlot20" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 48
+shift = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AbilitySlot" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 49
+
+[node name="AbilitySlot2" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 50
+
+[node name="AbilitySlot3" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 51
+
+[node name="AbilitySlot4" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 52
+
+[node name="AbilitySlot5" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 53
+
+[node name="AbilitySlot6" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 54
+
+[node name="AbilitySlot7" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 55
+
+[node name="AbilitySlot8" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 56
+
+[node name="AbilitySlot9" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 57
+
+[node name="AbilitySlot10" parent="PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_ilpki")]
+layout_mode = 2
+key = 48

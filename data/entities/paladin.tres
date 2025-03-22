@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="EntityResource" load_steps=23 format=3 uid="uid://cq8va3y3d1xkj"]
+
+[ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="1_dyjr6"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_py06x"]
+[ext_resource type="Resource" uid="uid://bv1t64wvoiic5" path="res://data/abilities/fast_blade.tres" id="2_eb2k7"]
+[ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="2_i8i6s"]
+[ext_resource type="Resource" uid="uid://bf2dnoc55io10" path="res://data/values/flats/breakpoints/hp_player_high.tres" id="3_0e3sj"]
+[ext_resource type="Resource" uid="uid://clt017r223853" path="res://data/abilities/riot_blade.tres" id="3_ocib1"]
+[ext_resource type="Resource" uid="uid://bs3nn3goth6et" path="res://data/values/flats/breakpoints/mana_player_medium.tres" id="4_6k1qg"]
+[ext_resource type="Resource" uid="uid://skg3gvuhe2jj" path="res://data/abilities/royal_authority.tres" id="4_rv8mk"]
+[ext_resource type="Resource" uid="uid://b7lf65t78afe8" path="res://data/abilities/holy_spirit.tres" id="5_s0p75"]
+[ext_resource type="Resource" uid="uid://bktqamoifelqi" path="res://data/values/flats/breakpoints/defense_player_medium.tres" id="6_3yopt"]
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="7_qmhwf"]
+[ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="9_py06x"]
+[ext_resource type="Resource" uid="uid://b2ievbk4n2m7u" path="res://data/stats/hp.tres" id="10_eb2k7"]
+[ext_resource type="Resource" uid="uid://dnd68wdbhr1i8" path="res://data/stats/max_mana.tres" id="11_ocib1"]
+[ext_resource type="Resource" uid="uid://o4t2v2iun48f" path="res://data/stats/mana.tres" id="12_rv8mk"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="15_vylp4"]
+[ext_resource type="Resource" uid="uid://duoiks3bvmv3i" path="res://data/values/flats/breakpoints/attack_player_low.tres" id="16_jyrbo"]
+[ext_resource type="Resource" uid="uid://bk53y5hldyf1u" path="res://data/stats/defense.tres" id="17_2ii0k"]
+[ext_resource type="Resource" uid="uid://0cdkdryyaugb" path="res://data/stats/ability_speed.tres" id="19_wvdtl"]
+[ext_resource type="Resource" uid="uid://cvfkifclr6lty" path="res://data/values/flats/breakpoints/ability_speed_player_medium.tres" id="20_nhjtl"]
+[ext_resource type="Resource" uid="uid://dodhwet73lma8" path="res://data/stats/gcd_cooldown.tres" id="21_2c3ts"]
+[ext_resource type="Resource" uid="uid://205fk5mfav40" path="res://data/values/flats/breakpoints/gcd_player_medium.tres" id="22_pbmci"]
+
+[resource]
+script = ExtResource("1_dyjr6")
+title = "Paladin"
+stats = Dictionary[ExtResource("7_qmhwf"), ExtResource("2_i8i6s")]({
+ExtResource("9_py06x"): ExtResource("3_0e3sj"),
+ExtResource("10_eb2k7"): ExtResource("3_0e3sj"),
+ExtResource("11_ocib1"): ExtResource("4_6k1qg"),
+ExtResource("12_rv8mk"): ExtResource("4_6k1qg"),
+ExtResource("15_vylp4"): ExtResource("16_jyrbo"),
+ExtResource("17_2ii0k"): ExtResource("6_3yopt"),
+ExtResource("19_wvdtl"): ExtResource("20_nhjtl"),
+ExtResource("21_2c3ts"): ExtResource("22_pbmci")
+})
+abilities = Dictionary[ExtResource("1_py06x"), int]({
+ExtResource("2_eb2k7"): 0,
+ExtResource("3_ocib1"): 1,
+ExtResource("4_rv8mk"): 2,
+ExtResource("5_s0p75"): 10
+})
+metadata/_custom_type_script = "uid://2e885iqyhq3n"

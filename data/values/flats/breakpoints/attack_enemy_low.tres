@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FlatValueResource" load_steps=2 format=3 uid="uid://dlsnroy6i2hoo"]
+
+[ext_resource type="Script" uid="uid://dnuf3s07uu1mo" path="res://data/values/flats/flat_value_resource.gd" id="1_kcs2r"]
+
+[resource]
+script = ExtResource("1_kcs2r")
+value = 20.0
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://dnuf3s07uu1mo"

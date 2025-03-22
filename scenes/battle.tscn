@@ -1,12 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://27bka5t3aalm"]
+[gd_scene load_steps=4 format=3 uid="uid://27bka5t3aalm"]
 
-[ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://scenes/ability_overlay.tscn" id="1_th188"]
-[ext_resource type="PackedScene" uid="uid://4acjdjarxqkn" path="res://scenes/health_bars.tscn" id="2_p1qf1"]
+[ext_resource type="Script" uid="uid://doo7asqx51qab" path="res://scenes/battle.gd" id="1_p1qf1"]
+[ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://ui/ability_overlay.tscn" id="1_th188"]
+[ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
 
-[node name="Battle" type="Node2D"]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player")]
+script = ExtResource("1_p1qf1")
+ability_overlay = NodePath("CanvasLayer/AbilityOverlay")
+health_bar_enemy = NodePath("CanvasLayer/HealthBar")
+health_bar_player = NodePath("CanvasLayer/HealthBar2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AbilityOverlay" parent="CanvasLayer" instance=ExtResource("1_th188")]
 
-[node name="HealthBars" parent="CanvasLayer" instance=ExtResource("2_p1qf1")]
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("3_a12nh")]
+floating_text_direction = "Down"
+
+[node name="HealthBar2" parent="CanvasLayer" instance=ExtResource("3_a12nh")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_vertical = 0

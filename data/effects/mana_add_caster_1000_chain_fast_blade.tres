@@ -1,22 +1,23 @@
 [gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=8 format=3 uid="uid://xs0gxdb273kt"]
 
-[ext_resource type="Resource" uid="uid://b316ugm5jmlww" path="res://data/values/flat_1000.tres" id="1_by4uq"]
+[ext_resource type="Resource" uid="uid://b316ugm5jmlww" path="res://data/values/flats/flat_1000.tres" id="1_by4uq"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_awrpu"]
 [ext_resource type="Resource" uid="uid://cv87rbcu48v" path="res://data/conditionals/caster_chain_0_fast_blade.tres" id="3_f4uwy"]
 [ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="4_hsv8s"]
-[ext_resource type="Resource" uid="uid://o4t2v2iun48f" path="res://data/stats/mana.tres" id="5_awrpu"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="4_plxv7"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_46xx6"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_o218a"]
 
 [resource]
 script = ExtResource("4_hsv8s")
 entity_target = 0
-stat = ExtResource("5_awrpu")
+stat_type = 10
 addition = ExtResource("1_by4uq")
 negative = false
 title = "Replenish 1000 mana"
 description = "Replenishes 1000 mana. Must be combo'd with Fast Blade."
 triggers = Array[ExtResource("6_46xx6")]([ExtResource("7_o218a")])
+lifetimes = Array[ExtResource("4_plxv7")]([])
 conditionals_positive = Array[ExtResource("2_awrpu")]([ExtResource("3_f4uwy")])
 conditionals_negative = Array[ExtResource("2_awrpu")]([])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

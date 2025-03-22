@@ -15,9 +15,10 @@ grow_horizontal = 2
 script = ExtResource("1_rwxrv")
 name_label = NodePath("Label")
 hp_label = NodePath("ProgressBar/Label")
-progress_bar_fast = NodePath("ProgressBar")
-progress_bar_delayed = NodePath("ProgressBar/ProgressBar")
+progress_bar_fast = NodePath("ProgressBar/ProgressBar")
+progress_bar_delayed = NodePath("ProgressBar")
 progress_bar_delay = 0.5
+progress_bar_duration = 0.4
 floating_text = NodePath("ProgressBar/Floating text")
 
 [node name="Label" type="Label" parent="."]

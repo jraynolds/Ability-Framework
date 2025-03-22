@@ -32,11 +32,12 @@ var activated : bool : ## Whether the button is currently activated. When set to
 		var old_val = activated
 		activated = val
 		if val and not old_val:
-			on_activated.emit(button.ability)
+			on_activated.emit()
+			animation_player.stop()
 			animation_player.play("activated_flash")
 
 signal on_drop_accept(data: Variant) ## emitted when an element is successfully dropped on this slot.
-signal on_activated(ability: Ability) ## emitted when the slot's keystroke is pressed.
+signal on_activated ## emitted when the slot's keystroke is pressed.
 
 ## Custom init function so that it doesn't error
 #func init(cms: Vector2) -> void:

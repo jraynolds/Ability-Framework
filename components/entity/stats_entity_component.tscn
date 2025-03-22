@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp4xbtgwweqmj"]
+
+[ext_resource type="Script" uid="uid://vv4ssn3crg5" path="res://components/entity/stats_entity_component.gd" id="1_h5dka"]
+[ext_resource type="PackedScene" uid="uid://q1nijtdb3fb8" path="res://components/entity/stats/stat.tscn" id="2_kljhh"]
+
+[node name="StatsEntityComponent" type="Node2D"]
+script = ExtResource("1_h5dka")
+stat_scene = ExtResource("2_kljhh")

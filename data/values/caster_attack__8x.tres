@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatValueResource" load_steps=4 format=3 uid="uid://duv2hxoultpou"]
 
-[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flat_1.tres" id="1_vonh0"]
+[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="1_vonh0"]
 [ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="2_cak1r"]
 [ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="3_qngsx"]
 

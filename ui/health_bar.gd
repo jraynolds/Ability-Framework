@@ -6,7 +6,7 @@ var entity : Entity : ## The Entity this HealthBar represents. Changing this upd
 	set(val):
 		var old_val = entity
 		entity = val
-		name_label.text = entity.resource.title
+		name_label.text = entity.title
 		_update_bars(entity.stats_component.get_stat_value(StatResource.StatType.HP))
 		entity.stats_component.on_stat_change.connect(_on_stat_change)
 
@@ -37,7 +37,7 @@ func _on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float
 func _update_bars(new_hp: float, old_hp: float = 0):
 	var entity_max_hp = entity.stats_component.get_stat_value(StatResource.StatType.MaxHP)
 	hp_label.text = str(floori(new_hp)) + "/" + str(floori(entity_max_hp))
-	var bar_value = new_hp / entity_max_hp
+	var bar_value = new_hp / entity_max_hp * 100
 	if progress_bar_tween and progress_bar_tween.is_running():
 		progress_bar_tween.kill()
 	progress_bar_fast.value = bar_value
@@ -59,6 +59,8 @@ func _update_bars(new_hp: float, old_hp: float = 0):
 ## Spawns a floating Label that drifts, fades, and frees itself.
 func _spawn_floating_text(difference: float):
 	var floating_text_temp : Label = floating_text.duplicate(2) ## copies group
+	progress_bar_fast.add_child(floating_text_temp)
+	
 	floating_text_temp.text = ""
 	if difference > 0:
 		floating_text_temp.modulate = Color.GREEN
@@ -67,14 +69,14 @@ func _spawn_floating_text(difference: float):
 		floating_text_temp.modulate = Color.WHITE
 	else :
 		floating_text_temp.modulate = Color.RED
-		floating_text_temp.text = "-"
 	floating_text_temp.text += str(floori(difference))
 	
 	floating_text_temp.position += Vector2(
 		randf_range(-floating_text_max_jitter.x, floating_text_max_jitter.x),
 		randf_range(-floating_text_max_jitter.y, floating_text_max_jitter.y)
 	)
-	var floating_text_end_position = floating_text.position + floating_text_distance
+	#var floating_text_end_position = floating_text.position + floating_text_distance ## looked kind of neat
+	var floating_text_end_position = floating_text_temp.position + floating_text_distance
 	if floating_text_direction == "Up":
 		floating_text_end_position -= 2 * floating_text_distance
 	

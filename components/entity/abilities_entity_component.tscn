@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://deeibcee0yoxg"]
+
+[ext_resource type="Script" uid="uid://2rjh7anldf4i" path="res://components/entity/abilities_entity_component.gd" id="1_fhhak"]
+[ext_resource type="PackedScene" uid="uid://bwdvnf5yme2e" path="res://components/abilities/ability.tscn" id="2_lqbfc"]
+
+[node name="AbilitiesEntityComponent" type="Node2D"]
+script = ExtResource("1_fhhak")
+ability_scene = ExtResource("2_lqbfc")

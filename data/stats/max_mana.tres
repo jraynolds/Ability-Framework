@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://dnd68wdbhr1i8"]
+
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="1_02xvi"]
+
+[resource]
+script = ExtResource("1_02xvi")
+title = "Max Mana"
+type = 11
+description = "Maximum resource used for casting spells."
+is_int = true
+rounding_behavior = 0
+max = 9999.0
+min = 0.0
+metadata/_custom_type_script = "uid://6ssi82iq1dbg"

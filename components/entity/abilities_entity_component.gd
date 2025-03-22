@@ -2,6 +2,33 @@ extends EntityComponent
 ## An EntityComponent containing Abilities values and logic.
 class_name AbilitiesEntityComponent
 
+## The Abilities this Entity has, paired with the bar locations for each Ability. 
+## The integer can be 0-19; 0 is "1", 10 is "+1"
+var abilities : Dictionary[Ability, int]
+
+@export var ability_scene : PackedScene ## The default Ability scene.
+
+## Overloaded method for logic that happens when the Entity's resource is changed.
+## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
+## Intializes Ability objects.
+func load_entity_resource(resource: EntityResource):
+	abilities = {}
+	for ability_resource in resource.abilities.keys():
+		var ability : Ability = ability_scene.instantiate().from_resource(ability_resource)
+		abilities[ability] = resource.abilities[ability_resource]
+		add_child(ability)
+		ability.name = ability._title
+
+
+## Overloaded method for logic that happens when the Entity value is updated.
+func on_entity_updated():
+	pass
+
+
+## Casts the given ability on the given targets.
+func cast(ability: Ability, targets: Array[Entity]):
+	ability.cast(entity, targets)
+
 
 ## Returns the last valid Ability cast.
 func get_last_ability_cast() -> Ability:

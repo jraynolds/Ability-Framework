@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxct0d54bqld8"]
+
+[ext_resource type="Script" uid="uid://cowxflwgtt3iq" path="res://managers/game_manager.gd" id="1_atyjh"]
+[ext_resource type="Resource" uid="uid://cq8va3y3d1xkj" path="res://data/entities/paladin.tres" id="2_j7rj3"]
+[ext_resource type="Resource" uid="uid://db51h4c174tks" path="res://data/entities/slime.tres" id="3_ou16m"]
+[ext_resource type="PackedScene" uid="uid://bw7igfy1003t4" path="res://components/entity/entity.tscn" id="4_ou16m"]
+[ext_resource type="PackedScene" uid="uid://27bka5t3aalm" path="res://scenes/battle.tscn" id="4_yawit"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_atyjh")
+player_entity_resource = ExtResource("2_j7rj3")
+temp_enemy_entity_resource = ExtResource("3_ou16m")
+entity_scene = ExtResource("4_ou16m")
+battle_scene = ExtResource("4_yawit")

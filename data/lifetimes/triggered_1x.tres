@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TriggersLifetimeResource" load_steps=3 format=3 uid="uid://bp168puf75ktn"]
 
 [ext_resource type="Script" uid="uid://ch1arv3x60nkm" path="res://data/lifetimes/triggers_lifetime_resource.gd" id="1_d5l3g"]
-[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flat_1.tres" id="2_tcrut"]
+[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="2_tcrut"]
 
 [resource]
 script = ExtResource("1_d5l3g")

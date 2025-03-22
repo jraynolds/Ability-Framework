@@ -1,4 +1,3 @@
-extends Node
 ## Helper class for math operations.
 class_name Math
 
