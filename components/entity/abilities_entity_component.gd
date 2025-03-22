@@ -5,6 +5,7 @@ class_name AbilitiesEntityComponent
 ## The Abilities this Entity has, paired with the bar locations for each Ability. 
 ## The integer can be 0-19; 0 is "1", 10 is "+1"
 var abilities : Dictionary[Ability, int]
+var abilities_cast : Array[Ability] ## The heap (front-recent) of Abilities this Entity has successfully cast.
 
 @export var ability_scene : PackedScene ## The default Ability scene.
 
@@ -25,9 +26,10 @@ func on_entity_updated():
 	pass
 
 
-## Casts the given ability on the given targets.
+## Casts the given ability on the given targets. Adds it to the heap of our casts.
 func cast(ability: Ability, targets: Array[Entity]):
 	ability.cast(entity, targets)
+	abilities_cast.insert(0, ability)
 
 
 ## Returns the last valid Ability cast.
@@ -37,4 +39,6 @@ func get_last_ability_cast() -> Ability:
 
 ## Backtracks the Abilities this Entity has cast and returns the valid cast at the given index.
 func get_ability_in_chain(chain_index: int) -> Ability:
-	return null
+	if len(abilities_cast) <= chain_index:
+		return null
+	return abilities_cast[chain_index]

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_hvhff")
-ability = ExtResource("1_xnh06")
+ability_in_chain = ExtResource("1_xnh06")
 ability_caster = 0
 chain_position = ExtResource("2_xrgsw")
 title = ""

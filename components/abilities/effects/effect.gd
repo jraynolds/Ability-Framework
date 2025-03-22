@@ -46,7 +46,7 @@ func from_resource(res: EffectResource) -> Effect:
 	return self
 
 
-## Returns an instance of this initialized with the given EffectResource.
+## Returns an instance of this initialized with the given Effect.
 func from_effect(effect: Effect) -> Effect:
 	_resource = effect.resource
 	_title = effect._title
