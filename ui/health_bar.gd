@@ -15,6 +15,7 @@ var entity : Entity : ## The Entity this HealthBar represents. Changing this upd
 @export var progress_bar_fast : ProgressBar ## HP bar that responds immediately.
 @export var progress_bar_delayed : ProgressBar ## HP bar that responds after a delay.
 @export var progress_bar_delay : float ## Delay in seconds before the slower HP bar responds.
+@export var progress_bar_duration : float ## Duration in seconds the slower HP bar takes to finish updating.
 var progress_bar_tween : Tween ## The Tweener that slowly modifies the delayed HP bar.
 
 @export_enum("Up", "Down") var floating_text_direction = "Up" ## The direction floating text moves.
@@ -39,14 +40,19 @@ func _update_bars(new_hp: float, old_hp: float = 0):
 	var bar_value = new_hp / entity_max_hp
 	if progress_bar_tween and progress_bar_tween.is_running():
 		progress_bar_tween.kill()
-		progress_bar_delayed.value = bar_value
 	progress_bar_fast.value = bar_value
 	progress_bar_tween = get_tree().create_tween()
+	progress_bar_tween.tween_property( ## Does nothing, to delay.
+		progress_bar_delayed,
+		"value",
+		progress_bar_delayed.value,
+		progress_bar_delay
+	)
 	progress_bar_tween.tween_property(
 		progress_bar_delayed, 
 		"value", 
 		bar_value,
-		progress_bar_delay
+		progress_bar_duration
 	)
 
 
