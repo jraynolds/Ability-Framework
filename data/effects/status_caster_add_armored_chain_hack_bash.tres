@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EntityAddStatusResource" load_steps=9 format=3 uid="uid://bxbkwjjc1kk3d"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_5r4xp"]
+[ext_resource type="Resource" uid="uid://colkeq031stob" path="res://data/effects/statuses/status_armored.tres" id="2_5r4xp"]
+[ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="2_hmjyh"]
+[ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="3_628jq"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_hmjyh"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/entity_add_status_effect_resource.gd" id="4_628jq"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_75f5a"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_17w6e"]
+
+[resource]
+script = ExtResource("4_628jq")
+entity_target = 0
+effect = ExtResource("2_5r4xp")
+stacking_behavior = 21
+title = "Add Armor"
+description = "Add a stack of Armored to yourself, increasing your Defense by 5%. Must be comboed with Hack and Bash."
+triggers = Array[ExtResource("5_75f5a")]([ExtResource("6_17w6e")])
+lifetimes = Array[ExtResource("3_hmjyh")]([])
+conditionals_positive = Array[ExtResource("1_5r4xp")]([ExtResource("2_hmjyh"), ExtResource("3_628jq")])
+conditionals_negative = Array[ExtResource("1_5r4xp")]([])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

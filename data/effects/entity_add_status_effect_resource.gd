@@ -9,8 +9,10 @@ enum StackingBehavior { ## What happens if the Entity has the same Effect we're 
 	Refresh = 0, ## Resets the duration.
 	Ignore = 10, ## Like we didn't cast this.
 	Add = 20, ## Adds a stack.
-	Subtract = 21, ## Removes a stack.
-	Replace = 30 ## Removes the original and adds this one.
+	AddAndRefresh = 21, ## Adds a stack and resets the duration.
+	AddAndReplace = 22, ## Adds a stack and replaces the effect.
+	Subtract = 30, ## Removes a stack.
+	Replace = 40 ## Removes the original and adds this one.
 }
 ## How the Effect we're adding interacts with an existing, identical Effect. By default, resets the original's duration.
 @export var stacking_behavior : StackingBehavior = StackingBehavior.Refresh
@@ -29,4 +31,4 @@ func affect(caster: Entity, targets: Array[Entity]):
 			targets_found.append(caster)
 	assert(!targets_found.is_empty(), "No valid targets found")
 	for target in targets_found:
-		target.statuses_component.add_effect_from_resource(effect, stacking_behavior)
+		target.statuses_component.add_effect_from_resource(caster, effect, stacking_behavior)

@@ -9,7 +9,8 @@ var _resource : AbilityResource :
 		_title = _resource.title
 		_icon = _resource.icon
 		for effect_resource in _resource.effects:
-			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource)
+			var targets : Array[Entity] = []
+			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, _caster, targets)
 			_effects.append(effect)
 			add_child(effect)
 			effect.name = effect._title
@@ -41,27 +42,30 @@ var _conditionals_negative : Array[ConditionalResource] = []
 ## The conditionals that highlight the Ability on the hotbar.
 var _conditionals_highlight : Array[ConditionalResource] = []
 
+var _caster : Entity ## The Entity who owns this Ability.
+
 @export var effect_scene : PackedScene ## The default Effect scene.
 
 signal on_cast_begin ## emitted when this Ability begins to cast.
 signal on_cast ## emitted when this Ability is successfully cast.
 
-## Returns an instance of this initialized with the given AbilityResource.
-func from_resource(resource: AbilityResource) -> Ability:
+## Returns an instance of this initialized with the given AbilityResource and Entity.
+func from_resource(resource: AbilityResource, caster: Entity) -> Ability:
 	_resource = resource
+	_caster = caster
 	return self
 
 
 ## Begins to cast this ability.
-func begin_cast(caster: Entity, targets: Array[Entity]):
+func begin_cast(targets: Array[Entity]):
 	on_cast_begin.emit()
-	_cast_time_left = _casting_time.get_value(caster, targets)
+	_cast_time_left = _casting_time.get_value(_caster, targets)
 
 
-## Performs this ability on the given targets, from the given caster.
-func cast(caster: Entity, targets: Array[Entity]):
+## Performs this ability on the given targets, from our owner.
+func cast(targets: Array[Entity]):
 	for effect in _effects:
-		effect.register(self, caster, targets)
+		effect.register(self, _caster, targets)
 	on_cast.emit()
 
 
@@ -71,21 +75,21 @@ func is_resource_equal(resource: AbilityResource):
 
 
 ## Returns whether this Ability can be cast.
-func _is_castable(caster: Entity, targets: Array[Entity]):
+func _is_castable(targets: Array[Entity]):
 	for conditional in _conditionals_positive:
-		if !conditional.is_met(null, self, caster, targets):
+		if !conditional.is_met(null, self, _caster, targets):
 			return false
 	for conditional in _conditionals_negative:
-		if conditional.is_met(null, self, caster, targets):
+		if conditional.is_met(null, self, _caster, targets):
 			return false
 	return true
 
 
 ## Returns whether this Ability is highlit.
-func _is_highlighted(caster: Entity, targets: Array[Entity]):
+func _is_highlighted(targets: Array[Entity]):
 	if _conditionals_highlight.is_empty():
 		return false
 	for conditional in _conditionals_highlight:
-		if !conditional.is_met(null, self, caster, targets):
+		if !conditional.is_met(null, self, _caster, targets):
 			return false
 	return true

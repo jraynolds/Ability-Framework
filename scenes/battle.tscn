@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://27bka5t3aalm"]
+[gd_scene load_steps=5 format=3 uid="uid://27bka5t3aalm"]
 
 [ext_resource type="Script" uid="uid://doo7asqx51qab" path="res://scenes/battle.gd" id="1_p1qf1"]
 [ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://ui/ability_overlay.tscn" id="1_th188"]
 [ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
+[ext_resource type="PackedScene" uid="uid://dh1uxqh1ntq1h" path="res://ui/statuses_container.tscn" id="4_a12nh"]
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative")]
 script = ExtResource("1_p1qf1")
 ability_overlay = NodePath("CanvasLayer/AbilityOverlay")
 health_bar_enemy = NodePath("CanvasLayer/HealthBar")
 health_bar_player = NodePath("CanvasLayer/HealthBar2")
+statuses_container_enemy_positive = NodePath("CanvasLayer/Statuses/StatusesContainer")
+statuses_container_enemy_negative = NodePath("CanvasLayer/Statuses/StatusesContainer2")
+statuses_container_player_positive = NodePath("CanvasLayer/Statuses2/StatusesContainer")
+statuses_container_player_negative = NodePath("CanvasLayer/Statuses2/StatusesContainer2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -23,3 +28,38 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -49.0
 grow_vertical = 0
+
+[node name="Statuses" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 61.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="StatusesContainer" parent="CanvasLayer/Statuses" instance=ExtResource("4_a12nh")]
+layout_mode = 2
+
+[node name="StatusesContainer2" parent="CanvasLayer/Statuses" instance=ExtResource("4_a12nh")]
+layout_mode = 2
+alignment = 2
+status_positivity = 2
+
+[node name="Statuses2" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -76.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StatusesContainer" parent="CanvasLayer/Statuses2" instance=ExtResource("4_a12nh")]
+layout_mode = 2
+
+[node name="StatusesContainer2" parent="CanvasLayer/Statuses2" instance=ExtResource("4_a12nh")]
+layout_mode = 2
+alignment = 2
+status_positivity = 2
+
+[editable path="CanvasLayer/Statuses/StatusesContainer"]

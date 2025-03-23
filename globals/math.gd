@@ -16,3 +16,10 @@ enum Comparison {
 	LessThan,
 	LessThanOrEqual
 }
+
+## Positivity comparisons.
+enum Positivity {
+	Positive,
+	Neutral,
+	Negative
+}

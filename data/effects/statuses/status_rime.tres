@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EffectResource" load_steps=7 format=3 uid="uid://cnbcpx5vylsch"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ubo1w"]
+[ext_resource type="Texture2D" uid="uid://blfbxndu13w3g" path="res://assets/abilities/b_05.png" id="2_3kuwn"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_im1nd"]
+[ext_resource type="Resource" uid="uid://5l3u8lht3d35" path="res://data/lifetimes/duration_30.tres" id="4_t8t2k"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="5_ewyk5"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_kv6c7"]
+
+[resource]
+script = ExtResource("5_ewyk5")
+title = "Rime"
+description = "Coated with gelid ice."
+icon = ExtResource("2_3kuwn")
+triggers = Array[ExtResource("6_kv6c7")]([])
+lifetimes = Array[ExtResource("3_im1nd")]([ExtResource("4_t8t2k")])
+conditionals_positive = Array[ExtResource("1_ubo1w")]([])
+conditionals_negative = Array[ExtResource("1_ubo1w")]([])
+metadata/_custom_type_script = "uid://des8hnti281sm"

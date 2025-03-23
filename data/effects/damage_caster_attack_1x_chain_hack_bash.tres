@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=9 format=3 uid="uid://vvukwfefa43r"]
+
+[ext_resource type="Resource" uid="uid://vrai8rbym5ym" path="res://data/values/caster_attack.tres" id="1_oeyhf"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_8lb4s"]
+[ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="3_11uth"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_nlv5f"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="4_11uth"]
+[ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="4_x0hdq"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_x0hdq"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_wgyeh"]
+
+[resource]
+script = ExtResource("4_11uth")
+entity_target = 11
+stat_type = 0
+addition = ExtResource("1_oeyhf")
+negative = true
+title = "Damage 1x attack"
+description = "Inflict damage to the target equal to 1x your attack. Must be comboed with Hack and Bash."
+triggers = Array[ExtResource("5_x0hdq")]([ExtResource("6_wgyeh")])
+lifetimes = Array[ExtResource("3_nlv5f")]([])
+conditionals_positive = Array[ExtResource("2_8lb4s")]([ExtResource("3_11uth"), ExtResource("4_x0hdq")])
+conditionals_negative = Array[ExtResource("2_8lb4s")]([])
+metadata/_custom_type_script = "uid://8lptu87j3jgg"

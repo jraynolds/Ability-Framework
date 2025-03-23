@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpegikwyn7voc"]
+
+[ext_resource type="Texture2D" uid="uid://cga04vvp3fle6" path="res://assets/abilities/r_15.png" id="1_j3yk4"]
+
+[node name="EffectPanel" type="Panel"]
+custom_minimum_size = Vector2(40, 40)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+icon = ExtResource("1_j3yk4")
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="StacksLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2

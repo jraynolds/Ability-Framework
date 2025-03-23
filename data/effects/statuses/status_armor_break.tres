@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=8 format=3 uid="uid://cnc41b7rnkraj"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ircfk"]
+[ext_resource type="Resource" uid="uid://cna30smjppgrl" path="res://data/values/flats/flat__05.tres" id="1_xv8uy"]
+[ext_resource type="Texture2D" uid="uid://cga04vvp3fle6" path="res://assets/abilities/r_15.png" id="2_ircfk"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_fgltm"]
+[ext_resource type="Resource" uid="uid://1gmdei4ye3w6" path="res://data/lifetimes/duration_8.tres" id="4_xv8uy"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="6_fgltm"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_g3h5e"]
+
+[resource]
+script = ExtResource("6_fgltm")
+entity_target = 10
+stat_type = 30
+addition = ExtResource("1_xv8uy")
+negative = true
+title = "Armor Break"
+description = "Defense reduced by 5%."
+icon = ExtResource("2_ircfk")
+triggers = Array[ExtResource("6_g3h5e")]([])
+lifetimes = Array[ExtResource("3_fgltm")]([ExtResource("4_xv8uy")])
+conditionals_positive = Array[ExtResource("1_ircfk")]([])
+conditionals_negative = Array[ExtResource("1_ircfk")]([])
+metadata/_custom_type_script = "uid://des8hnti281sm"

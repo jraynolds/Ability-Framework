@@ -6,10 +6,12 @@ var entity : Entity : ## The Entity this HealthBar represents. Changing this upd
 	set(val):
 		var old_val = entity
 		entity = val
+		icon.texture = entity.icon
 		name_label.text = entity.title
 		_update_bars(entity.stats_component.get_stat_value(StatResource.StatType.HP))
 		entity.stats_component.on_stat_change.connect(_on_stat_change)
 
+@export var icon : TextureRect ## Icon for the Entity's picture.
 @export var name_label : Label ## Label for the name of the Entity.
 @export var hp_label : Label ## Label for the Entity's HP value.
 @export var progress_bar_fast : ProgressBar ## HP bar that responds immediately.

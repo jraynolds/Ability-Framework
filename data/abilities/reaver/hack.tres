@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=6 format=3 uid="uid://c8l8rbq5qjls5"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_7my7e"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_5r6c4"]
+[ext_resource type="Resource" uid="uid://d12fi1sn21yhk" path="res://data/effects/damage_caster_attack_1x.tres" id="3_52xxd"]
+[ext_resource type="Texture2D" uid="uid://qa4dk8kdfwqq" path="res://assets/abilities/r_05.png" id="4_8cd62"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="5_w2tcr"]
+
+[resource]
+script = ExtResource("5_w2tcr")
+title = "Hack"
+icon = ExtResource("4_8cd62")
+effects = Array[ExtResource("2_5r6c4")]([ExtResource("3_52xxd")])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_7my7e")]([])
+conditionals_negative = Array[ExtResource("1_7my7e")]([])
+conditionals_highlight = Array[ExtResource("1_7my7e")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

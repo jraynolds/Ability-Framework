@@ -10,6 +10,8 @@ var resource : EntityResource :
 	set(val):
 		_resource = val
 		title = _resource.title
+		icon = _resource.icon
+		description = _resource.description
 		name = _resource.title
 		stats_component.load_entity_resource(_resource)
 		statuses_component.load_entity_resource(_resource)
@@ -20,3 +22,5 @@ var resource : EntityResource :
 @export var abilities_component : AbilitiesEntityComponent ## The Abilities component for this Entity.
 
 var title : String ## The name of the Entity.
+var icon : Texture2D ## The icon for this Entity.
+var description : String ## The description of this Entity.

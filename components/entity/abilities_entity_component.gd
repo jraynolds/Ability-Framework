@@ -15,7 +15,7 @@ var abilities_cast : Array[Ability] ## The heap (front-recent) of Abilities this
 func load_entity_resource(resource: EntityResource):
 	abilities = {}
 	for ability_resource in resource.abilities.keys():
-		var ability : Ability = ability_scene.instantiate().from_resource(ability_resource)
+		var ability : Ability = ability_scene.instantiate().from_resource(ability_resource, entity)
 		abilities[ability] = resource.abilities[ability_resource]
 		add_child(ability)
 		ability.name = ability._title
@@ -28,7 +28,7 @@ func on_entity_updated():
 
 ## Casts the given ability on the given targets. Adds it to the heap of our casts.
 func cast(ability: Ability, targets: Array[Entity]):
-	ability.cast(entity, targets)
+	ability.cast(targets)
 	abilities_cast.insert(0, ability)
 
 

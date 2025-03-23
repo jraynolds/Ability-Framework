@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=4 format=3 uid="uid://wvg21l1ra8aj"]
+
+[ext_resource type="Resource" uid="uid://ciu3r873ubuh3" path="res://data/values/flats/flat__1.tres" id="1_mq1o0"]
+[ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="2_sglfa"]
+[ext_resource type="Resource" uid="uid://bk53y5hldyf1u" path="res://data/stats/defense.tres" id="3_5bhfl"]
+
+[resource]
+script = ExtResource("2_sglfa")
+stat_entity = 10
+stat = ExtResource("3_5bhfl")
+amount = ExtResource("1_mq1o0")
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://fqonh0m4k5ow"
