@@ -14,6 +14,7 @@ statuses_container_enemy_positive = NodePath("CanvasLayer/Statuses/StatusesConta
 statuses_container_enemy_negative = NodePath("CanvasLayer/Statuses/StatusesContainer2")
 statuses_container_player_positive = NodePath("CanvasLayer/Statuses2/StatusesContainer")
 statuses_container_player_negative = NodePath("CanvasLayer/Statuses2/StatusesContainer2")
+queued_ability_duration = 0.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

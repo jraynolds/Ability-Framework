@@ -19,5 +19,5 @@ enum StatType {
 	Attack = 20,
 	Defense = 30,
 	AbilitySpeed = 40,
-	GCDCooldown = 41,
+	GCD = 41,
 }

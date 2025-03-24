@@ -75,7 +75,7 @@ func is_resource_equal(resource: AbilityResource):
 
 
 ## Returns whether this Ability can be cast.
-func _is_castable(targets: Array[Entity]):
+func is_castable(targets: Array[Entity]):
 	for conditional in _conditionals_positive:
 		if !conditional.is_met(null, self, _caster, targets):
 			return false

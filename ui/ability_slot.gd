@@ -20,6 +20,12 @@ var button : AbilityButton :
 		_button = val
 @export var key_label : Label ## The Label that depicts the keystroke that activates this slot.
 @export var progress_bar : TextureProgressBar ## The progress overlay for an Ability in cooldown.
+var progress : float : ## What percent filled the cooldown progress bar should be. Changing this fills the bar.
+	set(val):
+		assert(val >= 0.0 and val <= 100.0, "Can't set this value for our cooldown progress bar!")
+		progress = val
+		progress_bar.value = progress
+		progress_bar.visible = progress > 0
 @export var animation_player : AnimationPlayer ## The animation player for this slot.
 @export var highlight : TextureRect ## A highlight overlay for the button.
 var highlighted : bool : ## Whether the contained Ability should be highlighted. Toggles the highlight.
