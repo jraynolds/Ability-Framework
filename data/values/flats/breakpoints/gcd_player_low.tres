@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_n8rkx")
-value = 3.5
+value = 2.5
 is_int = false
 rounding_behavior = 0
 metadata/_custom_type_script = "uid://dnuf3s07uu1mo"

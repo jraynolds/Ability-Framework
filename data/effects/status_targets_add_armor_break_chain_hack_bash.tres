@@ -12,10 +12,11 @@
 [resource]
 script = ExtResource("4_tcksw")
 entity_target = 11
-effect = ExtResource("2_adn3f")
+effect_added = ExtResource("2_adn3f")
 stacking_behavior = 21
 title = "Break Armor"
 description = "Add a stack of Armor Break to the targets, reducing their Defense by 5%. Must be comboed with Hack and Bash."
+positivity = 2
 triggers = Array[ExtResource("5_71dne")]([ExtResource("6_yofyx")])
 lifetimes = Array[ExtResource("3_q28x2")]([])
 conditionals_positive = Array[ExtResource("1_adn3f")]([ExtResource("2_q28x2"), ExtResource("3_tcksw")])

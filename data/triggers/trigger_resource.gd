@@ -6,20 +6,40 @@ class_name TriggerResource
 @export_multiline var description : String ## The description for this Trigger.
 enum Trigger {
 	OnThisAbilityCast = 0, ## When the associated Ability is cast
+	OnRegistered = 10, ## When the Effect is successfully registered on its triggers
+	#OnAddedAsStatus = 10, ## When the Effect is added as a status Effect
 }
 ## The type of Trigger. By default, when the associated Ability is cast.
 @export var trigger : Trigger = Trigger.OnThisAbilityCast 
 
 
 ## Adds a listener to the appropriate game trigger for the given Effect.
-func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Variant):
+func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
 	match trigger :
 		Trigger.OnThisAbilityCast:
 			ability.on_cast.connect(function.bind(caster, targets))
+		Trigger.OnRegistered:
+			effect.on_registered.connect(function.bind(caster, targets))
+		#Trigger.OnAddedAsStatus:
+			#for target in targets:
+				#target.statuses_component.on_status_added.connect(func(status: Effect):
+					##print(status)
+					#if status == effect:
+						##print("matches!")
+						#function.bind(caster, targets)
+				#)
 
 
 ## Removes a listener from the appropriate game trigger for the given Effect.
-func unregister(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Variant):
+func unregister(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
 	match trigger :
 		Trigger.OnThisAbilityCast:
 			ability.on_cast.disconnect(function.bind(caster, targets))
+		Trigger.OnRegistered:
+			effect.on_registered.disconnect(function.bind(caster, targets))
+		#Trigger.OnAddedAsStatus:
+			#for target in targets:
+				#target.statuses_component.on_status_added.disconnect(func(status: Effect):
+					#if status == effect:
+						#function.bind(caster, targets)
+				#)

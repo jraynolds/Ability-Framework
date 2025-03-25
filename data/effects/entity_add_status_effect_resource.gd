@@ -4,7 +4,7 @@ class_name EntityAddStatusResource
 
 ## The Entity(s) this Effect affects. By default, all valid targets.
 @export var entity_target : Targeting.Target = Targeting.Target.Targets 
-@export var effect : EffectResource ## The Effect this Effect adds to an Entity.
+@export var effect_added : EffectResource ## The Effect this Effect adds to an Entity.
 enum StackingBehavior { ## What happens if the Entity has the same Effect we're trying to add.
 	Refresh = 0, ## Resets the duration.
 	Ignore = 10, ## Like we didn't cast this.
@@ -17,7 +17,7 @@ enum StackingBehavior { ## What happens if the Entity has the same Effect we're 
 ## How the Effect we're adding interacts with an existing, identical Effect. By default, resets the original's duration.
 @export var stacking_behavior : StackingBehavior = StackingBehavior.Refresh
  
-func affect(caster: Entity, targets: Array[Entity]):
+func affect(caster: Entity, ability: Ability, effect: Effect, targets: Array[Entity]):
 	var targets_found : Array[Entity] = []
 	match entity_target :
 		Targeting.Target.Targets:
@@ -28,7 +28,9 @@ func affect(caster: Entity, targets: Array[Entity]):
 			assert(targets[0], "There is no valid target")
 			targets_found.append(targets[0])
 		Targeting.Target.Caster:
+			print("Target for adding " + effect_added.title + " is caster") 
 			targets_found.append(caster)
+			effect._targets = [caster]
 	assert(!targets_found.is_empty(), "No valid targets found")
 	for target in targets_found:
-		target.statuses_component.add_effect_from_resource(caster, effect, stacking_behavior)
+		target.statuses_component.add_effect_from_resource(caster, ability, effect_added, stacking_behavior)

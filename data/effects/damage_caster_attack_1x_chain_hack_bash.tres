@@ -17,6 +17,7 @@ addition = ExtResource("1_oeyhf")
 negative = true
 title = "Damage 1x attack"
 description = "Inflict damage to the target equal to 1x your attack. Must be comboed with Hack and Bash."
+positivity = 2
 triggers = Array[ExtResource("5_x0hdq")]([ExtResource("6_wgyeh")])
 lifetimes = Array[ExtResource("3_nlv5f")]([])
 conditionals_positive = Array[ExtResource("2_8lb4s")]([ExtResource("3_11uth"), ExtResource("4_x0hdq")])

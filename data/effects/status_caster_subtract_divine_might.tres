@@ -9,10 +9,11 @@
 [resource]
 script = ExtResource("3_1kwxw")
 entity_target = 0
-effect = ExtResource("2_1kwxw")
-stacking_behavior = 21
+effect_added = ExtResource("2_1kwxw")
+stacking_behavior = 30
 title = "Expire Divine Might status"
 description = "The Divine Might status is removed."
+positivity = 2
 triggers = Array[ExtResource("4_ow64b")]([])
 lifetimes = Array[ExtResource("2_p8c63")]([])
 conditionals_positive = Array[ExtResource("1_7u5qf")]([])

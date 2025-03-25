@@ -32,6 +32,7 @@ var highlighted : bool : ## Whether the contained Ability should be highlighted.
 	set(val):
 		highlighted = val
 		highlight.visible = highlighted
+@export var activated_border : TextureRect ## A highlight overlay for the button that shows when it's been activated.
 
 @export var locked : bool ## Whether this slot can be dropped on.
 @export var key : Key ## The keystroke that activates this slot.

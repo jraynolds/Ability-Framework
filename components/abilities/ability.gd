@@ -10,7 +10,7 @@ var _resource : AbilityResource :
 		_icon = _resource.icon
 		for effect_resource in _resource.effects:
 			var targets : Array[Entity] = []
-			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, _caster, targets)
+			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, _caster, self, targets)
 			_effects.append(effect)
 			add_child(effect)
 			effect.name = effect._title
@@ -65,7 +65,7 @@ func begin_cast(targets: Array[Entity]):
 ## Performs this ability on the given targets, from our owner.
 func cast(targets: Array[Entity]):
 	for effect in _effects:
-		effect.register(self, _caster, targets)
+		effect.register(_caster, targets)
 	on_cast.emit()
 
 

@@ -16,6 +16,7 @@ addition = ExtResource("1_fdkvp")
 negative = true
 title = "Damage .8x attack"
 description = "Inflict damage to the target equal to .8x your attack. Occurs when not combo'd with Fast Blade."
+positivity = 2
 triggers = Array[ExtResource("5_mxnj2")]([ExtResource("6_r6jrj")])
 lifetimes = Array[ExtResource("4_7tg42")]([])
 conditionals_positive = Array[ExtResource("2_fdkvp")]([])

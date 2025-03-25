@@ -16,6 +16,7 @@ addition = ExtResource("1_wfsb5")
 negative = true
 title = "Damage .8x attack"
 description = "Inflict damage to the target equal to .8x your attack. Occurs when not comboed with Hack."
+positivity = 2
 triggers = Array[ExtResource("6_4ivdp")]([ExtResource("7_utch6")])
 lifetimes = Array[ExtResource("4_eo43j")]([])
 conditionals_positive = Array[ExtResource("2_sqta7")]([])

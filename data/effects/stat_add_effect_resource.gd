@@ -8,7 +8,7 @@ class_name StatAddEffectResource
 @export var addition : ValueResource ## The value that will be added to the Stat.
 @export var negative : bool ## Whether the amount should be multiplied by -1 before it's added.
  
-func affect(caster: Entity, targets: Array[Entity]):
+func affect(caster: Entity, ability: Ability, effect: Effect, targets: Array[Entity]):
 	var addition_value = addition.get_value(caster, targets)
 	if negative:
 		addition_value *= -1

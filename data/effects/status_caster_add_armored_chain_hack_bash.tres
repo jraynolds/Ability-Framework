@@ -12,10 +12,11 @@
 [resource]
 script = ExtResource("4_628jq")
 entity_target = 0
-effect = ExtResource("2_5r4xp")
+effect_added = ExtResource("2_5r4xp")
 stacking_behavior = 21
 title = "Add Armor"
 description = "Add a stack of Armored to yourself, increasing your Defense by 5%. Must be comboed with Hack and Bash."
+positivity = 2
 triggers = Array[ExtResource("5_75f5a")]([ExtResource("6_17w6e")])
 lifetimes = Array[ExtResource("3_hmjyh")]([])
 conditionals_positive = Array[ExtResource("1_5r4xp")]([ExtResource("2_hmjyh"), ExtResource("3_628jq")])

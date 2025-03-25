@@ -17,7 +17,7 @@ var _duration : float : ## How much time left in seconds the Effect has. Changin
 		if _duration <= 0:
 			_duration_label.text = ""
 		elif _duration < 1.0:
-			_duration_label.text = str(_duration)
+			_duration_label.text = str("%0.1f" % _duration)
 		else :
 			_duration_label.text = str(floori(_duration))
 @export var _duration_label : Label ## The label that displays how much time left the Effect has.

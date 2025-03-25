@@ -49,7 +49,6 @@ func _process(delta: float) -> void:
 		ability_slot.highlighted = highlighted
 	
 	if queued_ability_duration_left > 0:
-		print(queued_ability_duration_left)
 		if queued_ability and player.abilities_component.gcd_remaining <= 0:
 			player.abilities_component.try_cast(queued_ability, [enemy])
 		queued_ability_duration_left -= delta

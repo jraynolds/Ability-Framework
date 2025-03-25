@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TriggerResource" load_steps=2 format=3 uid="uid://eko7qxa4kgve"]
+
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="1_gaks4"]
+
+[resource]
+script = ExtResource("1_gaks4")
+title = "On Registered"
+description = "Triggered when the Effect's triggers become registered."
+trigger = 10
+metadata/_custom_type_script = "uid://bwdmmov3abjck"

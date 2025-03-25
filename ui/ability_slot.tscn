@@ -53,7 +53,7 @@ shader_parameter/ant_width = 2.0
 shader_parameter/ant_length = 10.0
 shader_parameter/ant_speed = 30.0
 
-[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "progress_bar", "animation_player", "highlight")]
+[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "progress_bar", "animation_player", "highlight", "activated_border")]
 self_modulate = Color(1, 1, 0.0235294, 1)
 custom_minimum_size = Vector2(80, 80)
 offset_right = 60.0
@@ -66,14 +66,13 @@ key_label = NodePath("Key")
 progress_bar = NodePath("TextureProgressBar")
 animation_player = NodePath("AnimationPlayer")
 highlight = NodePath("Highlight")
+activated_border = NodePath("Activation")
 metadata/_custom_type_script = "uid://wdbf8xeqtskp"
 
 [node name="AbilityButton" parent="." instance=ExtResource("2_vojnw")]
 z_index = 2
 custom_minimum_size = Vector2(74, 74)
 layout_mode = 2
-icon_alignment = 1
-expand_icon = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 self_modulate = Color(1, 1, 1, 0.541176)

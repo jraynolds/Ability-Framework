@@ -10,10 +10,11 @@
 [resource]
 script = ExtResource("3_g7fky")
 entity_target = 11
-effect = ExtResource("2_g7fky")
+effect_added = ExtResource("2_g7fky")
 stacking_behavior = 21
 title = "Freeze"
 description = "Add a stack of Rime to the target."
+positivity = 2
 triggers = Array[ExtResource("4_bs4n0")]([ExtResource("6_bs4n0")])
 lifetimes = Array[ExtResource("2_yhbmb")]([])
 conditionals_positive = Array[ExtResource("1_mh7ed")]([])

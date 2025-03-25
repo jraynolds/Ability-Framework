@@ -12,6 +12,7 @@ script = ExtResource("5_ewyk5")
 title = "Rime"
 description = "Coated with gelid ice."
 icon = ExtResource("2_3kuwn")
+positivity = 2
 triggers = Array[ExtResource("6_kv6c7")]([])
 lifetimes = Array[ExtResource("3_im1nd")]([ExtResource("4_t8t2k")])
 conditionals_positive = Array[ExtResource("1_ubo1w")]([])

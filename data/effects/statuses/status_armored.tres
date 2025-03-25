@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=8 format=3 uid="uid://colkeq031stob"]
+[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=9 format=3 uid="uid://colkeq031stob"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_6qchb"]
 [ext_resource type="Resource" uid="uid://cna30smjppgrl" path="res://data/values/flats/flat__05.tres" id="1_qk2gn"]
@@ -7,10 +7,11 @@
 [ext_resource type="Resource" uid="uid://1gmdei4ye3w6" path="res://data/lifetimes/duration_8.tres" id="4_sdvg5"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_571m5"]
 [ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="6_hv0s4"]
+[ext_resource type="Resource" uid="uid://eko7qxa4kgve" path="res://data/triggers/on_registered.tres" id="8_hv0s4"]
 
 [resource]
 script = ExtResource("6_hv0s4")
-entity_target = 10
+entity_target = 0
 stat_type = 30
 addition = ExtResource("1_qk2gn")
 negative = false
@@ -18,7 +19,7 @@ title = "Armored"
 description = "Defense increased by 5%."
 icon = ExtResource("2_6qchb")
 positivity = 0
-triggers = Array[ExtResource("6_571m5")]([])
+triggers = Array[ExtResource("6_571m5")]([ExtResource("8_hv0s4")])
 lifetimes = Array[ExtResource("3_hv0s4")]([ExtResource("4_sdvg5")])
 conditionals_positive = Array[ExtResource("1_6qchb")]([])
 conditionals_negative = Array[ExtResource("1_6qchb")]([])

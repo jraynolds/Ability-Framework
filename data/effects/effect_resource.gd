@@ -12,5 +12,5 @@ class_name EffectResource
 @export var conditionals_positive : Array[ConditionalResource] ## The conditionals that allow this Effect.
 @export var conditionals_negative : Array[ConditionalResource] ## The conditionals that disallow this Effect.
 
-func affect(caster: Entity, targets: Array[Entity]):
+func affect(caster: Entity, ability: Ability, effect: Effect, targets: Array[Entity]):
 	pass

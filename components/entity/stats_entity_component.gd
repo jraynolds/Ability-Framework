@@ -43,5 +43,6 @@ func get_stat_value_by_resource(stat: StatResource) -> float:
 
 
 func add_stat_value(stat: StatResource.StatType, addition: float) -> float:
+	print("Adding " + str(addition))
 	stats[stat].add_value(addition)
 	return stats[stat].get_value()

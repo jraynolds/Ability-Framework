@@ -11,10 +11,11 @@
 [resource]
 script = ExtResource("6_4by8a")
 entity_target = 0
-effect = ExtResource("4_vtgnj")
+effect_added = ExtResource("4_vtgnj")
 stacking_behavior = 0
 title = "Add Divine Might"
 description = "Adds a stack of Divine Might to the caster, allowing them to cast enhanced Holy Spirit."
+positivity = 2
 triggers = Array[ExtResource("7_edbga")]([])
 lifetimes = Array[ExtResource("5_hqrt0")]([])
 conditionals_positive = Array[ExtResource("1_482ov")]([ExtResource("2_bnnja"), ExtResource("3_0kuue")])
