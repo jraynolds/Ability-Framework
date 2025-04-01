@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://27bka5t3aalm"]
 
-[ext_resource type="Script" uid="uid://doo7asqx51qab" path="res://scenes/battle.gd" id="1_p1qf1"]
+[ext_resource type="Script" path="res://scenes/battle.gd" id="1_p1qf1"]
 [ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://ui/ability_overlay.tscn" id="1_th188"]
 [ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
 [ext_resource type="PackedScene" uid="uid://dh1uxqh1ntq1h" path="res://ui/statuses_container.tscn" id="4_a12nh"]

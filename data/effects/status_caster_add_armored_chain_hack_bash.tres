@@ -5,9 +5,10 @@
 [ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="2_hmjyh"]
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="3_628jq"]
 [ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_hmjyh"]
-[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/entity_add_status_effect_resource.gd" id="4_628jq"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/add_status_effect_resource.gd" id="4_628jq"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_75f5a"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_17w6e"]
+
 
 [resource]
 script = ExtResource("4_628jq")

@@ -8,9 +8,12 @@ class_name EffectResource
 ## Whether this Effect is good, bad, or neither for the target. By default, it's bad.
 @export var positivity : Math.Positivity = Math.Positivity.Negative 
 @export var triggers : Array[TriggerResource] ## The triggers for this Effect.
-@export var lifetimes : Array[LifetimeResource] ## The lifetimes before this Effect expires.
 @export var conditionals_positive : Array[ConditionalResource] ## The conditionals that allow this Effect.
 @export var conditionals_negative : Array[ConditionalResource] ## The conditionals that disallow this Effect.
 
-func affect(caster: Entity, ability: Ability, effect: Effect, targets: Array[Entity]):
+
+#func on_created(effect: Effect, ability: )
+
+
+func affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
 	pass

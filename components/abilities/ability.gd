@@ -10,7 +10,7 @@ var _resource : AbilityResource :
 		_icon = _resource.icon
 		for effect_resource in _resource.effects:
 			var targets : Array[Entity] = []
-			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, _caster, self, targets)
+			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, self,  _caster, targets)
 			_effects.append(effect)
 			add_child(effect)
 			effect.name = effect._title
@@ -75,7 +75,7 @@ func is_resource_equal(resource: AbilityResource):
 
 
 ## Returns whether this Ability can be cast.
-func is_castable(targets: Array[Entity]):
+func is_castable(targets: Array[Entity]) -> bool:
 	for conditional in _conditionals_positive:
 		if !conditional.is_met(null, self, _caster, targets):
 			return false
@@ -86,7 +86,7 @@ func is_castable(targets: Array[Entity]):
 
 
 ## Returns whether this Ability is highlit.
-func _is_highlighted(targets: Array[Entity]):
+func _is_highlighted(targets: Array[Entity]) -> bool:
 	if _conditionals_highlight.is_empty():
 		return false
 	for conditional in _conditionals_highlight:

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://66p1r58i6jcx" path="res://ui/ability_button.tscn" id="2_vojnw"]
 [ext_resource type="Texture2D" uid="uid://b4w485w6w2ohv" path="res://assets/black square.png" id="3_77mnq"]
 [ext_resource type="Texture2D" uid="uid://ilpoafipynnu" path="res://assets/white square.png" id="4_gf30w"]
-[ext_resource type="Shader" uid="uid://jw2n7i2u4mmi" path="res://ui/ants.gdshader" id="5_lxj2w"]
+[ext_resource type="Shader" path="res://ui/ants.gdshader" id="5_lxj2w"]
 
 [sub_resource type="Animation" id="Animation_f435q"]
 length = 0.25

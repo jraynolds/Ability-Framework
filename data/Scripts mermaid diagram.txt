@@ -1,0 +1,122 @@
+classDiagram
+	Effect --|> Node
+	class Effect {
+		-EffectResource _resource
+		+EffectResource resource
+		-String _title
+		-String _description
+		-Math.Positivity _positivity
+		-Texture2D _icon
+		-Array[TriggerResource] _triggers
+		-Array[LifetimeResource] _lifetimes
+		-Array[ConditionalResource] _conditionals_positive
+		-Array[ConditionalResource] _conditionals_negative
+		-Entity _caster
+		-Ability _ability
+		-Array[Entity] _targets
+		-float _duration
+		-int _times_triggered
+		+signal on_registered
+		+signal on_affected(Entity, Array[Entity])
+		+signal on_unregistered
+		+signal on_lifetime_ended
+		signal on_ended
+		+from_resource(EffectResource, Ability, Entity, Array[Entity]) Effect
+		+from_effect(Effect) Effect
+		+register(Entity, Array[Entity])
+		+affect(Entity, Array[Entity])
+		+has_lifetime_duration() bool
+		+get_lifetime_duration_left() float
+		+reset_lifetime()
+		+shares_resource(Effect) bool
+		+end
+	}
+
+	Ability --|> Node
+	class Ability {
+		-AbilityResource _resource
+		-String _title
+		-Texture2D _icon
+		-Array[Effect] _effects
+		-ValueResource _casting_time
+		-float _cast_time_left
+		-ValueResource _cooldown
+		-AbilityResource _gcd_type
+		-Array[ConditionalResource] _conditionals_positive
+		-Array[ConditionalResource] _conditionals_negative
+		-Array[ConditionalResource] _conditionals_highlight
+		-Entity _caster
+		+PackedScene effect_scene
+		+signal on_cast_begin
+		+signal on_cast
+		+from_resource(AbilityResource, Entity)
+		+begin_cast(Array[Entity])
+		+cast(Array[Entity])
+		+is_resource_equal(AbilityResource) bool
+		+is_castable(Array[Entity]) bool
+		+is_highlighted(Array[Entity]) bool
+	}
+
+	Entity --|> Node
+	class Entity {
+		-EntityResource _resource
+		+EntityResource resource
+		+StatsEntityComponent stats_component
+		+StatusesEntityComponent statuses_component
+		+AbilitiesEntityComponent abilities_component
+		+String title
+		+Texture2D icon
+		+String description
+	}
+	EntityComponent --|> Node
+	class EntityComponent {
+		+Entity entity
+		+load_entity_resource(EntityResource)
+		+on_entity_updated()
+	}
+	AbilitiesEntityComponent --|> EntityComponent
+	class AbilitiesEntityComponent {
+		+Dictionary[Ability, int] abilities
+		+Array[Ability] abilities_cast
+		+float gcd_remaining
+		+float gcd
+		+float gcd_max_cached
+		+PackedScene ability_scene
+		+signal on_gcd_update(float, float)
+		+load_entity_resource(EntityResource)
+		+on_entity_updated()
+		-_process(float)
+		+try_cast(Ability, Array[Entity])
+		+cast(Ability, Array[Entity])
+		+get_last_ability_cast() Ability
+		+get_ability_in_chain(int) Ability
+		+can_cast(Ability, Array[Entity]) bool
+	}
+	StatsEntityComponent --|> EntityComponent
+	class StatsEntityComponent {
+		+PackedScene stat_scene
+		+Dictionary[StatResource.StatType, Stat]
+		+signal on_stat_change(StatResource.StatType, float, float)
+		+load_entity_resource(EntityResource)
+		+on_entity_updated()
+		+get_stat_value(StatResource.StatType) float
+		+get_stat_value_by_resource(StatResource) float
+		+add_stat_value(StatResource.StatType, float) float
+	}
+	StatusesEntityComponent --|> EntityComponent
+	class StatusesEntityComponent {
+		+Dictionary[Effect, int] statuses
+		+PackedScene effect_scene
+		+signal on_status_added(Effect)
+		+signal on_status_removed(Effect)
+		+load_entity_resource(EntityResource)
+		-_process(float)
+		+get_effect(Effect) Effect
+		+get_effect_stacks(Effect) int
+		+get_effect_by_resource(EffectResource) Effect
+		+get_effects(Math.Positivity) Array[Effect]
+		+add_effect(Effect, Entity, EntityAddStatusEffectResource.StackingBehavior)
+		_add_effect(Effect, Entity)
+		_remove_effect(Effect)
+		+add_effect_from_resource(EffectResource, Ability, Entity, EntityAddStatusEffectResource.StackingBehavior)
+	}

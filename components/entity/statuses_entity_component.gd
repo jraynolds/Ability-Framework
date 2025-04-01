@@ -10,11 +10,17 @@ var statuses : Dictionary[Effect, int] = {}
 signal on_status_added(status: Effect) ## Emitted when we add a new status.
 signal on_status_removed(status: Effect) ## Emitted when we remove a status.
 
+enum IOLayerType { ## Different types of IOLayers.
+	Stats = 0, ## IOLayers that interact with Stats.
+}
+var iolayers : Dictionary[IOLayerType, Array] ## The Dictionary of active I/O layers, grouped by type.
+
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
 ## Intializes Stat objects.
 func load_entity_resource(resource: EntityResource):
 	statuses = {}
+	iolayers = {}
 
 
 ## Called every frame. Increments duration for all attached status Effects.
@@ -57,37 +63,37 @@ func get_effects(status_positivity: Math.Positivity) -> Array[Effect]:
 
 
 ## Adds a given Effect with the given stacking behavior.
-func add_effect(caster: Entity, effect: Effect, stacking_behavior: EntityAddStatusResource.StackingBehavior):
+func add_effect(effect: Effect, caster: Entity, stacking_behavior: AddStatusEffectResource.StackingBehavior):
 	var duplicate_effect = get_effect(effect)
 	if !duplicate_effect:
-		_add_effect(caster, effect)
+		_add_effect(effect, caster)
 		return
 	match stacking_behavior:
-		EntityAddStatusResource.StackingBehavior.Refresh:
+		AddStatusEffectResource.StackingBehavior.Refresh:
 			duplicate_effect.reset_lifetime()
-		EntityAddStatusResource.StackingBehavior.Ignore:
+		AddStatusEffectResource.StackingBehavior.Ignore:
 			return
-		EntityAddStatusResource.StackingBehavior.Add:
+		AddStatusEffectResource.StackingBehavior.Add:
 			statuses[duplicate_effect] += 1
-		EntityAddStatusResource.StackingBehavior.AddAndRefresh:
+		AddStatusEffectResource.StackingBehavior.AddAndRefresh:
 			statuses[duplicate_effect] += 1
 			duplicate_effect.reset_lifetime()
-		EntityAddStatusResource.StackingBehavior.AddAndReplace:
+		AddStatusEffectResource.StackingBehavior.AddAndReplace:
 			var stacks = statuses[duplicate_effect]
 			_remove_effect(duplicate_effect)
-			_add_effect(caster, effect)
+			_add_effect(effect, caster)
 			statuses[effect] = stacks + 1
-		EntityAddStatusResource.StackingBehavior.Subtract:
+		AddStatusEffectResource.StackingBehavior.Subtract:
 			statuses[duplicate_effect] -= 1
 			if statuses[duplicate_effect] <= 0:
 				_remove_effect(duplicate_effect)
-		EntityAddStatusResource.StackingBehavior.Replace:
+		AddStatusEffectResource.StackingBehavior.Replace:
 			_remove_effect(duplicate_effect)
-			_add_effect(caster, effect)
+			_add_effect(effect, caster)
 
 
 ## Does the actual work of adding an Effect.
-func _add_effect(caster: Entity, effect: Effect):
+func _add_effect(effect: Effect, caster: Entity):
 	statuses[effect] = 1
 	add_child(effect)
 	effect.on_lifetime_ended.connect(func(): _remove_effect(effect))
@@ -105,7 +111,7 @@ func _remove_effect(effect: Effect):
 
 
 ## Constructs an Effect from the given resource and adds it.
-func add_effect_from_resource(caster: Entity, ability: Ability, resource: EffectResource, stacking_behavior: EntityAddStatusResource.StackingBehavior):
+func add_effect_from_resource(resource: EffectResource, ability: Ability, caster: Entity, stacking_behavior: AddStatusEffectResource.StackingBehavior, lifetimes: Array[LifetimeResource], expiration_behavior: AddStatusEffectResource.ExpirationBehavior):
 	var targets : Array[Entity] = [entity]
 	var effect : Effect = effect_scene.instantiate().from_resource(resource, caster, ability, targets)
-	add_effect(caster, effect, stacking_behavior)
+	add_effect(effect, caster, stacking_behavior)

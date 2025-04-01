@@ -23,3 +23,12 @@ enum Positivity {
 	Neutral,
 	Negative
 }
+
+## Mathematics operations.
+enum Operation {
+	Addition,
+	Subtraction,
+	Multiplication,
+	Division,
+	Power
+}

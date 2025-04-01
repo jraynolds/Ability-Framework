@@ -23,6 +23,7 @@ var resource : EffectResource :
 			_conditionals_negative.append(conditional)
 		_duration = 0
 		_times_triggered = 0
+		_resource.
 var _title : String ## The title of this Effect.
 var _description : String ## The description of this Effect.
 var _positivity : Math.Positivity ## Whether this Effect is good, bad, or neither for its target.
@@ -52,7 +53,7 @@ signal on_lifetime_ended ## Emitted when any of this Effect's lifetimes expires.
 signal on_ended ## Emitted when this Effect expires.
 
 ## Returns an instance of this initialized with the given EffectResource.
-func from_resource(res: EffectResource, caster: Entity, ability: Ability, targets: Array[Entity]) -> Effect:
+func from_resource(res: EffectResource, ability: Ability, caster: Entity, targets: Array[Entity]) -> Effect:
 	resource = res
 	_caster = caster
 	_ability = ability
@@ -118,7 +119,7 @@ func affect(caster: Entity, targets: Array[Entity]):
 	_times_triggered += 1
 	
 	for target in targets:
-		_resource.affect(caster, _ability, self, targets)
+		_resource.affect(self, _ability, caster, targets)
 	
 	if _lifetimes.is_empty():
 		queue_free()

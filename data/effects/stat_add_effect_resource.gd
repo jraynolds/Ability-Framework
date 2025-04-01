@@ -6,11 +6,11 @@ class_name StatAddEffectResource
 @export var entity_target : Targeting.Target = Targeting.Target.Targets 
 @export var stat_type : StatResource.StatType ## The Stat this Effect adds to.
 @export var addition : ValueResource ## The value that will be added to the Stat.
-@export var negative : bool ## Whether the amount should be multiplied by -1 before it's added.
- 
-func affect(caster: Entity, ability: Ability, effect: Effect, targets: Array[Entity]):
+@export var value_mult_negative : bool ## Whether the amount should be multiplied by -1 before it's added.
+
+func affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
 	var addition_value = addition.get_value(caster, targets)
-	if negative:
+	if value_mult_negative:
 		addition_value *= -1
 	match entity_target :
 		Targeting.Target.Targets:

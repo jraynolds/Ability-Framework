@@ -1,0 +1,114 @@
+classDiagram
+    AbilityResource --|> Resource
+    class AbilityResource {
+        +String title
+        +Texture2D icon
+        +Array[EffectResource] effects
+        +ValueResource casting_time
+        +ValueResource cooldown
+        +GCD gcd_type
+        +ValueResource gcd_cooldown
+        +Array[ConditionalResource] conditionals_positive
+        +Array[ConditionalResource] conditionals_negative
+        +Array[ConditionalResource] conditionals_highlight
+    }
+
+    EffectResource --|> Resource 
+    class EffectResource {
+        +String title
+        +String description
+        +Texture2D icon
+        +Math.Positivity positivity
+        +Array[TriggerResource] triggers
+        +Array[LifetimeResource] lifetimes
+        +Array[ConditionalResource] conditionals_positive
+        +Array[ConditionalResource] conditionals_negative
+        +affect(Effect, Ability, Entity, Array[Entity])
+    }
+    EntityAddStatusEffectResource --|> EffectResource
+    class EntityAddStatusEffectResource  {
+        +Targeting.Target entity_target
+        +EffectResource effect_added
+        +StackingBehavior stacking_behavior
+        +affect(Effect, Ability, Entity, Array[Entity])
+    }
+    StatAddEffectResource --|> EffectResource
+    class StatAddEffectResource {
+        +Targeting.Target entity_target
+        +StatResource.StatType stat_type
+        +ValueResource addition
+        +bool negative
+        +affect(Effect, Ability, Entity, Array[Entity])
+    }
+
+    ValueResource --|> Resource
+    class ValueResource {
+        +bool is_int
+        +Math.Rounding rounding_behavior
+        +get_value(Entity, Array[Entity]) float
+    }
+    StatValueResource --|> ValueResource
+    class StatValueResource {
+        +Targeting.Target stat_entity
+        +StatResource stat
+        +ValueResource amount
+        +get_value(Entity, Array[Entity]) float
+    }
+    FlatValueResource --|> ValueResource
+    class FlatValueResource {
+        +float value
+        +get_value(Entity, Array[Entity]) float
+    }
+
+    ConditionalResource --|> Resource
+    class ConditionalResource {
+        +String title
+        +String description
+        +is_met(Effect, Ability, Entity, Array[Entity]) bool
+    }
+    EntityStatusConditionalResource --|> ConditionalResource
+    class EntityStatusConditionalResource {
+        +EffectResource status
+        +Targeting.Target status_entity
+        +ValueResource minimum_stacks
+        +is_met(Effect, Ability, Entity, Array[Entity]) bool
+    }
+    AbilityChainConditionalResource --|> ConditionalResource
+    class AbilityChainConditionalResource {
+        +AbilityResource ability_in_chain
+        +Targeting.Target ability_caster
+        +ValueResource chain_position
+        +is_met(Effect, Ability, Entity, Array[Entity]) bool
+    }
+    ValueComparisonConditionalResource --|> ConditionalResource
+    class ValueComparisonConditionalResource {
+        +ValueResource value_1
+        +ValueResource value_2
+        +Math.Comparison comparison
+        +is_met(Effect, Ability, Entity, Array[Entity]) bool
+    }
+
+    TriggerResource --|> Resource
+    class TriggerResource {
+        +String title
+        +String description
+        +Trigger trigger
+        +register(Effect, Ability, Entity, Array[Entity])
+    }
+
+    LifetimeResource --|> Resource
+    class LifetimeResource {
+        +String title
+        +String description
+        +is_lifetime_expired(Entity, Array[Entity], float, int)
+    }
+    DurationLifetimeResource --|> LifetimeResource
+    class DurationLifetimeResource {
+        +ValueResource duration
+        +is_lifetime_expired(Entity, Array[Entity], float, int)
+    }
+    TriggersLifetimeResource --|> LifetimeResource
+    class TriggersLifetimeResource {
+        +ValueResource triggers
+        +is_lifetime_expired(Entity, Array[Entity], float, int)
+    }
