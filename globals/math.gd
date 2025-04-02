@@ -21,7 +21,8 @@ enum Comparison {
 enum Positivity {
 	Positive,
 	Neutral,
-	Negative
+	Negative,
+	All
 }
 
 ## Mathematics operations.

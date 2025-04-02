@@ -11,9 +11,11 @@ class_name EffectResource
 @export var conditionals_positive : Array[ConditionalResource] ## The conditionals that allow this Effect.
 @export var conditionals_negative : Array[ConditionalResource] ## The conditionals that disallow this Effect.
 
+## Called when an Effect containing this Resource is created. Meant to be overloaded.
+func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+	pass
 
-#func on_created(effect: Effect, ability: )
 
-
-func affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+## Called when an Effect containing this Resource affects targets. Meant to be overloaded.
+func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
 	pass

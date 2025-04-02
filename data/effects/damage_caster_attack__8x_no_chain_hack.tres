@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=8 format=3 uid="uid://ccw62k78oq58s"]
+[gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=7 format=3 uid="uid://ccw62k78oq58s"]
 
 [ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/caster_attack__8x.tres" id="1_wfsb5"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_sqta7"]
 [ext_resource type="Resource" uid="uid://cgcdpvdlauage" path="res://data/conditionals/caster_chain_0_hack.tres" id="3_wfsb5"]
-[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="4_eo43j"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="5_lmswr"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="5_lmswr"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_4ivdp"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_utch6"]
 
@@ -12,13 +11,13 @@
 script = ExtResource("5_lmswr")
 entity_target = 11
 stat_type = 0
-addition = ExtResource("1_wfsb5")
-negative = true
+modifier = ExtResource("1_wfsb5")
+math_operation = 1
+ignore_modifiers = false
 title = "Damage .8x attack"
 description = "Inflict damage to the target equal to .8x your attack. Occurs when not comboed with Hack."
 positivity = 2
 triggers = Array[ExtResource("6_4ivdp")]([ExtResource("7_utch6")])
-lifetimes = Array[ExtResource("4_eo43j")]([])
 conditionals_positive = Array[ExtResource("2_sqta7")]([])
 conditionals_negative = Array[ExtResource("2_sqta7")]([ExtResource("3_wfsb5")])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

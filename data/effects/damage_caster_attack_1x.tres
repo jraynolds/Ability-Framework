@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=7 format=3 uid="uid://d12fi1sn21yhk"]
+[gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=6 format=3 uid="uid://d12fi1sn21yhk"]
 
 [ext_resource type="Resource" uid="uid://vrai8rbym5ym" path="res://data/values/caster_attack.tres" id="1_3qkkk"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="1_v1ky1"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="1_v1ky1"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_vdrp4"]
-[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_ptrln"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_oi14c"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_p1gn1"]
 
@@ -11,13 +10,13 @@
 script = ExtResource("1_v1ky1")
 entity_target = 11
 stat_type = 0
-addition = ExtResource("1_3qkkk")
-negative = true
+modifier = ExtResource("1_3qkkk")
+math_operation = 1
+ignore_modifiers = false
 title = "Damage 1x attack"
 description = "Inflict damage to the target equal to 1x your attack."
 positivity = 2
 triggers = Array[ExtResource("4_oi14c")]([ExtResource("5_p1gn1")])
-lifetimes = Array[ExtResource("3_ptrln")]([])
 conditionals_positive = Array[ExtResource("2_vdrp4")]([])
 conditionals_negative = Array[ExtResource("2_vdrp4")]([])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

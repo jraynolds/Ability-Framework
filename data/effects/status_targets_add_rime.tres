@@ -1,23 +1,25 @@
-[gd_resource type="Resource" script_class="EntityAddStatusResource" load_steps=7 format=3 uid="uid://chvpb2jmjr3g4"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=8 format=3 uid="uid://chvpb2jmjr3g4"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_mh7ed"]
 [ext_resource type="Resource" uid="uid://cnbcpx5vylsch" path="res://data/effects/statuses/status_rime.tres" id="2_g7fky"]
 [ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="2_yhbmb"]
-[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/add_status_effect_resource.gd" id="3_g7fky"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="4_3ydj5"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_bs4n0"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="5_nyxqc"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_bs4n0"]
 
-
 [resource]
-script = ExtResource("3_g7fky")
+script = ExtResource("4_3ydj5")
 entity_target = 11
 effect_added = ExtResource("2_g7fky")
 stacking_behavior = 21
+lifetimes = Array[ExtResource("2_yhbmb")]([])
+expiration_behavior = 0
+status_effect_scene = ExtResource("5_nyxqc")
 title = "Freeze"
 description = "Add a stack of Rime to the target."
 positivity = 2
 triggers = Array[ExtResource("4_bs4n0")]([ExtResource("6_bs4n0")])
-lifetimes = Array[ExtResource("2_yhbmb")]([])
 conditionals_positive = Array[ExtResource("1_mh7ed")]([])
 conditionals_negative = Array[ExtResource("1_mh7ed")]([])
 metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

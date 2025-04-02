@@ -1,22 +1,24 @@
-[gd_resource type="Resource" script_class="EntityAddStatusResource" load_steps=6 format=3 uid="uid://6q5cm6snpmsi"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=7 format=3 uid="uid://6q5cm6snpmsi"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_7u5qf"]
 [ext_resource type="Resource" uid="uid://nsj5sk4al1cc" path="res://data/effects/statuses/status_divine_might.tres" id="2_1kwxw"]
 [ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="2_p8c63"]
-[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/add_status_effect_resource.gd" id="3_1kwxw"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="3_1kwxw"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_ow64b"]
-
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="5_1kwxw"]
 
 [resource]
 script = ExtResource("3_1kwxw")
 entity_target = 0
 effect_added = ExtResource("2_1kwxw")
 stacking_behavior = 30
+lifetimes = Array[ExtResource("2_p8c63")]([])
+expiration_behavior = 0
+status_effect_scene = ExtResource("5_1kwxw")
 title = "Expire Divine Might status"
 description = "The Divine Might status is removed."
 positivity = 2
 triggers = Array[ExtResource("4_ow64b")]([])
-lifetimes = Array[ExtResource("2_p8c63")]([])
 conditionals_positive = Array[ExtResource("1_7u5qf")]([])
 conditionals_negative = Array[ExtResource("1_7u5qf")]([])
 metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

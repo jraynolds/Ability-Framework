@@ -1,21 +1,19 @@
-[gd_resource type="Resource" script_class="StatAddEffectResource" load_steps=6 format=3 uid="uid://dbs4vuq1pm3wr"]
+[gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=4 format=3 uid="uid://dbs4vuq1pm3wr"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_odnmw"]
-[ext_resource type="Resource" uid="uid://cna30smjppgrl" path="res://data/values/flats/flat__05.tres" id="1_wigsd"]
-[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="2_wigsd"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_add_effect_resource.gd" id="3_p4k4t"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="3_p4k4t"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_5b2xl"]
 
 [resource]
 script = ExtResource("3_p4k4t")
 entity_target = 0
 stat_type = 30
-addition = ExtResource("1_wigsd")
-negative = false
+math_operation = 0
+ignore_modifiers = false
 title = ""
 description = ""
+positivity = 2
 triggers = Array[ExtResource("4_5b2xl")]([])
-lifetimes = Array[ExtResource("2_wigsd")]([])
 conditionals_positive = Array[ExtResource("1_odnmw")]([])
 conditionals_negative = Array[ExtResource("1_odnmw")]([])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

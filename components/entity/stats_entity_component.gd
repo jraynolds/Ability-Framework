@@ -4,6 +4,11 @@ class_name StatsEntityComponent
 
 @export var stat_scene : PackedScene ## The default Stat scene.
 var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paired with the kind of Stat each is.
+#
+#enum IOLayerType { ## Different types of IOLayers.
+	#Stats = 0, ## IOLayers that interact with Stats.
+#}
+#var iolayers : Dictionary[IOLayerType, Array] ## The Dictionary of active I/O layers, grouped by type.
 
 ## Emitted when a Stat we're tracking changes
 signal on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float)
@@ -32,17 +37,41 @@ func on_entity_updated():
 	pass
 
 
-## Returns the value of a stat of the given type.
-func get_stat_value(stat: StatResource.StatType) -> float:
-	return stats[stat].value
+## Returns the value of a stat of the given type. 
+## By default, applies the modifications of any ongoing status Effects.
+func get_stat_value(stat: StatResource.StatType, bypass_statuses: bool = false) -> float:
+	if bypass_statuses:
+		return stats[stat].value
+	else :
+		var stat_value = stats[stat].value
+		for effect in entity.statuses_component.statuses:
+			## Skip any Effects without OnGetStatValue triggers.
+			if !effect._triggers.any(func(trigger: TriggerResource): 
+				return trigger.trigger == TriggerResource.Trigger.OnGetStatValue
+			):
+				continue
+			## Skip any Effects without StatModifyEffectResource.
+			var stat_resource = effect.resource as StatModifyEffectResource
+			if !stat_resource:
+				continue
+			## Skip any StatAddEffectResource without this stat as the one it modifies
+			if stat_resource.stat_type != stat:
+				continue
+			stat_value = stat_resource.get_modified_value(
+				stat_value, 
+				effect._ability._caster,
+				[entity]
+			)
+		return stat_value
 
 
 ## Returns the value of a stat of the given resource.
-func get_stat_value_by_resource(stat: StatResource) -> float:
-	return get_stat_value(stat.type)
+func get_stat_value_by_resource(stat: StatResource, bypass_statuses: bool = false) -> float:
+	return get_stat_value(stat.type, bypass_statuses)
 
 
-func add_stat_value(stat: StatResource.StatType, addition: float) -> float:
-	print("Adding " + str(addition))
-	stats[stat].add_value(addition)
+## Sets the given stat type to the given value.
+func set_stat_value(stat: StatResource.StatType, value: float) -> float:
+	print("Setting " + entity.title + "'s " + Natives.enum_name(StatResource.StatType, stat) + " to " + str(value))
+	stats[stat].set_value(value)
 	return stats[stat].get_value()

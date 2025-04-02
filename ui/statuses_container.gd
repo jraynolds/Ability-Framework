@@ -24,7 +24,7 @@ var _statuses : Dictionary[Effect, StatusContainer] = {}
 func _process(delta: float) -> void:
 	if !entity:
 		return
-	var statuses = entity.statuses_component.get_effects(status_positivity)
+	var statuses = entity.statuses_component.get_statuses(status_positivity)
 	var same_arrays = true
 	for status in statuses:
 		if status not in _statuses.keys():
