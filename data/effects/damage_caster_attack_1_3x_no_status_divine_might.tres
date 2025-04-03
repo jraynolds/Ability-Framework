@@ -3,21 +3,22 @@
 [ext_resource type="Resource" uid="uid://b4na3f2n7vci3" path="res://data/values/caster_attack_1_3x.tres" id="1_0xqq3"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_027e8"]
 [ext_resource type="Resource" uid="uid://do4dubxamjt0u" path="res://data/conditionals/caster_status_divine_might.tres" id="3_g84ou"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="5_emuro"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="4_e8jes"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_vixsa"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_rm24j"]
 
 [resource]
-script = ExtResource("5_emuro")
+script = ExtResource("4_e8jes")
 entity_target = 11
 stat_type = 0
 modifier = ExtResource("1_0xqq3")
 math_operation = 1
-ignore_modifiers = false
+ignore_statuses = false
+ignore_transforms = false
 title = "Damage 1.3x attack"
 description = "Inflict damage to the target equal to 1.3x your attack."
-positivity = 2
+positivity = null
 triggers = Array[ExtResource("7_vixsa")]([ExtResource("8_rm24j")])
-conditionals_positive = Array[ExtResource("2_027e8")]([])
+conditionals_positive = null
 conditionals_negative = Array[ExtResource("2_027e8")]([ExtResource("3_g84ou")])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

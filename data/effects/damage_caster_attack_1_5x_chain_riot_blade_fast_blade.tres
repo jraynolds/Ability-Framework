@@ -4,21 +4,21 @@
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_ait8k"]
 [ext_resource type="Resource" uid="uid://cd43lu3pdhexh" path="res://data/conditionals/caster_chain_0_riot_blade.tres" id="3_ait8k"]
 [ext_resource type="Resource" uid="uid://dhhbvttxhm6kx" path="res://data/conditionals/caster_chain_1_fast_blade.tres" id="4_aoguu"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="4_j6w1o"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="5_cfcdt"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_qurfe"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_0ba74"]
 
 [resource]
-script = ExtResource("4_j6w1o")
+script = ExtResource("5_cfcdt")
 entity_target = 11
 stat_type = 0
 modifier = ExtResource("1_cfcdt")
 math_operation = 1
-ignore_modifiers = false
+ignore_modifiers = null
 title = "Damage 1.5x attack"
 description = "Inflict damage to the target equal to 1.5x your attack. Must be combo'd with Riot Blade and Fast Blade."
-positivity = 2
+positivity = null
 triggers = Array[ExtResource("6_qurfe")]([ExtResource("7_0ba74")])
 conditionals_positive = Array[ExtResource("2_ait8k")]([ExtResource("3_ait8k"), ExtResource("4_aoguu")])
-conditionals_negative = Array[ExtResource("2_ait8k")]([])
+conditionals_negative = null
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

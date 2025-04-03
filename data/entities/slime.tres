@@ -19,6 +19,7 @@
 [resource]
 script = ExtResource("1_i74eu")
 title = "Slime"
+description = ""
 stats = Dictionary[ExtResource("3_l7npy"), ExtResource("4_xojas")]({
 ExtResource("5_l3nk3"): ExtResource("6_ruxcp"),
 ExtResource("7_p72cw"): ExtResource("6_ruxcp"),

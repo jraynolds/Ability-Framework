@@ -2,22 +2,22 @@
 
 [ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/caster_attack__8x.tres" id="1_fdkvp"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_fdkvp"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="3_7tg42"]
 [ext_resource type="Resource" uid="uid://cv87rbcu48v" path="res://data/conditionals/caster_chain_0_fast_blade.tres" id="3_fdkvp"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="4_gawti"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_mxnj2"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_r6jrj"]
 
 [resource]
-script = ExtResource("3_7tg42")
+script = ExtResource("4_gawti")
 entity_target = 11
 stat_type = 0
 modifier = ExtResource("1_fdkvp")
 math_operation = 1
-ignore_modifiers = false
+ignore_modifiers = null
 title = "Damage .8x attack"
 description = "Inflict damage to the target equal to .8x your attack. Occurs when not combo'd with Fast Blade."
-positivity = 2
+positivity = null
 triggers = Array[ExtResource("5_mxnj2")]([ExtResource("6_r6jrj")])
-conditionals_positive = Array[ExtResource("2_fdkvp")]([])
+conditionals_positive = null
 conditionals_negative = Array[ExtResource("2_fdkvp")]([ExtResource("3_fdkvp")])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

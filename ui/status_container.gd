@@ -22,26 +22,27 @@ var _duration : float : ## How much time left in seconds the Effect has. Changin
 			_duration_label.text = str(floori(_duration))
 @export var _duration_label : Label ## The label that displays how much time left the Effect has.
 
-var _effect : Effect : ## The Effect this container is representing. Changing this updates our visuals.
+var _status : StatusEffect : ## The StatusEffect this container is representing. Changing this updates our visuals.
 	set(val):
-		_effect = val
-		name = _effect._title
-		_button.icon = _effect._icon
+		_status = val
+		name = _status._title
+		_button.icon = _status._icon
 		_stacks_label.text = ""
 		_duration_label.text = ""
 
 
 ## Constructs and returns an instance of this, initialized with the given status Effect.
-func from_status(status: Effect) -> StatusContainer:
-	_effect = status
+func from_status(status: StatusEffect) -> StatusContainer:
+	_status = status
 	return self
 
 
 ## Called every frame. Updates the duration.
 func _process(delta: float) -> void:
-	if !_effect:
+	if !_status:
 		return
-	_duration = _effect.get_lifetime_duration_left()
+	if _status.has_lifetime_duration():
+		_duration = _status.get_lifetime_duration_left()
 
 
 func set_stacks(stacks: int):

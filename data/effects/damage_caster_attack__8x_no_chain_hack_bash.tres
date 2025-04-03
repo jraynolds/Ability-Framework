@@ -4,21 +4,21 @@
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_s1e4r"]
 [ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="3_bhwrl"]
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="4_s1e4r"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="6_87s03"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="5_0pbrk"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_rvhxl"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_lb8tp"]
 
 [resource]
-script = ExtResource("6_87s03")
+script = ExtResource("5_0pbrk")
 entity_target = 11
 stat_type = 0
 modifier = ExtResource("1_bhwrl")
 math_operation = 1
-ignore_modifiers = false
+ignore_modifiers = null
 title = "Damage .8x attack"
 description = "Inflict damage to the target equal to .8x your attack. Occurs when not comboed with Hack and Bash."
-positivity = 2
+positivity = null
 triggers = Array[ExtResource("7_rvhxl")]([ExtResource("8_lb8tp")])
-conditionals_positive = Array[ExtResource("2_s1e4r")]([])
+conditionals_positive = null
 conditionals_negative = Array[ExtResource("2_s1e4r")]([ExtResource("3_bhwrl"), ExtResource("4_s1e4r")])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TransformResource" load_steps=3 format=3 uid="uid://bx3ppeh1uh7wb"]
+
+[ext_resource type="Resource" uid="uid://bd5vjfoh52j8b" path="res://data/values/target_defense.tres" id="1_oau58"]
+[ext_resource type="Script" uid="uid://bhaop0eb07tqv" path="res://data/transforms/transform_resource.gd" id="2_ymdn1"]
+
+[resource]
+script = ExtResource("2_ymdn1")
+stat_type = 0
+math_operation = 1
+modifier = ExtResource("1_oau58")
+subtracted_from_1 = true
+modifier_operation = 2
+metadata/_custom_type_script = "uid://bhaop0eb07tqv"

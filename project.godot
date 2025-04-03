@@ -15,6 +15,10 @@ run/main_scene="uid://cxct0d54bqld8"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DebugManager="*res://managers/debug_manager.tscn"
+
 [input]
 
 "Clear queued Ability"={

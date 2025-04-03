@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		for status in statuses:
 			_on_status_added(status)
 	for status in _statuses:
-		_statuses[status].set_stacks(entity.statuses_component.get_effect_stacks(status))
+		_statuses[status].set_stacks(entity.statuses_component.get_status_stacks(status))
 
 
 ## Called when the connected statuses component adds a status.

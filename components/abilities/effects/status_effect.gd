@@ -38,7 +38,7 @@ func from_resource(res: EffectResource, ability: Ability, caster: Entity, target
 
 ## Returns an instance of this initialized with the given Effect.
 func from_effect(effect: Effect) -> Effect:
-	_resource = effect.resource
+	_resource = effect._resource
 	_title = effect._title
 	_description = effect._description
 	_positivity = effect._positivity
@@ -75,25 +75,39 @@ func from_status_effect(status: StatusEffect) -> StatusEffect:
 		_lifetimes.append(lifetime)
 	_duration = status._duration
 	_times_triggered = status._times_triggered
-	_lifetimes = []
 	
 	return self
 
 
+## If usable, registers this effect on the appropriate triggers.
+func register(caster: Entity, targets: Array[Entity]):
+	for conditional in _conditionals_positive:
+		if !conditional.is_met(self, _ability, caster, targets):
+			return
+	for conditional in _conditionals_negative:
+		if conditional.is_met(self, _ability, caster, targets):
+			return
+	
+	for trigger in _triggers:
+		trigger.register(self, _ability, caster, targets, affect)
+	on_registered.emit()
+
+
 ## Performs this StatusEffect on the given targets, from the given caster. Overloaded.
 func affect(caster: Entity, targets: Array[Entity]):
-	super(caster, targets)
+	for target in targets:
+		_resource.on_affect(self, _ability, caster, targets)
 	
 	_times_triggered += 1
 	
 	if _lifetimes.is_empty():
-		queue_free()
+		end()
 	else :
 		var ended = false
 		if _lifetimes.any(
 			func(lifetime: LifetimeResource): lifetime.is_lifetime_expired(caster, targets, 0, _times_triggered)
 		):
-			queue_free()
+			end()
 
 
 ## Returns whether this StatusEffect has an active DurationLifetime on it.

@@ -59,8 +59,8 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 			targets_found.append(caster)
 			effect._targets = [caster]
 	assert(!targets_found.is_empty(), "No valid targets found")
-	var status_effect_index = effect._sub_effects.find(func(se: Effect):
-		return se.resource == effect_added
+	var status_effect_index = effect._sub_effects.find_custom(func(se: Effect):
+		return se.has_resource(effect_added)
 	)
 	assert(status_effect_index >= 0, "The status effect object is gone!")
 	for target in targets_found:

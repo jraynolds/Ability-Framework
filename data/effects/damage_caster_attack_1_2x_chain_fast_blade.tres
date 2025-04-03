@@ -3,21 +3,21 @@
 [ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/caster_attack_1_2x.tres" id="1_6vxfb"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_6vxfb"]
 [ext_resource type="Resource" uid="uid://cv87rbcu48v" path="res://data/conditionals/caster_chain_0_fast_blade.tres" id="3_6vxfb"]
-[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="3_jhf55"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="4_ehn8g"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_fc0eo"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_c2xbe"]
 
 [resource]
-script = ExtResource("3_jhf55")
+script = ExtResource("4_ehn8g")
 entity_target = 11
 stat_type = 0
 modifier = ExtResource("1_6vxfb")
 math_operation = 1
-ignore_modifiers = false
+ignore_modifiers = null
 title = "Damage 1.2x attack"
 description = "Inflict damage to the target equal to 1.2x your attack. Must be combo'd with Fast Blade."
-positivity = 2
+positivity = null
 triggers = Array[ExtResource("5_fc0eo")]([ExtResource("6_c2xbe")])
 conditionals_positive = Array[ExtResource("2_6vxfb")]([ExtResource("3_6vxfb")])
-conditionals_negative = Array[ExtResource("2_6vxfb")]([])
+conditionals_negative = null
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

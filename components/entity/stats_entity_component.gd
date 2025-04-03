@@ -4,11 +4,9 @@ class_name StatsEntityComponent
 
 @export var stat_scene : PackedScene ## The default Stat scene.
 var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paired with the kind of Stat each is.
-#
-#enum IOLayerType { ## Different types of IOLayers.
-	#Stats = 0, ## IOLayers that interact with Stats.
-#}
-#var iolayers : Dictionary[IOLayerType, Array] ## The Dictionary of active I/O layers, grouped by type.
+
+## An Array of Transforms that alter modifications made to stats.
+@export var transforms : Array[TransformResource]
 
 ## Emitted when a Stat we're tracking changes
 signal on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float)
@@ -39,8 +37,16 @@ func on_entity_updated():
 
 ## Returns the value of a stat of the given type. 
 ## By default, applies the modifications of any ongoing status Effects.
-func get_stat_value(stat: StatResource.StatType, bypass_statuses: bool = false) -> float:
-	if bypass_statuses:
+func get_stat_value(stat: StatResource.StatType, ignore_statuses: bool = false) -> float:
+	DebugManager.debug_log(
+		"Returning the value of stat " + Natives.enum_name(StatResource.StatType, stat) +
+		(" ignoring statuses" if ignore_statuses else "")
+	, self)
+	if ignore_statuses:
+		DebugManager.debug_log(
+			"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
+			" is " + str(stats[stat].value)
+		, self)
 		return stats[stat].value
 	else :
 		var stat_value = stats[stat].value
@@ -51,27 +57,58 @@ func get_stat_value(stat: StatResource.StatType, bypass_statuses: bool = false) 
 			):
 				continue
 			## Skip any Effects without StatModifyEffectResource.
-			var stat_resource = effect.resource as StatModifyEffectResource
+			var stat_resource = effect._resource as StatModifyEffectResource
 			if !stat_resource:
 				continue
 			## Skip any StatAddEffectResource without this stat as the one it modifies
 			if stat_resource.stat_type != stat:
 				continue
-			stat_value = stat_resource.get_modified_value(
-				stat_value, 
-				effect._ability._caster,
-				[entity]
-			)
+			for i in range(entity.statuses_component.status_stacks[effect]):
+				stat_value = stat_resource.get_modified_value(
+					stat_value, 
+					effect._ability._caster,
+					[entity]
+				)
+		DebugManager.debug_log(
+			"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
+			" is " + str(stat_value)
+		, self)
 		return stat_value
 
 
-## Returns the value of a stat of the given resource.
-func get_stat_value_by_resource(stat: StatResource, bypass_statuses: bool = false) -> float:
-	return get_stat_value(stat.type, bypass_statuses)
+### Returns the value of a stat of the given resource.
+#func get_stat_value_by_resource(stat: StatResource, bypass_statuses: bool = false) -> float:
+	#return get_stat_value(stat.type, bypass_statuses)
 
 
-## Sets the given stat type to the given value.
+## Modifies the given stat type by the given value, using the given math operation, performed by the given Effect.
+## Optionally, bypasses all statuses to read the base stat directly.
+## Optionally, bypasses all transforms to modify the base stat directly.
+func modify_stat_value(
+	stat: StatResource.StatType, 
+	value_modifier: float,
+	effect : Effect,
+	math_operation: Math.Operation = Math.Operation.Addition, 
+	ignore_statuses: bool = false,
+	ignore_transforms: bool = false
+) -> float:
+	DebugManager.debug_log(
+		"Modifying stat " + Natives.enum_name(StatResource.StatType, stat) +
+		" by " + str(value_modifier) + " using " + Natives.enum_name(Math.Operation, math_operation) +
+		" from effect " + effect.name +
+		(" ignoring statuses " if ignore_statuses else "") +
+		(" ignoring transforms " if ignore_transforms else "")
+	, self)
+	var stat_value = get_stat_value(stat, ignore_statuses)
+	if !ignore_transforms:
+		for transform in transforms:
+			if transform.stat_type == stat and transform.math_operation == math_operation:
+				value_modifier = transform.transform(value_modifier, effect._ability._caster, [entity])
+	return set_stat_value(stat, Math.perform_operation(stat_value, value_modifier, math_operation))
+
+
+## Sets the base value of the given stat type to the given value.
 func set_stat_value(stat: StatResource.StatType, value: float) -> float:
-	print("Setting " + entity.title + "'s " + Natives.enum_name(StatResource.StatType, stat) + " to " + str(value))
+	#print("Setting " + entity.title + "'s " + Natives.enum_name(StatResource.StatType, stat) + " to " + str(value))
 	stats[stat].set_value(value)
 	return stats[stat].get_value()

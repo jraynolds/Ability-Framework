@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=3 format=3 uid="uid://bd5vjfoh52j8b"]
+
+[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="1_tifni"]
+[ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="2_wytpi"]
+
+[resource]
+script = ExtResource("2_wytpi")
+stat_entity = 10
+stat = 30
+amount = ExtResource("1_tifni")
+ignore_statuses = false
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://fqonh0m4k5ow"

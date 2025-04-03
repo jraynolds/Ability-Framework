@@ -74,8 +74,6 @@ func update_resource(res: EffectResource):
 
 ## If usable, makes a copy and registers this effect on the appropriate triggers.
 func register(caster: Entity, targets: Array[Entity]):
-	print("Registering " + _title)
-	
 	for conditional in _conditionals_positive:
 		if !conditional.is_met(self, _ability, caster, targets):
 			return
@@ -83,7 +81,6 @@ func register(caster: Entity, targets: Array[Entity]):
 		if conditional.is_met(self, _ability, caster, targets):
 			return
 	
-	assert(targets[0], "No valid targets to register on")
 	var effect_temp : Effect = self.duplicate(10).from_effect(self) ## Duplicates with values
 	effect_temp.name = "targeting "
 	for target in targets:
@@ -92,17 +89,15 @@ func register(caster: Entity, targets: Array[Entity]):
 	
 	for trigger in _triggers:
 		trigger.register(effect_temp, _ability, caster, targets, effect_temp.affect)
-	
-	print("Finished registering " + _title)
 	on_registered.emit()
 
 
 ## Performs this Effect on the given targets, from the given caster.
 func affect(caster: Entity, targets: Array[Entity]):
-	print("affecting " + targets[0].title + " with " + _title)
-	
 	for target in targets:
 		_resource.on_affect(self, _ability, caster, targets)
+	
+	end() ## By default, we have no duration--so we should just get rid of ourselves
 
 
 ## Adds a sub-Effect to our array and adds it as a child.
@@ -114,6 +109,11 @@ func add_sub_effect(sub_effect: Effect):
 ## Returns whether the given Effect shares our same EffectResource.
 func shares_resource(effect: Effect) -> bool:
 	return effect._resource == _resource
+
+
+## Returns whether the given EffectResource is the same as ours.
+func has_resource(resource: EffectResource) -> bool:
+	return _resource == resource
 
 
 ## Ends this Effect.

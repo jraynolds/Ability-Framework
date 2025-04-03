@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="StatValueResource" load_steps=4 format=3 uid="uid://vrai8rbym5ym"]
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=3 format=3 uid="uid://vrai8rbym5ym"]
 
 [ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="1_650os"]
 [ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="1_ihtyn"]
-[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="2_nrk06"]
 
 [resource]
 script = ExtResource("1_650os")
-entity = "Caster"
-stat = ExtResource("2_nrk06")
+stat_entity = 0
+stat = 20
 amount = ExtResource("1_ihtyn")
+ignore_statuses = false
 is_int = false
-rounding_behavior = "Floor"
+rounding_behavior = 0
 metadata/_custom_type_script = "uid://fqonh0m4k5ow"

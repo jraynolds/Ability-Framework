@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="StatValueResource" load_steps=4 format=3 uid="uid://duv2hxoultpou"]
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=3 format=3 uid="uid://duv2hxoultpou"]
 
 [ext_resource type="Resource" uid="uid://dspdqq2eg4qlb" path="res://data/values/flats/flat__8.tres" id="1_vonh0"]
 [ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="2_cak1r"]
-[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="3_qngsx"]
 
 [resource]
 script = ExtResource("2_cak1r")
 stat_entity = 0
-stat = ExtResource("3_qngsx")
+stat = 20
 amount = ExtResource("1_vonh0")
+ignore_statuses = false
 is_int = false
 rounding_behavior = 0
 metadata/_custom_type_script = "uid://fqonh0m4k5ow"
