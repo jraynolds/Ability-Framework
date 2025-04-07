@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityChainConditionalResource" load_steps=4 format=3 uid="uid://du6q4lw35scao"]
+
+[ext_resource type="Resource" uid="uid://kyus4p40s0cw" path="res://data/abilities/spellblade/slash.tres" id="1_2qtqy"]
+[ext_resource type="Resource" uid="uid://lyd4wksvii0k" path="res://data/values/flats/flat_0.tres" id="2_wur7p"]
+[ext_resource type="Script" uid="uid://cd3ofyhxxxaks" path="res://data/conditionals/ability_chain_conditional_resource.gd" id="3_pg1xg"]
+
+[resource]
+script = ExtResource("3_pg1xg")
+ability_in_chain = ExtResource("1_2qtqy")
+ability_caster = 0
+chain_position = ExtResource("2_wur7p")
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://cd3ofyhxxxaks"
