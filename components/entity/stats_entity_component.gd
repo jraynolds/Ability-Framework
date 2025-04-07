@@ -103,7 +103,13 @@ func modify_stat_value(
 	if !ignore_transforms:
 		for transform in transforms:
 			if transform.stat_type == stat and transform.math_operation == math_operation:
-				value_modifier = transform.transform(value_modifier, effect._ability._caster, [entity])
+				value_modifier = transform.try_transform(
+					value_modifier, 
+					effect, 
+					effect._ability, 
+					effect._ability._caster, 
+					[entity]
+				)
 	return set_stat_value(stat, Math.perform_operation(stat_value, value_modifier, math_operation))
 
 
@@ -112,3 +118,36 @@ func set_stat_value(stat: StatResource.StatType, value: float) -> float:
 	#print("Setting " + entity.title + "'s " + Natives.enum_name(StatResource.StatType, stat) + " to " + str(value))
 	stats[stat].set_value(value)
 	return stats[stat].get_value()
+
+
+## Reduces the Entity's HP by the given amount, with the given type. Optionally, bypasses statuses or transforms.
+func take_damage(
+	damage_dealt: float, 
+	damage_type: DamageEffectResource.DamageType, 
+	effect: Effect, 
+	ignore_statuses: bool = false,
+	ignore_transforms: bool = false
+) -> float:
+	DebugManager.debug_log(
+		"Taking damage equal to " + str(damage_dealt) + 
+		" of type " + Natives.enum_name(DamageEffectResource.DamageType, damage_type) +
+		" from effect " + effect.name +
+		(" ignoring statuses " if ignore_statuses else "") +
+		(" ignoring transforms " if ignore_transforms else "")
+	, self)
+	assert(damage_dealt >= 0, "Dealing negative damage.")
+	var hp_value = get_stat_value(StatResource.StatType.HP, ignore_statuses)
+	if !ignore_transforms:
+		for transform in transforms:
+			if transform.stat_type == StatResource.StatType.HP and transform.math_operation == Math.Operation.Subtraction:
+				damage_dealt = transform.try_transform(
+					damage_dealt, 
+					effect, 
+					effect._ability, 
+					effect._ability._caster, 
+					[entity]
+				)
+	return set_stat_value(
+		StatResource.StatType.HP, 
+		Math.perform_operation(hp_value, damage_dealt, Math.Operation.Subtraction)
+	)

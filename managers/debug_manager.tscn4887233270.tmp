@@ -4,5 +4,5 @@
 
 [node name="DebugManager" type="Node2D"]
 script = ExtResource("1_f7v61")
-stats_entity_component = true
 transform = true
+stat_modify = true

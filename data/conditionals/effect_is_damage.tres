@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectResourceConditionalResource" load_steps=2 format=3 uid="uid://ctdf1bwmhvife"]
+
+[ext_resource type="Script" uid="uid://bwabmv8ioi4lh" path="res://data/conditionals/effect_resource_conditional_resource.gd" id="1_8dwj6"]
+
+[resource]
+script = ExtResource("1_8dwj6")
+effect_resource = 1
+matches = true
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://bwabmv8ioi4lh"

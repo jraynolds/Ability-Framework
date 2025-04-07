@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_4sgkr"]
 [ext_resource type="Resource" uid="uid://dhhbvttxhm6kx" path="res://data/conditionals/caster_chain_1_fast_blade.tres" id="3_bdanc"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_e7rnp"]
-[ext_resource type="Resource" uid="uid://eikm0s4kxsel" path="res://data/effects/damage_caster_attack_1_5x_chain_riot_blade_fast_blade.tres" id="3_j7duq"]
-[ext_resource type="Resource" uid="uid://b6lo7b3v346me" path="res://data/effects/damage_caster_attack__8x_no_chain_riot_blade_fast_blade.tres" id="4_j7duq"]
+[ext_resource type="Resource" uid="uid://eikm0s4kxsel" path="res://data/effects/damage/old/damage_1_5x_chain_riot_blade_fast_blade.tres" id="3_j7duq"]
+[ext_resource type="Resource" uid="uid://b6lo7b3v346me" path="res://data/effects/damage/old/damage__8x_no_chain_riot_blade_fast_blade.tres" id="4_j7duq"]
 [ext_resource type="Resource" uid="uid://csfu8q8648el3" path="res://data/effects/status_caster_add_divine_might_chain_riot_blade_fast_blade.tres" id="5_lxppp"]
 
 [resource]

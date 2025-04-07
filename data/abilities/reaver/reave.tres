@@ -4,18 +4,18 @@
 [ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="2_esuhr"]
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_y3110"]
 [ext_resource type="Texture2D" uid="uid://df1sjuxse5wnd" path="res://assets/abilities/r_36.png" id="3_fb3k0"]
-[ext_resource type="Resource" uid="uid://28rv850p3cxk" path="res://data/effects/damage_caster_attack__8x_no_chain_hack_bash.tres" id="3_ngykk"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_obvbf"]
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="3_y2wfc"]
-[ext_resource type="Resource" uid="uid://vvukwfefa43r" path="res://data/effects/damage_caster_attack_1x_chain_hack_bash.tres" id="5_u8d87"]
+[ext_resource type="Resource" uid="uid://cwydierih7yj6" path="res://data/effects/damage/damage_chain_hack_bash.tres" id="5_esuhr"]
 [ext_resource type="Resource" uid="uid://c1dkjn6omt663" path="res://data/effects/status_targets_add_armor_break_chain_hack_bash.tres" id="6_lsuiw"]
 [ext_resource type="Resource" uid="uid://bxbkwjjc1kk3d" path="res://data/effects/status_caster_add_armored_chain_hack_bash.tres" id="7_kmqtm"]
+[ext_resource type="Resource" uid="uid://dhwgqo1oq4jix" path="res://data/effects/damage/damage__8x_chainless_hack_bash.tres" id="8_y2wfc"]
 
 [resource]
 script = ExtResource("3_obvbf")
 title = "Reave"
 icon = ExtResource("3_fb3k0")
-effects = Array[ExtResource("2_y3110")]([ExtResource("5_u8d87"), ExtResource("6_lsuiw"), ExtResource("7_kmqtm"), ExtResource("3_ngykk")])
+effects = Array[ExtResource("2_y3110")]([ExtResource("5_esuhr"), ExtResource("6_lsuiw"), ExtResource("7_kmqtm"), ExtResource("8_y2wfc")])
 gcd_type = 0
 conditionals_positive = Array[ExtResource("1_04g8u")]([])
 conditionals_negative = Array[ExtResource("1_04g8u")]([])

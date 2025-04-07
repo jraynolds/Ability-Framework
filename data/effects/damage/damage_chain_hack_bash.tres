@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=8 format=3 uid="uid://cwydierih7yj6"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_a10pv"]
+[ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="2_ke00a"]
+[ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="3_4v7rh"]
+[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="4_gollo"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="4_mlt6v"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_gollo"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_0et0l"]
+
+[resource]
+script = ExtResource("4_mlt6v")
+entity_target = 11
+stat_type = 20
+modifier = ExtResource("4_gollo")
+damage_type = 0
+math_operation = 2
+ignore_caster_statuses = false
+ignore_target_statuses = false
+ignore_transforms = false
+title = "Damage 1x attack"
+description = "Inflict damage to the target equal to 1x your attack. Must be comboed with Hack and Bash."
+positivity = 2
+triggers = Array[ExtResource("5_gollo")]([ExtResource("6_0et0l")])
+conditionals_positive = Array[ExtResource("1_a10pv")]([ExtResource("2_ke00a"), ExtResource("3_4v7rh")])
+conditionals_negative = Array[ExtResource("1_a10pv")]([])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

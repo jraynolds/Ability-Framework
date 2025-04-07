@@ -4,6 +4,6 @@ class_name FlatValueResource
 
 @export var value : float ## The value of this Value.
 
-## Returns the value of the given Entity's given Stat, multiplied by the given amount.
+## Returns a flat value.
 func get_value(caster: Entity, targets: Array[Entity]) -> float:
 	return value

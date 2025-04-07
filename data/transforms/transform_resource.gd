@@ -7,9 +7,13 @@ class_name TransformResource
 @export var modifier : ValueResource ## The value we modify the incoming value with.
 @export var subtracted_from_1 : bool ## Whether we should subtract the modifier value from 1.
 @export var modifier_operation : Math.Operation ## The math operation we use to modify the incoming value.
+@export var conditionals : Array[ConditionalResource] ## The conditions we check to see if we perform the Transform.
 
-## Modifies the given value.
-func transform(value: float, caster: Entity, targets: Array[Entity]) -> float:
+## Attempts to modify the given value. If the conditionals aren't met, just returns the incoming value.
+func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> float:
+	if !can_transform(value, effect, ability, caster, targets):
+		return value
+	
 	var modifier_value = modifier.get_value(caster, targets)
 	if subtracted_from_1:
 		modifier_value = 1 - modifier_value
@@ -24,3 +28,11 @@ func transform(value: float, caster: Entity, targets: Array[Entity]) -> float:
 		str(modifier_value) + " now " + str(transformed_value)
 	, self)
 	return transformed_value
+
+
+## Returns whether this Transform can be used on an incoming value.
+func can_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+	for conditional in conditionals:
+		if !conditional.is_met(effect, ability, caster, targets):
+			return false
+	return true

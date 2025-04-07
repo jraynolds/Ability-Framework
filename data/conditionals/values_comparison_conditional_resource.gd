@@ -1,6 +1,6 @@
 extends ConditionalResource
 ## A ConditionalResource that compares two values. Not meant to be mutated in runtime.
-class_name ValueComparisonConditionalResource
+class_name ValuesComparisonConditionalResource
 
 @export var value_1 : ValueResource ## The value we're comparing.
 @export var value_2 : ValueResource ## The value we're checking against.
