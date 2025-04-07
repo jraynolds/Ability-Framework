@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=5 format=3 uid="uid://b0db527arct3u"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_p18ik"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_tpmv7"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_jyc1u"]
+[ext_resource type="Texture2D" uid="uid://cyy7rmq2b3gmv" path="res://assets/abilities/r_29.png" id="3_tpmv7"]
+
+[resource]
+script = ExtResource("3_jyc1u")
+title = "Expel Elements"
+icon = ExtResource("3_tpmv7")
+effects = Array[ExtResource("2_tpmv7")]([])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_p18ik")]([])
+conditionals_negative = Array[ExtResource("1_p18ik")]([])
+conditionals_highlight = Array[ExtResource("1_p18ik")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

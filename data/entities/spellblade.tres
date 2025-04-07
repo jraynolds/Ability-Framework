@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EntityResource" load_steps=20 format=3 uid="uid://dnguhhq4lvfvh"]
+
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_hekjg"]
+[ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="2_6porh"]
+[ext_resource type="Texture2D" uid="uid://cf75x74xmsp86" path="res://assets/abilities/p_01.png" id="2_iu4nv"]
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="3_kqt1x"]
+[ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="4_atbdd"]
+[ext_resource type="Resource" uid="uid://citva5sn5h7nu" path="res://data/values/flats/breakpoints/hp_player_low.tres" id="7_iu4nv"]
+[ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="9_usakc"]
+[ext_resource type="Resource" uid="uid://b2ievbk4n2m7u" path="res://data/stats/hp.tres" id="11_sa2w3"]
+[ext_resource type="Resource" uid="uid://dnd68wdbhr1i8" path="res://data/stats/max_mana.tres" id="12_38w6a"]
+[ext_resource type="Resource" uid="uid://cutwvfbuqtr3h" path="res://data/values/flats/breakpoints/attack_player_high.tres" id="13_7wdll"]
+[ext_resource type="Resource" uid="uid://bs3nn3goth6et" path="res://data/values/flats/breakpoints/mana_player_medium.tres" id="13_oxk4y"]
+[ext_resource type="Resource" uid="uid://o4t2v2iun48f" path="res://data/stats/mana.tres" id="14_1ood2"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="15_a6rhu"]
+[ext_resource type="Resource" uid="uid://byb8av7p1otg5" path="res://data/values/flats/breakpoints/defense_player_low.tres" id="15_mtugn"]
+[ext_resource type="Resource" uid="uid://b8m8pdnudlcrg" path="res://data/values/flats/breakpoints/ability_speed_player_low.tres" id="17_c7uso"]
+[ext_resource type="Resource" uid="uid://bk53y5hldyf1u" path="res://data/stats/defense.tres" id="17_g2ki7"]
+[ext_resource type="Resource" uid="uid://bcrjt37cl6x6" path="res://data/values/flats/breakpoints/gcd_player_low.tres" id="19_dc5yi"]
+[ext_resource type="Resource" uid="uid://0cdkdryyaugb" path="res://data/stats/ability_speed.tres" id="19_xtpej"]
+[ext_resource type="Resource" uid="uid://dodhwet73lma8" path="res://data/stats/gcd_cooldown.tres" id="21_dsm33"]
+
+[resource]
+script = ExtResource("2_6porh")
+title = "Spellblade"
+icon = ExtResource("2_iu4nv")
+description = "The basic idea is to wield a sword but do magic things too."
+stats = Dictionary[ExtResource("3_kqt1x"), ExtResource("4_atbdd")]({
+ExtResource("9_usakc"): ExtResource("7_iu4nv"),
+ExtResource("11_sa2w3"): ExtResource("7_iu4nv"),
+ExtResource("12_38w6a"): ExtResource("13_oxk4y"),
+ExtResource("14_1ood2"): ExtResource("13_oxk4y"),
+ExtResource("15_a6rhu"): ExtResource("13_7wdll"),
+ExtResource("17_g2ki7"): ExtResource("15_mtugn"),
+ExtResource("19_xtpej"): ExtResource("17_c7uso"),
+ExtResource("21_dsm33"): ExtResource("19_dc5yi")
+})
+abilities = Dictionary[ExtResource("1_hekjg"), int]({})
+metadata/_custom_type_script = "uid://2e885iqyhq3n"

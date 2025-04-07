@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=6 format=3 uid="uid://kyus4p40s0cw"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_4d22e"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_levou"]
+[ext_resource type="Resource" uid="uid://d12fi1sn21yhk" path="res://data/effects/damage_caster_attack_1x.tres" id="3_isycx"]
+[ext_resource type="Texture2D" uid="uid://c50j0a24ajpn8" path="res://assets/abilities/r_01.png" id="3_levou"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_m8tn7"]
+
+[resource]
+script = ExtResource("3_m8tn7")
+title = "Slash"
+icon = ExtResource("3_levou")
+effects = Array[ExtResource("2_levou")]([ExtResource("3_isycx")])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_4d22e")]([])
+conditionals_negative = Array[ExtResource("1_4d22e")]([])
+conditionals_highlight = Array[ExtResource("1_4d22e")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"
