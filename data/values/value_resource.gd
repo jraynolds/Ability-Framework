@@ -8,4 +8,4 @@ class_name ValueResource
 
 ## Returns a calculated value.
 func get_value(caster: Entity, targets: Array[Entity]) -> float:
-	return -1
+	return NAN

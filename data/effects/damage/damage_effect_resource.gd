@@ -6,7 +6,7 @@ class_name DamageEffectResource
 @export var entity_target : Targeting.Target = Targeting.Target.Targets 
 ## The caster's Stat the damage is calculated from. By default, Attack.
 @export var stat_type : StatResource.StatType = StatResource.StatType.Attack
-@export var modifier : ValueResource ## The value that will multiply the Stat.
+@export var modifier : ValueResource ## The value that will multiply the Stat. By default, 1.
 @export var damage_type : DamageType ## The type of damage.
 enum DamageType {
 	Physical,
@@ -44,7 +44,7 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 	
 	var damage_dealt = Math.perform_operation(
 		caster.stats_component.get_stat_value(stat_type, ignore_caster_statuses),
-		modifier.get_value(caster, targets),
+		modifier.get_value(caster, targets) if modifier else 1.0,
 		math_operation,
 	)
 	

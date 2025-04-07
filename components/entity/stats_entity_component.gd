@@ -14,9 +14,10 @@ var transform_statuses : Array[StatusEffect] :
 				return true
 		)
 
-## Emitted when a Stat we're tracking changes
+## Emitted when a Stat we're tracking changes.
 signal on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float)
-
+## Emitted when our HP is changed by damage.
+signal on_take_damage(damage_taken: float, damage_assigned: float, damage_type: DamageEffectResource.DamageType)
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
@@ -120,7 +121,8 @@ func modify_stat_value(
 	return set_stat_value(stat, Math.perform_operation(stat_value, value_modifier, math_operation))
 
 
-## Sets the base value of the given stat type to the given value.
+## Sets the base value of the given stat type to the given value. 
+## Returns the value of the stat afterwards.
 func set_stat_value(stat: StatResource.StatType, value: float) -> float:
 	#print("Setting " + entity.title + "'s " + Natives.enum_name(StatResource.StatType, stat) + " to " + str(value))
 	stats[stat].set_value(value)
@@ -137,6 +139,7 @@ func take_damage(
 	ignore_transforms: bool = false,
 	bypass_defense: bool = false
 ) -> float:
+	var incoming_damage = damage_dealt
 	DebugManager.debug_log(
 		"Taking damage equal to " + str(damage_dealt) + 
 		" of type " + Natives.enum_name(DamageEffectResource.DamageType, damage_type) +
@@ -163,7 +166,11 @@ func take_damage(
 						effect._ability._caster, 
 						[entity]
 					)
-	return set_stat_value(
+	var hp_before_damage = get_stat_value(StatResource.StatType.HP)
+	var new_hp_value = set_stat_value(
 		StatResource.StatType.HP, 
 		Math.perform_operation(hp_value, damage_dealt, Math.Operation.Subtraction)
 	)
+	var actual_damage_dealt = hp_before_damage - new_hp_value
+	on_take_damage.emit(actual_damage_dealt, incoming_damage, damage_type)
+	return new_hp_value

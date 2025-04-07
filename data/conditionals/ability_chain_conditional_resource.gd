@@ -17,7 +17,7 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 			assert(len(targets), "No valid Entity target")
 			entity = targets[0]
 	assert(entity, "No valid Entity found")
-	var ability_check = entity.history_component.get_ability_in_chain(chain_position.get_value(caster, targets))
+	var ability_check = entity.history_component.get_ability_history(chain_position.get_value(caster, targets))
 	if !ability_check:
 		return false
 	return ability_check.is_resource_equal(ability_in_chain)
