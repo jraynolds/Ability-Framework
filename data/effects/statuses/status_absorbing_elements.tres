@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("2_i7wnq")
 title = "Absorbing Elements"
-description = "Reducing incoming damage and storing a portion of the elemental damage dealt."
+description = ""
 icon = ExtResource("2_3ebmk")
 positivity = 0
 triggers = Array[ExtResource("3_3ebmk")]([null])

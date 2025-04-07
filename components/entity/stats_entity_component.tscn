@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cp4xbtgwweqmj"]
+[gd_scene load_steps=3 format=3 uid="uid://cp4xbtgwweqmj"]
 
 [ext_resource type="Script" uid="uid://vv4ssn3crg5" path="res://components/entity/stats_entity_component.gd" id="1_h5dka"]
 [ext_resource type="PackedScene" uid="uid://q1nijtdb3fb8" path="res://components/entity/stats/stat.tscn" id="2_kljhh"]
-[ext_resource type="Script" uid="uid://bhaop0eb07tqv" path="res://data/transforms/transform_resource.gd" id="3_j0gyf"]
-[ext_resource type="Resource" uid="uid://bx3ppeh1uh7wb" path="res://data/transforms/damage_reduced_by_defense.tres" id="4_um1i1"]
 
 [node name="StatsEntityComponent" type="Node2D"]
 script = ExtResource("1_h5dka")
 stat_scene = ExtResource("2_kljhh")
-transforms = Array[ExtResource("3_j0gyf")]([ExtResource("4_um1i1")])

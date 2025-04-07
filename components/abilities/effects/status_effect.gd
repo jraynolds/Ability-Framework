@@ -15,6 +15,7 @@ var _duration : float = 0 :
 var _times_triggered : int = 0
 ## What should happen when the Effect reaches the end of a Lifetime. By default, we reduce its stacks by 1.
 var _expiration_behavior : StatusAddEffectResource.ExpirationBehavior
+var is_visible : bool ## Whether the StatusEffect should be visible on the GUI.
 
 
 ## Updates this StatusEffect's Resource with another. Overloaded.

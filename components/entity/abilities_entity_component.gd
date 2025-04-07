@@ -5,7 +5,6 @@ class_name AbilitiesEntityComponent
 ## The Abilities this Entity has, paired with the bar locations for each Ability. 
 ## The integer can be 0-19; 0 is "1", 10 is "+1"
 var abilities : Dictionary[Ability, int]
-var abilities_cast : Array[Ability] ## The heap (front-recent) of Abilities this Entity has successfully cast.
 var gcd_remaining : float : ## The time in seconds before the global cooldown is ready again.
 	set(val):
 		var old_val = gcd_remaining
@@ -20,7 +19,8 @@ var gcd_max_cached : float ## The stored GCD duration for the last Ability cast.
 @export var ability_scene : PackedScene ## The default Ability scene.
 
 ## Emitted when the GCD remaining value changes. Emits the remaining value and the total for this latest GCD.
-signal on_gcd_update(gcd_remaining: float, gcd_total: float) 
+signal on_gcd_update(gcd_remaining: float, gcd_total: float)
+signal on_ability_cast(ability: Ability, targets: Array[Entity]) 
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
@@ -32,7 +32,6 @@ func load_entity_resource(resource: EntityResource):
 		abilities[ability] = resource.abilities[ability_resource]
 		add_child(ability)
 		ability.name = ability._title
-	abilities_cast = []
 	gcd_remaining = 0
 
 
@@ -60,7 +59,7 @@ func try_cast(ability: Ability, targets: Array[Entity]):
 ## Casts the given ability on the given targets. Adds it to the heap of our casts.
 func cast(ability: Ability, targets: Array[Entity]):
 	ability.cast(targets)
-	abilities_cast.insert(0, ability)
+	on_ability_cast.emit(ability, targets)
 	if ability._gcd_type == AbilityResource.GCD.OnGCD:
 		if ability._gcd_cooldown:
 			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
@@ -68,18 +67,6 @@ func cast(ability: Ability, targets: Array[Entity]):
 		else :
 			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 			gcd_remaining = gcd_max_cached
-
-
-## Returns the last valid Ability cast.
-func get_last_ability_cast() -> Ability:
-	return get_ability_in_chain(0)
-
-
-## Backtracks the Abilities this Entity has cast and returns the valid cast at the given index.
-func get_ability_in_chain(chain_index: int) -> Ability:
-	if len(abilities_cast) <= chain_index:
-		return null
-	return abilities_cast[chain_index]
 
 
 ## Returns whether the given Ability can be cast by this Entity on the given targets.

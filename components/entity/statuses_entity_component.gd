@@ -6,6 +6,7 @@ class_name StatusesEntityComponent
 var statuses : Array[StatusEffect]
 ## The Dictionary of Effects ongoing on this Entity, paired with how many stacks of the same Effect exist.
 var status_stacks : Dictionary[StatusEffect, int] = {} 
+@export var initial_statuses : Array[StatusAddEffectResource] ## Statuses the Entity begins with can be added here.
 @export var status_effect_scene : PackedScene ## A default StatusEffect scene in case we have to construct one.
 
 signal on_status_added(status: StatusEffect) ## Emitted when we add a new status.
@@ -13,10 +14,21 @@ signal on_status_removed(status: StatusEffect) ## Emitted when we remove a statu
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
-## Intializes Stat objects.
+## Initializes any initial statuses.
 func load_entity_resource(resource: EntityResource):
 	statuses = []
 	status_stacks = {}
+	for status in initial_statuses:
+		var status_effect = status_effect_scene.instantiate().from_resource(
+			status.effect_added,
+			null,
+			entity,
+			[entity]
+		).with_status(
+			status.lifetimes,
+			status.expiration_behavior
+		)
+		add_status(status_effect, null, null, entity, status.stacking_behavior)
 
 
 ## Called every frame. Increments duration for all attached status Effects.
@@ -64,7 +76,8 @@ func add_status(
 	adding_effect: Effect,
 	adding_ability: Ability,
 	caster: Entity,
-	stacking_behavior: StatusAddEffectResource.StackingBehavior
+	stacking_behavior: StatusAddEffectResource.StackingBehavior,
+	num_stacks: int = 1
 ):
 	var duplicate_effect = get_status(effect)
 	if !duplicate_effect:
@@ -76,17 +89,17 @@ func add_status(
 		StatusAddEffectResource.StackingBehavior.Ignore:
 			return
 		StatusAddEffectResource.StackingBehavior.Add:
-			status_stacks[duplicate_effect] += 1
+			status_stacks[duplicate_effect] += num_stacks
 		StatusAddEffectResource.StackingBehavior.AddAndRefresh:
-			status_stacks[duplicate_effect] += 1
+			status_stacks[duplicate_effect] += num_stacks
 			duplicate_effect.reset_lifetime()
 		StatusAddEffectResource.StackingBehavior.AddAndReplace:
 			var stacks = statuses[duplicate_effect]
 			_remove_status(duplicate_effect)
 			_add_status(effect, caster)
-			statuses[effect] = stacks + 1
+			statuses[effect] = stacks + num_stacks
 		StatusAddEffectResource.StackingBehavior.Subtract:
-			status_stacks[duplicate_effect] -= 1
+			status_stacks[duplicate_effect] -= num_stacks
 			if status_stacks[duplicate_effect] <= 0:
 				_remove_status(duplicate_effect)
 		StatusAddEffectResource.StackingBehavior.Replace:

@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw7igfy1003t4"]
+[gd_scene load_steps=6 format=3 uid="uid://bw7igfy1003t4"]
 
 [ext_resource type="Script" uid="uid://bv6de8fr67yed" path="res://components/entity/entity.gd" id="1_a6cd0"]
 [ext_resource type="PackedScene" uid="uid://cp4xbtgwweqmj" path="res://components/entity/stats_entity_component.tscn" id="2_8ednr"]
 [ext_resource type="PackedScene" uid="uid://deeibcee0yoxg" path="res://components/entity/abilities_entity_component.tscn" id="3_4e6ij"]
 [ext_resource type="PackedScene" uid="uid://pefmxu8lle1h" path="res://components/entity/statuses_entity_component.tscn" id="4_v2ycs"]
+[ext_resource type="PackedScene" uid="uid://cd2h74vid232d" path="res://components/entity/history_entity_component.tscn" id="5_4e6ij"]
 
-[node name="Entity" type="Node2D" node_paths=PackedStringArray("stats_component", "statuses_component", "abilities_component")]
+[node name="Entity" type="Node2D" node_paths=PackedStringArray("stats_component", "statuses_component", "abilities_component", "history_component")]
 script = ExtResource("1_a6cd0")
 stats_component = NodePath("StatsEntityComponent")
 statuses_component = NodePath("StatusesEntityComponent")
 abilities_component = NodePath("AbilitiesEntityComponent")
+history_component = NodePath("HistoryEntityComponent")
 
 [node name="StatsEntityComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("2_8ednr")]
 entity = NodePath("..")
@@ -18,4 +20,7 @@ entity = NodePath("..")
 entity = NodePath("..")
 
 [node name="StatusesEntityComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("4_v2ycs")]
+entity = NodePath("..")
+
+[node name="HistoryEntityComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_4e6ij")]
 entity = NodePath("..")

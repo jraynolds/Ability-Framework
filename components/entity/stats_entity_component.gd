@@ -6,7 +6,13 @@ class_name StatsEntityComponent
 var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paired with the kind of Stat each is.
 
 ## An Array of Transforms that alter modifications made to stats.
-@export var transforms : Array[TransformResource]
+var transform_statuses : Array[StatusEffect] :
+	get :
+		if !entity or !entity.statuses_component: return []
+		return entity.statuses_component.statuses.filter(func(status: StatusEffect):
+			if status._resource as TransformEffectResource:
+				return true
+		)
 
 ## Emitted when a Stat we're tracking changes
 signal on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float)
@@ -101,15 +107,16 @@ func modify_stat_value(
 	, self)
 	var stat_value = get_stat_value(stat, ignore_statuses)
 	if !ignore_transforms:
-		for transform in transforms:
-			if transform.stat_type == stat and transform.math_operation == math_operation:
-				value_modifier = transform.try_transform(
-					value_modifier, 
-					effect, 
-					effect._ability, 
-					effect._ability._caster, 
-					[entity]
-				)
+		for transform in transform_statuses:
+			if transform._resource.stat_type == stat:
+				if transform._resource.math_operation == math_operation:
+					value_modifier = transform.try_transform(
+						value_modifier, 
+						effect, 
+						effect._ability, 
+						effect._ability._caster, 
+						[entity]
+					)
 	return set_stat_value(stat, Math.perform_operation(stat_value, value_modifier, math_operation))
 
 
@@ -121,12 +128,14 @@ func set_stat_value(stat: StatResource.StatType, value: float) -> float:
 
 
 ## Reduces the Entity's HP by the given amount, with the given type. Optionally, bypasses statuses or transforms.
+## Optionally, ignores Defense, which reduces incoming damage.
 func take_damage(
 	damage_dealt: float, 
 	damage_type: DamageEffectResource.DamageType, 
 	effect: Effect, 
 	ignore_statuses: bool = false,
-	ignore_transforms: bool = false
+	ignore_transforms: bool = false,
+	bypass_defense: bool = false
 ) -> float:
 	DebugManager.debug_log(
 		"Taking damage equal to " + str(damage_dealt) + 
@@ -136,17 +145,24 @@ func take_damage(
 		(" ignoring transforms " if ignore_transforms else "")
 	, self)
 	assert(damage_dealt >= 0, "Dealing negative damage.")
+	if !bypass_defense:
+		var defense = get_stat_value(StatResource.StatType.Defense, ignore_statuses)
+		damage_dealt *= (1 - defense)
+		DebugManager.debug_log(
+			"Our defense of " + str(defense) + " has reduced the incoming damage to " + str(damage_dealt)
+		, self)
 	var hp_value = get_stat_value(StatResource.StatType.HP, ignore_statuses)
 	if !ignore_transforms:
-		for transform in transforms:
-			if transform.stat_type == StatResource.StatType.HP and transform.math_operation == Math.Operation.Subtraction:
-				damage_dealt = transform.try_transform(
-					damage_dealt, 
-					effect, 
-					effect._ability, 
-					effect._ability._caster, 
-					[entity]
-				)
+		for transform in transform_statuses:
+			if transform._resource.stat_type == StatResource.StatType.HP:
+				if transform._resource.math_operation == Math.Operation.Subtraction:
+					damage_dealt = transform.try_transform(
+						damage_dealt, 
+						effect, 
+						effect._ability, 
+						effect._ability._caster, 
+						[entity]
+					)
 	return set_stat_value(
 		StatResource.StatType.HP, 
 		Math.perform_operation(hp_value, damage_dealt, Math.Operation.Subtraction)

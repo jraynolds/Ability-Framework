@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DurationLifetimeResource" load_steps=3 format=3 uid="uid://be0j5wqkv5pw0"]
+
+[ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="1_1152k"]
+[ext_resource type="Script" uid="uid://hl5823cs8kre" path="res://data/lifetimes/duration_lifetime_resource.gd" id="2_34755"]
+
+[resource]
+script = ExtResource("2_34755")
+duration = ExtResource("1_1152k")
+title = ""
+description = ""
+metadata/_custom_type_script = "uid://hl5823cs8kre"

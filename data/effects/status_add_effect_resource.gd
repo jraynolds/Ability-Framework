@@ -16,6 +16,7 @@ enum StackingBehavior { ## What happens if the Entity has the same Effect we're 
 }
 ## How the Effect we're adding interacts with an existing, identical Effect. By default, resets the original's duration.
 @export var stacking_behavior : StackingBehavior = StackingBehavior.Refresh
+@export var num_stacks : ValueResource ## How many stacks we add. By default, 1.
 @export var lifetimes : Array[LifetimeResource] ## The lifetimes before the added Effect expires.
 enum ExpirationBehavior { ## What should happen when the Effect reaches the end of a Lifetime.
 	Subtract = 0, ## A multi-stack ticks down by 1, and is erased if the stack number becomes 0.
@@ -24,7 +25,8 @@ enum ExpirationBehavior { ## What should happen when the Effect reaches the end 
 ## What should happen when the Effect reaches the end of a Lifetime. By default, we reduce its stacks by 1.
 @export var expiration_behavior : ExpirationBehavior = ExpirationBehavior.Subtract 
 @export var status_effect_scene : PackedScene ## The Effect scene to be created as an instance.
-  
+@export var visible_status : bool = true ## Whether the StatusEffect should be visible on the GUI.
+
 ## Called when an Effect containing this Resource is created. 
 ## Creates an instance copy of the status Effect to be added.
 func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
@@ -63,11 +65,15 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		return se.has_resource(effect_added)
 	)
 	assert(status_effect_index >= 0, "The status effect object is gone!")
+	
+	var stacks = num_stacks.get_value(caster, targets) if num_stacks else 1
+	
 	for target in targets_found:
 		target.statuses_component.add_status(
 			effect._sub_effects[status_effect_index],
 			effect,
 			ability,
 			caster,
-			stacking_behavior
+			stacking_behavior,
+			stacks
 		)

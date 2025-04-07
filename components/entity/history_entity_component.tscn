@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd2h74vid232d"]
+
+[ext_resource type="Script" uid="uid://12a1siwi0da6" path="res://components/entity/history_entity_component.gd" id="1_37ykc"]
+
+[node name="HistoryEntityComponent" type="Node2D"]
+script = ExtResource("1_37ykc")

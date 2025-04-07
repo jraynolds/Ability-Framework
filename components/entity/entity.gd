@@ -20,6 +20,7 @@ var resource : EntityResource :
 @export var stats_component : StatsEntityComponent ## The Stats component for this Entity.
 @export var statuses_component : StatusesEntityComponent ## The Statuses component for this Entity.
 @export var abilities_component : AbilitiesEntityComponent ## The Abilities component for this Entity.
+@export var history_component : HistoryEntityComponent ## The history component for this Entity.
 
 var title : String ## The name of the Entity.
 var icon : Texture2D ## The icon for this Entity.
