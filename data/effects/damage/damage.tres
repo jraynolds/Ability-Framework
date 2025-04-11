@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=6 format=3 uid="uid://clq2pjt4gtw30"]
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=7 format=3 uid="uid://clq2pjt4gtw30"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_xqhb4"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="2_d6b2g"]
-[ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="2_ey73s"]
+[ext_resource type="Resource" uid="uid://vrai8rbym5ym" path="res://data/values/caster_attack.tres" id="2_sfi77"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_iuf01"]
+[ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="3_o8cfb"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_sfi77"]
 
 [resource]
 script = ExtResource("2_d6b2g")
 entity_target = 11
-stat_type = 20
-modifier = ExtResource("2_ey73s")
-damage_type = 0
-math_operation = 2
+damage_amount = ExtResource("2_sfi77")
+damage_type = ExtResource("3_o8cfb")
 ignore_caster_statuses = false
 ignore_target_statuses = false
 ignore_transforms = false

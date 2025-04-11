@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=8 format=3 uid="uid://ddk47a47hxb3a"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_70gkx"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="2_4n3cy"]
+[ext_resource type="Resource" uid="uid://gl36hcxaxmn" path="res://data/conditionals/caster_status_imbued_element.tres" id="2_5x1qk"]
+[ext_resource type="Resource" uid="uid://benbchaytjrdn" path="res://data/values/caster_stacks_imbued_element.tres" id="2_m5j1j"]
+[ext_resource type="Resource" uid="uid://dt5x5k7nwv7ru" path="res://data/values/enums/damage types/damage_type_status_imbued_element.tres" id="3_hqn1m"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_m5j1j"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_4kjf2"]
+
+[resource]
+script = ExtResource("2_4n3cy")
+entity_target = 11
+damage_amount = ExtResource("2_m5j1j")
+damage_type = ExtResource("3_hqn1m")
+ignore_caster_statuses = false
+ignore_target_statuses = false
+ignore_transforms = false
+title = "Damage imbued element"
+description = "Deal damage equal to your Imbued Element's type and stacks."
+positivity = 2
+triggers = Array[ExtResource("3_m5j1j")]([ExtResource("7_4kjf2")])
+conditionals_positive = Array[ExtResource("1_70gkx")]([ExtResource("2_5x1qk")])
+conditionals_negative = Array[ExtResource("1_70gkx")]([])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

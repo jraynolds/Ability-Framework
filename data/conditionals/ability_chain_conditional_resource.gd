@@ -20,4 +20,4 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 	var ability_check = entity.history_component.get_ability_history(chain_position.get_value(caster, targets))
 	if !ability_check:
 		return false
-	return ability_check.is_resource_equal(ability_in_chain)
+	return ability_check.ability.is_resource_equal(ability_in_chain)

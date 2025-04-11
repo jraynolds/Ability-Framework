@@ -1,14 +1,13 @@
-[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://bxbkwjjc1kk3d"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://bxbkwjjc1kk3d"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_5r4xp"]
 [ext_resource type="Resource" uid="uid://colkeq031stob" path="res://data/effects/statuses/status_armored.tres" id="2_5r4xp"]
 [ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="2_hmjyh"]
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="3_628jq"]
-[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_hmjyh"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="4_628jq"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_75f5a"]
+[ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="5_628jq"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_17w6e"]
-[ext_resource type="Resource" uid="uid://1gmdei4ye3w6" path="res://data/lifetimes/duration_8.tres" id="6_75f5a"]
 [ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_628jq"]
 
 [resource]
@@ -16,9 +15,9 @@ script = ExtResource("4_628jq")
 entity_target = 0
 effect_added = ExtResource("2_5r4xp")
 stacking_behavior = 21
-lifetimes = Array[ExtResource("3_hmjyh")]([ExtResource("6_75f5a")])
-expiration_behavior = 0
+lifetime = ExtResource("5_628jq")
 status_effect_scene = ExtResource("7_628jq")
+visible_status = true
 title = "Add Armor"
 description = "Add a stack of Armored to yourself, increasing your Defense by 5%. Must be comboed with Hack and Bash."
 positivity = 2

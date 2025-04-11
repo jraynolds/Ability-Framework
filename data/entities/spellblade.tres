@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="EntityResource" load_steps=20 format=3 uid="uid://dnguhhq4lvfvh"]
+[gd_resource type="Resource" script_class="EntityResource" load_steps=24 format=3 uid="uid://dnguhhq4lvfvh"]
 
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_hekjg"]
 [ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="2_6porh"]
+[ext_resource type="Resource" uid="uid://kyus4p40s0cw" path="res://data/abilities/spellblade/slash.tres" id="2_dc5yi"]
 [ext_resource type="Texture2D" uid="uid://cf75x74xmsp86" path="res://assets/abilities/p_01.png" id="2_iu4nv"]
+[ext_resource type="Resource" uid="uid://cqkm28nnhwkkt" path="res://data/abilities/spellblade/imbued_slash.tres" id="3_hevdw"]
 [ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="3_kqt1x"]
 [ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="4_atbdd"]
+[ext_resource type="Resource" uid="uid://b0db527arct3u" path="res://data/abilities/spellblade/expel_elements.tres" id="4_vur0u"]
+[ext_resource type="Resource" uid="uid://clve3dg6ot77c" path="res://data/abilities/spellblade/absorb_elements.tres" id="5_usakc"]
 [ext_resource type="Resource" uid="uid://citva5sn5h7nu" path="res://data/values/flats/breakpoints/hp_player_low.tres" id="7_iu4nv"]
 [ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="9_usakc"]
 [ext_resource type="Resource" uid="uid://b2ievbk4n2m7u" path="res://data/stats/hp.tres" id="11_sa2w3"]
@@ -35,5 +39,10 @@ ExtResource("17_g2ki7"): ExtResource("15_mtugn"),
 ExtResource("19_xtpej"): ExtResource("17_c7uso"),
 ExtResource("21_dsm33"): ExtResource("19_dc5yi")
 })
-abilities = Dictionary[ExtResource("1_hekjg"), int]({})
+abilities = Dictionary[ExtResource("1_hekjg"), int]({
+ExtResource("2_dc5yi"): 0,
+ExtResource("3_hevdw"): 1,
+ExtResource("4_vur0u"): 2,
+ExtResource("5_usakc"): 10
+})
 metadata/_custom_type_script = "uid://2e885iqyhq3n"

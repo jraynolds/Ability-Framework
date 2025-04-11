@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="3_tubl5"]
 [ext_resource type="Resource" uid="uid://5l3u8lht3d35" path="res://data/lifetimes/duration_30.tres" id="4_iqd4x"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_meurl"]
-[ext_resource type="Resource" uid="uid://cerighfpkvxny" path="res://data/values/computed/caster_damaged_taken_x__2.tres" id="5_meurl"]
+[ext_resource type="Resource" uid="uid://cerighfpkvxny" path="res://data/values/computed/caster_damaged__2x.tres" id="5_meurl"]
 
 [resource]
 script = ExtResource("3_tubl5")

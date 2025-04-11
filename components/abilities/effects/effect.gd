@@ -20,8 +20,7 @@ var _sub_effects : Array[Effect] = [] ## Sub-effects this Effect also tracks.
 signal on_registered ## Emitted when this Effect is fully registered on all its Triggers.
 signal on_affected(caster: Entity, targets: Array[Entity]) ## Emitted when this Effect affects its targets.
 signal on_unregistered ## Emitted when this Effect is fully unregistered on all its Triggers.
-signal on_lifetime_ended ## Emitted when any of this Effect's lifetimes expires.
-signal on_ended ## Emitted when this Effect expires.
+signal on_expired ## Emitted when this Effect expires.
 
 ## Returns an instance of this initialized with the given EffectResource.
 func from_resource(res: EffectResource, ability: Ability, caster: Entity, targets: Array[Entity]) -> Effect:
@@ -118,5 +117,5 @@ func has_resource(resource: EffectResource) -> bool:
 
 ## Ends this Effect.
 func end():
-	on_ended.emit()
+	on_expired.emit()
 	queue_free()

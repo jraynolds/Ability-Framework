@@ -24,9 +24,6 @@ func load_entity_resource(resource: EntityResource):
 			null,
 			entity,
 			[entity]
-		).with_status(
-			status.lifetimes,
-			status.expiration_behavior
 		)
 		add_status(status_effect, null, null, entity, status.stacking_behavior)
 
@@ -34,7 +31,7 @@ func load_entity_resource(resource: EntityResource):
 ## Called every frame. Increments duration for all attached status Effects.
 func _process(delta: float) -> void:
 	for status in statuses:
-		status._duration += delta
+		status._time_active += delta
 
 
 ## Returns a StatusEffect with a matching EffectResource, if it's present.
@@ -70,18 +67,18 @@ func get_statuses(status_positivity: Math.Positivity) -> Array[Effect]:
 	return matching_statuses
 
 
-## Adds a given StatusEffect with the given stacking behavior.
+## Adds a given Effect with the given stacking behavior and given stacks (by default, 1).
 func add_status(
-	effect: Effect,
+	status: StatusEffect,
 	adding_effect: Effect,
 	adding_ability: Ability,
 	caster: Entity,
 	stacking_behavior: StatusAddEffectResource.StackingBehavior,
 	num_stacks: int = 1
 ):
-	var duplicate_effect = get_status(effect)
+	var duplicate_effect = get_status(status)
 	if !duplicate_effect:
-		_add_status(effect, caster)
+		_add_status(status, caster)
 		return
 	match stacking_behavior:
 		StatusAddEffectResource.StackingBehavior.Refresh:
@@ -95,41 +92,52 @@ func add_status(
 			duplicate_effect.reset_lifetime()
 		StatusAddEffectResource.StackingBehavior.AddAndReplace:
 			var stacks = statuses[duplicate_effect]
-			_remove_status(duplicate_effect)
-			_add_status(effect, caster)
-			statuses[effect] = stacks + num_stacks
+			remove_status(duplicate_effect)
+			_add_status(status, caster)
+			statuses[status] = stacks + num_stacks
 		StatusAddEffectResource.StackingBehavior.Subtract:
 			status_stacks[duplicate_effect] -= num_stacks
 			if status_stacks[duplicate_effect] <= 0:
-				_remove_status(duplicate_effect)
+				remove_status(duplicate_effect)
 		StatusAddEffectResource.StackingBehavior.Replace:
-			_remove_status(duplicate_effect)
-			_add_status(effect, caster)
+			remove_status(duplicate_effect)
+			_add_status(status, caster)
 
 
-## Does the actual work of adding a Status. Creates a StatusEffect from the given Effect.
-func _add_status(effect: Effect, caster: Entity):
-	var status_effect : StatusEffect = effect as StatusEffect
-	if !status_effect:
-		status_effect = status_effect_scene.instantiate().from_effect(effect)
-	else :
-		status_effect = status_effect_scene.instantiate().from_status_effect(status_effect)
+## Does the actual work of adding a Status. Creates a StatusEffect from the given Effect and lifetime.
+func _add_status(status: StatusEffect, caster: Entity):
+	var status_effect = status_effect_scene.instantiate().from_status_effect(status)
 	status_stacks[status_effect] = 1
 	statuses.append(status_effect)
 	add_child(status_effect)
-	status_effect.on_lifetime_ended.connect(func(): _remove_status(status_effect))
+	status_effect.on_expired.connect(func(): remove_status(status_effect))
 	var targets : Array[Entity] = [entity]
 	status_effect.register(caster, targets)
 	on_status_added.emit(status_effect)
 
 
-## Does the actual work of removing an Effect.
-func _remove_status(status: StatusEffect):
+## Converts the given Effect into a StatusEffect and removes it.
+func remove_effect(effect: Effect):
+	var status = effect as StatusEffect
+	assert(status, "This effect is not a Status!")
+	remove_status(status)
+
+
+## Removes a StatusEffect.
+func remove_status(status: StatusEffect):
 	statuses.erase(status)
 	status_stacks.erase(status)
 	#effect.on_lifetime_ended.disconnect(func(): _remove_effect(effect)) ## Maybe not necessary?
-	status.end()
 	on_status_removed.emit(status)
+
+
+func modify_stacks(status: StatusEffect, amount: int) -> int:
+	var matching_status = get_status(status)
+	status_stacks[matching_status] += amount
+	if status_stacks[matching_status] <= 0:
+		remove_status(matching_status)
+		return NAN
+	return status_stacks[matching_status]
 
 
 ### Constructs an Effect from the given resource and adds it.

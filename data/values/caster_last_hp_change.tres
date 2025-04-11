@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StatChangeValueResource" load_steps=2 format=3 uid="uid://bgkdeodljbb6g"]
+
+[ext_resource type="Script" uid="uid://baf6yhlxhtjle" path="res://data/values/stat_change_value_resource.gd" id="1_rl7y6"]
+
+[resource]
+script = ExtResource("1_rl7y6")
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://baf6yhlxhtjle"

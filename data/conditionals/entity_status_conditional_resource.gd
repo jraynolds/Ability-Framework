@@ -21,7 +21,7 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 	assert(!entities.is_empty(), "No valid Entity found")
 	
 	for entity in entities:
-		var matching_status = entity.statuses_component.get_effect_by_resource(status)
+		var matching_status = entity.statuses_component.get_status_by_resource(status)
 		if !matching_status:
 			return false
 		if entity.statuses_component.get_effect_stacks(matching_status) < minimum_stacks.get_value(caster, targets):

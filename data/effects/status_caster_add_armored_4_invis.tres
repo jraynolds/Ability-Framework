@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://lghbn8bconv2"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_g5u1e"]
+[ext_resource type="Resource" uid="uid://colkeq031stob" path="res://data/effects/statuses/status_armored.tres" id="4_13ibt"]
+[ext_resource type="Resource" uid="uid://be0j5wqkv5pw0" path="res://data/lifetimes/duration_2.tres" id="4_q3rkp"]
+[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="5_g1sa2"]
+[ext_resource type="Resource" uid="uid://c7ketxe56xuyq" path="res://data/values/flats/flat_4.tres" id="5_g5u1e"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_m11tu"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="8_cq4cm"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_pj5j6"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="10_l5gcg"]
+
+[resource]
+script = ExtResource("7_m11tu")
+entity_target = 0
+effect_added = ExtResource("4_13ibt")
+stacking_behavior = 21
+num_stacks = ExtResource("5_g5u1e")
+lifetimes = Array[ExtResource("5_g1sa2")]([ExtResource("4_q3rkp")])
+expiration_behavior = 0
+status_effect_scene = ExtResource("8_cq4cm")
+visible_status = false
+title = "Add Armor"
+description = "Add 4 stacks of Armored to yourself, increasing your Defense by 20%. Lasts for 2 seconds or until the next time damage is taken."
+positivity = 2
+triggers = Array[ExtResource("9_pj5j6")]([ExtResource("10_l5gcg")])
+conditionals_positive = Array[ExtResource("1_g5u1e")]([])
+conditionals_negative = Array[ExtResource("1_g5u1e")]([])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

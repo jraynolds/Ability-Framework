@@ -4,24 +4,37 @@ extends Effect
 class_name StatusEffect
 
 #var tracking_lifetime : bool ## Whether the StatusEffect is currently tracking its lifetime.
-var _lifetimes : Array[LifetimeResource] = [] ## The lifetimes before this StatusEffect expires.
-## The duration the associated StatusEffect has been active. Compared with the LifetimeResource.
-var _duration : float = 0 :
+var _lifetime : ValueResource ## The lifetimes before this StatusEffect expires.
+var lifetime_remaining : float :
+	get :
+		if !_lifetime:
+			return NAN
+		return _lifetime.get_value(_caster, _targets) - _time_active
+var _expirations : Array[ExpirationResource] ## A list of triggers that cause this StatusEffect to end early.
+
+## The duration the associated StatusEffect has been active. Compared with the lifetime.
+var _time_active : float = 0 :
 	set(val):
-		_duration = val
-		if has_lifetime_duration() and get_lifetime_duration_left() <= 0:
-			on_lifetime_ended.emit()
- ## The times the associated StatusEffect has been triggered. Compared with the LifetimeResource.
-var _times_triggered : int = 0
-## What should happen when the Effect reaches the end of a Lifetime. By default, we reduce its stacks by 1.
-var _expiration_behavior : StatusAddEffectResource.ExpirationBehavior
+		var old_value = _time_active
+		_time_active = val
+		on_time_active_changed.emit(_time_active, old_value)
+		if lifetime_remaining < 0:
+			end()
+## The times the associated StatusEffect has been triggered.
+var _times_triggered : int = 0 :
+	set(val):
+		var old_value = _times_triggered
+		_times_triggered = val
+		on_times_triggered_changed.emit(_times_triggered, old_value)
 var is_visible : bool ## Whether the StatusEffect should be visible on the GUI.
 
+signal on_time_active_changed(new_value: float, old_value: float) ## Emitted when the time active changes.
+signal on_times_triggered_changed(new_vlaue: float, old_value: float) ## Emitted when the number of times triggered changes.
 
 ## Updates this StatusEffect's Resource with another. Overloaded.
 func update_resource(res: EffectResource):
 	super(res)
-	_duration = 0
+	_time_active = 0
 	_times_triggered = 0
 
 
@@ -59,22 +72,19 @@ func from_effect(effect: Effect) -> Effect:
 	return self
 
 
-## Returns an instance of this initialized with the given Lifetime and ExpirationBehavior.
-func with_status(lifetimes: Array[LifetimeResource], expiry: StatusAddEffectResource.ExpirationBehavior):
-	_lifetimes = []
-	for lifetime in lifetimes:
-		_lifetimes.append(lifetime)
-	_expiration_behavior = expiry
-	
+## Returns an instance of this initialized with the given lifetime and expirations.
+func with_expiration(lifetime: ValueResource, expirations: Array[ExpirationResource]) -> StatusEffect:
+	_lifetime = lifetime
+	for expiration in expirations:
+		_expirations.append(expiration)
 	return self
 
 
 ## Returns an instance of this initialized with the given StatusEffect.
 func from_status_effect(status: StatusEffect) -> StatusEffect:
 	from_effect(status)
-	for lifetime in status._lifetimes:
-		_lifetimes.append(lifetime)
-	_duration = status._duration
+	_lifetime = status._lifetime
+	_time_active = status._time_active
 	_times_triggered = status._times_triggered
 	
 	return self
@@ -91,6 +101,8 @@ func register(caster: Entity, targets: Array[Entity]):
 	
 	for trigger in _triggers:
 		trigger.register(self, _ability, caster, targets, affect)
+	for expiration in _expirations:
+		expiration.register(self, _ability, caster, targets)
 	on_registered.emit()
 
 
@@ -100,38 +112,9 @@ func affect(caster: Entity, targets: Array[Entity]):
 		_resource.on_affect(self, _ability, caster, targets)
 	
 	_times_triggered += 1
-	
-	if _lifetimes.is_empty():
-		end()
-	else :
-		var ended = false
-		if _lifetimes.any(
-			func(lifetime: LifetimeResource): lifetime.is_lifetime_expired(caster, targets, 0, _times_triggered)
-		):
-			end()
 
 
-## Returns whether this StatusEffect has an active DurationLifetime on it.
-func has_lifetime_duration() -> bool:
-	for lifetime in _lifetimes:
-		var lifetime_duration = lifetime as DurationLifetimeResource
-		if lifetime_duration:
-			return true
-	return false
-
-
-## Returns the lowest lifetime duration on this StatusEffect, or -1 if there is none.
-func get_lifetime_duration_left() -> float:
-	assert(has_lifetime_duration(), "There's no lifetime duration active!")
-	var lowest_lifetime = 9999
-	for lifetime in _lifetimes:
-		var lifetime_duration = lifetime as DurationLifetimeResource
-		if lifetime_duration:
-			lowest_lifetime = min(lowest_lifetime, lifetime_duration.duration.get_value(_caster, _targets))
-	return lowest_lifetime - _duration
-
-
-## Resets duration and triggers.
+## Resets time active and triggers.
 func reset_lifetime():
-	_duration = 0
+	_time_active = 0
 	_times_triggered = 0

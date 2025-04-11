@@ -8,6 +8,7 @@ enum Trigger {
 	OnThisAbilityCast = 0, ## When the associated Ability is cast
 	OnRegistered = 10, ## When the Effect is successfully registered on its triggers
 	OnGetStatValue = 20, ## When anything retrieves the target's stats.
+	OnTakeDamage = 60, ## When the target suffers at least 0 damage.
 	#OnAddedAsStatus = 10, ## When the Effect is added as a status Effect
 }
 ## The type of Trigger. By default, when the associated Ability is cast.
@@ -23,6 +24,9 @@ func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[E
 			effect.on_registered.connect(function.bind(caster, targets))
 		Trigger.OnGetStatValue:
 			pass ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
+		Trigger.OnTakeDamage:
+			for target in targets:
+				target.stats_component.on_take_damage.connect(function.bind(caster, targets))
 		#Trigger.OnAddedAsStatus:
 			#for target in targets:
 				#target.statuses_component.on_status_added.connect(func(status: Effect):
@@ -42,6 +46,9 @@ func unregister(effect: Effect, ability: Ability, caster: Entity, targets: Array
 			effect.on_registered.disconnect(function.bind(caster, targets))
 		Trigger.OnGetStatValue:
 			pass ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
+		Trigger.OnTakeDamage:
+			for target in targets:
+				target.stats_component.on_take_damage.disconnect(function.bind(caster, targets))
 		#Trigger.OnAddedAsStatus:
 			#for target in targets:
 				#target.statuses_component.on_status_added.disconnect(func(status: Effect):

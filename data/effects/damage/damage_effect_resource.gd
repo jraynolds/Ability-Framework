@@ -4,10 +4,8 @@ class_name DamageEffectResource
 
 ## The Entity(s) this Effect affects. By default, all valid targets.
 @export var entity_target : Targeting.Target = Targeting.Target.Targets 
-## The caster's Stat the damage is calculated from. By default, Attack.
-@export var stat_type : StatResource.StatType = StatResource.StatType.Attack
-@export var modifier : ValueResource ## The value that will multiply the Stat. By default, 1.
-@export var damage_type : DamageType ## The type of damage.
+@export var damage_amount : ValueResource ## The amount of damage we'll do. By default, the caster's attack stat.
+@export var damage_type : ValueResource ## The type of damage. By default, physical.
 enum DamageType {
 	Physical,
 	Fire,
@@ -16,14 +14,12 @@ enum DamageType {
 	Acid,
 	None
 }
-## The type of mathematics operation we'll perform on the Stat to find damage. By default, multiplication.
-@export var math_operation : Math.Operation = Math.Operation.Multiplication
 @export var ignore_caster_statuses : bool ## Whether we should find the base stat value, no matter the caster's ongoing StatusEffects.
 @export var ignore_target_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing StatusEffects.
 @export var ignore_transforms : bool ## Whether we should modify the base stat, bypassing the target's Transforms.
 
 ## Called when an Effect containing this Resource affects targets.
-## reduces the calculated amount from the targets' HP.
+## Deals the given damage of type to the targets.
 func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
 	#print(
 		#"Affecting " + Natives.enum_name(Targeting.Target, entity_target) + 
@@ -42,16 +38,13 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		Targeting.Target.Caster:
 			stat_targets.append(caster)
 	
-	var damage_dealt = Math.perform_operation(
-		caster.stats_component.get_stat_value(stat_type, ignore_caster_statuses),
-		modifier.get_value(caster, targets) if modifier else 1.0,
-		math_operation,
-	)
+	var damage_dealt = damage_amount.get_value(caster, targets) if damage_amount else caster.stats_component.get_stat_value(StatResource.StatType.Attack)
+	var damage_dealt_type = damage_type.get_value(caster, targets) if damage_type else DamageType.Physical
 	
 	for stat_target in stat_targets:
 		stat_target.stats_component.take_damage(
 			damage_dealt,
-			damage_type,
+			damage_dealt_type,
 			effect,
 			ignore_target_statuses,
 			ignore_transforms
@@ -65,16 +58,16 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		#stat_target.stats_component.set_stat_value(stat_type, new_stat_value)
 
 
-## Returns what our modification to the given value would result in.
-func get_modified_value(value: float, caster: Entity, targets: Array[Entity]) -> float:
-	var value_modifier = modifier.get_value(caster, targets)
-	DebugManager.debug_log(
-		"Transforming the value " + str(value) + " using " + str(value_modifier) +
-		" with operation " + Natives.enum_name(Math.Operation, math_operation)
-	, self)
-	var value_modified = Math.perform_operation(value, value_modifier, math_operation)
-	DebugManager.debug_log(
-		"Original value " + str(value) + " has become " + str(value_modified)
-	, self)
-	return value_modified
-	
+### Returns what our modification to the given value would result in.
+#func get_modified_value(value: float, caster: Entity, targets: Array[Entity]) -> float:
+	#var value_modifier = modifier.get_value(caster, targets)
+	#DebugManager.debug_log(
+		#"Transforming the value " + str(value) + " using " + str(value_modifier) +
+		#" with operation " + Natives.enum_name(Math.Operation, math_operation)
+	#, self)
+	#var value_modified = Math.perform_operation(value, value_modifier, math_operation)
+	#DebugManager.debug_log(
+		#"Original value " + str(value) + " has become " + str(value_modified)
+	#, self)
+	#return value_modified
+	#

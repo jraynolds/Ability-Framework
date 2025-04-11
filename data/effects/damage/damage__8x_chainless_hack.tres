@@ -1,19 +1,18 @@
-[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=7 format=3 uid="uid://fng23op1ykuf"]
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=8 format=3 uid="uid://fng23op1ykuf"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_5x235"]
 [ext_resource type="Resource" uid="uid://cgcdpvdlauage" path="res://data/conditionals/caster_chain_0_hack.tres" id="2_ltwbk"]
-[ext_resource type="Resource" uid="uid://dspdqq2eg4qlb" path="res://data/values/flats/flat__8.tres" id="3_5x235"]
+[ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/caster_attack__8x.tres" id="3_5x235"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="4_8peu5"]
+[ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="4_ltwbk"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_pypw8"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_kyf2l"]
 
 [resource]
 script = ExtResource("4_8peu5")
 entity_target = 11
-stat_type = 20
-modifier = ExtResource("3_5x235")
-damage_type = 0
-math_operation = 2
+damage_amount = ExtResource("3_5x235")
+damage_type = ExtResource("4_ltwbk")
 ignore_caster_statuses = false
 ignore_target_statuses = false
 ignore_transforms = false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ComputedValueResource" load_steps=5 format=3 uid="uid://cerighfpkvxny"]
+
+[ext_resource type="Script" uid="uid://cao1j7x81va5m" path="res://data/values/computed/computed_value_resource.gd" id="1_3bsis"]
+[ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="2_mx2c3"]
+[ext_resource type="Resource" uid="uid://btnk70ijyeqjn" path="res://data/values/caster_damaged.tres" id="3_brxns"]
+[ext_resource type="Resource" uid="uid://g06l4oai6llx" path="res://data/values/flats/flat__2.tres" id="4_mavlq"]
+
+[resource]
+script = ExtResource("1_3bsis")
+values = Array[ExtResource("2_mx2c3")]([ExtResource("3_brxns"), ExtResource("4_mavlq")])
+math_operation = 2
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://cao1j7x81va5m"

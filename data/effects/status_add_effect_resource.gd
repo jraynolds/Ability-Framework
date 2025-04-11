@@ -11,33 +11,28 @@ enum StackingBehavior { ## What happens if the Entity has the same Effect we're 
 	Add = 20, ## Adds a stack.
 	AddAndRefresh = 21, ## Adds a stack and resets the duration.
 	AddAndReplace = 22, ## Adds a stack and replaces the effect.
-	Subtract = 30, ## Removes a stack.
+	Subtract = 30, ## Removes stacks.
 	Replace = 40 ## Removes the original and adds this one.
 }
 ## How the Effect we're adding interacts with an existing, identical Effect. By default, resets the original's duration.
 @export var stacking_behavior : StackingBehavior = StackingBehavior.Refresh
 @export var num_stacks : ValueResource ## How many stacks we add. By default, 1.
-@export var lifetimes : Array[LifetimeResource] ## The lifetimes before the added Effect expires.
-enum ExpirationBehavior { ## What should happen when the Effect reaches the end of a Lifetime.
-	Subtract = 0, ## A multi-stack ticks down by 1, and is erased if the stack number becomes 0.
-	Erase = 10, ## Just takes the entire Effect away.
-}
-## What should happen when the Effect reaches the end of a Lifetime. By default, we reduce its stacks by 1.
-@export var expiration_behavior : ExpirationBehavior = ExpirationBehavior.Subtract 
+@export var lifetime : ValueResource ## The duration before the added Effect expires. Time never expires it.
+@export var expirations : Array[ExpirationResource] ## Triggers that cause this effect to end before its lifetime.
 @export var status_effect_scene : PackedScene ## The Effect scene to be created as an instance.
 @export var visible_status : bool = true ## Whether the StatusEffect should be visible on the GUI.
 
 ## Called when an Effect containing this Resource is created. 
 ## Creates an instance copy of the status Effect to be added.
 func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
-	var sub_effect : StatusEffect = status_effect_scene.instantiate().with_status(
-		lifetimes, 
-		expiration_behavior
-	).from_resource(
+	var sub_effect : StatusEffect = status_effect_scene.instantiate().from_resource(
 		effect_added, 
 		ability, 
 		caster, 
 		targets
+	).with_expiration(
+		lifetime,
+		expirations
 	)
 	effect.add_sub_effect(sub_effect)
 

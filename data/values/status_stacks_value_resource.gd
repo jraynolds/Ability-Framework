@@ -12,7 +12,7 @@ func get_value(caster: Entity, targets: Array[Entity]) -> float:
 		entity = targets[0]
 	elif target == Targeting.Target.Targets:
 		assert(false, "No plan for multiple targets.")
-	assert(entity != null, "No entity to check damage history for!")
+	assert(entity != null, "No entity to check statuses for!")
 	var status = entity.statuses_component.get_status_by_resource(status)
 	if status:
 		return entity.statuses_component.get_status_stacks(status)

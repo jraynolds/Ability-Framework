@@ -32,6 +32,12 @@ class DamageHistory :
 		damage_taken = taken
 		damage_assigned = assigned
 		damage_type = type
+enum DamageHistoryInfo {
+	DamageTaken,
+	DamageAssigned,
+	DamageMitigated,
+	DamageType
+}
 
 ## A history of stat changes this Entity experiences.
 ## Stored with stat type keys and heap (front-recent) of array of FloatHistory type, which has new_value: float and old_value: float fields.
@@ -86,3 +92,11 @@ func get_damage_history(heap_index: int = 0) -> DamageHistory:
 	if len(damages_received) <= heap_index:
 		return null
 	return damages_received[heap_index]
+
+
+## Backtracks the stat changes this Entity has received and returns the valid history at the given index for the given stat.
+## By default, returns the most recent.
+func get_stat_change_history(stat: StatResource.StatType, heap_index: int = 0) -> FloatHistory:
+	if len(stats_changed[stat]) <= heap_index:
+		return null
+	return stats_changed[stat][heap_index]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DamageTypeValueResource" load_steps=2 format=3 uid="uid://bkasp88hqqomu"]
+
+[ext_resource type="Script" uid="uid://cnp21c283c3bv" path="res://data/values/enums/damage types/damage_type_value_resource.gd" id="1_vhd76"]
+
+[resource]
+script = ExtResource("1_vhd76")
+damage_type = 0
+is_int = false
+rounding_behavior = 0
+metadata/_custom_type_script = "uid://cnp21c283c3bv"

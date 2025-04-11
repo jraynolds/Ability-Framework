@@ -11,16 +11,16 @@ var _stacks : int : ## The number of stacks this status Effect has. Changing thi
 		else :
 			_stacks_label.text = str(_stacks)
 @export var _stacks_label : Label ## The label that displays how many stacks the status Effect has.
-var _duration : float : ## How much time left in seconds the Effect has. Changing this sets the label.
+var _lifetime_left : float : ## How much time left in seconds the Effect has. Changing this sets the label.
 	set(val):
-		_duration = val
-		if _duration <= 0:
-			_duration_label.text = ""
-		elif _duration < 1.0:
-			_duration_label.text = str("%0.1f" % _duration)
-		else :
-			_duration_label.text = str(floori(_duration))
-@export var _duration_label : Label ## The label that displays how much time left the Effect has.
+		_lifetime_left = val
+		if _lifetime_left <= 0:
+			_lifetime_label.text = ""
+		elif _lifetime_left < 1.0:
+			_lifetime_label.text = str("%0.1f" % _lifetime_left)
+		elif _lifetime_left >= 1.0: ## We specify this in case we get a NAN
+			_lifetime_label.text = str(floori(_lifetime_left))
+@export var _lifetime_label : Label ## The label that displays how much time left the Effect has.
 
 var _status : StatusEffect : ## The StatusEffect this container is representing. Changing this updates our visuals.
 	set(val):
@@ -28,7 +28,7 @@ var _status : StatusEffect : ## The StatusEffect this container is representing.
 		name = _status._title
 		_button.icon = _status._icon
 		_stacks_label.text = ""
-		_duration_label.text = ""
+		_lifetime_label.text = ""
 
 
 ## Constructs and returns an instance of this, initialized with the given status Effect.
@@ -41,8 +41,7 @@ func from_status(status: StatusEffect) -> StatusContainer:
 func _process(delta: float) -> void:
 	if !_status:
 		return
-	if _status.has_lifetime_duration():
-		_duration = _status.get_lifetime_duration_left()
+	_lifetime_left = _status.lifetime_remaining
 
 
 func set_stacks(stacks: int):

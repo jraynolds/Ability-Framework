@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="DamageEffectResource" load_steps=8 format=3 uid="uid://dkgedk7476kpo"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_qv60f"]
-[ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="2_05uit"]
-[ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="3_qel6s"]
-[ext_resource type="Resource" uid="uid://dspdqq2eg4qlb" path="res://data/values/flats/flat__8.tres" id="4_8jxo5"]
+[ext_resource type="Resource" uid="uid://du6q4lw35scao" path="res://data/conditionals/caster_chain_0_slash.tres" id="2_qv60f"]
+[ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/caster_attack__8x.tres" id="4_qv60f"]
+[ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="5_05uit"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="5_fepja"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_rmu6r"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_n0fro"]
@@ -11,10 +11,8 @@
 [resource]
 script = ExtResource("5_fepja")
 entity_target = 11
-stat_type = 20
-modifier = ExtResource("4_8jxo5")
-damage_type = 0
-math_operation = 2
+damage_amount = ExtResource("4_qv60f")
+damage_type = ExtResource("5_05uit")
 ignore_caster_statuses = false
 ignore_target_statuses = false
 ignore_transforms = false
@@ -23,5 +21,5 @@ description = "Inflict damage to the target equal to .8x your attack. Occurs whe
 positivity = 2
 triggers = Array[ExtResource("6_rmu6r")]([ExtResource("7_n0fro")])
 conditionals_positive = Array[ExtResource("1_qv60f")]([])
-conditionals_negative = Array[ExtResource("1_qv60f")]([ExtResource("2_05uit"), ExtResource("3_qel6s")])
+conditionals_negative = Array[ExtResource("1_qv60f")]([ExtResource("2_qv60f")])
 metadata/_custom_type_script = "uid://dljqmx2nfwymn"

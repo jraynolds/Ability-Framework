@@ -8,10 +8,10 @@
 [resource]
 script = ExtResource("2_i7wnq")
 title = "Absorbing Elements"
-description = ""
+description = "Reducing the damage of the next incoming attack, and converting it into power."
 icon = ExtResource("2_3ebmk")
 positivity = 0
-triggers = Array[ExtResource("3_3ebmk")]([null])
+triggers = Array[ExtResource("3_3ebmk")]([])
 conditionals_positive = Array[ExtResource("1_dofm5")]([])
 conditionals_negative = Array[ExtResource("1_dofm5")]([])
 metadata/_custom_type_script = "uid://des8hnti281sm"

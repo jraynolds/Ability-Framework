@@ -3,12 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://cga04vvp3fle6" path="res://assets/abilities/r_15.png" id="1_coxxs"]
 [ext_resource type="Script" uid="uid://bqvhdsixdkhkj" path="res://ui/status_container.gd" id="1_stutc"]
 
-[node name="StatusContainer" type="VBoxContainer" node_paths=PackedStringArray("_button", "_stacks_label", "_duration_label")]
+[node name="StatusContainer" type="VBoxContainer" node_paths=PackedStringArray("_button", "_stacks_label", "_lifetime_label")]
 theme_override_constants/separation = -4
 script = ExtResource("1_stutc")
 _button = NodePath("Panel/Button")
 _stacks_label = NodePath("Panel/Button/Stacks")
-_duration_label = NodePath("Duration")
+_lifetime_label = NodePath("Lifetime")
 
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -33,7 +33,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "3"
 
-[node name="Duration" type="Label" parent="."]
+[node name="Lifetime" type="Label" parent="."]
 layout_mode = 2
 text = "12"
 horizontal_alignment = 1
