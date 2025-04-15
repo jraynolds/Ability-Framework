@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ExpirationResource" load_steps=4 format=3 uid="uid://dvtw27ll7lyjw"]
+
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="1_xmkst"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="2_ne35p"]
+[ext_resource type="Resource" uid="uid://dt4kgw1tvdm7h" path="res://data/triggers/on_take_damage.tres" id="3_e8s2n"]
+
+[resource]
+script = ExtResource("1_xmkst")
+triggers = Array[ExtResource("2_ne35p")]([ExtResource("3_e8s2n")])
+metadata/_custom_type_script = "uid://d027ldw58hbct"

@@ -13,6 +13,7 @@
 script = ExtResource("3_jyc1u")
 title = "Expel Elements"
 icon = ExtResource("3_tpmv7")
+self_cast = false
 effects = Array[ExtResource("2_tpmv7")]([ExtResource("5_cfsve"), ExtResource("6_akc48")])
 casting_time = ExtResource("1_0bthl")
 gcd_type = 0

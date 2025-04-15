@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_sifwf"]
 [ext_resource type="Texture2D" uid="uid://bnpgmxvo4ovqn" path="res://assets/abilities/p_07.png" id="2_10xm6"]
-[ext_resource type="Resource" uid="uid://c8l8rbq5qjls5" path="res://data/abilities/reaver/hack.tres" id="2_sifwf"]
-[ext_resource type="Resource" uid="uid://bexhhfaqayjur" path="res://data/abilities/reaver/bash.tres" id="3_vjhwd"]
-[ext_resource type="Resource" uid="uid://drpytaho7ajnt" path="res://data/abilities/reaver/reave.tres" id="4_hdj6b"]
+[ext_resource type="Resource" uid="uid://c8l8rbq5qjls5" path="res://data/abilities/player/reaver/hack.tres" id="2_sifwf"]
+[ext_resource type="Resource" uid="uid://bexhhfaqayjur" path="res://data/abilities/player/reaver/bash.tres" id="3_vjhwd"]
+[ext_resource type="Resource" uid="uid://drpytaho7ajnt" path="res://data/abilities/player/reaver/reave.tres" id="4_hdj6b"]
 [ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="6_hubk0"]
 [ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="7_pmhun"]
 [ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="8_i48sn"]

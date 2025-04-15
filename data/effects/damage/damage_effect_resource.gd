@@ -38,8 +38,8 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		Targeting.Target.Caster:
 			stat_targets.append(caster)
 	
-	var damage_dealt = damage_amount.get_value(caster, targets) if damage_amount else caster.stats_component.get_stat_value(StatResource.StatType.Attack)
-	var damage_dealt_type = damage_type.get_value(caster, targets) if damage_type else DamageType.Physical
+	var damage_dealt = get_damage_dealt(caster, targets)
+	var damage_dealt_type = get_damage_type(caster, targets)
 	
 	for stat_target in stat_targets:
 		stat_target.stats_component.take_damage(
@@ -57,6 +57,14 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		#print(stat_target.title + "'s new value is " + str(new_stat_value))
 		#stat_target.stats_component.set_stat_value(stat_type, new_stat_value)
 
+## Returns the amount of damage this effect does. If none is set, it does an amount equal to the caster's Attack.
+func get_damage_dealt(caster: Entity, targets: Array[Entity]) -> float:
+	return damage_amount.get_value(caster, targets) if damage_amount else caster.stats_component.get_stat_value(StatResource.StatType.Attack)
+	
+	
+## Returns the type of damage this effect does. If none is set, it does physical.
+func get_damage_type(caster: Entity, targets: Array[Entity]) -> DamageType:
+	return damage_type.get_value(caster, targets) if damage_type else DamageType.Physical
 
 ### Returns what our modification to the given value would result in.
 #func get_modified_value(value: float, caster: Entity, targets: Array[Entity]) -> float:

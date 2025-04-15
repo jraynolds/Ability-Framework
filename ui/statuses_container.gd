@@ -17,7 +17,7 @@ var entity : Entity : ## The Entity whose statuses we're representing. Changing 
 			entity.statuses_component.on_status_added.connect(_on_status_added)
 			entity.statuses_component.on_status_removed.connect(_on_status_removed)
 ## The Statuses we're representing, paired with the container each is in.
-var _statuses : Dictionary[Effect, StatusContainer] = {}
+var _statuses : Dictionary[StatusEffect, StatusContainer] = {}
 
 
 ## Called every frame.
@@ -40,18 +40,26 @@ func _process(delta: float) -> void:
 
 
 ## Called when the connected statuses component adds a status.
-func _on_status_added(status: Effect):
+func _on_status_added(status: StatusEffect):
 	if status._positivity != status_positivity:
 		return
+	DebugManager.debug_log(
+		"Adding status " + status._title + " to containers",
+		self
+	)
 	var status_container : StatusContainer = status_container_scene.instantiate().from_status(status)
 	add_child(status_container)
 	_statuses[status] = status_container
 
 
-## Called when the connected statuses component adds a status.
-func _on_status_removed(status: Effect):
+## Called when the connected statuses component removes a status.
+func _on_status_removed(status: StatusEffect):
 	if status._positivity != status_positivity:
 		return
+	DebugManager.debug_log(
+		"Removing status " + status._title + " from containers",
+		self
+	)
 	assert(_statuses.has(status), "But we don't have that status Effect!")
 	_statuses[status].queue_free()
 	_statuses.erase(status)

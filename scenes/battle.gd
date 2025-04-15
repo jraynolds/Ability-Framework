@@ -50,10 +50,16 @@ func _process(delta: float) -> void:
 	
 	if queued_ability_duration_left > 0:
 		if queued_ability and player.abilities_component.gcd_remaining <= 0:
-			player.abilities_component.try_cast(queued_ability, [enemy])
+			player_cast(queued_ability)
 		queued_ability_duration_left -= delta
 		if queued_ability_duration_left <= 0:
 			queued_ability = null
+	
+	if enemy.abilities_component.gcd_remaining <= 0:
+		for ability in enemy.abilities_component.abilities:
+			if enemy.abilities_component.can_cast(ability, [player]):
+				enemy.abilities_component.cast(ability, [player])
+				return
 
 
 ## Called when unhandled keyboard input is received.
@@ -70,8 +76,16 @@ func start_battle(player_entity: Entity, enemy_entity: Entity):
 	add_child(enemy)
 
 
+## Called when an Ability is activated by the player, usually by pressing 
 func _on_ability_activated(caster: Entity, ability: Ability):
 	if ability._gcd_type == AbilityResource.GCD.OnGCD and caster.abilities_component.gcd_remaining > 0:
 		queued_ability = ability
+	else :
+		player_cast(ability)
+
+
+func player_cast(ability: Ability):
+	if ability._self_cast:
+		player.abilities_component.try_cast(ability, [player])
 	else :
 		player.abilities_component.try_cast(ability, [enemy])

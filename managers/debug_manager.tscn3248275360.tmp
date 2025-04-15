@@ -6,7 +6,5 @@
 script = ExtResource("1_f7v61")
 effects = true
 status_effects = true
-statuses_containers = true
 transform = true
 expiration_resources = true
-statuses_entity_components = true

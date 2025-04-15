@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=5 format=3 uid="uid://d4kn4gu8ay8yp"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ysmqn"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_2ogkv"]
+[ext_resource type="Resource" uid="uid://clq2pjt4gtw30" path="res://data/effects/damage/damage.tres" id="3_y8gyy"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="4_587de"]
+
+[resource]
+script = ExtResource("4_587de")
+title = "Slime Slap"
+self_cast = false
+effects = Array[ExtResource("2_2ogkv")]([ExtResource("3_y8gyy")])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_ysmqn")]([])
+conditionals_negative = Array[ExtResource("1_ysmqn")]([])
+conditionals_highlight = Array[ExtResource("1_ysmqn")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

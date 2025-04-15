@@ -53,7 +53,7 @@ func get_status_stacks(effect: Effect) -> int:
 ## Gets the given StatusEffect by its resource, if it's present.
 func get_status_by_resource(effect_resource: EffectResource) -> Effect:
 	for status in statuses:
-		if effect_resource == status.resource:
+		if effect_resource == status._resource:
 			return status
 	return null
 
@@ -76,9 +76,16 @@ func add_status(
 	stacking_behavior: StatusAddEffectResource.StackingBehavior,
 	num_stacks: int = 1
 ):
+	DebugManager.debug_log(
+		"Adding status " + status._title + " from effect '" + adding_effect._title + "' via ability '" + adding_ability._title +
+		"' cast by " + caster.title + " with stacking behavior " + Natives.enum_name(StatusAddEffectResource.StackingBehavior, stacking_behavior) +
+		" with " + str(num_stacks) + " stacks",
+		self
+	)
 	var duplicate_effect = get_status(status)
 	if !duplicate_effect:
-		_add_status(status, caster)
+		var new_status = _add_status(status, caster)
+		status_stacks[new_status] = num_stacks
 		return
 	match stacking_behavior:
 		StatusAddEffectResource.StackingBehavior.Refresh:
@@ -92,20 +99,24 @@ func add_status(
 			duplicate_effect.reset_lifetime()
 		StatusAddEffectResource.StackingBehavior.AddAndReplace:
 			var stacks = statuses[duplicate_effect]
-			remove_status(duplicate_effect)
+			duplicate_effect.end() ## Potential issues here.
 			_add_status(status, caster)
-			statuses[status] = stacks + num_stacks
+			status_stacks[status] = stacks + num_stacks
 		StatusAddEffectResource.StackingBehavior.Subtract:
 			status_stacks[duplicate_effect] -= num_stacks
 			if status_stacks[duplicate_effect] <= 0:
-				remove_status(duplicate_effect)
+				duplicate_effect.end()
 		StatusAddEffectResource.StackingBehavior.Replace:
 			remove_status(duplicate_effect)
-			_add_status(status, caster)
+			status_stacks[_add_status(status, caster)] = num_stacks
 
 
-## Does the actual work of adding a Status. Creates a StatusEffect from the given Effect and lifetime.
-func _add_status(status: StatusEffect, caster: Entity):
+## Does the actual work of adding a Status. Creates a StatusEffect from the given Effect and lifetime, adds it, and returns it.
+func _add_status(status: StatusEffect, caster: Entity) -> StatusEffect:
+	DebugManager.debug_log(
+		"Creating a status effect from " + status._title + " and adding it to " + entity.title + "'s statuses",
+		self
+	)
 	var status_effect = status_effect_scene.instantiate().from_status_effect(status)
 	status_stacks[status_effect] = 1
 	statuses.append(status_effect)
@@ -114,6 +125,7 @@ func _add_status(status: StatusEffect, caster: Entity):
 	var targets : Array[Entity] = [entity]
 	status_effect.register(caster, targets)
 	on_status_added.emit(status_effect)
+	return status_effect
 
 
 ## Converts the given Effect into a StatusEffect and removes it.
@@ -123,19 +135,34 @@ func remove_effect(effect: Effect):
 	remove_status(status)
 
 
-## Removes a StatusEffect.
+## Removes a StatusEffect. Called AFTER the status expires.
 func remove_status(status: StatusEffect):
+	DebugManager.debug_log(
+		"Removing status " + status._title + " from entity " + entity.title,
+		self
+	)
 	statuses.erase(status)
 	status_stacks.erase(status)
 	#effect.on_lifetime_ended.disconnect(func(): _remove_effect(effect)) ## Maybe not necessary?
 	on_status_removed.emit(status)
 
 
+## Modifies the given status's stacks by adding the given amount to them.
 func modify_stacks(status: StatusEffect, amount: int) -> int:
+	DebugManager.debug_log(
+		"Modifying the number of stacks for status " + status._title + " on " + entity.title + " by " + str(amount),
+		self
+	)
 	var matching_status = get_status(status)
+	assert(matching_status, "But we don't have that status to alter its stacks!")
 	status_stacks[matching_status] += amount
 	if status_stacks[matching_status] <= 0:
-		remove_status(matching_status)
+		DebugManager.debug_log(
+			"Status " + status._title + " on " + entity.title + " ran out of stacks and is ending",
+			self
+		)
+		#remove_status(matching_status)
+		matching_status.end()
 		return NAN
 	return status_stacks[matching_status]
 

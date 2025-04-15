@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="EntityResource" load_steps=16 format=3 uid="uid://db51h4c174tks"]
+[gd_resource type="Resource" script_class="EntityResource" load_steps=17 format=3 uid="uid://db51h4c174tks"]
 
 [ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="1_i74eu"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_xsnud"]
+[ext_resource type="Resource" uid="uid://d4kn4gu8ay8yp" path="res://data/abilities/enemy/slime_slap.tres" id="2_l7npy"]
 [ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="3_l7npy"]
 [ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="4_xojas"]
 [ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="5_l3nk3"]
@@ -28,5 +29,7 @@ ExtResource("10_c8bk2"): ExtResource("11_y0hjk"),
 ExtResource("12_w2u8w"): ExtResource("13_byxy5"),
 ExtResource("14_ntj4w"): ExtResource("15_qfurd")
 })
-abilities = Dictionary[ExtResource("1_xsnud"), int]({})
+abilities = Dictionary[ExtResource("1_xsnud"), int]({
+ExtResource("2_l7npy"): 0
+})
 metadata/_custom_type_script = "uid://2e885iqyhq3n"

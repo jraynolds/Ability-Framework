@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=9 format=3 uid="uid://d4in6bychxpo1"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://d4in6bychxpo1"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_0ecyq"]
-[ext_resource type="Resource" uid="uid://dgnylfe48x3hf" path="res://data/effects/statuses/status_absorbing_elements.tres" id="2_antkn"]
-[ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="3_37nff"]
-[ext_resource type="Resource" uid="uid://be0j5wqkv5pw0" path="res://data/lifetimes/duration_2.tres" id="4_w5ftv"]
+[ext_resource type="Resource" uid="uid://bd7eq48y2elxm" path="res://data/effects/statuses/status_caster_add_imbued_element.tres" id="2_0ecyq"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_f4sf5"]
+[ext_resource type="Resource" uid="uid://dvtw27ll7lyjw" path="res://data/expirations/on_take_damage_expire.tres" id="4_37nff"]
+[ext_resource type="Texture2D" uid="uid://bc8by5gv4xxas" path="res://assets/abilities/r_39.png" id="4_antkn"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="5_00dxr"]
+[ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="5_antkn"]
 [ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="6_e7c4p"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_v2ej5"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_i3xjg"]
@@ -12,15 +14,16 @@
 [resource]
 script = ExtResource("5_00dxr")
 entity_target = 0
-effect_added = ExtResource("2_antkn")
+effect_added = ExtResource("2_0ecyq")
 stacking_behavior = 0
-lifetimes = Array[ExtResource("3_37nff")]([ExtResource("4_w5ftv")])
-expiration_behavior = 10
+lifetime = ExtResource("5_antkn")
+expirations = Array[ExtResource("3_f4sf5")]([ExtResource("4_37nff")])
 status_effect_scene = ExtResource("6_e7c4p")
 visible_status = true
-title = "Absorption"
+title = "Absorb elements"
 description = "Begin to absorb elements."
-positivity = 2
+icon = ExtResource("4_antkn")
+positivity = 0
 triggers = Array[ExtResource("7_v2ej5")]([ExtResource("8_i3xjg")])
 conditionals_positive = Array[ExtResource("1_0ecyq")]([])
 conditionals_negative = Array[ExtResource("1_0ecyq")]([])

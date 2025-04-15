@@ -29,6 +29,7 @@ var _status : StatusEffect : ## The StatusEffect this container is representing.
 		_button.icon = _status._icon
 		_stacks_label.text = ""
 		_lifetime_label.text = ""
+		#_status.on_expired.connect(func(): _status = null)
 
 
 ## Constructs and returns an instance of this, initialized with the given status Effect.
@@ -44,5 +45,6 @@ func _process(delta: float) -> void:
 	_lifetime_left = _status.lifetime_remaining
 
 
+## Sets the number of stacks for our StatusEffect.
 func set_stacks(stacks: int):
 	_stacks = stacks

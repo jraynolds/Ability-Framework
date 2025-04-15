@@ -18,4 +18,4 @@ func get_value(caster: Entity, targets: Array[Entity]) -> float:
 		return NAN
 	var damage_resource = status._resource as DamageEffectResource
 	assert(damage_resource, "We found the resource, but it's not a damage resource!")
-	return damage_resource.damage_type
+	return damage_resource.get_damage_type(caster, targets)

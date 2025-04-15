@@ -34,6 +34,7 @@ func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array
 		lifetime,
 		expirations
 	)
+	assert(sub_effect, "We couldn't make that Status effect!")
 	effect.add_sub_effect(sub_effect)
 
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityChainConditionalResource" load_steps=4 format=3 uid="uid://dgnuo11ebnr7q"]
 
-[ext_resource type="Resource" uid="uid://c8l8rbq5qjls5" path="res://data/abilities/reaver/hack.tres" id="1_h781o"]
+[ext_resource type="Resource" uid="uid://c8l8rbq5qjls5" path="res://data/abilities/player/reaver/hack.tres" id="1_h781o"]
 [ext_resource type="Resource" uid="uid://cy6xmc1mj0kxg" path="res://data/values/flats/flat_1.tres" id="2_rr6mm"]
 [ext_resource type="Script" uid="uid://cd3ofyhxxxaks" path="res://data/conditionals/ability_chain_conditional_resource.gd" id="3_17aqj"]
 
