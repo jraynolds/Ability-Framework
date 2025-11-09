@@ -15,6 +15,7 @@ var gcd : float : ## The total duration in seconds a global cooldown ability dis
 	get :
 		return entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 var gcd_max_cached : float ## The stored GCD duration for the last Ability cast.
+var can_act : bool = true ## Whether the Entity can act or not.
 
 @export var ability_scene : PackedScene ## The default Ability scene.
 
@@ -71,6 +72,14 @@ func cast(ability: Ability, targets: Array[Entity]):
 
 ## Returns whether the given Ability can be cast by this Entity on the given targets.
 func can_cast(ability: Ability, targets: Array[Entity]) -> bool:
+	if !can_act:
+		return false
 	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
 		return false
 	return ability.is_castable(targets)
+
+
+## Modifies the remaining cooldowns on this Entity's abilities by the given number, using the given math operation.
+func modify_cooldowns(amount: float, operation: Math.Operation):
+	for ability in abilities:
+		ability._cooldown_left = Math.perform_operation(ability._cooldown_left, amount, operation)

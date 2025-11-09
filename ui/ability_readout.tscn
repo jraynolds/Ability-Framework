@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca1hyx1nuydxy"]
+
+[ext_resource type="Texture2D" uid="uid://dwhgxdkr13ljy" path="res://assets/abilities/r_45.png" id="1_mcve7"]
+[ext_resource type="Script" uid="uid://db1i75ti5aaq7" path="res://ui/ability_readout.gd" id="1_xmmpr"]
+[ext_resource type="Texture2D" uid="uid://d0kk3ldskmyrb" path="res://assets/abilities/y_05.png" id="3_filur"]
+[ext_resource type="PackedScene" uid="uid://dihvk0ok7tp6e" path="res://ui/effect_readout.tscn" id="3_ycoej"]
+[ext_resource type="Texture2D" uid="uid://cle3ruij6s7dm" path="res://assets/abilities/y_09.png" id="4_ycoej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7yqb"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="AbilityReadout" type="PanelContainer" node_paths=PackedStringArray("icon", "title", "cooldown_readout", "cast_time_readout")]
+z_index = 100
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1152.0
+offset_right = -1002.0
+offset_bottom = 82.0
+grow_horizontal = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e7yqb")
+script = ExtResource("1_xmmpr")
+icon = NodePath("VBoxContainer/ReadoutContainer/Icon")
+title = NodePath("VBoxContainer/ReadoutContainer/Title")
+cooldown_readout = NodePath("VBoxContainer/HBoxContainer2/CooldownContainer/Label")
+cast_time_readout = NodePath("VBoxContainer/HBoxContainer2/CastTimeContainer/Label")
+effect_readout = ExtResource("3_ycoej")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="ReadoutContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ReadoutContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_mcve7")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Title" type="RichTextLabel" parent="VBoxContainer/ReadoutContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Bone Break"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CooldownContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer2/CooldownContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("3_filur")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/CooldownContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 10
+text = "2.5"
+horizontal_alignment = 1
+
+[node name="CastTimeContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer2/CastTimeContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+texture = ExtResource("4_ycoej")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/CastTimeContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1

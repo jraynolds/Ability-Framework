@@ -31,7 +31,8 @@ enum Operation {
 	Subtraction,
 	Multiplication,
 	Division,
-	Power
+	Power,
+	Set
 }
 
 
@@ -48,5 +49,7 @@ static func perform_operation(value_modified: float, value_modifier: float, math
 			return value_modified / value_modifier
 		Math.Operation.Power:
 			return pow(value_modified, value_modifier)
+		Math.Operation.Power:
+			return value_modifier
 	assert(false, "How did we get here?")
 	return -1

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=5 format=3 uid="uid://tuxtj6ftf20w"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ml5r6"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="3_c1xic"]
+[ext_resource type="Texture2D" uid="uid://7rmi0jrli0m1" path="res://assets/abilities/y_17.png" id="4_fqh71"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="5_j2toy"]
+
+[resource]
+script = ExtResource("5_j2toy")
+title = "Furor"
+icon = ExtResource("4_fqh71")
+self_cast = false
+effects = Array[ExtResource("3_c1xic")]([null])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_ml5r6")]([])
+conditionals_negative = Array[ExtResource("1_ml5r6")]([])
+conditionals_highlight = Array[ExtResource("1_ml5r6")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

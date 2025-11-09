@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="EntityResource" load_steps=23 format=3 uid="uid://6y0k1hbmuqin"]
+
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_47l1n"]
+[ext_resource type="Resource" uid="uid://c8l8rbq5qjls5" path="res://data/abilities/player/reaver/hack.tres" id="2_qjgbx"]
+[ext_resource type="Resource" uid="uid://bexhhfaqayjur" path="res://data/abilities/player/reaver/bash.tres" id="3_txoop"]
+[ext_resource type="Resource" uid="uid://drpytaho7ajnt" path="res://data/abilities/player/reaver/reave.tres" id="4_6o6hl"]
+[ext_resource type="Texture2D" uid="uid://d0kk3ldskmyrb" path="res://assets/abilities/y_05.png" id="5_47l1n"]
+[ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="6_8ecqv"]
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="7_sast1"]
+[ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="8_dsymc"]
+[ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="9_inca1"]
+[ext_resource type="Resource" uid="uid://bf2dnoc55io10" path="res://data/values/flats/breakpoints/hp_player_high.tres" id="10_saa70"]
+[ext_resource type="Resource" uid="uid://b2ievbk4n2m7u" path="res://data/stats/hp.tres" id="11_5hw3b"]
+[ext_resource type="Resource" uid="uid://dnd68wdbhr1i8" path="res://data/stats/max_mana.tres" id="12_oh2b1"]
+[ext_resource type="Resource" uid="uid://by5biydcxkp4n" path="res://data/values/flats/breakpoints/mana_player_low.tres" id="13_qjgbx"]
+[ext_resource type="Resource" uid="uid://o4t2v2iun48f" path="res://data/stats/mana.tres" id="14_y4v8e"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="15_atcou"]
+[ext_resource type="Resource" uid="uid://dudq0krpyao8p" path="res://data/values/flats/breakpoints/attack_player_medium.tres" id="16_txoop"]
+[ext_resource type="Resource" uid="uid://bk53y5hldyf1u" path="res://data/stats/defense.tres" id="17_jq6m6"]
+[ext_resource type="Resource" uid="uid://bktqamoifelqi" path="res://data/values/flats/breakpoints/defense_player_medium.tres" id="18_ubvv5"]
+[ext_resource type="Resource" uid="uid://0cdkdryyaugb" path="res://data/stats/ability_speed.tres" id="19_yuk0a"]
+[ext_resource type="Resource" uid="uid://cvfkifclr6lty" path="res://data/values/flats/breakpoints/ability_speed_player_medium.tres" id="20_3i0rh"]
+[ext_resource type="Resource" uid="uid://dodhwet73lma8" path="res://data/stats/gcd_cooldown.tres" id="21_eodby"]
+[ext_resource type="Resource" uid="uid://205fk5mfav40" path="res://data/values/flats/breakpoints/gcd_player_medium.tres" id="22_a7ole"]
+
+[resource]
+script = ExtResource("6_8ecqv")
+title = "Gladiator"
+icon = ExtResource("5_47l1n")
+description = "The basic idea is to play with money mechanics and be a pit fighter, more money at lower HP levels"
+stats = Dictionary[ExtResource("7_sast1"), ExtResource("8_dsymc")]({
+ExtResource("9_inca1"): ExtResource("10_saa70"),
+ExtResource("11_5hw3b"): ExtResource("10_saa70"),
+ExtResource("12_oh2b1"): ExtResource("13_qjgbx"),
+ExtResource("14_y4v8e"): ExtResource("13_qjgbx"),
+ExtResource("15_atcou"): ExtResource("16_txoop"),
+ExtResource("17_jq6m6"): ExtResource("18_ubvv5"),
+ExtResource("19_yuk0a"): ExtResource("20_3i0rh"),
+ExtResource("21_eodby"): ExtResource("22_a7ole")
+})
+abilities = Dictionary[ExtResource("1_47l1n"), int]({
+ExtResource("2_qjgbx"): 0,
+ExtResource("3_txoop"): 1,
+ExtResource("4_6o6hl"): 2
+})
+metadata/_custom_type_script = "uid://2e885iqyhq3n"

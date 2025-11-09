@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="SetActiveEffectResource" load_steps=5 format=3 uid="uid://b0bun8r1gf2yr"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_1nftf"]
+[ext_resource type="Resource" uid="uid://lyd4wksvii0k" path="res://data/values/flats/flat_0.tres" id="1_h00qp"]
+[ext_resource type="Script" uid="uid://bwyrf0eumgc6g" path="res://data/effects/set_active_effect_resource.gd" id="2_h00qp"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_vhesn"]
+
+[resource]
+script = ExtResource("2_h00qp")
+entity_target = 11
+active = ExtResource("1_h00qp")
+title = "Set inactive"
+description = ""
+positivity = 2
+triggers = Array[ExtResource("3_vhesn")]([])
+conditionals_positive = Array[ExtResource("1_1nftf")]([])
+conditionals_negative = Array[ExtResource("1_1nftf")]([])
+metadata/_custom_type_script = "uid://bwyrf0eumgc6g"

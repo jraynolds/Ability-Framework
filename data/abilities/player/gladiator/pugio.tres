@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=6 format=3 uid="uid://cfgsdl0cwe3px"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_lg4vi"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_h7wuh"]
+[ext_resource type="Resource" uid="uid://t7cbv7k36x4g" path="res://data/effects/damage/damage__8x.tres" id="3_5ssps"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_gvl77"]
+[ext_resource type="Texture2D" uid="uid://b0f4f5ocvkw7e" path="res://assets/abilities/r_07.png" id="3_h7wuh"]
+
+[resource]
+script = ExtResource("3_gvl77")
+title = "Pugio"
+icon = ExtResource("3_h7wuh")
+self_cast = false
+effects = Array[ExtResource("2_h7wuh")]([ExtResource("3_5ssps")])
+gcd_type = 0
+conditionals_positive = Array[ExtResource("1_lg4vi")]([])
+conditionals_negative = Array[ExtResource("1_lg4vi")]([])
+conditionals_highlight = Array[ExtResource("1_lg4vi")]([])
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

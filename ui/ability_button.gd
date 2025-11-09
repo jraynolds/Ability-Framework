@@ -11,15 +11,42 @@ var dragging : bool : ## Whether this button is currently being dragged. Setting
 	set(val):
 		dragging = val
 		if dragging:
+			set_readout_visible(false)
 			modulate = Color(1, 1, 1, .6)
 		else :
+			set_readout_visible(false)
 			modulate = Color(1, 1, 1, 1)
+## The popup readout for this Ability.
+@export var readout : AbilityReadout
+
+## Whether this control is hovered over. Shows the readout if true but we're not dragging.
+var hovered : bool :
+	set(val):
+		hovered = val
+		if val and not dragging:
+			set_readout_visible(true)
+		else :
+			set_readout_visible(false)
 
 
 ## Called when this node wakes up. Toggles visibility if there's no Ability.
 func _ready() -> void:
 	visible = ability != null
-	#pass
+	call_deferred("set_readout_visible", false) ## Must wait a frame to calculate sizes.
+
+
+## Called when input occurs. Moves the readout.
+func _input(event):
+	if event as InputEventMouseMotion and readout.visible:
+		if !get_global_rect().has_point(get_global_mouse_position()):
+			call_deferred("set_readout_visible", false)
+			return
+		readout.size = Vector2(0, 0)
+		readout.global_position = Vector2(
+			get_global_mouse_position().x, 
+			get_global_mouse_position().y - readout.get_rect().size.y
+		)
+		readout.size = Vector2(0, 0)
 
 
 ## Called when dragged. Returns this object.
@@ -57,3 +84,18 @@ func _notification(notification_type):
 	match notification_type:
 		NOTIFICATION_DRAG_END: 
 			dragging = false
+
+
+## Called when the mouse enters this Control.
+func _on_mouse_entered() -> void:
+	hovered = true
+
+
+## Called when the mouse exits this Control.
+func _on_mouse_exited() -> void:
+	hovered = false
+
+
+## Sets the readout popup visible or not.
+func set_readout_visible(v: bool):
+	readout.visible = v

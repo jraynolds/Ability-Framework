@@ -32,6 +32,7 @@ var _effects : Array[Effect] = [] ## An Array of Effects this Ability will perfo
 var _casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
 var _cast_time_left : float ## The duration in seconds remaining before this Ability is fully cast.
 var _cooldown : ValueResource ## The duration in seconds before this Ability can be cast again.
+var _cooldown_left : float ## The remaining duration before this Ability can be cast again.
 ## This Ability's interaction with the Global Cooldown.
 ## GCDs put all GCD Abilities on a shared cooldown; oGCDs don't.
 var _gcd_type : AbilityResource.GCD

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dihvk0ok7tp6e"]
+
+[ext_resource type="Script" uid="uid://djv4i158rdeaq" path="res://ui/effect_readout.gd" id="1_n71vm"]
+
+[node name="EffectReadout" type="VBoxContainer" node_paths=PackedStringArray("title", "description")]
+theme_override_constants/separation = 0
+script = ExtResource("1_n71vm")
+title = NodePath("Title")
+description = NodePath("Description")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 14
+text = "Bleed"
+fit_content = true
+
+[node name="Description" type="RichTextLabel" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+bbcode_enabled = true
+text = "Deals [i]12,000[/i] damage to the target."
+fit_content = true

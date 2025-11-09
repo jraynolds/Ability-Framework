@@ -1,9 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://66p1r58i6jcx"]
+[gd_scene load_steps=5 format=3 uid="uid://66p1r58i6jcx"]
 
 [ext_resource type="Texture2D" uid="uid://dwhgxdkr13ljy" path="res://assets/abilities/r_45.png" id="1_e7yqb"]
 [ext_resource type="Script" uid="uid://b58pl1qn27y42" path="res://ui/ability_button.gd" id="2_1cvru"]
+[ext_resource type="PackedScene" uid="uid://ca1hyx1nuydxy" path="res://ui/ability_readout.tscn" id="3_1cvru"]
 
-[node name="AbilityButton" type="Button"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cvru"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.19076231, 0.19076234, 0.19076231, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="AbilityButton" type="Button" node_paths=PackedStringArray("readout")]
 custom_minimum_size = Vector2(50, 50)
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -11,4 +28,21 @@ icon = ExtResource("1_e7yqb")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_1cvru")
+readout = NodePath("AbilityReadout")
 metadata/_custom_type_script = "uid://b58pl1qn27y42"
+
+[node name="AbilityReadout" parent="." instance=ExtResource("3_1cvru")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 150.0
+grow_horizontal = 1
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1cvru")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="AbilityReadout" to="." method="_on_ability_readout_mouse_entered"]
+[connection signal="mouse_exited" from="AbilityReadout" to="." method="_on_ability_readout_mouse_exited"]

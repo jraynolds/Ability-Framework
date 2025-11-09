@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=9 format=3 uid="uid://ciei7srar5nb4"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_as1od"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_am4p5"]
+[ext_resource type="Texture2D" uid="uid://dtpub61sgax8m" path="res://assets/abilities/g_08.png" id="3_cfckv"]
+[ext_resource type="Resource" uid="uid://c7ketxe56xuyq" path="res://data/values/flats/flat_4.tres" id="4_liu4s"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_tofsq"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="8_3wcee"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_uva6c"]
+[ext_resource type="Resource" uid="uid://dt4kgw1tvdm7h" path="res://data/triggers/on_take_damage.tres" id="10_dwb8k"]
+
+[resource]
+script = ExtResource("7_tofsq")
+entity_target = 0
+stacking_behavior = 40
+lifetime = ExtResource("4_liu4s")
+expirations = Array[ExtResource("3_am4p5")]([])
+status_effect_scene = ExtResource("8_3wcee")
+visible_status = true
+title = "Add netted"
+description = "Stuns the attacker."
+icon = ExtResource("3_cfckv")
+positivity = 0
+triggers = Array[ExtResource("9_uva6c")]([ExtResource("10_dwb8k")])
+conditionals_positive = Array[ExtResource("1_as1od")]([])
+conditionals_negative = Array[ExtResource("1_as1od")]([])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

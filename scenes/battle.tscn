@@ -18,19 +18,6 @@ queued_ability_duration = 0.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="AbilityOverlay" parent="CanvasLayer" instance=ExtResource("1_th188")]
-offset_bottom = -55.0
-
-[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("3_a12nh")]
-floating_text_direction = "Down"
-
-[node name="HealthBar2" parent="CanvasLayer" instance=ExtResource("3_a12nh")]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -49.0
-grow_vertical = 0
-
 [node name="Statuses" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
@@ -67,5 +54,18 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 status_positivity = 2
+
+[node name="AbilityOverlay" parent="CanvasLayer" instance=ExtResource("1_th188")]
+offset_bottom = -55.0
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("3_a12nh")]
+floating_text_direction = "Down"
+
+[node name="HealthBar2" parent="CanvasLayer" instance=ExtResource("3_a12nh")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+grow_vertical = 0
 
 [editable path="CanvasLayer/Statuses/StatusesContainer"]

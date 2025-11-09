@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://c1dkjn6omt663"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://c1dkjn6omt663"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_adn3f"]
 [ext_resource type="Resource" uid="uid://cnc41b7rnkraj" path="res://data/effects/statuses/status_armor_break.tres" id="2_adn3f"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="3_tcksw"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_71dne"]
 [ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="5_tcksw"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="5_yofyx"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_tcksw"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_yofyx"]
 [ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_71dne"]
@@ -16,6 +17,7 @@ entity_target = 11
 effect_added = ExtResource("2_adn3f")
 stacking_behavior = 21
 lifetime = ExtResource("5_tcksw")
+expirations = Array[ExtResource("5_yofyx")]([])
 status_effect_scene = ExtResource("7_71dne")
 visible_status = true
 title = "Break Armor"

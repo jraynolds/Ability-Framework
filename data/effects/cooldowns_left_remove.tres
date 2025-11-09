@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CooldownsEffectResource" load_steps=6 format=3 uid="uid://cwsopgb570db2"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_nhs4b"]
+[ext_resource type="Script" uid="uid://ck7ikrx014oni" path="res://data/effects/cooldowns_effect_resource.gd" id="2_fj2ot"]
+[ext_resource type="Resource" uid="uid://drdc6r1gop77e" path="res://data/values/flats/flat_9999.tres" id="2_if1da"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_if1da"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_if1da"]
+
+[resource]
+script = ExtResource("2_fj2ot")
+entity_target = 11
+cooldown_amount = ExtResource("2_if1da")
+math_operation = 1
+title = "Reduce cooldowns to 0"
+description = "Reduce all ability cooldowns to 0."
+positivity = 0
+triggers = Array[ExtResource("3_if1da")]([ExtResource("5_if1da")])
+conditionals_positive = Array[ExtResource("1_nhs4b")]([])
+conditionals_negative = Array[ExtResource("1_nhs4b")]([])
+metadata/_custom_type_script = "uid://ck7ikrx014oni"

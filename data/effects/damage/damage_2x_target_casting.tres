@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=7 format=3 uid="uid://c0h70luvfcmwh"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_wpd7a"]
+[ext_resource type="Resource" uid="uid://dgny3unq0eubi" path="res://data/values/caster_attack_2x.tres" id="2_wpd7a"]
+[ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="3_vme1u"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="4_xmetl"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_nww2k"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_qrfiu"]
+
+[resource]
+script = ExtResource("4_xmetl")
+entity_target = 11
+damage_amount = ExtResource("2_wpd7a")
+damage_type = ExtResource("3_vme1u")
+ignore_caster_statuses = false
+ignore_target_statuses = false
+ignore_transforms = false
+title = "Damage 2x Attack"
+description = "Inflict damage to the target equal to 2x your attack. The enemy must be casting."
+positivity = 2
+triggers = Array[ExtResource("5_nww2k")]([ExtResource("6_qrfiu")])
+conditionals_positive = Array[ExtResource("1_wpd7a")]([])
+conditionals_negative = Array[ExtResource("1_wpd7a")]([])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"
