@@ -5,6 +5,7 @@ class_name AbilityButton
 var ability : Ability : ## The Ability this button represents. Setting it changes the look.
 	set(val):
 		ability = val
+		readout.ability = val
 		icon = ability._icon
 		visible = val != null
 var dragging : bool : ## Whether this button is currently being dragged. Setting it changes its visibility.
@@ -37,16 +38,18 @@ func _ready() -> void:
 
 ## Called when input occurs. Moves the readout.
 func _input(event):
-	if event as InputEventMouseMotion and readout.visible:
-		if !get_global_rect().has_point(get_global_mouse_position()):
-			call_deferred("set_readout_visible", false)
-			return
-		readout.size = Vector2(0, 0)
+	if event as InputEventMouseMotion:
 		readout.global_position = Vector2(
 			get_global_mouse_position().x, 
 			get_global_mouse_position().y - readout.get_rect().size.y
 		)
-		readout.size = Vector2(0, 0)
+		if !get_global_rect().has_point(get_global_mouse_position()):
+			set_readout_visible(false)
+
+
+## Called when the Control is redrawn.
+func _draw() -> void:
+	pass
 
 
 ## Called when dragged. Returns this object.
@@ -98,4 +101,8 @@ func _on_mouse_exited() -> void:
 
 ## Sets the readout popup visible or not.
 func set_readout_visible(v: bool):
-	readout.visible = v
+	readout.hide()
+	if v:
+		readout.size = Vector2(0, 0)
+		readout.show()
+		readout.call_deferred("set_size", Vector2(0,0))

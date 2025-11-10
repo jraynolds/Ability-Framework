@@ -10,9 +10,11 @@ var ability : Ability :
 		title.text = ability._title
 		for effect in ability._effects:
 			var effect_container = effect_readout.instantiate() as EffectReadout
-			add_child(effect_container)
-			move_child(effect_container, get_child_count() - 2)
+			readout_vbox.add_child(effect_container)
+			readout_vbox.move_child(effect_container, -2)
 			effect_container.effect = effect
+		#show()
+		#hide()
 ## The Icon component for the Ability.
 @export var icon : TextureRect
 ## The title for the Ability.
@@ -24,3 +26,5 @@ var ability : Ability :
 
 ## A default effect readout for each effect on the Ability.
 @export var effect_readout : PackedScene
+## The VBOXContainer we use for our layout.
+@export var readout_vbox : VBoxContainer
