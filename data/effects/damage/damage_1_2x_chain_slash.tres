@@ -10,16 +10,10 @@
 
 [resource]
 script = ExtResource("4_80mh3")
-entity_target = 11
 damage_amount = ExtResource("3_ewok2")
 damage_type = ExtResource("4_k2ols")
-ignore_caster_statuses = false
-ignore_target_statuses = false
-ignore_transforms = false
-title = "Damage 1.2x attack"
-description = "Inflict damage to the target equal to 1.2x your attack. Must be comboed with Slash."
-positivity = 2
+title = "Deal 1.2x attack"
+description = "Inflict damage to the target equal to 1.2x your attack. [i]Must be comboed with Slash.[/i]"
 triggers = Array[ExtResource("5_hpbik")]([ExtResource("6_vu2wg")])
 conditionals_positive = Array[ExtResource("1_ewok2")]([ExtResource("2_k2ols")])
-conditionals_negative = Array[ExtResource("1_ewok2")]([])
 metadata/_custom_type_script = "uid://dljqmx2nfwymn"

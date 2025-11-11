@@ -15,16 +15,12 @@
 script = ExtResource("5_00dxr")
 entity_target = 0
 effect_added = ExtResource("2_0ecyq")
-stacking_behavior = 0
 lifetime = ExtResource("5_antkn")
 expirations = Array[ExtResource("3_f4sf5")]([ExtResource("4_37nff")])
 status_effect_scene = ExtResource("6_e7c4p")
-visible_status = true
 title = "Absorb elements"
-description = "Begin to absorb elements."
+description = "Absorb the damage type of the next incoming damage source."
 icon = ExtResource("4_antkn")
 positivity = 0
 triggers = Array[ExtResource("7_v2ej5")]([ExtResource("8_i3xjg")])
-conditionals_positive = Array[ExtResource("1_0ecyq")]([])
-conditionals_negative = Array[ExtResource("1_0ecyq")]([])
 metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

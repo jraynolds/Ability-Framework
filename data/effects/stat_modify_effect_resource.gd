@@ -2,8 +2,8 @@ extends EffectResource
 ## An EffectResource that modifies an Entity's Stat.
 class_name StatModifyEffectResource
 
-## The Entity(s) this Effect affects. By default, all valid targets.
-@export var entity_target : Targeting.Target = Targeting.Target.Targets 
+ ## An optional targeting resource to use for this effect. If left empty, affects the Ability's targets.
+@export var targeting_resource_override : TargetingResource
 @export var stat_type : StatResource.StatType ## The Stat this Effect adds to.
 @export var modifier : ValueResource ## The value that will modify the Stat.
 @export var math_operation : Math.Operation ## The type of mathematics operation we'll perform.
@@ -19,19 +19,11 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		#" with " + Natives.enum_name(Math.Operation, math_operation)
 	#)
 	
-	var stat_targets : Array[Entity] = []
-	match entity_target :
-		Targeting.Target.Targets:
-			assert(targets[0], "There are no valid targets")
-			stat_targets.append_array(targets)
-		Targeting.Target.Target:
-			assert(targets[0], "There is no valid target")
-			stat_targets.append(targets[0])
-		Targeting.Target.Caster:
-			stat_targets.append(caster)
+	if targeting_resource_override:
+		targets = targeting_resource_override.get_targets(caster, ability)
 	
-	for stat_target in stat_targets:
-		stat_target.stats_component.modify_stat_value(
+	for target in targets:
+		target.stats_component.modify_stat_value(
 			stat_type,
 			modifier.get_value(caster, targets),
 			effect,

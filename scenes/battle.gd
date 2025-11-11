@@ -84,8 +84,7 @@ func _on_ability_activated(caster: Entity, ability: Ability):
 		player_cast(ability)
 
 
+## Sends the given Ability to the player so their AbilityComponent can try to cast it.
 func player_cast(ability: Ability):
-	if ability._self_cast:
-		player.abilities_component.try_cast(ability, [player])
-	else :
-		player.abilities_component.try_cast(ability, [enemy])
+	var targets = ability._targeting_resource.get_targets(player, ability)
+	player.abilities_component.try_cast(ability, targets)

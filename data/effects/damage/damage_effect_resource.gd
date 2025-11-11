@@ -2,8 +2,8 @@ extends EffectResource
 ## An EffectResource that reduces the target's HP based on the caster's Stats.
 class_name DamageEffectResource
 
-## The Entity(s) this Effect affects. By default, all valid targets.
-@export var entity_target : Targeting.Target = Targeting.Target.Targets 
+ ## An optional targeting resource to use for this effect. If left empty, affects the Ability's targets.
+@export var targeting_resource_override : TargetingResource
 @export var damage_amount : ValueResource ## The amount of damage we'll do. By default, the caster's attack stat.
 @export var damage_type : ValueResource ## The type of damage. By default, physical.
 enum DamageType {
@@ -27,22 +27,14 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		#" with " + Natives.enum_name(Math.Operation, math_operation)
 	#)
 	
-	var stat_targets : Array[Entity] = []
-	match entity_target :
-		Targeting.Target.Targets:
-			assert(targets[0], "There are no valid targets")
-			stat_targets.append_array(targets)
-		Targeting.Target.Target:
-			assert(targets[0], "There is no valid target")
-			stat_targets.append(targets[0])
-		Targeting.Target.Caster:
-			stat_targets.append(caster)
+	if targeting_resource_override:
+		targets = targeting_resource_override.get_targets(caster, ability)
 	
 	var damage_dealt = get_damage_dealt(caster, targets)
 	var damage_dealt_type = get_damage_type(caster, targets)
 	
-	for stat_target in stat_targets:
-		stat_target.stats_component.take_damage(
+	for target in targets:
+		target.stats_component.take_damage(
 			damage_dealt,
 			damage_dealt_type,
 			effect,

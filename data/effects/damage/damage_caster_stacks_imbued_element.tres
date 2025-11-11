@@ -10,16 +10,10 @@
 
 [resource]
 script = ExtResource("2_4n3cy")
-entity_target = 11
 damage_amount = ExtResource("2_m5j1j")
 damage_type = ExtResource("3_hqn1m")
-ignore_caster_statuses = false
-ignore_target_statuses = false
-ignore_transforms = false
 title = "Damage imbued element"
-description = "Deal damage equal to your Imbued Element's type and stacks."
-positivity = 2
+description = "Deal damage equal to your Imbued Element's type and stacks. [i]Must be comboed with Slash.[/i]"
 triggers = Array[ExtResource("3_m5j1j")]([ExtResource("7_4kjf2")])
 conditionals_positive = Array[ExtResource("1_70gkx")]([ExtResource("2_5x1qk")])
-conditionals_negative = Array[ExtResource("1_70gkx")]([])
 metadata/_custom_type_script = "uid://dljqmx2nfwymn"

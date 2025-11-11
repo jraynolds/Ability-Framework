@@ -9,16 +9,9 @@
 
 [resource]
 script = ExtResource("2_d6b2g")
-entity_target = 11
 damage_amount = ExtResource("2_sfi77")
 damage_type = ExtResource("3_o8cfb")
-ignore_caster_statuses = false
-ignore_target_statuses = false
-ignore_transforms = false
-title = "Damage 1x Attack"
+title = "Deal attack damage"
 description = "Inflict damage to the target equal to your attack."
-positivity = 2
 triggers = Array[ExtResource("3_iuf01")]([ExtResource("5_sfi77")])
-conditionals_positive = Array[ExtResource("1_xqhb4")]([])
-conditionals_negative = Array[ExtResource("1_xqhb4")]([])
 metadata/_custom_type_script = "uid://dljqmx2nfwymn"

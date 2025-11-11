@@ -10,16 +10,10 @@
 
 [resource]
 script = ExtResource("5_fepja")
-entity_target = 11
 damage_amount = ExtResource("4_qv60f")
 damage_type = ExtResource("5_05uit")
-ignore_caster_statuses = false
-ignore_target_statuses = false
-ignore_transforms = false
 title = "Damage .8x Attack"
-description = "Inflict damage to the target equal to .8x your attack. Occurs when not comboed with Slash."
-positivity = 2
+description = "Inflict damage to the target equal to .8x your attack. [i]Occurs when not comboed with Slash.[/i]"
 triggers = Array[ExtResource("6_rmu6r")]([ExtResource("7_n0fro")])
-conditionals_positive = Array[ExtResource("1_qv60f")]([])
 conditionals_negative = Array[ExtResource("1_qv60f")]([ExtResource("2_qv60f")])
 metadata/_custom_type_script = "uid://dljqmx2nfwymn"

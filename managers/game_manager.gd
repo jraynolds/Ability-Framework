@@ -1,6 +1,5 @@
 extends Node2D
 ## Class for game logic.
-class_name GameManager
 
 @export var player_entity_resource : EntityResource ## The Entity the player starts as.
 var player_entity : Entity ## The instanced Entity the player currently is.
@@ -23,4 +22,3 @@ func _ready() -> void:
 	battle = battle_scene.instantiate()
 	add_child(battle)
 	battle.start_battle(player_entity, enemy_entity)
-	

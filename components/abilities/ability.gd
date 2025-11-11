@@ -8,7 +8,7 @@ var _resource : AbilityResource :
 		_resource = val
 		_title = _resource.title
 		_icon = _resource.icon
-		_self_cast = _resource.self_cast
+		_targeting_resource = _resource.targeting
 		for effect_resource in _resource.effects:
 			var targets : Array[Entity] = []
 			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, self,  _caster, targets)
@@ -27,7 +27,7 @@ var _resource : AbilityResource :
 			_conditionals_highlight.append(conditional)
 var _title : String ## The title of the Ability.
 var _icon : Texture2D ## The icon for this Ability.
-var _self_cast : bool ## Whether this Ability is cast on us instead of another target.
+var _targeting_resource : TargetingResource ## The Resource that will find the target(s) for this Ability to affect.
 var _effects : Array[Effect] = [] ## An Array of Effects this Ability will perform.
 var _casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
 var _cast_time_left : float ## The duration in seconds remaining before this Ability is fully cast.

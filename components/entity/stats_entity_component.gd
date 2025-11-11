@@ -172,5 +172,11 @@ func take_damage(
 		Math.perform_operation(hp_value, damage_dealt, Math.Operation.Subtraction)
 	)
 	var actual_damage_dealt = hp_before_damage - new_hp_value
+	DebugManager.debug_log(
+		"We've been dealt " + str(actual_damage_dealt) + " actual damage"
+	, self)
 	on_take_damage.emit(actual_damage_dealt, incoming_damage, damage_type)
+	DebugManager.debug_log(
+		"Our new HP is " + str(new_hp_value)
+	, self)
 	return new_hp_value

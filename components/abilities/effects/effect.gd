@@ -97,7 +97,7 @@ func register(caster: Entity, targets: Array[Entity]):
 	, self)
 	
 	var effect_temp : Effect = self.duplicate(10).from_effect(self) ## Duplicates with values
-	effect_temp.name = "targeting "
+	effect_temp.name = _title + " targeting "
 	for target in targets:
 		effect_temp.name += target.title + " "
 	add_child(effect_temp, true)

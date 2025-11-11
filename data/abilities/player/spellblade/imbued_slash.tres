@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=9 format=3 uid="uid://cqkm28nnhwkkt"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=10 format=3 uid="uid://cqkm28nnhwkkt"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_uhk72"]
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_65y7p"]
@@ -8,14 +8,14 @@
 [ext_resource type="Resource" uid="uid://cnkovqw15yv4r" path="res://data/effects/damage/damage_1_2x_chain_slash.tres" id="4_myufp"]
 [ext_resource type="Resource" uid="uid://dkgedk7476kpo" path="res://data/effects/damage/damage__8x_chainless_slash.tres" id="5_axs18"]
 [ext_resource type="Resource" uid="uid://ddk47a47hxb3a" path="res://data/effects/damage/damage_caster_stacks_imbued_element.tres" id="5_myufp"]
+[ext_resource type="Resource" uid="uid://bik72mrso60cg" path="res://data/targeting/get_enemy.tres" id="9_dxqmr"]
 
 [resource]
 script = ExtResource("3_6jgeg")
 title = "Imbued Slash"
 icon = ExtResource("3_65y7p")
+description = "Combo attack after Slash. Deals additional damage if you have Imbued Elements."
+targeting = ExtResource("9_dxqmr")
 effects = Array[ExtResource("2_65y7p")]([ExtResource("4_myufp"), ExtResource("5_myufp"), ExtResource("5_axs18")])
-gcd_type = 0
-conditionals_positive = Array[ExtResource("1_uhk72")]([])
-conditionals_negative = Array[ExtResource("1_uhk72")]([])
 conditionals_highlight = Array[ExtResource("1_uhk72")]([ExtResource("2_i4yrm")])
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"

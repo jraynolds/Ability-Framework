@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=8 format=3 uid="uid://clve3dg6ot77c"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=9 format=3 uid="uid://clve3dg6ot77c"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_2te8t"]
 [ext_resource type="Resource" uid="uid://d3yskhs600nks" path="res://data/values/flats/flat_30.tres" id="2_fygg2"]
@@ -7,16 +7,14 @@
 [ext_resource type="Resource" uid="uid://d4in6bychxpo1" path="res://data/effects/status_caster_add_absorb_elements_absorption.tres" id="5_t55g5"]
 [ext_resource type="Texture2D" uid="uid://bc8by5gv4xxas" path="res://assets/abilities/r_39.png" id="6_e6m0b"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="7_k8q1r"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="8_fygg2"]
 
 [resource]
 script = ExtResource("7_k8q1r")
 title = "Absorb Elements"
 icon = ExtResource("6_e6m0b")
-self_cast = true
+targeting = ExtResource("8_fygg2")
 effects = Array[ExtResource("3_tdv8k")]([ExtResource("4_or7xf"), ExtResource("5_t55g5")])
 cooldown = ExtResource("2_fygg2")
 gcd_type = 1
-conditionals_positive = Array[ExtResource("1_2te8t")]([])
-conditionals_negative = Array[ExtResource("1_2te8t")]([])
-conditionals_highlight = Array[ExtResource("1_2te8t")]([])
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"
