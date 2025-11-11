@@ -16,6 +16,7 @@ var enemy : Entity : ## The enemy the player is fighting against. Changing this 
 		health_bar_enemy.entity = enemy
 		statuses_container_enemy_positive.entity = enemy
 		statuses_container_enemy_negative.entity = enemy
+		enemy.targeting_component.targets = [player]
 var player : Entity: ## The Entity the player controls. Changing this alters the UI.
 	set(val):
 		player = val
@@ -23,6 +24,7 @@ var player : Entity: ## The Entity the player controls. Changing this alters the
 		ability_overlay.entity = player
 		statuses_container_player_positive.entity = player
 		statuses_container_player_negative.entity = player
+		player.targeting_component.targets = [enemy]
 ## How long in seconds the last pressed Ability is kept and cast if the GCD reaches 0 first. 
 @export var queued_ability_duration : float
 var queued_ability_duration_left : float ## How long in seconds we'll continue to remember the queued Ability.
@@ -57,7 +59,7 @@ func _process(delta: float) -> void:
 	
 	if enemy.abilities_component.gcd_remaining <= 0:
 		for ability in enemy.abilities_component.abilities:
-			if enemy.abilities_component.can_cast(ability, [player]):
+			if enemy.abilities_component.can_cast_at(ability, [player]):
 				enemy.abilities_component.cast(ability, [player])
 				return
 
@@ -73,6 +75,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func start_battle(player_entity: Entity, enemy_entity: Entity):
 	player = player_entity
 	enemy = enemy_entity
+	player.targeting_component.targets = [enemy]
+	enemy.targeting_component.targets = [player]
 	add_child(enemy)
 
 
@@ -86,5 +90,5 @@ func _on_ability_activated(caster: Entity, ability: Ability):
 
 ## Sends the given Ability to the player so their AbilityComponent can try to cast it.
 func player_cast(ability: Ability):
-	var targets = ability._targeting_resource.get_targets(player, ability)
+	var targets = ability.get_targets()
 	player.abilities_component.try_cast(ability, targets)

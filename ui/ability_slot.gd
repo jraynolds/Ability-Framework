@@ -19,15 +19,24 @@ var button : AbilityButton :
 			val_parent.button = _button
 		_button = val
 @export var key_label : Label ## The Label that depicts the keystroke that activates this slot.
-@export var progress_bar : TextureProgressBar ## The progress overlay for an Ability in cooldown.
-var progress : float : ## What percent filled the cooldown progress bar should be. Changing this fills the bar.
+@export var gcd_progress_bar : TextureProgressBar ## The progress overlay for an Ability in gcd cooldown.
+@export var cooldown_progress_bar : TextureProgressBar ## The progress overlay for an Ability in cooldown.
+var gcd_progress : float : ## What percent filled the GCD progress bar should be. Changing this fills the bar.
 	set(val):
 		assert(val >= 0.0 and val <= 100.0, "Can't set this value for our cooldown progress bar!")
-		progress = val
-		progress_bar.value = progress
+		gcd_progress = val
+		gcd_progress_bar.value = gcd_progress
 		if button.ability:
 			if button.ability._gcd_type != AbilityResource.GCD.OffGCD:
-				progress_bar.visible = progress > 0
+				gcd_progress_bar.visible = gcd_progress > 0
+var cooldown_progress : float : ## What percent filled the cooldown progress bar should be. Changing this fills the bar.
+	set(val):
+		if val < 0.0:
+			return
+		assert(val >= 0.0 and val <= 100.0, "Can't set this value for our cooldown progress bar!")
+		cooldown_progress = val
+		cooldown_progress_bar.value = cooldown_progress
+		cooldown_progress_bar.visible = button.ability.get_cooldown() > 0.0 and button.ability._cooldown_left > 0.0
 @export var animation_player : AnimationPlayer ## The animation player for this slot.
 @export var highlight : TextureRect ## A highlight overlay for the button.
 var highlighted : bool : ## Whether the contained Ability should be highlighted. Toggles the highlight.
@@ -35,6 +44,7 @@ var highlighted : bool : ## Whether the contained Ability should be highlighted.
 		highlighted = val
 		highlight.visible = highlighted
 @export var activated_border : TextureRect ## A highlight overlay for the button that shows when it's been activated.
+@export var disabled_overlay : TextureRect ## A dark overlay for the button that shows if the ability in it can be used.
 
 @export var locked : bool ## Whether this slot can be dropped on.
 @export var key : Key ## The keystroke that activates this slot.
@@ -61,7 +71,22 @@ signal on_activated ## emitted when the slot's keystroke is pressed.
 ## Called when this node comes alive. Sets the activation key to update the readout and sets visibility.
 func _ready() -> void:
 	set_key(key, shift, control, alt)
-	progress_bar.visible = false
+	gcd_progress_bar.visible = false
+	cooldown_progress_bar.visible = false
+
+
+## Called every frame. Checks whether the player can use the ability in the slot, and adds the disabled overlay if not.
+func _process(delta: float) -> void:
+	if _button and _button.ability:
+		disabled_overlay.visible = !GameManager.player_entity.abilities_component.can_cast(_button.ability)
+		if _button.ability.get_cooldown() != 0.0:
+			var cooldown_left = _button.ability._cooldown_left
+			var cooldown_total = _button.ability.get_cooldown()
+			cooldown_progress = (1 - ((cooldown_total - cooldown_left) / cooldown_total)) * 100
+	#if slot._button.ability._gcd_type == AbilityResource.GCD.OffGCD:
+		#cooldown_left = slot._button.ability._cooldown_left
+		#cooldown_total = slot._button.ability.get_cooldown()
+	#cooldown_percentage = (1 - ((cooldown_total - cooldown_left) / cooldown_total)) * 100
 
 
 ## Called when an unconsumed input event is heard. 

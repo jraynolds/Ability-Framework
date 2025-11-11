@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=9 format=3 uid="uid://cov242tkxrdli"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://cov242tkxrdli"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_db4pn"]
 [ext_resource type="Resource" uid="uid://mpfhupyolpaq" path="res://data/effects/statuses/status_imbued_element.tres" id="2_arfmg"]
@@ -7,21 +7,17 @@
 [ext_resource type="Resource" uid="uid://drdc6r1gop77e" path="res://data/values/flats/flat_9999.tres" id="4_mm5g4"]
 [ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="5_woutc"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_whftd"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="7_4wjyr"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_arfmg"]
 
 [resource]
 script = ExtResource("4_4wjyr")
-entity_target = 0
+targeting_resource_override = ExtResource("7_4wjyr")
 effect_added = ExtResource("2_arfmg")
 stacking_behavior = 30
 num_stacks = ExtResource("4_mm5g4")
-expirations = Array[ExtResource("3_db4pn")]([])
 status_effect_scene = ExtResource("5_woutc")
-visible_status = true
 title = "Expire Imbued Element status"
 description = "The Imbued Element status is removed."
-positivity = 2
 triggers = Array[ExtResource("6_whftd")]([ExtResource("7_arfmg")])
-conditionals_positive = Array[ExtResource("1_db4pn")]([])
-conditionals_negative = Array[ExtResource("1_db4pn")]([])
 metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

@@ -13,7 +13,6 @@
 
 [resource]
 script = ExtResource("5_00dxr")
-entity_target = 0
 effect_added = ExtResource("2_0ecyq")
 lifetime = ExtResource("5_antkn")
 expirations = Array[ExtResource("3_f4sf5")]([ExtResource("4_37nff")])

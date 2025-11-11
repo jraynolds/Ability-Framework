@@ -13,7 +13,6 @@
 
 [resource]
 script = ExtResource("4_uag7y")
-entity_target = 0
 effect_added = ExtResource("2_nhwhv")
 num_stacks = ExtResource("6_uag7y")
 lifetime = ExtResource("4_4bcoi")

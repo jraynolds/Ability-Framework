@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=10 format=3 uid="uid://b0db527arct3u"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=9 format=3 uid="uid://b0db527arct3u"]
 
 [ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="1_0bthl"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_p18ik"]
@@ -8,13 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cyy7rmq2b3gmv" path="res://assets/abilities/r_29.png" id="3_tpmv7"]
 [ext_resource type="Resource" uid="uid://dcf0c6l5w3eq5" path="res://data/effects/damage/damage_caster_stacks_imbued_element_5x.tres" id="5_cfsve"]
 [ext_resource type="Resource" uid="uid://cov242tkxrdli" path="res://data/effects/status_caster_subtract_imbued_element.tres" id="6_akc48"]
-[ext_resource type="Resource" uid="uid://bik72mrso60cg" path="res://data/targeting/get_enemy.tres" id="9_luvhc"]
 
 [resource]
 script = ExtResource("3_jyc1u")
 title = "Expel Elements"
 icon = ExtResource("3_tpmv7")
-targeting = ExtResource("9_luvhc")
 effects = Array[ExtResource("2_tpmv7")]([ExtResource("5_cfsve"), ExtResource("6_akc48")])
 casting_time = ExtResource("1_0bthl")
 conditionals_positive = Array[ExtResource("1_p18ik")]([ExtResource("2_jyc1u")])

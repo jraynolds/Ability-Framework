@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 
 ## Tries to cast the given ability on the given targets.
 func try_cast(ability: Ability, targets: Array[Entity]):
-	if !can_cast(ability, targets):
+	if !can_cast_at(ability, targets):
 		return
 	cast(ability, targets)
 
@@ -70,13 +70,26 @@ func cast(ability: Ability, targets: Array[Entity]):
 			gcd_remaining = gcd_max_cached
 
 
-## Returns whether the given Ability can be cast by this Entity on the given targets.
-func can_cast(ability: Ability, targets: Array[Entity]) -> bool:
+## Returns whether the given Ability can be cast by this Entity.
+func can_cast(ability: Ability) -> bool:
 	if !can_act:
 		return false
 	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
 		return false
-	return ability.is_castable(targets)
+	if ability._cooldown_left > 0.0:
+		return false
+	return ability.is_castable()
+
+
+## Returns whether the given Ability can be cast by this Entity on the given targets.
+func can_cast_at(ability: Ability, targets: Array[Entity]) -> bool:
+	if !can_act:
+		return false
+	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
+		return false
+	if ability._cooldown_left > 0.0:
+		return false
+	return ability.is_castable_at(targets)
 
 
 ## Modifies the remaining cooldowns on this Entity's abilities by the given number, using the given math operation.

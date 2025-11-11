@@ -52,6 +52,11 @@ var _caster : Entity ## The Entity who owns this Ability.
 signal on_cast_begin ## emitted when this Ability begins to cast.
 signal on_cast ## emitted when this Ability is successfully cast.
 
+## Called every frame. Reduces the cooldown left.
+func _process(delta: float) -> void:
+	_cooldown_left -= delta
+
+
 ## Returns an instance of this initialized with the given AbilityResource and Entity.
 func from_resource(resource: AbilityResource, caster: Entity) -> Ability:
 	_resource = resource
@@ -69,6 +74,7 @@ func begin_cast(targets: Array[Entity]):
 func cast(targets: Array[Entity]):
 	for effect in _effects:
 		effect.register(_caster, targets)
+	_cooldown_left = get_cooldown()
 	on_cast.emit()
 
 
@@ -77,8 +83,14 @@ func is_resource_equal(resource: AbilityResource):
 	return resource == _resource
 
 
-## Returns whether this Ability can be cast.
-func is_castable(targets: Array[Entity]) -> bool:
+## Returns whether this Ability can be cast. Finds the default targets.
+func is_castable() -> bool:
+	var targets = _targeting_resource.get_targets(_caster, self) if _targeting_resource else _caster.targeting_component.targets
+	return is_castable_at(targets)
+
+
+## Returns whether this Ability can be cast at the given targets.
+func is_castable_at(targets: Array[Entity]) -> bool:
 	for conditional in _conditionals_positive:
 		if !conditional.is_met(null, self, _caster, targets):
 			return false
@@ -96,3 +108,18 @@ func _is_highlighted(targets: Array[Entity]) -> bool:
 		if !conditional.is_met(null, self, _caster, targets):
 			return false
 	return true
+
+
+## Returns the default targets this Ability gets.
+func get_targets() -> Array[Entity]:
+	var targets =  _caster.targeting_component.targets
+	if _targeting_resource:
+		targets = _targeting_resource.get_targets(_caster, self)
+	return targets
+
+
+## Returns the cooldown of this Ability.
+func get_cooldown() -> float:
+	if !_cooldown:
+		return 0.0
+	return _cooldown.get_value(_caster, [])

@@ -53,7 +53,7 @@ shader_parameter/ant_width = 2.0
 shader_parameter/ant_length = 10.0
 shader_parameter/ant_speed = 30.0
 
-[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "progress_bar", "animation_player", "highlight", "activated_border")]
+[node name="AbilitySlot" type="PanelContainer" node_paths=PackedStringArray("_button", "key_label", "gcd_progress_bar", "cooldown_progress_bar", "animation_player", "highlight", "activated_border", "disabled_overlay")]
 self_modulate = Color(1, 1, 0.0235294, 1)
 custom_minimum_size = Vector2(80, 80)
 offset_right = 60.0
@@ -63,18 +63,32 @@ size_flags_vertical = 4
 script = ExtResource("1_77mnq")
 _button = NodePath("AbilityButton")
 key_label = NodePath("Key")
-progress_bar = NodePath("TextureProgressBar")
+gcd_progress_bar = NodePath("GCDProgressBar")
+cooldown_progress_bar = NodePath("CooldownProgressBar")
 animation_player = NodePath("AnimationPlayer")
 highlight = NodePath("Highlight")
 activated_border = NodePath("Activation")
+disabled_overlay = NodePath("DisabledOverlay")
 metadata/_custom_type_script = "uid://wdbf8xeqtskp"
 
+[node name="DisabledOverlay" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.65882355)
+z_index = 10
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_77mnq")
+expand_mode = 3
+
 [node name="AbilityButton" parent="." instance=ExtResource("2_vojnw")]
+visible = false
 z_index = 2
 custom_minimum_size = Vector2(74, 74)
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="GCDProgressBar" type="TextureProgressBar" parent="."]
 self_modulate = Color(1, 1, 1, 0.541176)
 z_index = 5
 clip_contents = true
@@ -88,7 +102,38 @@ fill_mode = 5
 nine_patch_stretch = true
 texture_progress = ExtResource("3_77mnq")
 
-[node name="Label" type="Label" parent="TextureProgressBar"]
+[node name="Label" type="Label" parent="GCDProgressBar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "2.5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownProgressBar" type="TextureProgressBar" parent="."]
+self_modulate = Color(1, 1, 1, 0.541176)
+z_index = 5
+clip_contents = true
+custom_minimum_size = Vector2(74, 74)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+value = 30.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = ExtResource("3_77mnq")
+
+[node name="Label" type="Label" parent="CooldownProgressBar"]
 visible = false
 layout_mode = 1
 anchors_preset = 15

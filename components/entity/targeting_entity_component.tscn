@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf353jylr385k"]
+
+[ext_resource type="Script" uid="uid://bxk0oeh8vagdb" path="res://components/entity/targeting_entity_component.gd" id="1_sju23"]
+
+[node name="TargetingEntityComponent" type="Node2D"]
+script = ExtResource("1_sju23")

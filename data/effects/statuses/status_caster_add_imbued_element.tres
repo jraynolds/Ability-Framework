@@ -13,19 +13,14 @@
 
 [resource]
 script = ExtResource("7_8m5ah")
-entity_target = 0
 effect_added = ExtResource("2_qyxtf")
-stacking_behavior = 40
+stacking_behavior = 21
 num_stacks = ExtResource("6_80r8x")
 lifetime = ExtResource("5_le4fe")
-expirations = Array[ExtResource("3_sgy60")]([])
 status_effect_scene = ExtResource("8_rww80")
-visible_status = true
 title = "Add imbued element"
 description = "Adds a portion of the last damage suffered to the caster."
 icon = ExtResource("4_mq6pp")
 positivity = 0
 triggers = Array[ExtResource("9_c8xhn")]([ExtResource("10_8rt7c")])
-conditionals_positive = Array[ExtResource("1_5dg6s")]([])
-conditionals_negative = Array[ExtResource("1_5dg6s")]([])
 metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

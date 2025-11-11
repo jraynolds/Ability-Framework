@@ -29,7 +29,10 @@ func on_slot_activated(slot: AbilitySlot):
 		on_ability_activated.emit(entity, slot.button.ability)
 
 
-## Called when the GCD remaining for our Entity changes. Updates progress bars on AbilitySlots.
+### Called when the GCD remaining for our Entity changes. Updates progress bars on AbilitySlots.
 func on_gcd_update(gcd_remaining: float, gcd_total: float):
 	for slot in ability_slots:
-		slot.progress = (1 - ((gcd_total - gcd_remaining) / gcd_total)) * 100
+		var cooldown_left = gcd_remaining
+		var cooldown_total = gcd_total
+		var cooldown_percentage = (1 - ((cooldown_total - cooldown_left) / cooldown_total)) * 100
+		slot.gcd_progress = cooldown_percentage
