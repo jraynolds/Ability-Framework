@@ -11,6 +11,10 @@ class AbilityHistory:
 	func _init(a: Ability, t: Array[Entity]):
 		ability = a
 		targets = t
+## Abilities as cast by this Entity, but only those that are of OnGCD type.
+var gcd_abilities_cast : Array[AbilityHistory] :
+	get :
+		return abilities_cast.filter(func(history: AbilityHistory): return history.ability._gcd_type == AbilityResource.GCD.OnGCD)
 
 ## A history of Effects received by this Entity.
 ## Stored as heap (front-recent) of EffectHistory type, which has effect: Effect, ability: Ability and targets: Array[Entity] fields. 
@@ -79,11 +83,15 @@ func load_entity_resource(resource: EntityResource):
 
 
 ## Backtracks the Abilities this Entity has cast and returns the valid history at the given index.
+## Optionally, ignores Abilities that are off the GCD.
 ## By default, returns the most recent.
-func get_ability_history(heap_index: int = 0) -> AbilityHistory:
-	if len(abilities_cast) <= heap_index:
+func get_ability_history(heap_index: int = 0, ignore_non_gcd=false) -> AbilityHistory:
+	var heap = abilities_cast
+	if ignore_non_gcd:
+		heap = gcd_abilities_cast
+	if len(heap) <= heap_index:
 		return null
-	return abilities_cast[heap_index]
+	return heap[heap_index]
 
 
 ## Backtracks the damage this Entity has received and returns the valid history at the given index.

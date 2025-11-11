@@ -23,6 +23,9 @@ class_name DebugManagerGlobal
 ## Whether debugging should be output for StatusesEntityComponents.
 @export var statuses_entity_components : bool
 
+## Whether debugging should be output for ConditionalResources.
+@export var conditional_resources : bool
+
 ## Outputs a detailed log if the log's source is one2 we're outputting.
 func debug_log(message: String, source: Variant):
 	if is_instance_of(source, Effect):
@@ -47,3 +50,7 @@ func debug_log(message: String, source: Variant):
 		print("EXPIRATIONRESOURCE: " + message + ", from '" + source.resource_path + "'")
 	elif is_instance_of(source, StatusesContainer) and statuses_containers:
 		print("STATUSCONTAINER: " + message + ", from '" + source.name + "'")
+	
+	## Conditionals
+	elif is_instance_of(source, ConditionalResource) and conditional_resources:
+		print("CONDITIONALRESOURCE: " + message + ", from '" + source.resource_path + "'")

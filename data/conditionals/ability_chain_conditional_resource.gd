@@ -6,9 +6,16 @@ class_name AbilityChainConditionalResource
 @export var targeting_resource_override : TargetingResource
 @export var ability_in_chain : AbilityResource ## The Ability we're checking against.
 @export var chain_position : ValueResource ## How many Abilities back we're checking. If left blank, the most recent.
+@export var non_GCDs_break_chain : bool ## Whether Abilities off the GCD break the chain. 
 
 ## Returns whether the ability caster last cast the given Ability.
 func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+	DebugManager.debug_log(
+		"Evaluating whether the ability caster " + caster.title + " cast the ability " + ability_in_chain.resource_path +
+		" at reverse index " + str(chain_position)
+		+ (" using the targeting resource override " + targeting_resource_override.resource_path) if targeting_resource_override else ""
+		+ (" ignoring non-GCDs" if !non_GCDs_break_chain else " including non-GCDs")
+	, self)
 	assert(ability_in_chain, "No valid AbilityResource set")
 	
 	if targeting_resource_override:
@@ -17,7 +24,14 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 	if chain_position:
 		ability_index = chain_position.get_value(caster, targets)
 		
-	var ability_check = targets[0].history_component.get_ability_history(ability_index)
-	if !ability_check:
+	var ability_at_index = targets[0].history_component.get_ability_history(ability_index, !non_GCDs_break_chain)
+	if !ability_at_index:
+		DebugManager.debug_log(
+			"No ability at that index, so no."
+		, self)
 		return false
-	return ability_check.ability.is_resource_equal(ability_in_chain)
+	var met = ability_at_index.ability.is_resource_equal(ability_in_chain)
+	DebugManager.debug_log(
+		"Evaluation result is " + str(met)
+	, self)
+	return met

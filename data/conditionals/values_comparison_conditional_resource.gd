@@ -8,15 +8,25 @@ class_name ValuesComparisonConditionalResource
 
 ## Returns whether the ability caster last cast the given Ability.
 func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+		
+	DebugManager.debug_log(
+		"Comparing the two values " + value_1.resource_path + " and " + value_2.resource_path + " with the comparison " +
+		Natives.enum_name(Math.Comparison, comparison)
+	, self)
+	
+	var met = false
 	match comparison:
 		Math.Comparison.Equal:
-			return value_1.get_value(caster, targets) == value_2.get_value(caster, targets)
+			met = value_1.get_value(caster, targets) == value_2.get_value(caster, targets)
 		Math.Comparison.GreaterThan:
-			return value_1.get_value(caster, targets) > value_2.get_value(caster, targets)
+			met = value_1.get_value(caster, targets) > value_2.get_value(caster, targets)
 		Math.Comparison.GreaterThanOrEqual:
-			return value_1.get_value(caster, targets) >= value_2.get_value(caster, targets)
+			met = value_1.get_value(caster, targets) >= value_2.get_value(caster, targets)
 		Math.Comparison.LessThan:
-			return value_1.get_value(caster, targets) < value_2.get_value(caster, targets)
+			met = value_1.get_value(caster, targets) < value_2.get_value(caster, targets)
 		Math.Comparison.LessThanOrEqual:
-			return value_1.get_value(caster, targets) <= value_2.get_value(caster, targets)
-	return false
+			met = value_1.get_value(caster, targets) <= value_2.get_value(caster, targets)
+	DebugManager.debug_log(
+		"The comparison has evaluated as " + met
+	, self)
+	return met
