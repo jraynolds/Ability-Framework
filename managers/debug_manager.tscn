@@ -12,4 +12,5 @@ transform = true
 stat_modify = true
 expiration_resources = true
 statuses_entity_components = true
-conditional_resources = true
+value_resources = true
+stats = true

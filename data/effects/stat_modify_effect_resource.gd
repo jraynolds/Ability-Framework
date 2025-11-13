@@ -13,14 +13,17 @@ class_name StatModifyEffectResource
 ## Called when an Effect containing this Resource affects targets.
 ## Adds the given value to the given targets' given stats.
 func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
-	#print(
-		#"Affecting " + Natives.enum_name(Targeting.Target, entity_target) + 
-		#"'s " + Natives.enum_name(StatResource.StatType, stat_type) +
-		#" with " + Natives.enum_name(Math.Operation, math_operation)
-	#)
-	
 	if targeting_resource_override:
 		targets = targeting_resource_override.get_targets(caster, ability)
+	
+	print(
+		"Affecting the stat " + Natives.enum_name(StatResource.StatType, stat_type) + 
+		" of the " + ", ".join(targets.map(func(t: Entity): return t.title)) + 
+		" with " + str(modifier.get_value(caster, targets)) +
+		" via " + Natives.enum_name(Math.Operation, math_operation) +
+		(" ignoring statuses" if ignore_statuses else "") +
+		(" ignoring transforms " if ignore_transforms else "")
+	)
 	
 	for target in targets:
 		target.stats_component.modify_stat_value(
@@ -44,12 +47,12 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 func get_modified_value(value: float, caster: Entity, targets: Array[Entity]) -> float:
 	var value_modifier = modifier.get_value(caster, targets)
 	DebugManager.debug_log(
-		"Transforming the value " + str(value) + " using " + str(value_modifier) +
+		"Imagining what would happen if we transformed the value " + str(value) + " using " + str(value_modifier) +
 		" with operation " + Natives.enum_name(Math.Operation, math_operation)
 	, self)
 	var value_modified = Math.perform_operation(value, value_modifier, math_operation)
 	DebugManager.debug_log(
-		"Original value " + str(value) + " has become " + str(value_modified)
+		"Original value " + str(value) + " would become " + str(value_modified)
 	, self)
 	return value_modified
 	

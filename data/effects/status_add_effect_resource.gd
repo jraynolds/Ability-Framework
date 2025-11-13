@@ -50,7 +50,7 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 	)
 	assert(status_effect_index >= 0, "The status effect object is gone!")
 	
-	var stacks = num_stacks.get_value(caster, targets) if num_stacks else 1
+	var stacks = num_stacks.get_value(caster, targets) if num_stacks else 1.0
 	
 	for target in targets:
 		target.statuses_component.add_status(

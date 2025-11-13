@@ -9,7 +9,7 @@ var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paire
 var transform_statuses : Array[StatusEffect] :
 	get :
 		if !entity or !entity.statuses_component: return []
-		return entity.statuses_component.statuses.filter(func(status: StatusEffect):
+		return entity.statuses_component.statuses.filter(func(status: StatusEffect): 
 			if status._resource as TransformEffectResource:
 				return true
 		)
@@ -33,6 +33,9 @@ func load_entity_resource(resource: EntityResource):
 		stat.name = Natives.enum_name(StatResource.StatType, stat._type)
 		add_child(stat)
 		stat.on_value_change.connect(func(new_val: float, old_val: float):
+			DebugManager.debug_log(
+				"Value for entity " + entity.title + " has changed from " + str(old_val) + " to " + str(new_val)
+			, stat)
 			on_stat_change.emit(stat._type, new_val, old_val)
 		)
 
@@ -45,15 +48,15 @@ func on_entity_updated():
 ## Returns the value of a stat of the given type. 
 ## By default, applies the modifications of any ongoing status Effects.
 func get_stat_value(stat: StatResource.StatType, ignore_statuses: bool = false) -> float:
-	DebugManager.debug_log(
-		"Returning the value of stat " + Natives.enum_name(StatResource.StatType, stat) +
-		(" ignoring statuses" if ignore_statuses else "")
-	, self)
+	#DebugManager.debug_log(
+		#"Returning the value of stat " + Natives.enum_name(StatResource.StatType, stat) +
+		#(" ignoring statuses" if ignore_statuses else "")
+	#, self)
 	if ignore_statuses:
-		DebugManager.debug_log(
-			"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
-			" is " + str(stats[stat].value)
-		, self)
+		#DebugManager.debug_log(
+			#"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
+			#" is " + str(stats[stat].value)
+		#, self)
 		return stats[stat].value
 	else :
 		var stat_value = stats[stat].value
@@ -76,10 +79,10 @@ func get_stat_value(stat: StatResource.StatType, ignore_statuses: bool = false) 
 					effect._ability._caster,
 					[entity]
 				)
-		DebugManager.debug_log(
-			"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
-			" is " + str(stat_value)
-		, self)
+		#DebugManager.debug_log(
+			#"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
+			#" is " + str(stat_value)
+		#, self)
 		return stat_value
 
 
@@ -150,10 +153,11 @@ func take_damage(
 	assert(damage_dealt >= 0, "Dealing negative damage.")
 	if !bypass_defense:
 		var defense = get_stat_value(StatResource.StatType.Defense, ignore_statuses)
-		damage_dealt *= (1 - defense)
-		DebugManager.debug_log(
-			"Our defense of " + str(defense) + " has reduced the incoming damage to " + str(damage_dealt)
-		, self)
+		if defense != 0.0:
+			damage_dealt *= (1 - defense)
+			DebugManager.debug_log(
+				"Our defense of " + str(defense) + " has reduced the incoming damage to " + str(damage_dealt)
+			, self)
 	var hp_value = get_stat_value(StatResource.StatType.HP, ignore_statuses)
 	if !ignore_transforms:
 		for transform in transform_statuses:
@@ -176,7 +180,7 @@ func take_damage(
 		"We've been dealt " + str(actual_damage_dealt) + " actual damage"
 	, self)
 	on_take_damage.emit(actual_damage_dealt, incoming_damage, damage_type)
-	DebugManager.debug_log(
-		"Our new HP is " + str(new_hp_value)
-	, self)
+	#DebugManager.debug_log(
+		#"Our new HP is " + str(new_hp_value)
+	#, self)
 	return new_hp_value

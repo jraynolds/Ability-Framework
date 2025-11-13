@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://bvwtoshvvpm5i"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://bvwtoshvvpm5i"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ypdn3"]
 [ext_resource type="Resource" uid="uid://dvr1848wetr16" path="res://data/effects/caster_add_defense__2x.tres" id="2_nhwhv"]
@@ -8,13 +8,11 @@
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="4_uag7y"]
 [ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="5_nx3kw"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_jy6pt"]
-[ext_resource type="Resource" uid="uid://c7ketxe56xuyq" path="res://data/values/flats/flat_4.tres" id="6_uag7y"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_3ru40"]
 
 [resource]
 script = ExtResource("4_uag7y")
 effect_added = ExtResource("2_nhwhv")
-num_stacks = ExtResource("6_uag7y")
 lifetime = ExtResource("4_4bcoi")
 expirations = Array[ExtResource("3_nhwhv")]([ExtResource("4_nx3kw")])
 status_effect_scene = ExtResource("5_nx3kw")
