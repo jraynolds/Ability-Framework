@@ -1,15 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://27bka5t3aalm"]
+[gd_scene load_steps=7 format=3 uid="uid://27bka5t3aalm"]
 
 [ext_resource type="Script" uid="uid://doo7asqx51qab" path="res://scenes/battle.gd" id="1_p1qf1"]
 [ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://ui/ability_overlay.tscn" id="1_th188"]
+[ext_resource type="PackedScene" uid="uid://b64vcadfmbtx7" path="res://ui/ability_cast_bar.tscn" id="3_6vh42"]
 [ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
 [ext_resource type="PackedScene" uid="uid://dh1uxqh1ntq1h" path="res://ui/statuses_container.tscn" id="4_a12nh"]
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player", "cast_bar_enemy", "cast_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative")]
 script = ExtResource("1_p1qf1")
 ability_overlay = NodePath("CanvasLayer/AbilityOverlay")
 health_bar_enemy = NodePath("CanvasLayer/HealthBar")
 health_bar_player = NodePath("CanvasLayer/HealthBar2")
+cast_bar_enemy = NodePath("CanvasLayer/EnemyCastBar")
+cast_bar_player = NodePath("CanvasLayer/PlayerCastBar")
 statuses_container_enemy_positive = NodePath("CanvasLayer/Statuses/StatusesContainer")
 statuses_container_enemy_negative = NodePath("CanvasLayer/Statuses/StatusesContainer2")
 statuses_container_player_positive = NodePath("CanvasLayer/Statuses2/StatusesContainer")
@@ -54,6 +69,13 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 status_positivity = 2
+
+[node name="EnemyCastBar" parent="CanvasLayer" instance=ExtResource("3_6vh42")]
+offset_top = -146.0
+offset_bottom = -116.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_lpir7")
+
+[node name="PlayerCastBar" parent="CanvasLayer" instance=ExtResource("3_6vh42")]
 
 [node name="AbilityOverlay" parent="CanvasLayer" instance=ExtResource("1_th188")]
 offset_bottom = -55.0

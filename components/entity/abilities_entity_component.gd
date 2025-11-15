@@ -5,6 +5,9 @@ class_name AbilitiesEntityComponent
 ## The Abilities this Entity has, paired with the bar locations for each Ability. 
 ## The integer can be 0-19; 0 is "1", 10 is "+1"
 var abilities : Dictionary[Ability, int]
+
+var ability_casting : Ability ## The Ability the Entity is currently casting, if any.
+
 var gcd_remaining : float : ## The time in seconds before the global cooldown is ready again.
 	set(val):
 		var old_val = gcd_remaining
@@ -21,7 +24,12 @@ var can_act : bool = true ## Whether the Entity can act or not.
 
 ## Emitted when the GCD remaining value changes. Emits the remaining value and the total for this latest GCD.
 signal on_gcd_update(gcd_remaining: float, gcd_total: float)
-signal on_ability_cast(ability: Ability, targets: Array[Entity]) 
+## Emitted when the Entity begins to cast an Ability.
+signal on_ability_cast_begin(ability: Ability, targets: Array[Entity])
+## Emitted when the Entity's ongoing Ability cast is interrupted or canceled.
+signal on_ability_cast_interrupted(ability: Ability, targets: Array[Entity], interrupter: Entity)
+## Emitted when the Entity successfully casts an Ability.
+signal on_ability_cast(ability: Ability, targets: Array[Entity])
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
@@ -40,9 +48,6 @@ func load_entity_resource(resource: EntityResource):
 func on_entity_updated():
 	pass
 
-### Called when this node becomes active. Connects signals.
-#func _ready() -> void:
-	#entity.
 
 ## Updates every frame.
 func _process(delta: float) -> void:
@@ -57,10 +62,24 @@ func try_cast(ability: Ability, targets: Array[Entity]):
 	cast(ability, targets)
 
 
-## Casts the given ability on the given targets. Adds it to the heap of our casts.
+## Begins to cast the given ability on the given targets.
 func cast(ability: Ability, targets: Array[Entity]):
-	ability.cast(targets)
-	on_ability_cast.emit(ability, targets)
+	DebugManager.debug_log(
+		"Entity " + entity.title + " is beginning to cast ability " + ability._title +
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
+	on_ability_cast_begin.emit(ability, targets)
+	ability_casting = ability
+	ability.on_cast.connect(func(_caster: Entity, t: Array[Entity]): on_ability_finished_cast(ability, t), 4)
+	ability.begin_cast(targets)
+
+
+## Triggered when an Ability we've begun to cast has finished casting. Adds it to the heap of our casts.
+func on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
+	DebugManager.debug_log(
+		"Entity " + entity.title + " has successfully finished casting ability " + ability._title +
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
 	if ability._gcd_type == AbilityResource.GCD.OnGCD:
 		if ability._gcd_cooldown:
 			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
@@ -68,11 +87,15 @@ func cast(ability: Ability, targets: Array[Entity]):
 		else :
 			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 			gcd_remaining = gcd_max_cached
+	ability_casting = null
+	on_ability_cast.emit(ability, targets)
 
 
 ## Returns whether the given Ability can be cast by this Entity.
 func can_cast(ability: Ability) -> bool:
 	if !can_act:
+		return false
+	if ability_casting:
 		return false
 	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
 		return false
@@ -84,6 +107,8 @@ func can_cast(ability: Ability) -> bool:
 ## Returns whether the given Ability can be cast by this Entity on the given targets.
 func can_cast_at(ability: Ability, targets: Array[Entity]) -> bool:
 	if !can_act:
+		return false
+	if ability_casting:
 		return false
 	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
 		return false

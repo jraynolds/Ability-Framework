@@ -29,6 +29,7 @@ var _title : String ## The title of the Ability.
 var _icon : Texture2D ## The icon for this Ability.
 var _targeting_resource : TargetingResource ## The Resource that will find the target(s) for this Ability to affect.
 var _effects : Array[Effect] = [] ## An Array of Effects this Ability will perform.
+var casting : bool ## Whether or not the Ability is currently being cast by its caster.
 var _casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
 var _cast_time_left : float ## The duration in seconds remaining before this Ability is fully cast.
 var _cooldown : ValueResource ## The duration in seconds before this Ability can be cast again.
@@ -46,15 +47,21 @@ var _conditionals_negative : Array[ConditionalResource] = []
 var _conditionals_highlight : Array[ConditionalResource] = []
 
 var _caster : Entity ## The Entity who owns this Ability.
+var _targets : Array[Entity] ## The Entities who this Ability is targeting.
 
 @export var effect_scene : PackedScene ## The default Effect scene.
 
-signal on_cast_begin ## emitted when this Ability begins to cast.
-signal on_cast ## emitted when this Ability is successfully cast.
+signal on_cast_begin(caster: Entity, targets: Array[Entity]) ## emitted when this Ability begins to cast.
+signal on_cast(caster: Entity, targets: Array[Entity]) ## emitted when this Ability is successfully cast.
 
 ## Called every frame. Reduces the cooldown left.
 func _process(delta: float) -> void:
-	_cooldown_left -= delta
+	if casting and _cast_time_left >= 0.0:
+		_cast_time_left -= delta
+		if _cast_time_left <= 0.0:
+			cast()
+	if _cooldown_left > 0.0:
+		_cooldown_left -= delta
 
 
 ## Returns an instance of this initialized with the given AbilityResource and Entity.
@@ -66,16 +73,27 @@ func from_resource(resource: AbilityResource, caster: Entity) -> Ability:
 
 ## Begins to cast this ability.
 func begin_cast(targets: Array[Entity]):
-	on_cast_begin.emit()
-	_cast_time_left = _casting_time.get_value(_caster, targets)
+	DebugManager.debug_log(
+		"Ability " + _title + " is beginning to be cast by " + _caster.title + 
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
+	_targets = targets
+	on_cast_begin.emit(_caster, _targets)
+	_cast_time_left = get_casting_time()
+	for effect in _effects:
+		effect.register(_caster, _targets)
+	casting = true
 
 
 ## Performs this ability on the given targets, from our owner.
-func cast(targets: Array[Entity]):
-	for effect in _effects:
-		effect.register(_caster, targets)
+func cast():
 	_cooldown_left = get_cooldown()
-	on_cast.emit()
+	on_cast.emit(_caster, _targets)
+	DebugManager.debug_log(
+		"Ability " + _title + " has successfully been cast by " + _caster.title + 
+		" at targets " + ",".join(_targets.map(func(t: Entity): return t.title))
+	, self)
+	casting = false
 
 
 ## Returns whether this Ability's resource is equal to the given AbilityResource.
@@ -118,8 +136,15 @@ func get_targets() -> Array[Entity]:
 	return targets
 
 
-## Returns the cooldown of this Ability.
+## Returns the cooldown of this Ability. By default, 0.
 func get_cooldown() -> float:
 	if !_cooldown:
 		return 0.0
-	return _cooldown.get_value(_caster, [])
+	return _cooldown.get_value(_caster, _targets)
+
+
+## Returns the cast time of this Ability. By default, 0.
+func get_casting_time() -> float:
+	if !_casting_time:
+		return 0.0
+	return _casting_time.get_value(_caster, _targets)

@@ -21,13 +21,15 @@ enum Trigger {
 func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
 	match trigger :
 		Trigger.OnThisAbilityCast:
-			ability.on_cast.connect(function.bind(caster, targets))
+			#ability.on_cast.connect(function.bind(caster, targets))
+			ability.on_cast.connect(function)
 		Trigger.OnRegistered:
-			effect.on_registered.connect(function.bind(caster, targets))
+			#effect.on_registered.connect(function.bind(caster, targets))
+			ability.on_cast.connect(function)
 		Trigger.OnGetStatValue:
 			pass ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
 		Trigger.OnTakeDamage:
-			## Frankly, it sucks that this is how we have to do it in Godot
+			### Frankly, it sucks that this is how we have to do it in Godot
 			var bound_arguments = function.get_bound_arguments()
 			function = Callable(function.get_object(), function.get_method())
 			#var params = function.get_bound_arguments()

@@ -4,13 +4,16 @@
 
 [node name="DebugManager" type="Node2D"]
 script = ExtResource("1_f7v61")
+abilities = true
 effects = true
 status_effects = true
 stats_entity_components = true
-statuses_containers = true
+abilities_entity_components = true
+statuses_entity_components = true
 transform = true
 stat_modify = true
 expiration_resources = true
-statuses_entity_components = true
 value_resources = true
 stats = true
+statuses_containers = true
+ability_cast_bars = true

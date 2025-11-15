@@ -5,6 +5,8 @@ class_name Battle
 @export var ability_overlay : AbilityOverlay
 @export var health_bar_enemy : HealthBar
 @export var health_bar_player : HealthBar
+@export var cast_bar_enemy : AbilityCastBar
+@export var cast_bar_player : AbilityCastBar
 @export var statuses_container_enemy_positive : StatusesContainer
 @export var statuses_container_enemy_negative: StatusesContainer
 @export var statuses_container_player_positive : StatusesContainer
@@ -17,6 +19,7 @@ var enemy : Entity : ## The enemy the player is fighting against. Changing this 
 		statuses_container_enemy_positive.entity = enemy
 		statuses_container_enemy_negative.entity = enemy
 		enemy.targeting_component.targets = [player]
+		cast_bar_enemy.entity = enemy
 var player : Entity: ## The Entity the player controls. Changing this alters the UI.
 	set(val):
 		player = val
@@ -25,6 +28,7 @@ var player : Entity: ## The Entity the player controls. Changing this alters the
 		statuses_container_player_positive.entity = player
 		statuses_container_player_negative.entity = player
 		player.targeting_component.targets = [enemy]
+		cast_bar_player.entity = player
 ## How long in seconds the last pressed Ability is kept and cast if the GCD reaches 0 first. 
 @export var queued_ability_duration : float
 var queued_ability_duration_left : float ## How long in seconds we'll continue to remember the queued Ability.
