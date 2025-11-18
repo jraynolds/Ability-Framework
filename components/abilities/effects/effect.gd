@@ -17,6 +17,12 @@ var _targets : Array[Entity] ## The Entities targeted by this Effect.
 
 var _sub_effects : Array[Effect] = [] ## Sub-effects this Effect also tracks.
 
+var _temp_effects : Array[Effect] = [] ## Temporary effects this Effect has created.
+var _active_temp_effects : Array[Effect] : ## Those of our _temp_effects which are currently active.
+	get :
+		return _temp_effects.filter(func(temp_effect): return temp_effect != null)
+#var canceled : bool  ## Whether this effect has been canceled.
+
 signal on_registered ## Emitted when this Effect is fully registered on all its Triggers.
 signal on_affected(caster: Entity, targets: Array[Entity]) ## Emitted when this Effect affects its targets.
 signal on_unregistered ## Emitted when this Effect is fully unregistered on all its Triggers.
@@ -98,6 +104,7 @@ func register(caster: Entity, targets: Array[Entity]):
 	
 	var effect_temp : Effect = self.duplicate(10).from_effect(self) ## Duplicates with values
 	effect_temp.name = _title + " targeting " + ", ".join(targets.map(func(t: Entity): return t.title))
+	_temp_effects.append(effect_temp)
 	add_child(effect_temp, true)
 	
 	for trigger in _triggers:
@@ -148,3 +155,9 @@ func end():
 	
 	on_expired.emit()
 	queue_free()
+
+
+## Cancels this effect, removing all Effect children.
+func cancel():
+	for temp_effect in _active_temp_effects:
+		temp_effect.end()

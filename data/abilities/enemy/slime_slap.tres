@@ -9,6 +9,7 @@
 [resource]
 script = ExtResource("4_587de")
 title = "Slime Slap"
+description = "Basic attack."
 effects = Array[ExtResource("2_2ogkv")]([ExtResource("3_y8gyy")])
 casting_time = ExtResource("1_bq6jp")
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"

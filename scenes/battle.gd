@@ -70,8 +70,10 @@ func _process(delta: float) -> void:
 
 ## Called when unhandled keyboard input is received.
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Clear queued Ability"):
+	if event.is_action_pressed("Clear queued or cancel casting ability"):
 		queued_ability = null
+		if player.abilities_component.ability_casting:
+			player.abilities_component.cancel_cast()
 		get_viewport().set_input_as_handled()
 
 

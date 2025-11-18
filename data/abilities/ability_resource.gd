@@ -1,11 +1,13 @@
 extends Resource
-## A Resource representing an ability. Not meant to be mutated in runtime.
 class_name AbilityResource
+## A Resource representing an ability. Not meant to be mutated in runtime.
 
 @export var title : String ## The title of the Ability.
 @export var icon : Texture2D ## The icon for this Ability.
 @export_multiline var description : String ## The description for this Ability.
 @export var targeting : TargetingResource ## The method by which this Ability finds its targets.
+@export var cancelable : bool = true ## Whether this Ability can be canceled by the caster.
+@export var interruptible : bool = true ## Whether this Ability can be canceled by others.
 @export var effects : Array[EffectResource] ## An Array of EffectResources this Ability will perform.
 @export var casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
 @export var cooldown : ValueResource ## The duration in seconds before this Ability can be cast again.

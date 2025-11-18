@@ -1,8 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://b64vcadfmbtx7"]
+[gd_scene load_steps=5 format=3 uid="uid://b64vcadfmbtx7"]
 
 [ext_resource type="Script" uid="uid://c1lnd25hap32o" path="res://ui/ability_cast_bar.gd" id="1_8nknr"]
 
-[node name="AbilityCastBar" type="ProgressBar" node_paths=PackedStringArray("label")]
+[sub_resource type="Animation" id="Animation_8nknr"]
+resource_name = "flash_red"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w1hf2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lpkn"]
+_data = {
+&"RESET": SubResource("Animation_w1hf2"),
+&"flash_red": SubResource("Animation_8nknr")
+}
+
+[node name="AbilityCastBar" type="ProgressBar" node_paths=PackedStringArray("label", "animation_player")]
 custom_minimum_size = Vector2(800, 30)
 anchors_preset = 8
 anchor_left = 0.5
@@ -19,6 +56,7 @@ value = 80.0
 show_percentage = false
 script = ExtResource("1_8nknr")
 label = NodePath("Label")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -30,3 +68,10 @@ grow_vertical = 2
 text = "Imbued Expulsion"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6lpkn")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

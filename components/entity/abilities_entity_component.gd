@@ -121,3 +121,14 @@ func can_cast_at(ability: Ability, targets: Array[Entity]) -> bool:
 func modify_cooldowns(amount: float, operation: Math.Operation):
 	for ability in abilities:
 		ability._cooldown_left = Math.perform_operation(ability._cooldown_left, amount, operation)
+
+
+## Stops the active cast ability.
+func cancel_cast():
+	if ability_casting:
+		DebugManager.debug_log(
+			"Entity " + entity.title + " is canceling its cast of ability " + ability_casting._title
+		, self)
+		ability_casting.cancel_cast()
+		on_ability_cast_interrupted.emit(ability_casting, ability_casting.get_targets(), entity)
+		ability_casting = null

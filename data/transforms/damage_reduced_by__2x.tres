@@ -2,15 +2,12 @@
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_lmf6c"]
 [ext_resource type="Resource" uid="uid://ctdf1bwmhvife" path="res://data/conditionals/effect_is_damage.tres" id="2_7q5po"]
-[ext_resource type="Resource" uid="uid://g06l4oai6llx" path="res://data/values/flats/flat__2.tres" id="3_7q5po"]
+[ext_resource type="Resource" uid="uid://ciu3r873ubuh3" path="res://data/values/flats/flat__1.tres" id="3_7q5po"]
 [ext_resource type="Script" uid="uid://bhaop0eb07tqv" path="res://data/transforms/transform_resource.gd" id="3_jmjff"]
 
 [resource]
 script = ExtResource("3_jmjff")
-stat_type = 0
-math_operation = 1
 modifier = ExtResource("3_7q5po")
-subtracted_from_1 = true
 modifier_operation = 2
 conditionals = Array[ExtResource("1_lmf6c")]([ExtResource("2_7q5po")])
 metadata/_custom_type_script = "uid://bhaop0eb07tqv"

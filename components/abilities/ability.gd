@@ -148,3 +148,10 @@ func get_casting_time() -> float:
 	if !_casting_time:
 		return 0.0
 	return _casting_time.get_value(_caster, _targets)
+
+
+## Cancels the current casting of this ability.
+func cancel_cast():
+	casting = false
+	for effect in _effects:
+		effect.cancel()
