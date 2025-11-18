@@ -2,30 +2,24 @@ extends EffectResource
 ## Sets whether the targets are active or not.
 class_name SetActiveEffectResource
 
-## The Entity(s) this Effect affects. By default, all valid targets.
-@export var entity_target : Targeting.Target = Targeting.Target.Targets
-@export var active : ValueResource ## Whether the targets should be set to active or not. By default, active.
+@export var targeting_resource_override : TargetingResource ## An optional targeter to override what Entities are affected.
+@export var active_resource : ValueResource ## Whether the targets should be set to active or not. By default, active.
 
 ## Called when an Effect containing this Resource affects targets. Meant to be overloaded.
 func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+	if targeting_resource_override:
+		targets = targeting_resource_override.get_targets(caster, ability, effect)
+	
+	var active = active_resource.get_value(caster, targets) if active_resource else 1.0
+	
+	DebugManager.debug_log(
+		"Setting the following Entities " + ("active: " if active else "inactive: ") + 
+		",".join(targets.map(func(t: Entity): return t.title))
+	, self)
+	
 	super(effect, ability, caster, targets)
 	
-	var targets_found : Array[Entity] = []
-	match entity_target :
-		Targeting.Target.Targets:
-			assert(targets[0], "There are no valid targets")
-			for target in targets:
-				targets_found.append(target)
-		Targeting.Target.Target:
-			assert(targets[0], "There is no valid target")
-			targets_found.append(targets[0])
-		Targeting.Target.Caster:
-			#print("Target for adding " + effect_added.title + " is caster") 
-			targets_found.append(caster)
-			effect._targets = [caster]
-	assert(!targets_found.is_empty(), "No valid targets found")
+	assert(!targets.is_empty(), "There are no valid targets!")
 	
-	var is_active = active.get_value(caster, targets) if active else 1
-	
-	for target in targets_found:
-		target.abilities_component.can_act = is_active
+	for target in targets:
+		target.abilities_component.can_act = active

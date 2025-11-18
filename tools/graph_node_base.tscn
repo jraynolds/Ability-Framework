@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpt8hpkrbrsgd"]
+
+[ext_resource type="Script" uid="uid://4x5c0md8b52u" path="res://tools/graph_node_base.gd" id="1_ypw0o"]
+
+[node name="GraphNodeBase" type="GraphNode"]
+offset_right = 9.0
+offset_bottom = 55.0
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_ypw0o")
+metadata/_custom_type_script = "uid://4x5c0md8b52u"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Port"

@@ -29,5 +29,5 @@ func _process(_delta):
 	if ability:
 		var cast_time = ability.get_casting_time()
 		var cast_time_left = ability._cast_time_left
-		var bar_percent = (ability.get_casting_time() - ability._cast_time_left) / ability.get_casting_time()
+		var bar_percent = (cast_time - cast_time_left) / cast_time
 		value = bar_percent * 100

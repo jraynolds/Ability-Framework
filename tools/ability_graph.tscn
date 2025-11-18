@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://wq0bycheyfy8"]
+
+[ext_resource type="Script" uid="uid://t1v6f55vtv3r" path="res://tools/ability_graph.gd" id="1_7kxcf"]
+[ext_resource type="PackedScene" uid="uid://b1vxlda83m0ca" path="res://tools/conditional_graph_node.tscn" id="2_r650a"]
+[ext_resource type="PackedScene" uid="uid://clk18d4fq55oi" path="res://tools/graph_node_io.tscn" id="2_y6qk3"]
+[ext_resource type="PackedScene" uid="uid://c6mq0rdmboduc" path="res://tools/enter_graph_node.tscn" id="3_y6qk3"]
+[ext_resource type="PackedScene" uid="uid://bawqyxxy0s1u1" path="res://tools/ability_graph_node.tscn" id="4_eld2d"]
+
+[node name="AbilityGraph" type="Control" node_paths=PackedStringArray("graph_edit", "node_option_dropdown", "add_node_dropdown")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7kxcf")
+graph_edit = NodePath("VBoxContainer/GraphEdit")
+node_option_dropdown = NodePath("VBoxContainer/HBoxContainer/AddNodeOptions")
+add_node_dropdown = NodePath("VBoxContainer/HBoxContainer/AddNode")
+node_options = Array[PackedScene]([ExtResource("2_y6qk3"), ExtResource("2_r650a"), ExtResource("4_eld2d")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="AddNodeOptions" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Input/Output node"
+popup/item_0/id = 0
+popup/item_1/text = "Conditional node"
+popup/item_1/id = 1
+popup/item_2/text = "Ability node"
+popup/item_2/id = 2
+
+[node name="AddNode" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Add "
+
+[node name="GraphEdit" type="GraphEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConditionalGraphNode" parent="VBoxContainer/GraphEdit" instance=ExtResource("2_r650a")]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 117.0
+offset_right = 562.0
+offset_bottom = 245.0
+position_offset = Vector2(425, 117)
+resizable = true
+title = "If HP below 50%:"
+
+[node name="EnterGraphNode" parent="VBoxContainer/GraphEdit" instance=ExtResource("3_y6qk3")]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 133.0
+offset_right = 230.0
+offset_bottom = 211.0
+mouse_filter = 1
+position_offset = Vector2(152, 133)
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddNode" to="." method="_on_add_node_button_pressed"]
+[connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_connection_request"]
+[connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
