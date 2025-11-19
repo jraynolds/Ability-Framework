@@ -2,8 +2,6 @@ extends EffectResource
 class_name StatusAddEffectResource
 ## An EffectResource that adds a given Effect to an Entity.
 
- ## An optional targeting resource to use for this effect. If left empty, affects the Ability's targets.
-@export var targeting_resource_override : TargetingResource
 @export var effect_added : EffectResource ## The Effect this Effect adds to an Entity.
 enum StackingBehavior { ## What happens if the Entity has the same Effect we're trying to add.
 	Refresh = 0, ## Resets the duration.
@@ -43,14 +41,21 @@ func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array
 func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
 	super(effect, ability, caster, targets)
 	
-	if targeting_resource_override:
-		targets = targeting_resource_override.get_targets(caster, ability)
+	if targeting_override:
+		targets = targeting_override.get_targets(caster, ability)
+		
 	var status_effect_index = effect._sub_effects.find_custom(func(se: Effect):
 		return se.has_resource(effect_added)
 	)
 	assert(status_effect_index >= 0, "The status effect object is gone!")
 	
 	var stacks = num_stacks.get_value(caster, targets) if num_stacks else 1.0
+	
+	DebugManager.debug_log(
+		"Adding a status called " + effect._sub_effects[status_effect_index]._title +
+		" to the Entities " + ",".join(targets.map(func(e: Entity): return e.title)) +
+		" with stacks equal to " + str(stacks)
+	, self)
 	
 	for target in targets:
 		target.statuses_component.add_status(

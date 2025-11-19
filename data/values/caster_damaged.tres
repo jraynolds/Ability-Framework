@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="DamagedHistoryValueResource" load_steps=2 format=3 uid="uid://btnk70ijyeqjn"]
+[gd_resource type="Resource" script_class="DamagedHistoryValueResource" load_steps=3 format=3 uid="uid://btnk70ijyeqjn"]
 
 [ext_resource type="Script" uid="uid://bq8rhpal5wn2k" path="res://data/values/damaged_history_value_resource.gd" id="1_nsqgl"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="2_cu14l"]
 
 [resource]
 script = ExtResource("1_nsqgl")
-returned_information = 0
-is_int = false
-rounding_behavior = 0
+target_resource = ExtResource("2_cu14l")
 metadata/_custom_type_script = "uid://bq8rhpal5wn2k"

@@ -35,6 +35,13 @@ enum Operation {
 	Set
 }
 
+## Multiplication behavior. 
+enum MultiplicationBehavior {
+	None, ## The given value is unchanged.
+	AddToOne, ## The given value is added to 1 (so .1 becomes 1.1)
+	SubtractFromOne, ## The given value is subtracted from 1 (so .1 becomes .9)
+}
+
 
 ## Performs the given math operation on the first given value, modified by the second.
 static func perform_operation(value_modified: float, value_modifier: float, math_operation: Operation) -> float:

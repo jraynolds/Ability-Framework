@@ -6,13 +6,13 @@ class_name StatsEntityComponent
 var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paired with the kind of Stat each is.
 
 ## An Array of Transforms that alter modifications made to stats.
-var transform_statuses : Array[StatusEffect] :
+var stat_transform_statuses : Array[StatusEffect] :
 	get :
-		if !entity or !entity.statuses_component: return []
-		return entity.statuses_component.statuses.filter(func(status: StatusEffect): 
-			if status._resource as TransformEffectResource:
-				return true
-		)
+		return entity.statuses_component.stat_transform_statuses
+## An Array of Transforms that alter modifications made to keyworded values.
+var keyword_transform_statuses : Array[StatusEffect] :
+	get :
+		return entity.statuses_component.keyword_transform_statuses
 
 ## Emitted when a Stat we're tracking changes.
 signal on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float)
@@ -111,16 +111,16 @@ func modify_stat_value(
 	, self)
 	var stat_value = get_stat_value(stat, ignore_statuses)
 	if !ignore_transforms:
-		for transform in transform_statuses:
+		for transform in stat_transform_statuses:
 			if transform._resource.stat_type == stat:
-				if transform._resource.math_operation == math_operation:
-					value_modifier = transform.try_transform(
-						value_modifier, 
-						effect, 
-						effect._ability, 
-						effect._ability._caster, 
-						[entity]
-					)
+				value_modifier = transform._resource.try_transform(
+					value_modifier, 
+					effect, 
+					effect._ability, 
+					effect._ability._caster, 
+					effect._ability._targets,
+					entity.statuses_component.get_status_stacks(transform)
+				)
 	return set_stat_value(stat, Math.perform_operation(stat_value, value_modifier, math_operation))
 
 
@@ -160,16 +160,16 @@ func take_damage(
 			, self)
 	var hp_value = get_stat_value(StatResource.StatType.HP, ignore_statuses)
 	if !ignore_transforms:
-		for transform in transform_statuses:
-			if transform._resource.stat_type == StatResource.StatType.HP:
-				if transform._resource.math_operation == Math.Operation.Subtraction:
-					damage_dealt = transform.try_transform(
-						damage_dealt, 
-						effect, 
-						effect._ability, 
-						effect._ability._caster, 
-						[entity]
-					)
+		for transform in keyword_transform_statuses:
+			if transform._resource.keyword == KeywordTransformEffectResource.Keyword.Damaged:
+				damage_dealt = transform._resource.try_transform(
+					damage_dealt, 
+					effect, 
+					effect._ability, 
+					effect._ability._caster, 
+					effect._ability._targets,
+					entity.statuses_component.get_status_stacks(transform)
+				)
 	var hp_before_damage = get_stat_value(StatResource.StatType.HP)
 	var new_hp_value = set_stat_value(
 		StatResource.StatType.HP, 

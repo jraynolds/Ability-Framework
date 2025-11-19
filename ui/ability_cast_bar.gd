@@ -32,7 +32,12 @@ func _ready() -> void:
 
 ## Called every frame. Updates the UI.
 func _process(_delta):
-	visible = true if ability or animation_player.is_playing() else false
+	if animation_player.is_playing():
+		visible = true
+	elif ability and ability.get_casting_time() > 0.0:
+		visible = true
+	else :
+		visible = false
 	if ability:
 		var cast_time = ability.get_casting_time()
 		var cast_time_left = ability._cast_time_left 
@@ -43,4 +48,9 @@ func _process(_delta):
 ## Called when a cast ability is interrupted.
 func interrupt(_ability: Ability, _target: Array[Entity], _source: Entity):
 	ability = null
-	animation_player.play("flash_red")
+	if _source == entity:
+		label.text = "Canceled."
+		animation_player.play("flash_white")
+	else :
+		label.text = "Interrupted!"
+		animation_player.play("flash_red")

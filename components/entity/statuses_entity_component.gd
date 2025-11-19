@@ -9,6 +9,17 @@ var status_stacks : Dictionary[StatusEffect, int] = {}
 @export var initial_statuses : Array[StatusAddEffectResource] ## Statuses the Entity begins with can be added here.
 @export var status_effect_scene : PackedScene ## A default StatusEffect scene in case we have to construct one.
 
+var stat_transform_statuses : Array[StatusEffect] : ## The statuses that transform changes made to stats.
+	get :
+		return entity.statuses_component.statuses.filter(func(status: StatusEffect): 
+			return status._resource as StatTransformEffectResource
+		)
+var keyword_transform_statuses : Array[StatusEffect] : ## The statuses that transform changes made to keywords.
+	get :
+		return entity.statuses_component.statuses.filter(func(status: StatusEffect): 
+			return status._resource as KeywordTransformEffectResource
+		)
+
 signal on_status_added(status: StatusEffect) ## Emitted when we add a new status.
 signal on_status_removed(status: StatusEffect) ## Emitted when we remove a status.
 
@@ -76,6 +87,7 @@ func add_status(
 	stacking_behavior: StatusAddEffectResource.StackingBehavior,
 	num_stacks: int = 1
 ):
+	assert(num_stacks > 0, "Trying to add negative--or zero--stacks of something!")
 	DebugManager.debug_log(
 		"Adding status " + status._title + " from effect '" + adding_effect._title + "' via ability '" + adding_ability._title +
 		"' cast by " + caster.title + " with stacking behavior " + Natives.enum_name(StatusAddEffectResource.StackingBehavior, stacking_behavior) +

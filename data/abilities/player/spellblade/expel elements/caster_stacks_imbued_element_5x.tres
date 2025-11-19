@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cao1j7x81va5m" path="res://data/values/computed/computed_value_resource.gd" id="1_mn6fp"]
 [ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="2_5do62"]
-[ext_resource type="Resource" uid="uid://benbchaytjrdn" path="res://data/values/caster_stacks_imbued_element.tres" id="3_mn6fp"]
+[ext_resource type="Resource" uid="uid://benbchaytjrdn" path="res://data/abilities/player/spellblade/expel elements/caster_stacks_imbued_element.tres" id="3_mn6fp"]
 [ext_resource type="Resource" uid="uid://wjhhsi3bvspv" path="res://data/values/flats/flat_5.tres" id="4_5do62"]
 
 [resource]

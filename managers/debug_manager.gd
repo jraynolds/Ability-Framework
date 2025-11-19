@@ -9,6 +9,8 @@ class_name DebugManagerGlobal
 @export var effects : bool
 ## Whether debugging should be output for StatusEffects.
 @export var status_effects : bool
+## Whether debugging should be output for StatusAddEffectResources.
+@export var status_add_effect_resources : bool
 
 ## Whether debugging should be output for StatsEntityComponents.
 @export var stats_entity_components : bool
@@ -18,7 +20,7 @@ class_name DebugManagerGlobal
 @export var statuses_entity_components : bool
 
 ## Whether debugging should be output for TransformResources.
-@export var transform : bool
+@export var transform_resource : bool
 ## Whether debugging should be output for TriggerResources.
 @export var trigger_resources : bool
 ## Whether debugging should be output for StatModifyEffectResources.
@@ -44,32 +46,28 @@ func debug_log(message: String, source: Variant):
 	if is_instance_of(source, Ability) and abilities:
 		print("ABILITY: " + message + ", from '" + source.name + "'")
 	
-	if is_instance_of(source, Effect):
+	elif is_instance_of(source, Effect):
 		if is_instance_of(source, StatusEffect) and status_effects:
 			print("STATUSEFFECT: " + message + ", from '" + source.name + "'")
-			return
 		else:
 			print("EFFECT: " + message + ", from '" + source.name + "'")
-			return
 	
-	if is_instance_of(source, EntityComponent):
+	elif is_instance_of(source, EntityComponent):
 		if is_instance_of(source, StatsEntityComponent) and stats_entity_components:
 			print("ENTITYSTATS: " + message + ", from '" + source.entity.name + "'")
-			return
 		elif is_instance_of(source, StatusesEntityComponent) and statuses_entity_components:
 			print("ENTITYSTATUSES: " + message + ", from '" + source.entity.name + "'")
-			return
 		elif is_instance_of(source, AbilitiesEntityComponent) and abilities_entity_components:
 			print("ENTITYABILITIES: " + message + ", from '" + source.entity.name + "'")
-			return
 	
-	if is_instance_of(source, EffectResource):
+	elif is_instance_of(source, EffectResource):
 		if is_instance_of(source, StatModifyEffectResource) and stat_modify:
 			print("STATMODIFYEFFECT: " + message + ", from '" + source.resource_path + "'")
-			return
+		elif is_instance_of(source, StatusAddEffectResource) and status_add_effect_resources:
+			print("STATUSADDEFFECTRESOURCE: " + message + ", from '" + source.resource_path + "'")
 	
-	elif is_instance_of(source, TransformResource) and transform:
-		print("TRANSFORM: " + message + ", from '" + source.resource_path + "'")
+	elif is_instance_of(source, TransformResource) and transform_resource:
+		print("TRANSFORMRESOURCE: " + message + ", from '" + source.resource_path + "'")
 	elif is_instance_of(source, TriggerResource) and trigger_resources:
 		print("TRIGGER: " + message + ", from '" + source.resource_path + "'")
 	elif is_instance_of(source, ExpirationResource) and expiration_resources:

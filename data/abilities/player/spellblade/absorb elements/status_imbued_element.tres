@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=5 format=3 uid="uid://mpfhupyolpaq"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_s4k5l"]
+[ext_resource type="Texture2D" uid="uid://c6gfrtugim48b" path="res://assets/abilities/r_34.png" id="2_ukh8a"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="3_cq7ed"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_21a0r"]
+
+[resource]
+script = ExtResource("3_cq7ed")
+title = "Imbued Element"
+description = "Imbued with the power of an absorbed attack. 1 damage per stack."
+icon = ExtResource("2_ukh8a")
+positivity = 0
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="KeywordTransformEffectResource" load_steps=6 format=3 uid="uid://dqlp2vmyx1050"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_4nnv6"]
+[ext_resource type="Texture2D" uid="uid://40iridvww7qw" path="res://assets/abilities/b_01.png" id="2_4nnv6"]
+[ext_resource type="Resource" uid="uid://g06l4oai6llx" path="res://data/values/flats/flat__2.tres" id="3_4nnv6"]
+[ext_resource type="Script" uid="uid://chpfuld7ro0c3" path="res://data/effects/keyword_transform_effect_resource.gd" id="4_0dfu1"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_hivuk"]
+
+[resource]
+script = ExtResource("4_0dfu1")
+modifier = ExtResource("3_4nnv6")
+modifier_operation = 2
+multiplication_behavior = 2
+title = "Shielded"
+description = "The next time you take damage, take 20% less per stack."
+icon = ExtResource("2_4nnv6")
+positivity = 0
+metadata/_custom_type_script = "uid://chpfuld7ro0c3"

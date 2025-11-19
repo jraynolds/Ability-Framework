@@ -18,7 +18,7 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 		(str(minimum_stacks.get_value(caster, targets)) if minimum_stacks else "1") + " stacks"
 	, self)
 	
-	var min_stacks : float = minimum_stacks.get_value(caster, targets) if minimum_stacks else 1
+	var min_stacks : float = minimum_stacks.get_value(caster, targets) if minimum_stacks else 1.0
 	
 	for target in targets:
 		var matching_status = target.statuses_component.get_status_by_resource(status)

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://bd7eq48y2elxm"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_q6y5x"]
+[ext_resource type="Resource" uid="uid://mpfhupyolpaq" path="res://data/abilities/player/spellblade/absorb elements/status_imbued_element.tres" id="2_cu4oh"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_iamoq"]
+[ext_resource type="Texture2D" uid="uid://bc8by5gv4xxas" path="res://assets/abilities/r_39.png" id="4_3kb4i"]
+[ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="5_wb3mu"]
+[ext_resource type="Resource" uid="uid://cerighfpkvxny" path="res://data/values/computed/caster_damaged__2x.tres" id="6_phow3"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_yypp7"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="8_bq1jw"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_we63v"]
+[ext_resource type="Resource" uid="uid://dt4kgw1tvdm7h" path="res://data/triggers/on_take_damage.tres" id="10_yoaej"]
+
+[resource]
+script = ExtResource("7_yypp7")
+effect_added = ExtResource("2_cu4oh")
+stacking_behavior = 21
+num_stacks = ExtResource("6_phow3")
+lifetime = ExtResource("5_wb3mu")
+status_effect_scene = ExtResource("8_bq1jw")
+title = "Add imbued element"
+description = "Adds a portion of the last damage suffered to the caster."
+icon = ExtResource("4_3kb4i")
+positivity = 0
+triggers = Array[ExtResource("9_we63v")]([ExtResource("10_yoaej")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

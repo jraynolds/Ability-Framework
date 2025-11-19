@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://bvwtoshvvpm5i"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_40w61"]
+[ext_resource type="Resource" uid="uid://dqlp2vmyx1050" path="res://data/effects/statuses/status_shielded.tres" id="2_4x4vb"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_skk0a"]
+[ext_resource type="Resource" uid="uid://dvtw27ll7lyjw" path="res://data/expirations/on_take_damage_expire.tres" id="4_w0wk8"]
+[ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="5_qhrcg"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_phckf"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_ifycm"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="8_ia8ce"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="9_bunyb"]
+
+[resource]
+script = ExtResource("6_phckf")
+effect_added = ExtResource("2_4x4vb")
+lifetime = ExtResource("5_qhrcg")
+expirations = Array[ExtResource("3_skk0a")]([ExtResource("4_w0wk8")])
+status_effect_scene = ExtResource("7_ifycm")
+visible_status = false
+title = "Gain Shielded"
+description = "Gain a temporary 20% damage resist."
+positivity = 0
+triggers = Array[ExtResource("8_ia8ce")]([ExtResource("9_bunyb")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

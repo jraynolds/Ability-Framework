@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DamageEffectResource" load_steps=8 format=3 uid="uid://dkgedk7476kpo"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_qv60f"]
-[ext_resource type="Resource" uid="uid://du6q4lw35scao" path="res://data/conditionals/caster_chain_0_slash.tres" id="2_qv60f"]
+[ext_resource type="Resource" uid="uid://du6q4lw35scao" path="res://data/abilities/player/spellblade/imbued slash/caster_chain_0_slash.tres" id="2_qv60f"]
 [ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/caster_attack__8x.tres" id="4_qv60f"]
 [ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="5_05uit"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="5_fepja"]

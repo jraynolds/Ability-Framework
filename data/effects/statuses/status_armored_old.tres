@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=7 format=3 uid="uid://colkeq031stob"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_6qchb"]
+[ext_resource type="Resource" uid="uid://cna30smjppgrl" path="res://data/values/flats/flat__05.tres" id="1_qk2gn"]
+[ext_resource type="Texture2D" uid="uid://d215asybpyft5" path="res://assets/abilities/b_18.png" id="2_6qchb"]
+[ext_resource type="Resource" uid="uid://cgdygqjabdv5n" path="res://data/triggers/on_get_stat_value.tres" id="6_6qchb"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_571m5"]
+[ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="6_hv0s4"]
+
+[resource]
+script = ExtResource("6_hv0s4")
+entity_target = 0
+stat_type = 30
+modifier = ExtResource("1_qk2gn")
+math_operation = 0
+ignore_statuses = false
+ignore_transforms = false
+title = "Armored"
+description = "Defense increased by 5%."
+icon = ExtResource("2_6qchb")
+positivity = 0
+triggers = Array[ExtResource("6_571m5")]([ExtResource("6_6qchb")])
+conditionals_positive = Array[ExtResource("1_6qchb")]([])
+conditionals_negative = Array[ExtResource("1_6qchb")]([])
+metadata/_custom_type_script = "uid://des8hnti281sm"
