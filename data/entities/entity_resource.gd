@@ -10,3 +10,4 @@ class_name EntityResource
 ## The Abilities this Entity starts with, paired with the default bar locations for each Ability. 
 ## The integer can be 0-19; 0 is "1", 10 is "+1"
 @export var abilities : Dictionary[AbilityResource, int]
+@export var ability_graph : AbilityGraphResource ## The visual graph that determines how this Entity chooses its Abilities.

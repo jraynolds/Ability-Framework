@@ -9,7 +9,7 @@ offset_right = 567.0
 offset_bottom = 276.0
 mouse_filter = 1
 position_offset = Vector2(398, 214)
-title = "Slime Slap"
+title = "Ability node"
 slot/0/left_enabled = false
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -37,18 +37,46 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
 script = ExtResource("1_kbpn8")
 option_button = NodePath("OptionButton")
 
 [node name="OptionButton" type="OptionButton" parent="."]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="On casted" type="Label" parent="."]
 layout_mode = 2
-text = "Castable"
+text = "On casted"
 horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="."]
+[node name="On canceled" type="Label" parent="."]
+layout_mode = 2
+text = "On canceled"
+horizontal_alignment = 2
+
+[node name="On interrupted" type="Label" parent="."]
+layout_mode = 2
+text = "On interrupted"
+horizontal_alignment = 2
+
+[node name="Not castable" type="Label" parent="."]
 layout_mode = 2
 text = "Not castable"
 horizontal_alignment = 2

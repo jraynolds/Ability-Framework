@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=8 format=3 uid="uid://eikm0s4kxsel"]
 
-[ext_resource type="Resource" uid="uid://csxk1r5wyr1g4" path="res://data/values/caster_attack_1_5x.tres" id="1_cfcdt"]
+[ext_resource type="Resource" uid="uid://csxk1r5wyr1g4" path="res://data/values/computed/caster_attack_1_5x.tres" id="1_cfcdt"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_ait8k"]
 [ext_resource type="Resource" uid="uid://cd43lu3pdhexh" path="res://data/conditionals/caster_chain_0_riot_blade.tres" id="3_ait8k"]
 [ext_resource type="Resource" uid="uid://dhhbvttxhm6kx" path="res://data/conditionals/caster_chain_1_fast_blade.tres" id="4_aoguu"]

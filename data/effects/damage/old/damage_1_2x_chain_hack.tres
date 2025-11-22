@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=7 format=3 uid="uid://p81cnrs8dqkv"]
 
-[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/caster_attack_1_2x.tres" id="1_67spm"]
+[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_1_2x.tres" id="1_67spm"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_ukpoj"]
 [ext_resource type="Resource" uid="uid://cgcdpvdlauage" path="res://data/conditionals/caster_chain_0_hack.tres" id="3_67spm"]
 [ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="4_4ywhu"]

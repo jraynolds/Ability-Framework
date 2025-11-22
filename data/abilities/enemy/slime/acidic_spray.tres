@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=8 format=3 uid="uid://b7axsh52xjtbo"]
+
+[ext_resource type="Resource" uid="uid://hdwxhewk7tdu" path="res://data/values/flats/flat_3.tres" id="1_5gf70"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="2_nruub"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="3_5gf70"]
+[ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="4_hc2gs"]
+[ext_resource type="Resource" uid="uid://rxbn50n0tn21" path="res://data/abilities/enemy/slime/status_targets_add_corrosion.tres" id="4_nruub"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="5_3h1tt"]
+[ext_resource type="Resource" uid="uid://ben1d0nalbgbc" path="res://data/effects/damage/damage__5x.tres" id="5_hc2gs"]
+
+[resource]
+script = ExtResource("5_3h1tt")
+title = "Acidic Spray"
+description = "Adds a vuln up to the target."
+effects = Array[ExtResource("3_5gf70")]([ExtResource("4_nruub"), ExtResource("5_hc2gs")])
+casting_time = ExtResource("1_5gf70")
+gcd_cooldown = ExtResource("4_hc2gs")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

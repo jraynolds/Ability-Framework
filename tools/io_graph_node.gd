@@ -1,5 +1,5 @@
 extends GraphNodeBase
-class_name GraphNodeIO
+class_name IOGraphNode
 ## GraphNode that supports one entrance and one exit.
 
 ## Called when this node enters the scene.

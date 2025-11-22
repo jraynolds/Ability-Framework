@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dlhc3qkfv013t" path="res://tools/conditional_graph_node.gd" id="1_8pfa8"]
 
-[node name="ConditionalGraphNode" type="GraphNode" node_paths=PackedStringArray("option_button")]
+[node name="ConditionalGraphNode" type="GraphNode" node_paths=PackedStringArray("conditional_options")]
 offset_right = 133.0
 offset_bottom = 55.0
 mouse_filter = 1
+title = "Conditional node"
 slot/0/left_enabled = false
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -33,19 +34,45 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
 script = ExtResource("1_8pfa8")
-option_button = NodePath("OptionButton")
+conditional_options = NodePath("ConditionalOptions")
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="ConditionalOptions" type="OptionButton" parent="."]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="."]
+[node name="Subconditional1" type="OptionButton" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Subconditional2" type="OptionButton" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "True"
 horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="."]
+[node name="Label2" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "False"

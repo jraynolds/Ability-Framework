@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://t1v6f55vtv3r" path="res://tools/ability_graph.gd" id="1_7kxcf"]
 [ext_resource type="PackedScene" uid="uid://b1vxlda83m0ca" path="res://tools/conditional_graph_node.tscn" id="2_r650a"]
-[ext_resource type="PackedScene" uid="uid://clk18d4fq55oi" path="res://tools/io_graph_node.tscn" id="2_y6qk3"]
+[ext_resource type="PackedScene" uid="uid://clk18d4fq55oi" path="res://tools/graph_node_io.tscn" id="2_y6qk3"]
 [ext_resource type="PackedScene" uid="uid://c6mq0rdmboduc" path="res://tools/enter_graph_node.tscn" id="3_y6qk3"]
 [ext_resource type="PackedScene" uid="uid://bawqyxxy0s1u1" path="res://tools/ability_graph_node.tscn" id="4_eld2d"]
 [ext_resource type="PackedScene" uid="uid://5skvynkn2pnm" path="res://tools/priority_graph_node.tscn" id="5_eld2d"]
@@ -18,11 +18,7 @@ script = ExtResource("1_7kxcf")
 graph_edit = NodePath("VBoxContainer/GraphEdit")
 node_option_dropdown = NodePath("VBoxContainer/HBoxContainer/AddNodeOptions")
 add_node_dropdown = NodePath("VBoxContainer/HBoxContainer/AddNode")
-enter_node = ExtResource("3_y6qk3")
-io_node = ExtResource("2_y6qk3")
-conditional_node = ExtResource("2_r650a")
-ability_node = ExtResource("4_eld2d")
-priority_node = ExtResource("5_eld2d")
+node_options = Array[PackedScene]([ExtResource("2_y6qk3"), ExtResource("2_r650a"), ExtResource("4_eld2d"), ExtResource("5_eld2d")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -52,20 +48,6 @@ popup/item_3/id = 3
 layout_mode = 2
 text = "Add "
 
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Load" type="Button" parent="VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Load"
-
-[node name="Save" type="Button" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-text = "Save"
-
 [node name="GraphEdit" type="GraphEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -81,8 +63,6 @@ position_offset = Vector2(152, 133)
 resizable = false
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/AddNode" to="." method="_on_add_node_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_connection_request"]
 [connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
 [connection signal="node_deselected" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_node_deselected"]

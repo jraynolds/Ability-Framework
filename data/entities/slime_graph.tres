@@ -1,0 +1,92 @@
+[gd_resource type="Resource" script_class="AbilityGraphResource" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://tools/resources/ability_graph_node_resource.gd" id="1_m3mi0"]
+[ext_resource type="Script" path="res://tools/resources/ability_graph_resource.gd" id="2_38itl"]
+
+[sub_resource type="Resource" id="Resource_m3mi0"]
+script = ExtResource("1_m3mi0")
+title = "AbilityGraphNode"
+position_offset = Vector2(780, 140)
+
+[sub_resource type="Resource" id="Resource_38itl"]
+script = ExtResource("1_m3mi0")
+title = "EnterGraphNode2"
+position_offset = Vector2(20, 240)
+
+[sub_resource type="Resource" id="Resource_4uque"]
+script = ExtResource("1_m3mi0")
+title = "IOGraphNode"
+position_offset = Vector2(200, 240)
+
+[sub_resource type="Resource" id="Resource_e5nh5"]
+script = ExtResource("1_m3mi0")
+title = "ConditionalGraphNode"
+position_offset = Vector2(360, 180)
+
+[sub_resource type="Resource" id="Resource_f2vyt"]
+script = ExtResource("1_m3mi0")
+title = "AbilityGraphNode3"
+position_offset = Vector2(800, 400)
+
+[sub_resource type="Resource" id="Resource_rmqdk"]
+script = ExtResource("1_m3mi0")
+title = "ConditionalGraphNode2"
+position_offset = Vector2(360, 400)
+
+[sub_resource type="Resource" id="Resource_1ydy8"]
+script = ExtResource("1_m3mi0")
+title = "AbilityGraphNode2"
+position_offset = Vector2(800, 640)
+
+[resource]
+script = ExtResource("2_38itl")
+connections = Array[Dictionary]([{
+"from_node": &"IOGraphNode",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"ConditionalGraphNode",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode",
+"to_port": 0
+}, {
+"from_node": &"EnterGraphNode2",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"IOGraphNode",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode",
+"from_port": 1,
+"keep_alive": false,
+"to_node": &"ConditionalGraphNode2",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"ConditionalGraphNode2",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode3",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode2",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode2",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode3",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode2",
+"from_port": 1,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode2",
+"to_port": 0
+}])
+nodes = Array[ExtResource("1_m3mi0")]([SubResource("Resource_m3mi0"), SubResource("Resource_38itl"), SubResource("Resource_4uque"), SubResource("Resource_e5nh5"), SubResource("Resource_f2vyt"), SubResource("Resource_rmqdk"), SubResource("Resource_1ydy8")])

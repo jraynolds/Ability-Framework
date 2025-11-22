@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=3 format=3 uid="uid://duytbsj0cjyrg"]
+
+[ext_resource type="Resource" uid="uid://dxkb0dc5r7gmp" path="res://data/values/flats/flat__5.tres" id="1_lyhkw"]
+[ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="2_1x75s"]
+
+[resource]
+script = ExtResource("2_1x75s")
+stat = 20
+amount = ExtResource("1_lyhkw")
+metadata/_custom_type_script = "uid://fqonh0m4k5ow"

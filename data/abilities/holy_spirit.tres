@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityResource" load_steps=10 format=3 uid="uid://b7lf65t78afe8"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_8xofb"]
-[ext_resource type="Resource" uid="uid://canx04w7a0bwo" path="res://data/values/caster_ability_speed.tres" id="1_s58eq"]
+[ext_resource type="Resource" uid="uid://canx04w7a0bwo" path="res://data/values/computed/caster_ability_speed.tres" id="1_s58eq"]
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_bfdda"]
 [ext_resource type="Resource" uid="uid://g2rnr4drci7i" path="res://data/effects/mana_subtract_caster_2000.tres" id="3_bfdda"]
 [ext_resource type="Resource" uid="uid://do4dubxamjt0u" path="res://data/conditionals/caster_status_divine_might.tres" id="3_px55c"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy27yw1fb26hp"]
+
+[ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/ability_graph.tscn" id="1_yodcc"]
+
+[node name="AbilityGraphWindow" type="Window"]
+transparent_bg = true
+oversampling_override = 1.0
+title = "Ability Graph"
+initial_position = 3
+size = Vector2i(768, 500)
+current_screen = 0
+transparent = true
+popup_window = true
+
+[node name="AbilityGraph" parent="." instance=ExtResource("1_yodcc")]

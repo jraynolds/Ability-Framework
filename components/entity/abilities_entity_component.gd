@@ -55,6 +55,14 @@ func _process(delta: float) -> void:
 		gcd_remaining = max(0, gcd_remaining - delta)
 
 
+## Returns the Ability that matches the given AbilityResource.
+func get_ability_by_resource(resource: AbilityResource):
+	for ability in abilities:
+		if ability.is_resource_equal(resource):
+			return ability
+	return null
+
+
 ## Tries to cast the given ability on the given targets.
 func try_cast(ability: Ability, targets: Array[Entity]):
 	if !can_cast_at(ability, targets):
@@ -70,12 +78,12 @@ func cast(ability: Ability, targets: Array[Entity]):
 	, self)
 	on_ability_cast_begin.emit(ability, targets)
 	ability_casting = ability
-	ability.on_cast.connect(func(_caster: Entity, t: Array[Entity]): on_ability_finished_cast(ability, t), 4)
+	ability.on_cast.connect(func(_caster: Entity, t: Array[Entity]): _on_ability_finished_cast(ability, t), 4)
 	ability.begin_cast(targets)
 
 
 ## Triggered when an Ability we've begun to cast has finished casting. Adds it to the heap of our casts.
-func on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
+func _on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
 	DebugManager.debug_log(
 		"Entity " + entity.title + " has successfully finished casting ability " + ability._title +
 		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))

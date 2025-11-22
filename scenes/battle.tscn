@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://27bka5t3aalm"]
+[gd_scene load_steps=8 format=3 uid="uid://27bka5t3aalm"]
 
 [ext_resource type="Script" uid="uid://doo7asqx51qab" path="res://scenes/battle.gd" id="1_p1qf1"]
 [ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://ui/ability_overlay.tscn" id="1_th188"]
 [ext_resource type="PackedScene" uid="uid://b64vcadfmbtx7" path="res://ui/ability_cast_bar.tscn" id="3_6vh42"]
 [ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
 [ext_resource type="PackedScene" uid="uid://dh1uxqh1ntq1h" path="res://ui/statuses_container.tscn" id="4_a12nh"]
+[ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/ability_graph.tscn" id="6_6vh42"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 content_margin_left = 2.0
@@ -18,7 +19,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player", "cast_bar_enemy", "cast_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player", "cast_bar_enemy", "cast_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative", "ability_graph")]
 script = ExtResource("1_p1qf1")
 ability_overlay = NodePath("CanvasLayer/AbilityOverlay")
 health_bar_enemy = NodePath("CanvasLayer/HealthBar")
@@ -29,6 +30,7 @@ statuses_container_enemy_positive = NodePath("CanvasLayer/Statuses/StatusesConta
 statuses_container_enemy_negative = NodePath("CanvasLayer/Statuses/StatusesContainer2")
 statuses_container_player_positive = NodePath("CanvasLayer/Statuses2/StatusesContainer")
 statuses_container_player_negative = NodePath("CanvasLayer/Statuses2/StatusesContainer2")
+ability_graph = NodePath("AbilityGraphWindow/AbilityGraph")
 queued_ability_duration = 0.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -89,5 +91,26 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -49.0
 grow_vertical = 0
+
+[node name="AbilityGraphWindow" type="Window" parent="."]
+transparent_bg = true
+handle_input_locally = false
+oversampling_override = 1.0
+title = "Ability Graph"
+initial_position = 3
+size = Vector2i(1280, 1000)
+current_screen = 0
+transparent = true
+unfocusable = true
+popup_window = true
+
+[node name="AbilityGraph" parent="AbilityGraphWindow" node_paths=PackedStringArray("battle") instance=ExtResource("6_6vh42")]
+battle = NodePath("../..")
+
+[connection signal="on_paused" from="." to="AbilityGraphWindow/AbilityGraph" method="_on_battle_paused"]
+[connection signal="on_resumed" from="." to="AbilityGraphWindow/AbilityGraph" method="_on_battle_resumed"]
+[connection signal="on_started" from="." to="AbilityGraphWindow/AbilityGraph" method="_on_battle_started"]
+[connection signal="on_tick" from="." to="AbilityGraphWindow/AbilityGraph" method="_on_battle_tick"]
+[connection signal="close_requested" from="AbilityGraphWindow" to="." method="_on_ability_graph_window_close_requested"]
 
 [editable path="CanvasLayer/Statuses/StatusesContainer"]

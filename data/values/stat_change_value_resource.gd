@@ -3,24 +3,21 @@ extends ValueResource
 ## Tracks backwards the given number of changes.
 class_name StatChangeValueResource
 
-@export var target_resource : ValueResource ## What Entity we should be checking. By default, the caster.
+## An optional override for who we target to get a stat from. If not chosen, this will be the target of the Effect.
+@export var targeting_resource_override : TargetingResource 
 @export var stat_resource : ValueResource ## The stat we find changes for. By default, HP.
 @export var index_resource : ValueResource ## How many changes back we look. By default, none.
 
 ## Returns the magnitude of the target's previous stat change.
 func get_value(caster: Entity, targets: Array[Entity]):
-	var target = target_resource.get_value(caster, targets) if target_resource else Targeting.Target.Caster
+	if targeting_resource_override:
+		targets = targeting_resource_override.get_targets(caster)
+	
 	var stat = stat_resource.get_value(caster, targets) if stat_resource else StatResource.StatType.HP
 	var index = index_resource.get_value(caster, targets) if index_resource else 0
 	
-	var entity = caster
-	if target == Targeting.Target.Target:
-		entity = targets[0]
-	elif target == Targeting.Target.Targets:
-		assert(false, "No plan for multiple targets.")
-	assert(entity != null, "No entity to check stat changes for!")
+	var change = targets[0].history_component.get_stat_change_history(stat, index)
 	
-	var change = entity.history_component.get_stat_change_history(stat, index)
 	if !change:
 		return NAN
 	if change.new_value == NAN or change.old_value == NAN:

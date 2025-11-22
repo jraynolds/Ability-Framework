@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StatValueResource" load_steps=3 format=3 uid="uid://qw5ms05ebxg5"]
+
+[ext_resource type="Script" uid="uid://fqonh0m4k5ow" path="res://data/values/stat_value_resource.gd" id="1_lur6r"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="2_0qcey"]
+
+[resource]
+script = ExtResource("1_lur6r")
+targeting_resource_override = ExtResource("2_0qcey")
+metadata/_custom_type_script = "uid://fqonh0m4k5ow"

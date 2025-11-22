@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_cy8t8"]
 [ext_resource type="Resource" uid="uid://cgcdpvdlauage" path="res://data/conditionals/caster_chain_0_hack.tres" id="2_dpm7k"]
-[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/caster_attack_1_2x.tres" id="3_dpm7k"]
+[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_1_2x.tres" id="3_dpm7k"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="3_yqtdo"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_6x1wc"]
 [ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="4_yqtdo"]

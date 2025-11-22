@@ -2,6 +2,9 @@ extends Node
 ## A class for outputting custom debug messages. Autoloaded.
 class_name DebugManagerGlobal
 
+## Whether debugging should be output for the Battle.
+@export var battle : bool
+
 ## Whether debugging should be output for Abilities.
 @export var abilities : bool
 
@@ -41,8 +44,14 @@ class_name DebugManagerGlobal
 ## Whether debugging should be output for AbilityCastBars.
 @export var ability_cast_bars : bool
 
+## Whether debugging should be output for the AbilityGraph.
+@export var ability_graph : bool
+
 ## Outputs a detailed log if the log's source is one2 we're outputting.
 func debug_log(message: String, source: Variant):
+	if is_instance_of(source, Battle) and battle:
+		print("BATTLE: " + message + ", from '" + source.name + "'")
+		
 	if is_instance_of(source, Ability) and abilities:
 		print("ABILITY: " + message + ", from '" + source.name + "'")
 	
@@ -88,3 +97,7 @@ func debug_log(message: String, source: Variant):
 	## Stats
 	elif is_instance_of(source, Stat) and stats:
 		print("STAT: " + message + ", from '" + source._title + "'")
+		
+	## AbilityGraph
+	elif is_instance_of(source, AbilityGraph) and ability_graph:
+		print("ABILITYGRAPH: " + message + ", from '" + source.name + "'")

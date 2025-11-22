@@ -1,10 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpt8hpkrbrsgd"]
+[gd_scene load_steps=5 format=3 uid="uid://cpt8hpkrbrsgd"]
 
 [ext_resource type="Script" uid="uid://4x5c0md8b52u" path="res://tools/graph_node_base.gd" id="1_ypw0o"]
 
-[node name="GraphNodeBase" type="GraphNode"]
+[sub_resource type="Animation" id="Animation_b0rem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ypw0o"]
+resource_name = "pulsate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_at0vd"]
+_data = {
+&"RESET": SubResource("Animation_b0rem"),
+&"pulsate": SubResource("Animation_ypw0o")
+}
+
+[node name="GraphNodeBase" type="GraphNode" node_paths=PackedStringArray("animation_player")]
 offset_right = 9.0
 offset_bottom = 55.0
+resizable = true
+title = "Base node"
 slot/0/left_enabled = false
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -15,8 +54,16 @@ slot/0/right_color = Color(1, 1, 1, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
 script = ExtResource("1_ypw0o")
+animation_player = NodePath("AnimationPlayer")
 metadata/_custom_type_script = "uid://4x5c0md8b52u"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 text = "Port"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_at0vd")
+}
+
+[connection signal="resize_request" from="." to="." method="_on_resize_request"]
