@@ -49,3 +49,16 @@ func _on_remove_slot_pressed():
 	if num_slots <= 3:
 		remove_slot_button.disabled = true
 	get_rect().size = get_minimum_size()
+
+
+## Called to save this node into the given Resource for later retrieval.
+func save(resource: AbilityGraphNodeResource): 
+	super(resource)
+	resource.node_data.num_slots = num_slots
+
+
+## Called to load into this node with the given resource.
+func load(resource: AbilityGraphNodeResource):
+	super(resource)
+	for i in range(resource.node_data.num_slots - num_slots):
+		_on_add_slot_pressed()

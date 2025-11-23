@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EntityStatusConditionalResource" load_steps=3 format=3 uid="uid://bgxp4ikexk1x3"]
+
+[ext_resource type="Script" uid="uid://y5lbihft5yxd" path="res://data/conditionals/entity_status_conditional_resource.gd" id="1_t8qin"]
+[ext_resource type="Resource" uid="uid://wre0vwfwlsv2" path="res://data/effects/statuses/status_corrosion.tres" id="2_tfhw3"]
+
+[resource]
+script = ExtResource("1_t8qin")
+status = ExtResource("2_tfhw3")
+metadata/_custom_type_script = "uid://y5lbihft5yxd"

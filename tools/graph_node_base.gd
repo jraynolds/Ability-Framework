@@ -2,8 +2,16 @@ extends GraphNode
 class_name GraphNodeBase
 ## Base class for a GraphNode in an AbilityGraph.
 
+@export var option_button : OptionButton ## The dropdown menu we offer.
 @export var animation_player : AnimationPlayer ## The animation player for this node.
 var entity : Entity ## The Entity this AbilityGraph is for.
+var active : bool : ## Whether the AI brain is on this node.
+	set(val):
+		active = val
+		if val and !animation_player.is_playing():
+			animation_player.play("pulsate")
+		elif !val:
+			animation_player.stop()
 
 signal on_proceed(port: int) ## Emitted when we're ready to proceed along a connection.
 
@@ -40,4 +48,18 @@ func _on_resize_request(new_size: Vector2) -> void:
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain. Meant to be overloaded.
 func tick(delta: float):
-	pass
+	on_proceed.emit(0)
+	modulate = Color.PURPLE
+	#print("I'm active: " + name)
+
+
+## Called to save this node into the given Resource for later retrieval. Meant to be overloaded.
+func save(resource: AbilityGraphNodeResource):
+	resource.title = name
+	resource.position_offset = position_offset
+
+
+## Called to load into this node with the given resource. Meant to be overloaded.
+func load(resource: AbilityGraphNodeResource):
+	name = resource.title
+	position_offset = resource.position_offset

@@ -5,4 +5,4 @@ class_name AbilityGraphNodeResource
 @export var title: String
 #@export var packed_scene: PackedScene
 @export var position_offset: Vector2
-#@export var node_data = {}
+@export var node_data = {}

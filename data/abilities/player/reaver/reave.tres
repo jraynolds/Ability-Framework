@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_obvbf"]
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="3_y2wfc"]
 [ext_resource type="Resource" uid="uid://cwydierih7yj6" path="res://data/effects/damage/damage_chain_hack_bash.tres" id="5_esuhr"]
-[ext_resource type="Resource" uid="uid://c1dkjn6omt663" path="res://data/effects/status_targets_add_armor_break_chain_hack_bash.tres" id="6_lsuiw"]
+[ext_resource type="Resource" uid="uid://c1dkjn6omt663" path="res://data/effects/status_add_armor_break_chain_hack_bash.tres" id="6_lsuiw"]
 [ext_resource type="Resource" uid="uid://bxbkwjjc1kk3d" path="res://data/effects/status_caster_add_armored_chain_hack_bash.tres" id="7_kmqtm"]
 [ext_resource type="Resource" uid="uid://dhwgqo1oq4jix" path="res://data/effects/damage/damage__8x_chainless_hack_bash.tres" id="8_y2wfc"]
 

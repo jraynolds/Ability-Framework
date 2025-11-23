@@ -80,14 +80,7 @@ func cast(ability: Ability, targets: Array[Entity]):
 	ability_casting = ability
 	ability.on_cast.connect(func(_caster: Entity, t: Array[Entity]): _on_ability_finished_cast(ability, t), 4)
 	ability.begin_cast(targets)
-
-
-## Triggered when an Ability we've begun to cast has finished casting. Adds it to the heap of our casts.
-func _on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
-	DebugManager.debug_log(
-		"Entity " + entity.title + " has successfully finished casting ability " + ability._title +
-		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
-	, self)
+	
 	if ability._gcd_type == AbilityResource.GCD.OnGCD:
 		if ability._gcd_cooldown:
 			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
@@ -95,6 +88,14 @@ func _on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
 		else :
 			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 			gcd_remaining = gcd_max_cached
+
+
+## Triggered when an Ability we've begun to cast has finished casting.
+func _on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
+	DebugManager.debug_log(
+		"Entity " + entity.title + " has successfully finished casting ability " + ability._title +
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
 	ability_casting = null
 	on_ability_cast.emit(ability, targets)
 

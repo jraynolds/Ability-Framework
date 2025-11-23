@@ -2,7 +2,6 @@ extends GraphNodeBase
 class_name AbilityGraphNode
 ## A node in the AbilityGraph that holds a single Ability castable by an Entity.
 
-@export var option_button : OptionButton ## The dropdown menu for the AbilityResource we offer.
 var resources : Array[AbilityResource] ## The AbilityResources available to us.
 var ability_resource : AbilityResource : ## The AbilityResource we choose.
 	get :
@@ -12,6 +11,7 @@ var ability_resource : AbilityResource : ## The AbilityResource we choose.
 var ability : Ability : ## Our Ability on our Entity, as an actual Ability.
 	get :
 		return entity.abilities_component.get_ability_by_resource(ability_resource)
+var resource_path_to_load : String ## The resource we're waiting to load, if any.
 
 ## Called when the node enters the scene.
 func _ready() -> void:
@@ -28,6 +28,13 @@ func _ready() -> void:
 				resources.append(resource)
 	for resource in resources:
 		option_button.add_item(resource.resource_path.split("/")[-1])
+	if resource_path_to_load:
+		var ability_resource_index = -1
+		for i in range(len(resources)):
+			if resources[i].resource_path == resource_path_to_load:
+				ability_resource_index = i
+		option_button.select(ability_resource_index)
+		resource_path_to_load = ""
 
 
 ## Initializes much of our setup.
@@ -43,17 +50,22 @@ func set_entity(e: Entity):
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain and tries to cast this Ability.
 func tick(delta: float):
-	super(delta)
-	if ability._gcd_type == AbilityResource.GCD.OnGCD and entity.abilities_component.gcd_remaining > 0.0:
+	if entity.abilities_component.ability_casting :
 		return
-	if !entity.abilities_component.can_cast_at(ability, entity.targeting_component.targets):
+	elif ability._gcd_type == AbilityResource.GCD.OnGCD and entity.abilities_component.gcd_remaining > 0.0:
+		return
+	elif !entity.abilities_component.can_cast_at(ability, entity.targeting_component.targets):
+		modulate = Color.RED
 		on_proceed.emit(4)
+	else :
+		entity.abilities_component.cast(ability, entity.targeting_component.targets)
 
 
 ## Called when our Entity casts an Ability. Ignored if it's not ours.
 func _on_cast(cast_ability: Ability, targets: Array[Entity]):
 	if cast_ability != ability:
 		return
+	modulate = Color.GREEN
 	on_proceed.emit(1)
 
 
@@ -63,6 +75,21 @@ func _on_cast_interrupted(cast_ability: Ability, targets: Array[Entity], interru
 		return
 	
 	if interrupter == entity:
+		modulate = Color.YELLOW
 		on_proceed.emit(2)
 	else:
+		modulate = Color.ORANGE
 		on_proceed.emit(3)
+
+
+## Called to save this node into the given Resource for later retrieval.
+func save(resource: AbilityGraphNodeResource):
+	super(resource)
+	var resource_path = ability_resource.resource_path
+	resource.node_data.ability_resource_path = resource_path
+
+
+## Called to load into this node with the given resource.
+func load(resource: AbilityGraphNodeResource):
+	super(resource)
+	resource_path_to_load = resource.node_data.ability_resource_path

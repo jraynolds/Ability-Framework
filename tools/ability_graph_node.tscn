@@ -1,33 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bawqyxxy0s1u1"]
+[gd_scene load_steps=3 format=3 uid="uid://bawqyxxy0s1u1"]
 
 [ext_resource type="Script" uid="uid://dpr7x14l0jo1a" path="res://tools/ability_graph_node.gd" id="1_kbpn8"]
+[ext_resource type="PackedScene" uid="uid://cpt8hpkrbrsgd" path="res://tools/graph_node_base.tscn" id="1_ytjsa"]
 
-[node name="AbilityGraphNode" type="GraphNode" node_paths=PackedStringArray("option_button")]
-offset_left = 398.0
-offset_top = 214.0
-offset_right = 567.0
-offset_bottom = 276.0
-mouse_filter = 1
-position_offset = Vector2(398, 214)
-title = "Ability node"
-slot/0/left_enabled = false
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = false
-slot/0/right_type = 0
-slot/0/right_color = Color(1, 1, 1, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
-slot/1/left_enabled = false
-slot/1/left_type = 0
-slot/1/left_color = Color(1, 1, 1, 1)
-slot/1/left_icon = null
-slot/1/right_enabled = false
-slot/1/right_type = 0
-slot/1/right_color = Color(1, 1, 1, 1)
-slot/1/right_icon = null
-slot/1/draw_stylebox = true
+[node name="AbilityGraphNode" instance=ExtResource("1_ytjsa")]
+title = "Ability Node"
 slot/2/left_enabled = false
 slot/2/left_type = 0
 slot/2/left_color = Color(1, 1, 1, 1)
@@ -56,27 +33,22 @@ slot/4/right_color = Color(1, 1, 1, 1)
 slot/4/right_icon = null
 slot/4/draw_stylebox = true
 script = ExtResource("1_kbpn8")
-option_button = NodePath("OptionButton")
 
-[node name="OptionButton" type="OptionButton" parent="."]
-layout_mode = 2
-
-[node name="On casted" type="Label" parent="."]
-layout_mode = 2
+[node name="Label" parent="." index="2"]
 text = "On casted"
 horizontal_alignment = 2
 
-[node name="On canceled" type="Label" parent="."]
+[node name="On canceled" type="Label" parent="." index="4"]
 layout_mode = 2
 text = "On canceled"
 horizontal_alignment = 2
 
-[node name="On interrupted" type="Label" parent="."]
+[node name="On interrupted" type="Label" parent="." index="5"]
 layout_mode = 2
 text = "On interrupted"
 horizontal_alignment = 2
 
-[node name="Not castable" type="Label" parent="."]
+[node name="On casted" type="Label" parent="." index="6"]
 layout_mode = 2
-text = "Not castable"
+text = "Unable to cast"
 horizontal_alignment = 2

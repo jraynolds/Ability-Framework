@@ -26,6 +26,6 @@ func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Ent
 		Math.Comparison.LessThanOrEqual:
 			met = value_1.get_value(caster, targets) <= value_2.get_value(caster, targets)
 	DebugManager.debug_log(
-		"The comparison has evaluated as " + met
+		"The comparison has evaluated as " + str(met)
 	, self)
 	return met

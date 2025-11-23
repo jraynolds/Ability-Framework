@@ -18,11 +18,11 @@ script = ExtResource("1_7kxcf")
 graph_edit = NodePath("VBoxContainer/GraphEdit")
 node_option_dropdown = NodePath("VBoxContainer/HBoxContainer/AddNodeOptions")
 add_node_dropdown = NodePath("VBoxContainer/HBoxContainer/AddNode")
-enter_node = ExtResource("3_y6qk3")
-io_node = ExtResource("2_y6qk3")
-conditional_node = ExtResource("2_r650a")
-ability_node = ExtResource("4_eld2d")
-priority_node = ExtResource("5_eld2d")
+enter_node_scene = ExtResource("3_y6qk3")
+io_node_scene = ExtResource("2_y6qk3")
+conditional_node_scene = ExtResource("2_r650a")
+ability_node_scene = ExtResource("4_eld2d")
+priority_node_scene = ExtResource("5_eld2d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

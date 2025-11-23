@@ -4,8 +4,11 @@
 [ext_resource type="Script" uid="uid://inlgfxwnlpbx" path="res://tools/enter_graph_node.gd" id="2_euwx1"]
 
 [node name="EnterGraphNode" instance=ExtResource("1_wgnl4")]
-title = "On battle begin"
+title = "Entry node"
 script = ExtResource("2_euwx1")
 
-[node name="Label" parent="." index="1"]
+[node name="OptionButton" parent="." index="1"]
+visible = false
+
+[node name="Label" parent="." index="2"]
 text = "Enter"
