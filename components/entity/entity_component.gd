@@ -10,7 +10,7 @@ class_name EntityComponent
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
-func load_entity_resource(resource: EntityResource):
+func load_entity_resource(_resource: EntityResource):
 	pass
 
 

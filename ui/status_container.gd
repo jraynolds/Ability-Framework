@@ -39,7 +39,7 @@ func from_status(status: StatusEffect) -> StatusContainer:
 
 
 ## Called every frame. Updates the duration.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !_status:
 		return
 	_lifetime_left = _status.lifetime_remaining

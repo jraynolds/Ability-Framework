@@ -6,7 +6,7 @@ class_name CooldownsEffectResource
 @export var math_operation : Math.Operation ## The type of mathematics operation we'll perform.
 
 ## Called when an Effect containing this Resource is created. Meant to be overloaded.
-func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+func on_created(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]):
 	pass
 
 

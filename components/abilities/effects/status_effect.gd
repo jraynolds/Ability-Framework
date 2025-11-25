@@ -123,7 +123,7 @@ func register(caster: Entity, targets: Array[Entity]):
 	, self)
 	
 	for trigger in _triggers:
-		trigger.register(self, _ability, caster, targets, affect)
+		trigger.register(_ability, caster, targets, affect)
 	for expiration in _expirations:
 		expiration.register(self, _ability, caster, targets)
 	on_registered.emit()
@@ -149,8 +149,8 @@ func affect(caster: Entity, targets: Array[Entity]):
 
 
 ## Causes this StatusEffect to expire according to the behavior of the given ExpirationResource.
-## caster and targets are extraneous parameters necessary to square with how our triggers work.
-func expire_from_resource(expiration: ExpirationResource, caster: Entity, targets: Array[Entity]):
+## c(caster) and t(arget) are extraneous parameters necessary to square with how our triggers work.
+func expire_from_resource(expiration: ExpirationResource, _c: Entity, _t: Array[Entity]):
 	DebugManager.debug_log(
 		"StatusEffect " + _title + " is expiring from effect " + expiration.resource_name
 	, self)

@@ -7,5 +7,5 @@ class_name ConditionalResource
 
 
 ## Returns whether the conditions are met. False by default.
-func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+func is_met(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]) -> bool:
 	return false

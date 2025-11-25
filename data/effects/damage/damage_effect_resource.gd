@@ -56,7 +56,7 @@ func get_damage_dealt(caster: Entity, targets: Array[Entity]) -> float:
 	
 ## Returns the type of damage this effect does. If none is set, it does physical.
 func get_damage_type(caster: Entity, targets: Array[Entity]) -> DamageType:
-	return damage_type.get_value(caster, targets) if damage_type else DamageType.Physical
+	return damage_type.get_value_int(caster, targets) as DamageType if damage_type else DamageType.Physical
 
 ### Returns what our modification to the given value would result in.
 #func get_modified_value(value: float, caster: Entity, targets: Array[Entity]) -> float:

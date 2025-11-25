@@ -15,7 +15,7 @@ func register(status: StatusEffect, ability: Ability, caster: Entity, targets: A
 			"StatusEffect " + status._title + "'s expiration effects are being registered to trigger " + 
 			trigger.title
 		, self)
-		trigger.register(status, ability, caster, targets, status.expire_from_resource.bind(self))
+		trigger.register(ability, caster, targets, status.expire_from_resource.bind(self))
 
 
 ## Causes the selected expiration behavior to happen for the StatusEffect.
@@ -25,6 +25,6 @@ func expire_effect(status: StatusEffect, ability: Ability = status._ability, cas
 	, self)
 	if stacks_removed:
 		for target in status._targets:
-			target.statuses_component.modify_stacks(status, -stacks_removed.get_value(caster, targets))
+			target.statuses_component.modify_stacks(status, -stacks_removed.get_value_int(caster, targets))
 	else :
 		status.end()

@@ -24,8 +24,8 @@ var _active_temp_effects : Array[Effect] : ## Those of our _temp_effects which a
 #var canceled : bool  ## Whether this effect has been canceled.
 
 signal on_registered ## Emitted when this Effect is fully registered on all its Triggers.
-signal on_affected(caster: Entity, targets: Array[Entity]) ## Emitted when this Effect affects its targets.
-signal on_unregistered ## Emitted when this Effect is fully unregistered on all its Triggers.
+#signal on_affected(caster: Entity, targets: Array[Entity]) ## Emitted when this Effect affects its targets.
+#signal on_unregistered ## Emitted when this Effect is fully unregistered on all its Triggers.
 signal on_expired ## Emitted when this Effect expires.
 
 ## Returns an instance of this initialized with the given EffectResource.
@@ -108,7 +108,7 @@ func register(caster: Entity, targets: Array[Entity]):
 	add_child(effect_temp, true)
 	
 	for trigger in _triggers:
-		trigger.register(effect_temp, _ability, caster, targets, effect_temp.affect)
+		trigger.register(_ability, caster, targets, effect_temp.affect)
 	on_registered.emit()
 	
 	DebugManager.debug_log(

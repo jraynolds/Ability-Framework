@@ -8,8 +8,8 @@ class_name StatResource
 @export var is_int : bool ## Whether this Stat is an integer.
 ## If this Value should output an integer, the rounding method it should use.
 @export var rounding_behavior : Math.Rounding = Math.Rounding.Floor
-@export var max : float = 9999 ## The maximum allowed value of this Stat.
-@export var min : float = -9999 ## The minimum allowed value of this Stat.
+@export var maximum : float = 9999 ## The maximum allowed value of this Stat.
+@export var minimum : float = -9999 ## The minimum allowed value of this Stat.
 
 enum StatType {
 	HP = 0,

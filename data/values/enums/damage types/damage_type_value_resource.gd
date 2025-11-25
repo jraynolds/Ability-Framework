@@ -5,5 +5,5 @@ class_name DamageTypeValueResource
 @export var damage_type : DamageEffectResource.DamageType ## The damage type we return.
 
 ## Returns the int value of our DamageType enum.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
+func get_value(_caster: Entity, _targets: Array[Entity]) -> float:
 	return damage_type

@@ -7,5 +7,10 @@ class_name ValueResource
 @export var rounding_behavior : Math.Rounding = Math.Rounding.Floor
 
 ## Returns a calculated value.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
+func get_value(_caster: Entity, _targets: Array[Entity]) -> float:
 	return NAN
+
+
+## Returns a calculated value as an int.
+func get_value_int(_caster: Entity, _targets: Array[Entity]) -> int:
+	return int(get_value(_caster, _targets))

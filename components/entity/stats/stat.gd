@@ -11,16 +11,16 @@ var _resource : StatResource :
 		_description = _resource.description
 		_is_int = _resource.is_int
 		_rounding_behavior = _resource.rounding_behavior
-		_max = _resource.max
-		_min = _resource.min
+		_maximum = _resource.maximum
+		_minimum = _resource.minimum
 var _title : String ## The title of this Stat.
 var _type : StatResource.StatType ## The type of this Stat.
 var _description : String ## The description for this Stat's purpose.
 var _is_int : bool ## Whether this Stat is an integer.
 ## If this Value should output an integer, the rounding method it should use.
 var _rounding_behavior : Math.Rounding
-var _max : float = 9999 ## The maximum allowed value of this Stat.
-var _min : float = -9999 ## The minimum allowed value of this Stat.
+var _maximum : float = 9999 ## The maximum allowed value of this Stat.
+var _minimum : float = -9999 ## The minimum allowed value of this Stat.
 
 var _value : float ## The value of this Stat.
 var value : float : ## Get/Setter for the value. Changing it emits on_value_change.
@@ -28,10 +28,7 @@ var value : float : ## Get/Setter for the value. Changing it emits on_value_chan
 		return _value
 	set(val):
 		var old_val = _value
-		if val > _max:
-			val == _max
-		if val < _min:
-			val == _min
+		val = clampf(val, _minimum, _maximum)
 		_value = val
 		on_value_change.emit(_value, old_val)
 

@@ -21,7 +21,7 @@ var _statuses : Dictionary[StatusEffect, StatusContainer] = {}
 
 
 ## Called every frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !entity:
 		return
 	var statuses = entity.statuses_component.get_statuses(status_positivity)

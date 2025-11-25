@@ -13,8 +13,8 @@ func get_value(caster: Entity, targets: Array[Entity]):
 	if targeting_resource_override:
 		targets = targeting_resource_override.get_targets(caster)
 	
-	var stat = stat_resource.get_value(caster, targets) if stat_resource else StatResource.StatType.HP
-	var index = index_resource.get_value(caster, targets) if index_resource else 0
+	var stat = stat_resource.get_value_int(caster, targets) as StatResource.StatType if stat_resource else StatResource.StatType.HP
+	var index = index_resource.get_value_int(caster, targets) if index_resource else 0
 	
 	var change = targets[0].history_component.get_stat_change_history(stat, index)
 	

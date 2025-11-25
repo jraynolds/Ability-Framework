@@ -15,7 +15,14 @@ enum MultistackBehavior { ## The behavior multiple stacks results in.
 }
 
 ## Gets the modifying value. If given more than 1 stack, each stack is tallied according to the MultistackBehavior.
-func get_modifying_value(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], stacks: int=1) -> float:
+func get_modifying_value(
+	_value: float, 
+	_effect: Effect, 
+	_ability: Ability, 
+	caster: Entity, 
+	targets: Array[Entity], 
+	stacks: int=1
+) -> float:
 	var modifier_value = modifier.get_value(caster, targets)
 	
 	assert(stacks >= 1, "No plan for negative stacks!")
@@ -32,14 +39,14 @@ func get_modifying_value(value: float, effect: Effect, ability: Ability, caster:
 
 
 ## Attempts to modify the given value. If the conditionals aren't met, just returns the incoming value.
-func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], stacks: int=1) -> float:
-	if !can_transform(value, effect, ability, caster, targets):
+func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], _stacks: int=1) -> float:
+	if !can_transform(effect, ability, caster, targets):
 		return value
 	return value
 
 
 ## Returns whether this Transform can be used on an incoming value.
-func can_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+func can_transform(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
 	for conditional in conditionals:
 		if !conditional.is_met(effect, ability, caster, targets):
 			return false

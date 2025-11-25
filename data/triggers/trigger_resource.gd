@@ -15,10 +15,10 @@ enum Trigger {
 @export var trigger : Trigger = Trigger.OnThisAbilityCast 
 
 
-## Adds a listener to the appropriate game trigger for the given Effect, calling the given function.
+## Adds a listener to the appropriate game trigger for the given Ability, calling the given function.
 ## For this to work properly, we're expecting the function to need, as its final parameters, caster: Entity and targets: Array[Entity].
 ## Whatever Signal gets bound needs to emit 0 variables--if it emits more, we untangle its parameters to put caster and targets last.
-func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
+func register(ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
 	match trigger :
 		Trigger.OnThisAbilityCast:
 			#ability.on_cast.connect(function.bind(caster, targets))

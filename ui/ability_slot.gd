@@ -60,7 +60,7 @@ var activated : bool : ## Whether the button is currently activated. When set to
 			animation_player.stop()
 			animation_player.play("activated_flash")
 
-signal on_drop_accept(data: Variant) ## emitted when an element is successfully dropped on this slot.
+#signal on_drop_accept(data: Variant) ## emitted when an element is successfully dropped on this slot.
 signal on_activated ## emitted when the slot's keystroke is pressed.
 
 ## Custom init function so that it doesn't error
@@ -76,7 +76,7 @@ func _ready() -> void:
 
 
 ## Called every frame. Checks whether the player can use the ability in the slot, and adds the disabled overlay if not.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _button and _button.ability:
 		disabled_overlay.visible = !GameManager.player_entity.abilities_component.can_cast(_button.ability)
 		if _button.ability.get_cooldown() != 0.0:
@@ -108,7 +108,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 ## Returns whether a draggable element can be dropped on this slot.
-func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
 	if locked:
 		return false
 	if button:
@@ -126,7 +126,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 ## Sets our activation keypress and updates the label.
 func set_key(new_key: Key, new_shift: bool, new_control: bool, new_alt: bool):
-	key = key
+	key = new_key
 	shift = new_shift
 	control = new_control
 	alt = new_alt

@@ -16,21 +16,29 @@ enum MultistackBehavior { ## The behavior multiple stacks results in.
 
 
 ## Called when an Effect containing this Resource is created.
-func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+func on_created(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]):
 	pass
 
 
 ## Called when an Effect containing this Resource affects targets.
 ## Does nothing. Our only use is as a StatusEffect.
-func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+func on_affect(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]):
 	pass
 
 
 ## Gets the modifying value. If given more than 1 stack, each stack is tallied according to the MultistackBehavior.
-func get_modifying_value(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], stacks: int=1) -> float:
+func get_modifying_value(
+	_value: float, 
+	_effect: Effect, 
+	_ability: Ability, 
+	caster: Entity, 
+	targets: Array[Entity], 
+	stacks: int=1
+) -> float:
 	var modifier_value = modifier.get_value(caster, targets)
 	
-	assert(stacks >= 1, "No plan for negative stacks!")
+	assert(stacks >= 0, "No plan for negative stacks!")
+	assert(stacks > 0, "No plan for zero stacks!")
 	if stacks > 1:
 		if multistack_behavior == MultistackBehavior.Additive:
 			modifier_value *= stacks
@@ -44,14 +52,14 @@ func get_modifying_value(value: float, effect: Effect, ability: Ability, caster:
 
 
 ## Attempts to modify the given value. If the conditionals aren't met, just returns the incoming value.
-func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], stacks: int=1) -> float:
+func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], _stacks: int=1) -> float:
 	if !can_transform(value, effect, ability, caster, targets):
 		return value
 	return value
 
 
 ## Returns whether this Transform can be used on an incoming value.
-func can_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+func can_transform(_value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
 	for conditional in conditionals:
 		if !conditional.is_met(effect, ability, caster, targets):
 			return false

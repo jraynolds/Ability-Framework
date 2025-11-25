@@ -13,7 +13,7 @@ enum EffectResourceType {
 @export var matches : bool = true ## Whether we return true if a match is found. By default, yes.
 
 ## Returns whether the ability caster last cast the given Ability.
-func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+func is_met(effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]) -> bool:
 	match effect_resource:
 		EffectResourceType.Base:
 			if effect._resource as DamageEffectResource:

@@ -4,7 +4,7 @@ class_name HealthBar
 
 var entity : Entity : ## The Entity this HealthBar represents. Changing this updates the UI.
 	set(val):
-		var old_val = entity
+		#var old_val = entity
 		entity = val
 		icon.texture = entity.icon
 		name_label.text = entity.title
@@ -36,7 +36,7 @@ func _on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float
 
 
 ## Updates the values and text for the HP bars.
-func _update_bars(new_hp: float, old_hp: float = 0):
+func _update_bars(new_hp: float, _old_hp: float = 0):
 	var entity_max_hp = entity.stats_component.get_stat_value(StatResource.StatType.MaxHP)
 	hp_label.text = str(floori(new_hp)) + "/" + str(floori(entity_max_hp))
 	var bar_value = new_hp / entity_max_hp * 100

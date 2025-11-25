@@ -26,7 +26,7 @@ signal on_status_removed(status: StatusEffect) ## Emitted when we remove a statu
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
 ## Initializes any initial statuses.
-func load_entity_resource(resource: EntityResource):
+func load_entity_resource(_resource: EntityResource):
 	statuses = []
 	status_stacks = {}
 	for status in initial_statuses:
@@ -116,7 +116,7 @@ func add_status(
 			status_stacks[status] = stacks + num_stacks
 		StatusAddEffectResource.StackingBehavior.Subtract:
 			status_stacks[duplicate_effect] -= num_stacks
-			if status_stacks[duplicate_effect] <= 0:
+			if status_stacks[duplicate_effect] <= 0: 
 				duplicate_effect.end()
 		StatusAddEffectResource.StackingBehavior.Replace:
 			remove_status(duplicate_effect)

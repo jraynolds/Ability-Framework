@@ -49,7 +49,7 @@ func set_entity(e: Entity):
 
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain and tries to cast this Ability.
-func tick(delta: float):
+func tick(_delta: float):
 	if entity.abilities_component.ability_casting :
 		return
 	elif ability._gcd_type == AbilityResource.GCD.OnGCD and entity.abilities_component.gcd_remaining > 0.0:
@@ -62,7 +62,7 @@ func tick(delta: float):
 
 
 ## Called when our Entity casts an Ability. Ignored if it's not ours.
-func _on_cast(cast_ability: Ability, targets: Array[Entity]):
+func _on_cast(cast_ability: Ability, _targets: Array[Entity]):
 	if cast_ability != ability:
 		return
 	modulate = Color.GREEN
@@ -70,7 +70,7 @@ func _on_cast(cast_ability: Ability, targets: Array[Entity]):
 
 
 ## Called when our Entity's Ability is interrupted. Ignored if it's not ours.
-func _on_cast_interrupted(cast_ability: Ability, targets: Array[Entity], interrupter: Entity):
+func _on_cast_interrupted(cast_ability: Ability, _targets: Array[Entity], interrupter: Entity):
 	if cast_ability != ability:
 		return
 	

@@ -112,7 +112,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			"Registering the delete keypress"
 		, self)
 		DebugManager.debug_log(
-			"Deleting the selected node, " + (node_selected.name if node_selected else "null")
+			"Deleting the selected node, " + (node_selected.name as String if node_selected else "null")
 		, self)
 		node_selected.queue_free()
 	else :

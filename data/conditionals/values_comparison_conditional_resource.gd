@@ -7,7 +7,7 @@ class_name ValuesComparisonConditionalResource
 @export var comparison : Math.Comparison = Math.Comparison.Equal ## The math comparison we're undertaking. By default, equality.
 
 ## Returns whether the ability caster last cast the given Ability.
-func is_met(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+func is_met(_effect: Effect, _ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
 	DebugManager.debug_log(
 		"Comparing the two values " + value_1.resource_path + " and " + value_2.resource_path + " with the comparison " +
 		Natives.enum_name(Math.Comparison, comparison)
