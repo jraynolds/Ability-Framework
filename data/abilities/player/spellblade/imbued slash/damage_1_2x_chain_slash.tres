@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ewok2"]
 [ext_resource type="Resource" uid="uid://du6q4lw35scao" path="res://data/abilities/player/spellblade/imbued slash/caster_chain_0_slash.tres" id="2_k2ols"]
-[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_1_2x.tres" id="3_ewok2"]
+[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_120%.tres" id="3_ewok2"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="4_80mh3"]
 [ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="4_k2ols"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_hpbik"]

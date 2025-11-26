@@ -17,6 +17,7 @@ var _resource : AbilityResource :
 			effect.name = effect._title
 		_casting_time = _resource.casting_time
 		_cooldown = _resource.cooldown
+		_max_channel_time = _resource.max_channel_time
 		_gcd_type = _resource.gcd_type
 		_gcd_cooldown = _resource.gcd_cooldown
 		for conditional in _resource.conditionals_positive:
@@ -29,11 +30,14 @@ var _title : String ## The title of the Ability.
 var _icon : Texture2D ## The icon for this Ability.
 var _targeting_resource : TargetingResource ## The Resource that will find the target(s) for this Ability to affect.
 var _effects : Array[Effect] = [] ## An Array of Effects this Ability will perform.
-var casting : bool ## Whether or not the Ability is currently being cast by its caster.
 var _casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
 var _cast_time_left : float ## The duration in seconds remaining before this Ability is fully cast.
 var _cooldown : ValueResource ## The duration in seconds before this Ability can be cast again.
 var _cooldown_left : float ## The remaining duration before this Ability can be cast again.
+## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly.
+var _max_channel_time : ValueResource
+## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly. By default, 0 seconds.
+var _channel_time_left : float ## How many seconds remain in this Ability's channel.
 ## This Ability's interaction with the Global Cooldown.
 ## GCDs put all GCD Abilities on a shared cooldown; oGCDs don't.
 var _gcd_type : AbilityResource.GCD
@@ -49,17 +53,49 @@ var _conditionals_highlight : Array[ConditionalResource] = []
 var _caster : Entity ## The Entity who owns this Ability.
 var _targets : Array[Entity] ## The Entities who this Ability is targeting.
 
+var casting_time : float : ## The duration in seconds this Ability takes to cast. By default, 0 seconds.
+	get: return _casting_time.get_value(_caster, _targets) if _casting_time else 0.0
+var cooldown : float : ## The duration in seconds before this Ability can be cast again. By default, 0 seconds.
+	get: return _cooldown.get_value(_caster, _targets) if _cooldown else 0.0
+var casting : bool : ## Whether or not the Ability is currently being cast by its caster. Changing this emits signals.
+	set(val):
+		var old_val = casting
+		casting = val
+		if val and !old_val:
+			on_cast_begin.emit(_caster, _targets)
+		if !val and old_val:
+			on_cast.emit(_caster, _targets)
+var channeling : bool : ## Whether or not the Ability is currently being channeled by its caster. Changing this emits signals.
+	set(val):
+		var old_val = channeling
+		channeling = val
+		if val and !old_val:
+			on_channel_begin.emit(_caster, _targets)
+		if !val and old_val:
+			on_channel_ended.emit(_caster, _targets)
+var max_channel_time : float :
+	get: return _max_channel_time.get_value(_caster, _targets) if _max_channel_time else 0.0
+
 @export var effect_scene : PackedScene ## The default Effect scene.
 
 signal on_cast_begin(caster: Entity, targets: Array[Entity]) ## emitted when this Ability begins to cast.
 signal on_cast(caster: Entity, targets: Array[Entity]) ## emitted when this Ability is successfully cast.
+signal on_channel_begin(caster: Entity, targets: Array[Entity]) ## emitted when this Ability begins to channel after a successful cast.
+signal on_channel_tick(caster: Entity, targets: Array[Entity], tick_time: float) ## Emitted every frame this Ability channels.
+signal on_channel_ended(caster: Entity, targets: Array[Entity]) ## emitted when this Ability's channeling ends.
 
 ## Called every frame. Reduces the cooldown left.
-func _process(delta: float) -> void:
+func on_battle_tick(delta: float) -> void:
 	if casting and _cast_time_left >= 0.0:
 		_cast_time_left -= delta
 		if _cast_time_left <= 0.0:
 			cast()
+	if channeling and _channel_time_left >= 0.0:
+		_channel_time_left -= delta
+		if _channel_time_left <= 0.0:
+			cast_finish()
+		else :
+			on_channel_tick.emit(_caster, _targets, delta)
 	if _cooldown_left > 0.0:
 		_cooldown_left -= delta
 
@@ -78,8 +114,7 @@ func begin_cast(targets: Array[Entity]):
 		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
 	, self)
 	_targets = targets
-	on_cast_begin.emit(_caster, _targets)
-	_cast_time_left = get_casting_time()
+	_cast_time_left = casting_time
 	for effect in _effects:
 		effect.register(_caster, _targets)
 	casting = true
@@ -87,13 +122,21 @@ func begin_cast(targets: Array[Entity]):
 
 ## Performs this ability on the given targets, from our owner.
 func cast():
-	_cooldown_left = get_cooldown()
-	on_cast.emit(_caster, _targets)
+	casting = false
 	DebugManager.debug_log(
 		"Ability " + _title + " has successfully been cast by " + _caster.title + 
 		" at targets " + ",".join(_targets.map(func(t: Entity): return t.title))
 	, self)
-	casting = false
+	if max_channel_time > 0.0:
+		channeling = true
+	else :
+		cast_finish()
+
+
+## Performs the cleanup at the end of the Ability cast.
+func cast_finish():
+	_cooldown_left = cooldown
+	channeling = false
 
 
 ## Returns whether this Ability's resource is equal to the given AbilityResource.
@@ -109,6 +152,9 @@ func is_castable() -> bool:
 
 ## Returns whether this Ability can be cast at the given targets.
 func is_castable_at(targets: Array[Entity]) -> bool:
+	for target in targets:
+		if !target.targeting_component.is_targetable():
+			return false
 	for conditional in _conditionals_positive:
 		if !conditional.is_met(null, self, _caster, targets):
 			return false
@@ -134,20 +180,6 @@ func get_targets() -> Array[Entity]:
 	if _targeting_resource:
 		targets = _targeting_resource.get_targets(_caster, self)
 	return targets
-
-
-## Returns the cooldown of this Ability. By default, 0.
-func get_cooldown() -> float:
-	if !_cooldown:
-		return 0.0
-	return _cooldown.get_value(_caster, _targets)
-
-
-## Returns the cast time of this Ability. By default, 0.
-func get_casting_time() -> float:
-	if !_casting_time:
-		return 0.0
-	return _casting_time.get_value(_caster, _targets)
 
 
 ## Cancels the current casting of this ability.

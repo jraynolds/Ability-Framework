@@ -40,7 +40,7 @@ func load_entity_resource(_resource: EntityResource):
 
 
 ## Called every frame. Increments duration for all attached status Effects.
-func _process(delta: float) -> void:
+func on_battle_tick(delta: float) -> void:
 	for status in statuses:
 		status._time_active += delta
 

@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://dgnuo11ebnr7q" path="res://data/conditionals/caster_chain_1_hack.tres" id="2_tupfa"]
 [ext_resource type="Resource" uid="uid://conqhmh3nham0" path="res://data/conditionals/caster_chain_0_bash.tres" id="3_tiw1f"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="4_tiw1f"]
-[ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/computed/caster_attack__8x.tres" id="4_tupfa"]
+[ext_resource type="Resource" uid="uid://duv2hxoultpou" path="res://data/values/computed/caster_attack_80%.tres" id="4_tupfa"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_cvnyr"]
 [ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="5_hfjh1"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_4rwx3"]

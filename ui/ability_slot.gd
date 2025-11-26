@@ -36,7 +36,7 @@ var cooldown_progress : float : ## What percent filled the cooldown progress bar
 		assert(val >= 0.0 and val <= 100.0, "Can't set this value for our cooldown progress bar!")
 		cooldown_progress = val
 		cooldown_progress_bar.value = cooldown_progress
-		cooldown_progress_bar.visible = button.ability.get_cooldown() > 0.0 and button.ability._cooldown_left > 0.0
+		cooldown_progress_bar.visible = button.ability.cooldown > 0.0 and button.ability._cooldown_left > 0.0
 @export var animation_player : AnimationPlayer ## The animation player for this slot.
 @export var highlight : TextureRect ## A highlight overlay for the button.
 var highlighted : bool : ## Whether the contained Ability should be highlighted. Toggles the highlight.
@@ -79,9 +79,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _button and _button.ability:
 		disabled_overlay.visible = !GameManager.player_entity.abilities_component.can_cast(_button.ability)
-		if _button.ability.get_cooldown() != 0.0:
+		if _button.ability.cooldown != 0.0:
 			var cooldown_left = _button.ability._cooldown_left
-			var cooldown_total = _button.ability.get_cooldown()
+			var cooldown_total = _button.ability.cooldown
 			cooldown_progress = (1 - ((cooldown_total - cooldown_left) / cooldown_total)) * 100
 	#if slot._button.ability._gcd_type == AbilityResource.GCD.OffGCD:
 		#cooldown_left = slot._button.ability._cooldown_left

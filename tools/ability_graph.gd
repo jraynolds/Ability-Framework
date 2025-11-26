@@ -116,7 +116,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		, self)
 		node_selected.queue_free()
 	else :
-		get_tree().root.push_unhandled_input(event)
+		get_tree().root.push_input(event)
 
 
 ## Returns a GraphNodeBase from its name.

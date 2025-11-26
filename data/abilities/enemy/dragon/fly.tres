@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=8 format=3 uid="uid://b4e8733eub8c3"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_8i6o1"]
+[ext_resource type="Resource" uid="uid://hdwxhewk7tdu" path="res://data/values/flats/flat_3.tres" id="1_mcpgn"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_gygh6"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_45oer"]
+[ext_resource type="Resource" uid="uid://d3yskhs600nks" path="res://data/values/flats/flat_30.tres" id="3_nbt0b"]
+[ext_resource type="Resource" uid="uid://6vf3eg0ulwgi" path="res://data/effects/status_caster_add_flying.tres" id="5_3akuu"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="7_7jgen"]
+
+[resource]
+script = ExtResource("3_45oer")
+title = "Fly"
+description = "The dragon takes flight, evading all melee effects for a short duration."
+targeting = ExtResource("7_7jgen")
+effects = Array[ExtResource("2_gygh6")]([ExtResource("5_3akuu")])
+casting_time = ExtResource("1_mcpgn")
+cooldown = ExtResource("3_nbt0b")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=6 format=3 uid="uid://dlspgarslr64y"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_fxw8y"]
+[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_120%.tres" id="2_1y2ss"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="3_2x1sr"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_jtcfw"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_0514m"]
+
+[resource]
+script = ExtResource("3_2x1sr")
+damage_amount = ExtResource("2_1y2ss")
+title = "Deal 120% attack damage"
+description = "Deal attack damage equal to 120% your attack stat."
+triggers = Array[ExtResource("4_jtcfw")]([ExtResource("5_0514m")])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

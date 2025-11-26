@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=7 format=3 uid="uid://76eskamw42n6"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ggsjy"]
+[ext_resource type="Resource" uid="uid://hdwxhewk7tdu" path="res://data/values/flats/flat_3.tres" id="1_u4rih"]
+[ext_resource type="Resource" uid="uid://c7ketxe56xuyq" path="res://data/values/flats/flat_4.tres" id="3_kxkg5"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="4_kts45"]
+[ext_resource type="Resource" uid="uid://dlspgarslr64y" path="res://data/effects/damage/damage_120%.tres" id="5_3ggcj"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="6_fp145"]
+
+[resource]
+script = ExtResource("6_fp145")
+title = "Tail Slap"
+description = "The dragon swings its tail in a deadly arc."
+effects = Array[ExtResource("4_kts45")]([ExtResource("5_3ggcj")])
+casting_time = ExtResource("1_u4rih")
+cooldown = ExtResource("3_kxkg5")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ewj6xqdcoabf" path="res://assets/abilities/r_11.png" id="3_78nsx"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_mntsv"]
 [ext_resource type="Resource" uid="uid://dod4tk8e66phl" path="res://data/effects/damage/damage_target_not_casting.tres" id="4_4v77v"]
-[ext_resource type="Resource" uid="uid://c0h70luvfcmwh" path="res://data/effects/damage/damage_2x_target_casting.tres" id="5_0qwrf"]
+[ext_resource type="Resource" uid="uid://c0h70luvfcmwh" path="res://data/effects/damage/damage_200%_target_casting.tres" id="5_0qwrf"]
 
 [resource]
 script = ExtResource("3_mntsv")

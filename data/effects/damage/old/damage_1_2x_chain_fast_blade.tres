@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_sfogm"]
 [ext_resource type="Resource" uid="uid://cv87rbcu48v" path="res://data/conditionals/caster_chain_0_fast_blade.tres" id="2_5kdwd"]
-[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_1_2x.tres" id="3_autns"]
+[ext_resource type="Resource" uid="uid://dgv3f6icl61i6" path="res://data/values/computed/caster_attack_120%.tres" id="3_autns"]
 [ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="4_y2sel"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_wp581"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_fvgsr"]

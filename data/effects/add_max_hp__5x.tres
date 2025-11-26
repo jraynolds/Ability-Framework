@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=5 format=3 uid="uid://ewtg7to8jiww"]
+[gd_resource type="Resource" script_class="StatModifyEffectResource" load_steps=6 format=3 uid="uid://ewtg7to8jiww"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_rduob"]
-[ext_resource type="Resource" uid="uid://drpaalir2o57l" path="res://data/values/computed/caster_max_hp__5x.tres" id="2_jw5a2"]
+[ext_resource type="Resource" uid="uid://drpaalir2o57l" path="res://data/values/computed/caster_max_hp_50%.tres" id="2_jw5a2"]
 [ext_resource type="Script" uid="uid://8lptu87j3jgg" path="res://data/effects/stat_modify_effect_resource.gd" id="3_pxfik"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_b5w5c"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_pxfik"]
 
 [resource]
 script = ExtResource("3_pxfik")
@@ -12,4 +13,5 @@ modifier = ExtResource("2_jw5a2")
 title = "Heal half HP"
 description = "Regain HP equal to half your max life."
 positivity = 0
+triggers = Array[ExtResource("4_b5w5c")]([ExtResource("5_pxfik")])
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

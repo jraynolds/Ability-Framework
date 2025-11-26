@@ -79,6 +79,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if active and !paused:
 		on_tick.emit(delta)
+		player.on_battle_tick(delta)
+		enemy.on_battle_tick(delta)
 	
 	for ability_slot in ability_overlay.ability_slots:
 		var highlighted = false

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TriggerResource" load_steps=2 format=3 uid="uid://drrsr858qi3h"]
+
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="1_bjyhv"]
+
+[resource]
+script = ExtResource("1_bjyhv")
+title = "OnBattleTick"
+description = "Triggered each frame the battle is active."
+trigger = 81
+metadata/_custom_type_script = "uid://bwdmmov3abjck"

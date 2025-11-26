@@ -49,10 +49,13 @@ func on_entity_updated():
 	pass
 
 
-## Updates every frame.
-func _process(delta: float) -> void:
+## Overloadable function for logic that happens every time the battle advances a frame.
+## Reduces GCDs and propagates to our Abilities.
+func on_battle_tick(delta: float):
 	if gcd_remaining > 0:
 		gcd_remaining = max(0, gcd_remaining - delta)
+	for ability in abilities:
+		ability.on_battle_tick(delta)
 
 
 ## Returns the Ability that matches the given AbilityResource.

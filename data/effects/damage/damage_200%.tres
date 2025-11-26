@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=6 format=3 uid="uid://6abb7hfceqhj"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_53hh0"]
+[ext_resource type="Resource" uid="uid://dgny3unq0eubi" path="res://data/values/computed/caster_attack_200%.tres" id="2_75imb"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="3_pmcs8"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_3r8g5"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_drdjg"]
+
+[resource]
+script = ExtResource("3_pmcs8")
+damage_amount = ExtResource("2_75imb")
+title = "Deal 200% attack damage"
+description = "Deal double attack damage."
+triggers = Array[ExtResource("4_3r8g5")]([ExtResource("5_drdjg")])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

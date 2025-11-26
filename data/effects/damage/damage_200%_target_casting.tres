@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DamageEffectResource" load_steps=7 format=3 uid="uid://c0h70luvfcmwh"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_wpd7a"]
-[ext_resource type="Resource" uid="uid://dgny3unq0eubi" path="res://data/values/computed/caster_attack_2x.tres" id="2_wpd7a"]
+[ext_resource type="Resource" uid="uid://dgny3unq0eubi" path="res://data/values/computed/caster_attack_200%.tres" id="2_wpd7a"]
 [ext_resource type="Resource" uid="uid://bkasp88hqqomu" path="res://data/values/enums/damage types/damage_type_physical.tres" id="3_vme1u"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="4_xmetl"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_nww2k"]

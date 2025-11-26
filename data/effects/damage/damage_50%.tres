@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=6 format=3 uid="uid://ben1d0nalbgbc"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_mc4mu"]
+[ext_resource type="Resource" uid="uid://duytbsj0cjyrg" path="res://data/values/computed/caster_attack_50%.tres" id="2_gnxao"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="3_fdh53"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_qiitf"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_48hxa"]
+
+[resource]
+script = ExtResource("3_fdh53")
+damage_amount = ExtResource("2_gnxao")
+title = "Deal half attack damage"
+description = "Inflict damage to the target equal to half your attack."
+triggers = Array[ExtResource("4_qiitf")]([ExtResource("5_48hxa")])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

@@ -2,8 +2,6 @@ extends EffectResource
 ## An EffectResource that reduces the target's HP based on the caster's Stats.
 class_name DamageEffectResource
 
- ## An optional targeting resource to use for this effect. If left empty, affects the Ability's targets.
-@export var targeting_resource_override : TargetingResource
 @export var damage_amount : ValueResource ## The amount of damage we'll do. By default, the caster's attack stat.
 @export var damage_type : ValueResource ## The type of damage. By default, physical.
 enum DamageType {
@@ -27,8 +25,8 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		#" with " + Natives.enum_name(Math.Operation, math_operation)
 	#)
 	
-	if targeting_resource_override:
-		targets = targeting_resource_override.get_targets(caster, ability)
+	if targeting_override:
+		targets = targeting_override.get_targets(caster, ability)
 	
 	var damage_dealt = get_damage_dealt(caster, targets)
 	var damage_dealt_type = get_damage_type(caster, targets)

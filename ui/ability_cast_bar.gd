@@ -34,12 +34,12 @@ func _ready() -> void:
 func _process(_delta):
 	if animation_player.is_playing():
 		visible = true
-	elif ability and ability.get_casting_time() > 0.0:
+	elif ability and ability.casting_time > 0.0:
 		visible = true
 	else :
 		visible = false
 	if ability:
-		var cast_time = ability.get_casting_time()
+		var cast_time = ability.casting_time
 		var cast_time_left = ability._cast_time_left 
 		var bar_percent = (cast_time - cast_time_left) / cast_time
 		value = bar_percent * 100

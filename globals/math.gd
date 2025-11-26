@@ -32,7 +32,7 @@ enum Operation {
 	Multiplication,
 	Division,
 	Power,
-	Set
+	Set ## Changes the value to the given amount.
 }
 
 ## Multiplication behavior. 
@@ -56,7 +56,7 @@ static func perform_operation(value_modified: float, value_modifier: float, math
 			return value_modified / value_modifier
 		Math.Operation.Power:
 			return pow(value_modified, value_modifier)
-		Math.Operation.Power:
+		Math.Operation.Set:
 			return value_modifier
 	assert(false, "How did we get here?")
 	return -1

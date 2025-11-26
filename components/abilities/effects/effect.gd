@@ -1,6 +1,6 @@
 extends Node
-## The runtime instance of an EffectResource.
 class_name Effect
+## The runtime instance of an EffectResource.
 
 var _resource : EffectResource ## The base EffectResource this Effect represents.
 var _title : String ## The title of this Effect.
@@ -22,6 +22,19 @@ var _active_temp_effects : Array[Effect] : ## Those of our _temp_effects which a
 	get :
 		return _temp_effects.filter(func(temp_effect): return temp_effect != null)
 #var canceled : bool  ## Whether this effect has been canceled.
+
+ ## A Dictionary storing information about how times, and by what TriggerResources, this Effect has affected its targets.
+var times_triggered : Dictionary[TriggerResource, int]
+var total_times_triggered : int : ## The total times this Effect has affected its targets. 
+	get :
+		var out = 0
+		for time : TriggerResource in times_triggered.keys():
+			out += times_triggered[time]
+		return out
+## A Dictionary storing information about how many seconds have occurred since the last time this Effect was triggered.
+## Tracks each TriggerResource source individually. 
+var time_since_last_trigger : Dictionary[TriggerResource, float]
+#signal on_times_triggered_changed(new_vlaue: float, old_value: float) ## Emitted when the number of times triggered changes.
 
 signal on_registered ## Emitted when this Effect is fully registered on all its Triggers.
 #signal on_affected(caster: Entity, targets: Array[Entity]) ## Emitted when this Effect affects its targets.
@@ -77,6 +90,19 @@ func update_resource(res: EffectResource):
 		_conditionals_negative.append(conditional)
 
 
+## Called every time the battle advances an active frame. Increments the time we've been waiting for our triggers.
+func on_battle_tick(delta: float):
+	for sub_effect in _sub_effects:
+		sub_effect.on_battle_tick(delta)
+	for temp_effect in _temp_effects:
+		temp_effect.on_battle_tick(delta)
+	for trigger in _triggers:
+		if trigger in time_since_last_trigger:
+			time_since_last_trigger[trigger] += delta
+		else :
+			time_since_last_trigger[trigger] = delta
+
+
 ## If usable, makes a copy and registers this effect on the appropriate triggers.
 func register(caster: Entity, targets: Array[Entity]):
 	DebugManager.debug_log(
@@ -108,7 +134,7 @@ func register(caster: Entity, targets: Array[Entity]):
 	add_child(effect_temp, true)
 	
 	for trigger in _triggers:
-		trigger.register(_ability, caster, targets, effect_temp.affect)
+		trigger.register(self, _ability, caster, targets, effect_temp.affect_if_trigger_ready)
 	on_registered.emit()
 	
 	DebugManager.debug_log(
@@ -116,15 +142,39 @@ func register(caster: Entity, targets: Array[Entity]):
 	, self)
 
 
-## Performs this Effect on the given targets, from the given caster.
-func affect(caster: Entity, targets: Array[Entity]):
+## Performs this Effect on the given targets, from the given caster, from the given trigger.
+## Only works if we've exceeded the cooldown for the given trigger.
+func affect_if_trigger_ready(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
 	DebugManager.debug_log(
-		"Affecting targets with effect " + _title
+		"Attempting to affect targets with effect " + _title + " from the trigger " + trigger.resource_path +
+		", if its cooldown is ready"
 	, self)
+	
+	if !trigger.cooldown or time_since_last_trigger[trigger] > trigger.cooldown.get_value(caster, targets):
+		affect(caster, targets, trigger)
+	
+	DebugManager.debug_log(
+		"Failed to affect with " + _title + " from the trigger " + trigger.resource_path +
+		", because its cooldown wasn't ready"
+	, self)
+
+
+## Performs this Effect on the given targets, from the given caster, from the given trigger.
+func affect(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
+	DebugManager.debug_log(
+		"Affecting targets with effect " + _title + " from the trigger " + trigger.resource_path
+	, self)
+	
+	if trigger in times_triggered:
+		times_triggered[trigger] += 1
+	else :
+		times_triggered[trigger] = 1
+	time_since_last_trigger[trigger] = 0.0
 	
 	for target in targets:
 		DebugManager.debug_log(
-			"Affecting target " + target._resource.title + " with effect " + _title
+			"Affecting target " + target._resource.title + " with effect " + _title + 
+			" from the trigger " + trigger.resource_path
 		, self)
 		_resource.on_affect(self, _ability, caster, targets)
 	

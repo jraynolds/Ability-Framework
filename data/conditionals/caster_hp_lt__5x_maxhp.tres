@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bw4yy682t5m1y" path="res://data/conditionals/values_comparison_conditional_resource.gd" id="1_nxmma"]
 [ext_resource type="Resource" uid="uid://qw5ms05ebxg5" path="res://data/values/caster_hp.tres" id="2_nxmma"]
-[ext_resource type="Resource" uid="uid://drpaalir2o57l" path="res://data/values/computed/caster_max_hp__5x.tres" id="3_nxmma"]
+[ext_resource type="Resource" uid="uid://drpaalir2o57l" path="res://data/values/computed/caster_max_hp_50%.tres" id="3_nxmma"]
 
 [resource]
 script = ExtResource("1_nxmma")

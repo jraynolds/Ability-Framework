@@ -1,21 +1,24 @@
 extends EffectResource
-## An EffectResource that modifies an Entity's Stat.
-class_name StatModifyEffectResource
+## An EffectResource that modifies a keyword in an Entity.
+class_name KeywordModifyEffectResource
 
-@export var stat_type : StatResource.StatType ## The Stat this Effect adds to.
-@export var modifier : ValueResource ## The value that will modify the Stat.
+@export var keyword : Keyword ## The keyword this Effect adds to.
+enum Keyword { ## The list of keyword options for this Effect to affect.
+	Targetable ## Whether the Entity is targetable by Effects
+}
+@export var modifier : ValueResource ## The value that will modify the keyword.
 @export var math_operation : Math.Operation ## The type of mathematics operation we'll perform.
 @export var ignore_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing StatusEffects.
 @export var ignore_transforms : bool ## Whether we should modify the base stat, bypassing the target's Transforms.
 
 ## Called when an Effect containing this Resource affects targets.
 ## Adds the given value to the given targets' given stats.
-func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+func on_affect(_effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
 	if targeting_override:
 		targets = targeting_override.get_targets(caster, ability)
 	
 	print(
-		"Affecting the stat " + Natives.enum_name(StatResource.StatType, stat_type) + 
+		"Affecting the keyword " + Natives.enum_name(Keyword, keyword) + 
 		" of targets " + ", ".join(targets.map(func(t: Entity): return t.title)) + 
 		" with " + str(modifier.get_value(caster, targets)) +
 		" via " + Natives.enum_name(Math.Operation, math_operation) +
@@ -23,15 +26,20 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		(" ignoring transforms " if ignore_transforms else "")
 	)
 	
-	for target in targets:
-		target.stats_component.modify_stat_value(
-			stat_type,
-			modifier.get_value(caster, targets),
-			effect,
-			math_operation,
-			ignore_statuses,
-			ignore_transforms
-		)
+	assert(false, "I thought we weren't getting here!")
+	
+	#for target in targets:
+		#match keyword:
+			#Keyword.Targetable:
+				#
+		#target.stats_component.modify_stat_value(
+			#stat_type,
+			#modifier.get_value(caster, targets),
+			#effect,
+			#math_operation,
+			#ignore_statuses,
+			#ignore_transforms
+		#)
 		#var new_stat_value = get_modified_value(
 			#stat_target.stats_component.get_stat_value(stat_type, ignore_modifiers),
 			#caster,

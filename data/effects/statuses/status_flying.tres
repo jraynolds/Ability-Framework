@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="KeywordModifyEffectResource" load_steps=7 format=3 uid="uid://vel1vbj0gg4f"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_77qgn"]
+[ext_resource type="Script" uid="uid://b527px4k1mght" path="res://data/effects/keyword_modify_effect_resource.gd" id="2_4x8jm"]
+[ext_resource type="Texture2D" uid="uid://00ggqm6mehc2" path="res://assets/abilities/g_07.png" id="2_sqaqp"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_0rdc1"]
+[ext_resource type="Resource" uid="uid://lyd4wksvii0k" path="res://data/values/flats/flat_0.tres" id="3_ibgff"]
+[ext_resource type="Resource" uid="uid://b6k5dbp7vidiw" path="res://data/triggers/on_get_keyword_value.tres" id="6_2fupp"]
+
+[resource]
+script = ExtResource("2_4x8jm")
+modifier = ExtResource("3_ibgff")
+math_operation = 5
+title = "Flying"
+description = "The creature is in flight, too distant to be hit by melee effects."
+icon = ExtResource("2_sqaqp")
+positivity = 0
+triggers = Array[ExtResource("3_0rdc1")]([ExtResource("6_2fupp")])
+metadata/_custom_type_script = "uid://b527px4k1mght"

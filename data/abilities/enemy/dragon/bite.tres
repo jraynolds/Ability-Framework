@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=7 format=3 uid="uid://cuxd226tdlubh"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_41c6a"]
+[ext_resource type="Resource" uid="uid://c7ketxe56xuyq" path="res://data/values/flats/flat_4.tres" id="1_v7l7k"]
+[ext_resource type="Resource" uid="uid://rnc55ype5qph" path="res://data/values/flats/flat_12.tres" id="3_clioe"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="4_aii4c"]
+[ext_resource type="Resource" uid="uid://6abb7hfceqhj" path="res://data/effects/damage/damage_200%.tres" id="5_max0h"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="6_0s4yr"]
+
+[resource]
+script = ExtResource("6_0s4yr")
+title = "Bite"
+description = "The dragon bites down with its frumious jaws, dealing terrible damage."
+effects = Array[ExtResource("4_aii4c")]([ExtResource("5_max0h")])
+casting_time = ExtResource("1_v7l7k")
+cooldown = ExtResource("3_clioe")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

@@ -4,9 +4,9 @@
 [ext_resource type="Resource" uid="uid://cgcdpvdlauage" path="res://data/conditionals/caster_chain_0_hack.tres" id="2_8hbrs"]
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_xmaco"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_ffix8"]
-[ext_resource type="Resource" uid="uid://8c1avpbtcm42" path="res://data/effects/damage/damage_1_2x_chain_hack.tres" id="4_8hbrs"]
+[ext_resource type="Resource" uid="uid://8c1avpbtcm42" path="res://data/effects/damage/damage_120%_chain_hack.tres" id="4_8hbrs"]
 [ext_resource type="Texture2D" uid="uid://dwhgxdkr13ljy" path="res://assets/abilities/r_45.png" id="4_u5fvp"]
-[ext_resource type="Resource" uid="uid://fng23op1ykuf" path="res://data/effects/damage/damage__8x_chainless_hack.tres" id="5_mlv2p"]
+[ext_resource type="Resource" uid="uid://fng23op1ykuf" path="res://data/effects/damage/damage_80%_chainless_hack.tres" id="5_mlv2p"]
 
 [resource]
 script = ExtResource("3_ffix8")

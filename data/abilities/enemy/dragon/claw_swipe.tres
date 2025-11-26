@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=7 format=3 uid="uid://fsshlprmsieg"]
+
+[ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="1_6o8w6"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_qf1vv"]
+[ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="3_b4f0a"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="4_60a3l"]
+[ext_resource type="Resource" uid="uid://clq2pjt4gtw30" path="res://data/effects/damage/damage_100%.tres" id="5_c56me"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="6_8r65g"]
+
+[resource]
+script = ExtResource("6_8r65g")
+title = "Claw Swipe"
+description = "The dragon brings its jagged claws to bear."
+effects = Array[ExtResource("4_60a3l")]([ExtResource("5_c56me")])
+casting_time = ExtResource("1_6o8w6")
+cooldown = ExtResource("3_b4f0a")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

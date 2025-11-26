@@ -10,6 +10,8 @@ class_name AbilityResource
 @export var interruptible : bool = true ## Whether this Ability can be canceled by others.
 @export var effects : Array[EffectResource] ## An Array of EffectResources this Ability will perform.
 @export var casting_time : ValueResource ## The duration in seconds this Ability takes to cast.
+## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly.
+@export var max_channel_time : ValueResource 
 @export var cooldown : ValueResource ## The duration in seconds before this Ability can be cast again.
 @export var gcd_type : GCD = GCD.OnGCD ## This Ability's interaction with the Global Cooldown.
 enum GCD {

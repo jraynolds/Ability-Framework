@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="3_5gf70"]
 [ext_resource type="Resource" uid="uid://rxbn50n0tn21" path="res://data/abilities/enemy/slime/status_add_corrosion.tres" id="4_t62lt"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="5_3h1tt"]
-[ext_resource type="Resource" uid="uid://ben1d0nalbgbc" path="res://data/effects/damage/damage__5x.tres" id="5_hc2gs"]
+[ext_resource type="Resource" uid="uid://ben1d0nalbgbc" path="res://data/effects/damage/damage_50%.tres" id="5_hc2gs"]
 
 [resource]
 script = ExtResource("5_3h1tt")

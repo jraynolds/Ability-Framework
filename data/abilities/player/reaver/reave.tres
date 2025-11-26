@@ -9,7 +9,7 @@
 [ext_resource type="Resource" uid="uid://cwydierih7yj6" path="res://data/effects/damage/damage_chain_hack_bash.tres" id="5_esuhr"]
 [ext_resource type="Resource" uid="uid://c1dkjn6omt663" path="res://data/effects/status_add_armor_break_chain_hack_bash.tres" id="6_lsuiw"]
 [ext_resource type="Resource" uid="uid://bxbkwjjc1kk3d" path="res://data/effects/status_caster_add_armored_chain_hack_bash.tres" id="7_kmqtm"]
-[ext_resource type="Resource" uid="uid://dhwgqo1oq4jix" path="res://data/effects/damage/damage__8x_chainless_hack_bash.tres" id="8_y2wfc"]
+[ext_resource type="Resource" uid="uid://dhwgqo1oq4jix" path="res://data/effects/damage/damage_80%_chainless_hack_bash.tres" id="8_y2wfc"]
 
 [resource]
 script = ExtResource("3_obvbf")
