@@ -7,6 +7,7 @@ class_name AbilitiesEntityComponent
 var abilities : Dictionary[Ability, int]
 
 var ability_casting : Ability ## The Ability the Entity is currently casting, if any.
+var ability_channeling : Ability ## The Ability the Entity is currently channeling, if any.
 
 var gcd_remaining : float : ## The time in seconds before the global cooldown is ready again.
 	set(val):
@@ -30,6 +31,12 @@ signal on_ability_cast_begin(ability: Ability, targets: Array[Entity])
 signal on_ability_cast_interrupted(ability: Ability, targets: Array[Entity], interrupter: Entity)
 ## Emitted when the Entity successfully casts an Ability.
 signal on_ability_cast(ability: Ability, targets: Array[Entity])
+## Emitted when the Entity begins to channel an Ability.
+signal on_ability_channel_begin(ability: Ability, targets: Array[Entity])
+## Emitted when the Entity's ongoing Ability channel is interrupted or canceled.
+#signal on_ability_channel_interrupted(ability: Ability, targets: Array[Entity], interrupter: Entity)
+## Emitted when the Entity successfully finishes channeling an Ability.
+signal on_ability_channeled(ability: Ability, targets: Array[Entity])
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
@@ -41,6 +48,7 @@ func load_entity_resource(resource: EntityResource):
 		abilities[ability] = resource.abilities[ability_resource]
 		add_child(ability)
 		ability.name = ability._title
+		connect_signals(ability)
 	gcd_remaining = 0
 
 
@@ -56,6 +64,12 @@ func on_battle_tick(delta: float):
 		gcd_remaining = max(0, gcd_remaining - delta)
 	for ability in abilities:
 		ability.on_battle_tick(delta)
+
+
+## Connects an Ability's signals to our functions.
+func connect_signals(ability: Ability):
+	ability.on_cast.connect(func(_caster: Entity, targets: Array[Entity]): _on_ability_finished_cast(ability, targets))
+	ability.on_channel_ended.connect(func(_caster: Entity, targets: Array[Entity]): _on_ability_finished_channel(ability, targets))
 
 
 ## Returns the Ability that matches the given AbilityResource.
@@ -81,7 +95,9 @@ func cast(ability: Ability, targets: Array[Entity]):
 	, self)
 	on_ability_cast_begin.emit(ability, targets)
 	ability_casting = ability
-	ability.on_cast.connect(func(_caster: Entity, t: Array[Entity]): _on_ability_finished_cast(ability, t), 4)
+	#ability.on_cast.connect(
+		#func(_caster: Entity, t: Array[Entity]): _on_ability_finished_cast(ability, t), 4
+	#) ##TODO fix interrupt interaction
 	ability.begin_cast(targets)
 	
 	if ability._gcd_type == AbilityResource.GCD.OnGCD:
@@ -101,6 +117,32 @@ func _on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
 	, self)
 	ability_casting = null
 	on_ability_cast.emit(ability, targets)
+	if ability.max_channel_time > 0.0:
+		channel(ability, targets)
+	else :
+		ability.end()
+
+
+## Begins to channel the given Ability at the given targets.
+func channel(ability: Ability, targets: Array[Entity]):
+	DebugManager.debug_log(
+		"Entity " + entity.title + " is beginning to channel ability " + ability._title +
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
+	ability_channeling = ability
+	on_ability_channel_begin.emit(ability, targets)
+	ability.channel()
+
+
+## Triggered when an Ability we've begun to channel has finished channeling.
+func _on_ability_finished_channel(ability: Ability, targets: Array[Entity]):
+	DebugManager.debug_log(
+		"Entity " + entity.title + " has successfully finished channeling ability " + ability._title +
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
+	ability_channeling = null
+	on_ability_channeled.emit(ability, targets)
+	ability.end()
 
 
 ## Returns whether the given Ability can be cast by this Entity.
@@ -108,6 +150,8 @@ func can_cast(ability: Ability) -> bool:
 	if !can_act:
 		return false
 	if ability_casting:
+		return false
+	if ability_channeling:
 		return false
 	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
 		return false
@@ -121,6 +165,8 @@ func can_cast_at(ability: Ability, targets: Array[Entity]) -> bool:
 	if !can_act:
 		return false
 	if ability_casting:
+		return false
+	if ability_channeling:
 		return false
 	if gcd_remaining > 0 and ability._gcd_type == AbilityResource.GCD.OnGCD:
 		return false

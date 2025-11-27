@@ -36,7 +36,6 @@ var _cooldown : ValueResource ## The duration in seconds before this Ability can
 var _cooldown_left : float ## The remaining duration before this Ability can be cast again.
 ## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly.
 var _max_channel_time : ValueResource
-## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly. By default, 0 seconds.
 var _channel_time_left : float ## How many seconds remain in this Ability's channel.
 ## This Ability's interaction with the Global Cooldown.
 ## GCDs put all GCD Abilities on a shared cooldown; oGCDs don't.
@@ -73,16 +72,32 @@ var channeling : bool : ## Whether or not the Ability is currently being channel
 			on_channel_begin.emit(_caster, _targets)
 		if !val and old_val:
 			on_channel_ended.emit(_caster, _targets)
+## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly. By default, 0 seconds.
 var max_channel_time : float :
 	get: return _max_channel_time.get_value(_caster, _targets) if _max_channel_time else 0.0
+var active : bool : ## Whether this Ability is being cast or channeled.
+	set(val):
+		var old_val = active
+		active = val
+		if val and !old_val:
+			on_channel_begin.emit(_caster, _targets)
+		if !val and old_val:
+			on_channel_ended.emit(_caster, _targets)
 
 @export var effect_scene : PackedScene ## The default Effect scene.
 
-signal on_cast_begin(caster: Entity, targets: Array[Entity]) ## emitted when this Ability begins to cast.
-signal on_cast(caster: Entity, targets: Array[Entity]) ## emitted when this Ability is successfully cast.
-signal on_channel_begin(caster: Entity, targets: Array[Entity]) ## emitted when this Ability begins to channel after a successful cast.
+## Emitted when this Ability becomes active, usually by being cast.
+#signal on_become_active(caster: Entity, targets: Array[Entity]) 
+## Emitted when this Ability becomes inactive, usually by the cast or channel finishing.
+#signal on_become_inactive(caster: Entity, targets: Array[Entity])
+
+signal on_cast_begin(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability begins to cast.
+#signal on_cast_failed(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability is interrupted or canceled.
+signal on_cast(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability is successfully cast.
+signal on_channel_begin(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability begins to channel after a successful cast.
 signal on_channel_tick(caster: Entity, targets: Array[Entity], tick_time: float) ## Emitted every frame this Ability channels.
-signal on_channel_ended(caster: Entity, targets: Array[Entity]) ## emitted when this Ability's channeling ends.
+#signal on_channel_failed(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability's channeling is interrupted or canceled.
+signal on_channel_ended(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability's channeling ends.
 
 ## Called every frame. Reduces the cooldown left.
 func on_battle_tick(delta: float) -> void:
@@ -93,7 +108,7 @@ func on_battle_tick(delta: float) -> void:
 	if channeling and _channel_time_left >= 0.0:
 		_channel_time_left -= delta
 		if _channel_time_left <= 0.0:
-			cast_finish()
+			on_channel_ended.emit(_caster, _targets)
 		else :
 			on_channel_tick.emit(_caster, _targets, delta)
 	if _cooldown_left > 0.0:
@@ -118,6 +133,7 @@ func begin_cast(targets: Array[Entity]):
 	for effect in _effects:
 		effect.register(_caster, _targets)
 	casting = true
+	active = true
 
 
 ## Performs this ability on the given targets, from our owner.
@@ -127,16 +143,22 @@ func cast():
 		"Ability " + _title + " has successfully been cast by " + _caster.title + 
 		" at targets " + ",".join(_targets.map(func(t: Entity): return t.title))
 	, self)
-	if max_channel_time > 0.0:
-		channeling = true
-	else :
-		cast_finish()
 
 
-## Performs the cleanup at the end of the Ability cast.
-func cast_finish():
+## Performs this ability's channel on the given targets, from our owner.
+func channel():
+	channeling = true
+	DebugManager.debug_log(
+		"Ability " + _title + " is beginning to be channeled by " + _caster.title + 
+		" at targets " + ",".join(_targets.map(func(t: Entity): return t.title))
+	, self)
+
+
+## Performs the cleanup at the end of the Ability's lifetime.
+func end():
 	_cooldown_left = cooldown
 	channeling = false
+	active = false
 
 
 ## Returns whether this Ability's resource is equal to the given AbilityResource.

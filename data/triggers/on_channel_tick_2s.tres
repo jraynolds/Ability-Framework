@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TriggerResource" load_steps=3 format=3 uid="uid://bprcciwkihorn"]
+
+[ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="1_0ohhh"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="1_evebm"]
+
+[resource]
+script = ExtResource("1_evebm")
+title = "OnChannelTick"
+description = "Triggered each frame the ability is channeled."
+trigger = 84
+cooldown = ExtResource("1_0ohhh")
+metadata/_custom_type_script = "uid://bwdmmov3abjck"
