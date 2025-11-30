@@ -21,20 +21,20 @@ func _ready() -> void:
 	set_slot(3, false, 0, Color.PURPLE, true, 0, Color.ORANGE) ## On interrupted
 	set_slot(4, false, 0, Color.PURPLE, true, 0, Color.RED) ## Unable to cast (for a reason besides GCD)
 
-	for file_path in get_all_file_paths("res://data/"):
-		if file_path.ends_with(".tres"):
-			var resource = ResourceLoader.load(file_path) as AbilityResource
-			if resource:
-				resources.append(resource)
-	for resource in resources:
-		option_button.add_item(resource.resource_path.split("/")[-1])
-	if resource_path_to_load:
-		var ability_resource_index = -1
-		for i in range(len(resources)):
-			if resources[i].resource_path == resource_path_to_load:
-				ability_resource_index = i
-		option_button.select(ability_resource_index)
-		resource_path_to_load = ""
+	#for file_path in get_all_file_paths("res://data/"):
+		#if file_path.ends_with(".tres"):
+			#var resource = ResourceLoader.load(file_path) as AbilityResource
+			#if resource:
+				#resources.append(resource)
+	#for resource in resources:
+		#option_button.add_item(resource.resource_path.split("/")[-1])
+	#if resource_path_to_load:
+		#var ability_resource_index = -1
+		#for i in range(len(resources)):
+			#if resources[i].resource_path == resource_path_to_load:
+				#ability_resource_index = i
+		#option_button.select(ability_resource_index)
+		#resource_path_to_load = ""
 
 
 ## Initializes much of our setup.
@@ -46,6 +46,18 @@ func set_entity(e: Entity):
 	if entity:
 		entity.abilities_component.on_ability_cast.connect(_on_cast)
 		entity.abilities_component.on_ability_cast_interrupted.connect(_on_cast_interrupted)
+		
+		resources = e._resource.abilities.keys()
+		for resource in resources:
+			option_button.add_item(resource.resource_path.split("/")[-1])
+		
+		if resource_path_to_load:
+			var ability_resource_index = -1
+			for i in range(len(resources)):
+				if resources[i].resource_path == resource_path_to_load:
+					ability_resource_index = i
+			option_button.select(ability_resource_index)
+			resource_path_to_load = ""
 
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain and tries to cast this Ability.
@@ -85,7 +97,9 @@ func _on_cast_interrupted(cast_ability: Ability, _targets: Array[Entity], interr
 ## Called to save this node into the given Resource for later retrieval.
 func save(resource: AbilityGraphNodeResource):
 	super(resource)
+	print(resource)
 	var resource_path = ability_resource.resource_path
+	print(resource_path)
 	resource.node_data.ability_resource_path = resource_path
 
 

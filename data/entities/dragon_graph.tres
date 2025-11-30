@@ -1,0 +1,98 @@
+[gd_resource type="Resource" script_class="AbilityGraphResource" load_steps=10 format=3 uid="uid://colj6qlgdxpyo"]
+
+[ext_resource type="Script" uid="uid://b0jgoy0lfkoee" path="res://tools/resources/ability_graph_node_resource.gd" id="1_x34qj"]
+[ext_resource type="Script" uid="uid://ciktqkdlurfmq" path="res://tools/resources/ability_graph_resource.gd" id="2_350wg"]
+
+[sub_resource type="Resource" id="Resource_jylh2"]
+script = ExtResource("1_x34qj")
+title = "EnterGraphNode2"
+position_offset = Vector2(40, 40)
+
+[sub_resource type="Resource" id="Resource_fvuo6"]
+script = ExtResource("1_x34qj")
+title = "ConditionalGraphNode"
+position_offset = Vector2(280, 100)
+node_data = {
+&"conditional_resource_path": "res://data/conditionals/caster_hp_lt__5x_maxhp.tres"
+}
+
+[sub_resource type="Resource" id="Resource_ba654"]
+script = ExtResource("1_x34qj")
+title = "AbilityGraphNode2"
+position_offset = Vector2(680, 80)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/dragon/fly.tres"
+}
+
+[sub_resource type="Resource" id="Resource_qui58"]
+script = ExtResource("1_x34qj")
+title = "AbilityGraphNode"
+position_offset = Vector2(680, 300)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/dragon/fire_breath.tres"
+}
+
+[sub_resource type="Resource" id="Resource_axija"]
+script = ExtResource("1_x34qj")
+title = "AbilityGraphNode3"
+position_offset = Vector2(680, 520)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/dragon/bite.tres"
+}
+
+[sub_resource type="Resource" id="Resource_1ofgp"]
+script = ExtResource("1_x34qj")
+title = "AbilityGraphNode4"
+position_offset = Vector2(680, 740)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/dragon/claw_swipe.tres"
+}
+
+[sub_resource type="Resource" id="Resource_ug2vq"]
+script = ExtResource("1_x34qj")
+title = "AbilityGraphNode5"
+position_offset = Vector2(680, 960)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/dragon/tail_slap.tres"
+}
+
+[resource]
+script = ExtResource("2_350wg")
+connections = Array[Dictionary]([{
+"from_node": &"EnterGraphNode2",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"ConditionalGraphNode",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode2",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode",
+"from_port": 1,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode4",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode5",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode3",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode4",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode3",
+"to_port": 0
+}])
+nodes = Array[ExtResource("1_x34qj")]([SubResource("Resource_jylh2"), SubResource("Resource_fvuo6"), SubResource("Resource_ba654"), SubResource("Resource_qui58"), SubResource("Resource_axija"), SubResource("Resource_1ofgp"), SubResource("Resource_ug2vq")])

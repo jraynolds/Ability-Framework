@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dtpub61sgax8m" path="res://assets/abilities/g_08.png" id="3_cfckv"]
 [ext_resource type="Resource" uid="uid://c7ketxe56xuyq" path="res://data/values/flats/flat_4.tres" id="4_liu4s"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_tofsq"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="8_3wcee"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="8_3wcee"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_uva6c"]
 [ext_resource type="Resource" uid="uid://dt4kgw1tvdm7h" path="res://data/triggers/on_take_damage.tres" id="10_dwb8k"]
 

@@ -1,6 +1,6 @@
 extends Resource
 ## A Resource that acts as an intermediate layer when a number would be applied to an Entity, and modifies that number.
-## Used exclusively in StatusEffects.
+## Used exclusively in LifetimeEffects.
 class_name TransformResource
 
 @export var modifier : ValueResource ## The value we modify the incoming number with.

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="5_75f5a"]
 [ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="5_628jq"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_17w6e"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_628jq"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="7_628jq"]
 
 [resource]
 script = ExtResource("4_628jq")

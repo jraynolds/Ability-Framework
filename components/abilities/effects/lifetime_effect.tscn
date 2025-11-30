@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://by62w1pj46ro7"]
+
+[ext_resource type="Script" uid="uid://si2xbal1dltv" path="res://components/abilities/effects/lifetime_effect.gd" id="1_1e682"]
+
+[node name="LifetimeEffect" type="Node2D"]
+script = ExtResource("1_1e682")

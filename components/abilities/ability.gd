@@ -69,6 +69,7 @@ var channeling : bool : ## Whether or not the Ability is currently being channel
 		var old_val = channeling
 		channeling = val
 		if val and !old_val:
+			_channel_time_left = max_channel_time
 			on_channel_begin.emit(_caster, _targets)
 		if !val and old_val:
 			on_channel_ended.emit(_caster, _targets)
@@ -101,6 +102,9 @@ signal on_channel_ended(caster: Entity, targets: Array[Entity]) ## Emitted when 
 
 ## Called every frame. Reduces the cooldown left.
 func on_battle_tick(delta: float) -> void:
+	for effect in _effects:
+		effect.on_battle_tick(delta)
+	
 	if casting and _cast_time_left >= 0.0:
 		_cast_time_left -= delta
 		if _cast_time_left <= 0.0:
@@ -156,9 +160,14 @@ func channel():
 
 ## Performs the cleanup at the end of the Ability's lifetime.
 func end():
+	DebugManager.debug_log(
+		"Ability " + _title + " is performing cleanup"
+	, self)
 	_cooldown_left = cooldown
 	channeling = false
 	active = false
+	for effect in _effects:
+		effect.clear_temp_effects()
 
 
 ## Returns whether this Ability's resource is equal to the given AbilityResource.

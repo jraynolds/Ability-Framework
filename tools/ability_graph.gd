@@ -18,9 +18,9 @@ var enter_node : EnterGraphNode ## The entry node for this graph.
 var node_index = 0 ## The index of the current node.
 @export var node_option_dropdown : OptionButton ## The options for our add_node_dropdown.
 @export var add_node_dropdown : Button ## The button to add a node, chosen by our node_option_dropdown.
-var node_options : Array[PackedScene] : ## An Array of PackedScene options for the dropdown.
+var node_options : Array[PackedScene] : ## An Array of PackedScenes, for the dropdown.
 	get :
-		return [ io_node_scene, conditional_node_scene, ability_node_scene, priority_node_scene ] 
+		return [ io_node_scene, conditional_node_scene, ability_node_scene, priority_node_scene ]
 
 @export var enter_node_scene : PackedScene ## The PackedScene version of an entry node.
 @export var io_node_scene : PackedScene ## The PackedScene version of an input/output node.
@@ -166,11 +166,22 @@ func _on_graph_edit_disconnection_request(from_node: StringName, from_port: int,
 func _on_add_node_button_pressed() -> void:
 	if node_option_dropdown.selected < 0:
 		return
-	var node = node_options[node_option_dropdown.selected].instantiate() as GraphNodeBase
-	node.position_offset += initial_position + (node_index * Vector2(20,20))
-	graph_edit.add_child(node, true)
-	node.on_proceed.connect(func(port: int): _on_node_proceed(node, port))
-	node.entity = entity
+	var node = node_options[node_option_dropdown.selected].instantiate()
+	var typed_node = node
+	#var typed_node = null
+	#match node_option_dropdown.selected:
+		#0:
+			#typed_node = node as IOGraphNode
+		#1:
+			#typed_node = node as ConditionalGraphNode
+		#2:
+			#typed_node = node as AbilityGraphNode
+		#3:
+			#typed_node = node as PriorityGraphNode
+	typed_node.position_offset += initial_position + (node_index * Vector2(20,20))
+	graph_edit.add_child(typed_node, true)
+	typed_node.on_proceed.connect(func(port: int): _on_node_proceed(typed_node, port))
+	typed_node.set_entity(entity)
 	node_index += 1
 
 
@@ -240,7 +251,7 @@ func load_data(file_name):
 
 
 ## Called when the save button is pressed.
-func _on_save_pressed(file_name: String="res://data/entities/slime_graph") -> void:
+func _on_save_pressed(file_name: String="res://data/entities/" + entity.title + "_graph") -> void:
 	file_name += ".tres"
 	
 	var graph_data = AbilityGraphResource.new()

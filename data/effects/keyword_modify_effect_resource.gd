@@ -8,7 +8,7 @@ enum Keyword { ## The list of keyword options for this Effect to affect.
 }
 @export var modifier : ValueResource ## The value that will modify the keyword.
 @export var math_operation : Math.Operation ## The type of mathematics operation we'll perform.
-@export var ignore_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing StatusEffects.
+@export var ignore_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing LifetimeEffects.
 @export var ignore_transforms : bool ## Whether we should modify the base stat, bypassing the target's Transforms.
 
 ## Called when an Effect containing this Resource affects targets.

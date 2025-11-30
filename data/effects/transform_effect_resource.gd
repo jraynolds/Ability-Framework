@@ -1,7 +1,7 @@
 extends EffectResource
 class_name TransformEffectResource
 ## An Effect that acts as an intermediate layer when a number would be applied to an Entity, and modifies that number.
-## Used exclusively in StatusEffects.
+## Used exclusively in LifetimeEffects.
 
 @export var modifier : ValueResource ## The value we modify the incoming number with.
 @export var modifier_operation : Math.Operation ## The math operation we use to modify the incoming value.
@@ -21,7 +21,7 @@ func on_created(_effect: Effect, _ability: Ability, _caster: Entity, _targets: A
 
 
 ## Called when an Effect containing this Resource affects targets.
-## Does nothing. Our only use is as a StatusEffect.
+## Does nothing. Our only use is as a LifetimeEffect.
 func on_affect(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]):
 	pass
 

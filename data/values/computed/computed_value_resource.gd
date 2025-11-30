@@ -7,7 +7,7 @@ class_name ComputedValueResource
 @export var math_operation : Math.Operation = Math.Operation.Multiplication
 
 ## Returns a value calculated from the given values, combined with the given operation.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
+func calc_value(caster: Entity, targets: Array[Entity]) -> float:
 	assert(!values.is_empty(), "There are no values for us to calculate!")
 	DebugManager.debug_log(
 		"Computing the values " + (",".join(values.map(func(v: ValueResource): return v.get_value(caster, targets)))) + 

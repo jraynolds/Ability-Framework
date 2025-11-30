@@ -6,7 +6,7 @@ class_name StatusDamageTypeValueResource
 @export var targeting_resource_override : TargetingResource
 @export var status : EffectResource ## The Status we're checking DamageType for.
 
-## Returns the int value of the DamageType enum on the given target's StatusEffect.
+## Returns the int value of the DamageType enum on the given target's LifetimeEffect.
 func get_value(caster: Entity, targets: Array[Entity]) -> float:
 	if targeting_resource_override:
 		targets = targeting_resource_override.get_targets(caster)

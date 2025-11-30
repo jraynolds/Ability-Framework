@@ -9,7 +9,7 @@ class_name StatChangeValueResource
 @export var index_resource : ValueResource ## How many changes back we look. By default, none.
 
 ## Returns the magnitude of the target's previous stat change.
-func get_value(caster: Entity, targets: Array[Entity]):
+func calc_value(caster: Entity, targets: Array[Entity]):
 	if targeting_resource_override:
 		targets = targeting_resource_override.get_targets(caster)
 	

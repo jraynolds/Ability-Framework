@@ -84,6 +84,7 @@ func update_resource(res: EffectResource):
 	_icon = _resource.icon
 	for trigger in _resource.triggers:
 		_triggers.append(trigger)
+		times_triggered[trigger] = 0
 	for conditional in _resource.conditionals_positive:
 		_conditionals_positive.append(conditional)
 	for conditional in _resource.conditionals_negative:
@@ -96,11 +97,8 @@ func on_battle_tick(delta: float):
 		sub_effect.on_battle_tick(delta)
 	for temp_effect in _temp_effects:
 		temp_effect.on_battle_tick(delta)
-	for trigger in _triggers:
-		if trigger in time_since_last_trigger:
-			time_since_last_trigger[trigger] += delta
-		else :
-			time_since_last_trigger[trigger] = delta
+	for trigger in time_since_last_trigger.keys():
+		time_since_last_trigger[trigger] += delta
 
 
 ## If usable, makes a copy and registers this effect on the appropriate triggers.
@@ -128,6 +126,9 @@ func register(caster: Entity, targets: Array[Entity]):
 		"Registering effect " + _title
 	, self)
 	
+	_caster = caster
+	_targets = targets
+	
 	var effect_temp : Effect = self.duplicate(10).from_effect(self) ## Duplicates with values
 	effect_temp.name = _title + " targeting " + ", ".join(targets.map(func(t: Entity): return t.title))
 	_temp_effects.append(effect_temp)
@@ -150,13 +151,24 @@ func affect_if_trigger_ready(caster: Entity, targets: Array[Entity], trigger: Tr
 		", if its cooldown is ready"
 	, self)
 	
-	if !trigger.cooldown or time_since_last_trigger[trigger] > trigger.cooldown.get_value(caster, targets):
-		affect(caster, targets, trigger)
-	else :
-		DebugManager.debug_log(
-			"Failed to affect with " + _title + " from the trigger " + trigger.resource_path +
-			", because its cooldown wasn't ready"
-		, self)
+	if trigger.cooldown:
+		if trigger in time_since_last_trigger:
+			DebugManager.debug_log(
+				"Time since last trigger is " + str(time_since_last_trigger[trigger])
+			, self)
+			if time_since_last_trigger[trigger] < trigger.cooldown.get_value(caster, targets):
+				DebugManager.debug_log(
+					"Failed to affect with " + _title + " from the trigger " + trigger.resource_path +
+					", because its cooldown wasn't ready"
+				, self)
+				return
+		else :
+			DebugManager.debug_log(
+				"It's the first time we've been triggered, so we have no cooldown"
+			, self)
+			time_since_last_trigger[trigger] = 0.0
+	
+	affect(caster, targets, trigger)
 
 
 ## Performs this Effect on the given targets, from the given caster, from the given trigger.
@@ -178,13 +190,27 @@ func affect(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
 		, self)
 		_resource.on_affect(self, _ability, caster, targets)
 	
-	end() ## By default, we have no duration--so we should just get rid of ourselves
+	#end() ## By default, we have no duration--so we should just get rid of ourselves
 
 
 ## Adds a sub-Effect to our array and adds it as a child.
 func add_sub_effect(sub_effect: Effect):
 	_sub_effects.append(sub_effect)
 	add_child(sub_effect)
+
+
+## Removes all active sub effects.
+func clear_sub_effects():
+	for i in range(len(_sub_effects)):
+		_sub_effects[i].end()
+		_sub_effects.remove_at(i)
+
+
+## Removes all active temp effects.
+func clear_temp_effects():
+	for i in range(len(_temp_effects)):
+		_temp_effects[i].end()
+		_temp_effects.remove_at(i)
 
 
 ## Returns whether the given Effect shares our same EffectResource.

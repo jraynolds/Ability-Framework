@@ -9,7 +9,7 @@ class_name DamagedHistoryValueResource
 @export var returned_information : HistoryEntityComponent.DamageHistoryInfo = HistoryEntityComponent.DamageHistoryInfo.DamageTaken
 
 ## Returns the magnitude of the target's previous stat change.
-func get_value(caster: Entity, targets: Array[Entity]):
+func calc_value(caster: Entity, targets: Array[Entity]):
 	var target = target_resource.get_targets(caster)[0] if target_resource else caster
 	var index = index_resource.get_value(caster, targets) if index_resource else 0.0
 	

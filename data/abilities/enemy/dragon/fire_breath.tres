@@ -1,11 +1,20 @@
-[gd_resource type="Resource" script_class="AbilityResource" load_steps=4 format=3 uid="uid://dye2ihktb5b6i"]
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=8 format=3 uid="uid://dye2ihktb5b6i"]
 
+[ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="1_ftmpo"]
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_u6jvc"]
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_y1ij3"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_82dst"]
+[ext_resource type="Resource" uid="uid://d3yskhs600nks" path="res://data/values/flats/flat_30.tres" id="3_ah2oy"]
+[ext_resource type="Resource" uid="uid://dkv2aw2hilk4f" path="res://data/effects/damage/damage_20%_on_channel_tick_1s.tres" id="5_34qyd"]
+[ext_resource type="Resource" uid="uid://bwy4x62ix84vt" path="res://data/values/flats/flat_8.tres" id="6_dc8cv"]
 
 [resource]
 script = ExtResource("3_82dst")
 title = "Fire Breath"
 description = "The dragon belches bone-melting flames."
+effects = Array[ExtResource("2_y1ij3")]([ExtResource("5_34qyd")])
+casting_time = ExtResource("1_ftmpo")
+max_channel_time = ExtResource("6_dc8cv")
+cooldown = ExtResource("3_ah2oy")
+gcd_cooldown = ExtResource("6_dc8cv")
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"

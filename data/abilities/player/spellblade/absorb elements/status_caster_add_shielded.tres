@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://dvtw27ll7lyjw" path="res://data/expirations/on_take_damage_expire.tres" id="4_w0wk8"]
 [ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="5_qhrcg"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_phckf"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_ifycm"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="7_ifycm"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="8_ia8ce"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="9_bunyb"]
 

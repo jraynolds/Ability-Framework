@@ -6,8 +6,8 @@ class_name StatusStocksValueResource
 @export var targeting_resource_override : TargetingResource
 @export var status : EffectResource ## The Status we're checking stacks for.
 
-## Returns the number of stacks the given Entity has for the matching StatusEffect.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
+## Returns the number of stacks the given Entity has for the matching LifetimeEffect.
+func calc_value(caster: Entity, targets: Array[Entity]) -> float:
 	if targeting_resource_override:
 		targets = targeting_resource_override.get_targets(caster)
 	

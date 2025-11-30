@@ -99,14 +99,6 @@ func cast(ability: Ability, targets: Array[Entity]):
 		#func(_caster: Entity, t: Array[Entity]): _on_ability_finished_cast(ability, t), 4
 	#) ##TODO fix interrupt interaction
 	ability.begin_cast(targets)
-	
-	if ability._gcd_type == AbilityResource.GCD.OnGCD:
-		if ability._gcd_cooldown:
-			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
-			gcd_remaining = gcd_max_cached
-		else :
-			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
-			gcd_remaining = gcd_max_cached
 
 
 ## Triggered when an Ability we've begun to cast has finished casting.
@@ -120,7 +112,7 @@ func _on_ability_finished_cast(ability: Ability, targets: Array[Entity]):
 	if ability.max_channel_time > 0.0:
 		channel(ability, targets)
 	else :
-		ability.end()
+		_on_ability_end(ability, targets)
 
 
 ## Begins to channel the given Ability at the given targets.
@@ -142,7 +134,19 @@ func _on_ability_finished_channel(ability: Ability, targets: Array[Entity]):
 	, self)
 	ability_channeling = null
 	on_ability_channeled.emit(ability, targets)
+	_on_ability_end(ability, targets)
+
+
+## Performs the cleanup for the finish of an Ability.
+func _on_ability_end(ability: Ability, targets: Array[Entity]):
 	ability.end()
+	if ability._gcd_type == AbilityResource.GCD.OnGCD:
+		if ability._gcd_cooldown:
+			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
+		gcd_remaining = gcd_max_cached
+	else :
+		gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
+		gcd_remaining = gcd_max_cached
 
 
 ## Returns whether the given Ability can be cast by this Entity.

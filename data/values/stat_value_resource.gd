@@ -10,7 +10,7 @@ class_name StatValueResource
 @export var ignore_target_statuses : bool ## Whether we should get the base stat instead of one modified by statuses.
 
 ## Returns the value of the given Entity's given Stat, multiplied by the given amount.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
+func calc_value(caster: Entity, targets: Array[Entity]) -> float:
 	var value = 0
 	
 	if targeting_resource_override:

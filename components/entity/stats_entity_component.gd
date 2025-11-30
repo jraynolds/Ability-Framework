@@ -6,11 +6,11 @@ class_name StatsEntityComponent
 var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paired with the kind of Stat each is.
 
 ## An Array of Transforms that alter modifications made to stats.
-var stat_transform_statuses : Array[StatusEffect] :
+var stat_transform_statuses : Array[LifetimeEffect] :
 	get :
 		return entity.statuses_component.stat_transform_statuses
 ## An Array of Transforms that alter modifications made to keyworded values.
-var keyword_transform_statuses : Array[StatusEffect] :
+var keyword_transform_statuses : Array[LifetimeEffect] :
 	get :
 		return entity.statuses_component.keyword_transform_statuses
 

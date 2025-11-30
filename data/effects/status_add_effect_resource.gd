@@ -18,12 +18,12 @@ enum StackingBehavior { ## What happens if the Entity has the same Effect we're 
 @export var lifetime : ValueResource ## The duration before the added Effect expires. Time never expires it.
 @export var expirations : Array[ExpirationResource] ## Triggers that cause this effect to end before its lifetime.
 @export var status_effect_scene : PackedScene ## The Effect scene to be created as an instance.
-@export var visible_status : bool = true ## Whether the StatusEffect should be visible on the GUI.
+@export var visible_status : bool = true ## Whether the LifetimeEffect should be visible on the GUI.
 
 ## Called when an Effect containing this Resource is created. 
 ## Creates an instance copy of the status Effect to be added.
 func on_created(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
-	var sub_effect : StatusEffect = status_effect_scene.instantiate().from_resource(
+	var sub_effect : LifetimeEffect = status_effect_scene.instantiate().from_resource(
 		effect_added, 
 		ability, 
 		caster, 

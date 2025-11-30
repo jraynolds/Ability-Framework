@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://nsj5sk4al1cc" path="res://data/effects/statuses/status_divine_might.tres" id="4_vtgnj"]
 [ext_resource type="Script" uid="uid://c6jhudweyt18x" path="res://data/lifetimes/lifetime_resource.gd" id="5_hqrt0"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_4by8a"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_bnnja"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="7_bnnja"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_edbga"]
 
 [resource]

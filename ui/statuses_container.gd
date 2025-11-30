@@ -17,7 +17,7 @@ var entity : Entity : ## The Entity whose statuses we're representing. Changing 
 			entity.statuses_component.on_status_added.connect(_on_status_added)
 			entity.statuses_component.on_status_removed.connect(_on_status_removed)
 ## The Statuses we're representing, paired with the container each is in.
-var _statuses : Dictionary[StatusEffect, StatusContainer] = {}
+var _statuses : Dictionary[LifetimeEffect, StatusContainer] = {}
 
 
 ## Called every frame.
@@ -40,7 +40,7 @@ func _process(_delta: float) -> void:
 
 
 ## Called when the connected statuses component adds a status.
-func _on_status_added(status: StatusEffect):
+func _on_status_added(status: LifetimeEffect):
 	if status._positivity != status_positivity:
 		return
 	DebugManager.debug_log(
@@ -53,7 +53,7 @@ func _on_status_added(status: StatusEffect):
 
 
 ## Called when the connected statuses component removes a status.
-func _on_status_removed(status: StatusEffect):
+func _on_status_removed(status: LifetimeEffect):
 	if status._positivity != status_positivity:
 		return
 	DebugManager.debug_log(

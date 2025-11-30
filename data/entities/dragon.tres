@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="EntityResource" load_steps=22 format=3 uid="uid://d3tm0gr5e5ivq"]
+
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_1enko"]
+[ext_resource type="Resource" uid="uid://cuxd226tdlubh" path="res://data/abilities/enemy/dragon/bite.tres" id="2_jwxs2"]
+[ext_resource type="Resource" uid="uid://fsshlprmsieg" path="res://data/abilities/enemy/dragon/claw_swipe.tres" id="3_53que"]
+[ext_resource type="Resource" uid="uid://dye2ihktb5b6i" path="res://data/abilities/enemy/dragon/fire_breath.tres" id="4_7aa55"]
+[ext_resource type="Resource" uid="uid://b4e8733eub8c3" path="res://data/abilities/enemy/dragon/fly.tres" id="5_3grw1"]
+[ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="6_3grw1"]
+[ext_resource type="Resource" uid="uid://76eskamw42n6" path="res://data/abilities/enemy/dragon/tail_slap.tres" id="6_a8v0n"]
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="7_a8v0n"]
+[ext_resource type="Resource" uid="uid://btq5hht6hwme6" path="res://data/entities/dragon_graph.tres" id="7_rnnuq"]
+[ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="8_rnnuq"]
+[ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="9_beigs"]
+[ext_resource type="Resource" uid="uid://bprtwqbua4hdp" path="res://data/values/flats/breakpoints/hp_enemy_high.tres" id="10_hkw40"]
+[ext_resource type="Resource" uid="uid://b2ievbk4n2m7u" path="res://data/stats/hp.tres" id="11_jidx0"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="12_5b73k"]
+[ext_resource type="Resource" uid="uid://dlsnroy6i2hoo" path="res://data/values/flats/breakpoints/attack_enemy_low.tres" id="13_ibmde"]
+[ext_resource type="Resource" uid="uid://bk53y5hldyf1u" path="res://data/stats/defense.tres" id="14_st6d5"]
+[ext_resource type="Resource" uid="uid://d0rqp0fsp54sa" path="res://data/values/flats/breakpoints/defense_enemy_low.tres" id="15_yqrry"]
+[ext_resource type="Resource" uid="uid://0cdkdryyaugb" path="res://data/stats/ability_speed.tres" id="16_kaed1"]
+[ext_resource type="Resource" uid="uid://b8m8pdnudlcrg" path="res://data/values/flats/breakpoints/ability_speed_player_low.tres" id="17_2khrw"]
+[ext_resource type="Resource" uid="uid://dodhwet73lma8" path="res://data/stats/gcd_cooldown.tres" id="18_g8qcx"]
+[ext_resource type="Resource" uid="uid://bcrjt37cl6x6" path="res://data/values/flats/breakpoints/gcd_player_low.tres" id="19_ry5t5"]
+
+[resource]
+script = ExtResource("6_3grw1")
+title = "Dragon"
+stats = Dictionary[ExtResource("7_a8v0n"), ExtResource("8_rnnuq")]({
+ExtResource("9_beigs"): ExtResource("10_hkw40"),
+ExtResource("11_jidx0"): ExtResource("10_hkw40"),
+ExtResource("12_5b73k"): ExtResource("13_ibmde"),
+ExtResource("14_st6d5"): ExtResource("15_yqrry"),
+ExtResource("16_kaed1"): ExtResource("17_2khrw"),
+ExtResource("18_g8qcx"): ExtResource("19_ry5t5")
+})
+abilities = Dictionary[ExtResource("1_1enko"), int]({
+ExtResource("2_jwxs2"): 0,
+ExtResource("3_53que"): 1,
+ExtResource("4_7aa55"): 2,
+ExtResource("5_3grw1"): 3,
+ExtResource("6_a8v0n"): 4
+})
+ability_graph = ExtResource("7_rnnuq")
+metadata/_custom_type_script = "uid://2e885iqyhq3n"

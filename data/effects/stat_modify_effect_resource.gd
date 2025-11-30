@@ -5,7 +5,7 @@ class_name StatModifyEffectResource
 @export var stat_type : StatResource.StatType ## The Stat this Effect adds to.
 @export var modifier : ValueResource ## The value that will modify the Stat.
 @export var math_operation : Math.Operation ## The type of mathematics operation we'll perform.
-@export var ignore_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing StatusEffects.
+@export var ignore_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing LifetimeEffects.
 @export var ignore_transforms : bool ## Whether we should modify the base stat, bypassing the target's Transforms.
 
 ## Called when an Effect containing this Resource affects targets.

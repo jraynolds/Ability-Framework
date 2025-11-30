@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bc8by5gv4xxas" path="res://assets/abilities/r_39.png" id="5_bqsa7"]
 [ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="6_ordp7"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_w5jkc"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="8_6fjof"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="8_6fjof"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_c85at"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="10_h1te4"]
 

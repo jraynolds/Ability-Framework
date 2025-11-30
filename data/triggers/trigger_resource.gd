@@ -117,7 +117,7 @@ func get_parameters_to_unbind(trigger_type: Trigger) -> int:
 		Trigger.OnTick:
 			return 0 ##TODO
 		Trigger.OnBattleTick:
-			return 3
-		Trigger.OnChannelTick:
 			return 1
+		Trigger.OnChannelTick:
+			return 3
 	return 0

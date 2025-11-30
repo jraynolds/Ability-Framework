@@ -12,8 +12,8 @@ enum DamageType {
 	Acid,
 	None
 }
-@export var ignore_caster_statuses : bool ## Whether we should find the base stat value, no matter the caster's ongoing StatusEffects.
-@export var ignore_target_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing StatusEffects.
+@export var ignore_caster_statuses : bool ## Whether we should find the base stat value, no matter the caster's ongoing LifetimeEffects.
+@export var ignore_target_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing LifetimeEffects.
 @export var ignore_transforms : bool ## Whether we should modify the base stat, bypassing the target's Transforms.
 
 ## Called when an Effect containing this Resource affects targets.

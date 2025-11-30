@@ -8,7 +8,4 @@
 [resource]
 script = ExtResource("1_3bsis")
 values = Array[ExtResource("2_mx2c3")]([ExtResource("3_brxns"), ExtResource("4_mavlq")])
-math_operation = 2
-is_int = false
-rounding_behavior = 0
 metadata/_custom_type_script = "uid://cao1j7x81va5m"

@@ -10,7 +10,7 @@ class_name DebugManagerGlobal
 
 ## Whether debugging should be output for Effects.
 @export var effects : bool
-## Whether debugging should be output for StatusEffects.
+## Whether debugging should be output for LifetimeEffects.
 @export var status_effects : bool
 ## Whether debugging should be output for StatusAddEffectResources.
 @export var status_add_effect_resources : bool
@@ -56,8 +56,8 @@ func debug_log(message: String, source: Variant):
 		print("ABILITY: " + message + ", from '" + source.name + "'")
 	
 	elif is_instance_of(source, Effect):
-		if is_instance_of(source, StatusEffect) and status_effects:
-			print("STATUSEFFECT: " + message + ", from '" + source.name + "'")
+		if is_instance_of(source, LifetimeEffect) and status_effects:
+			print("LifetimeEffect: " + message + ", from '" + source.name + "'")
 		else:
 			print("EFFECT: " + message + ", from '" + source.name + "'")
 	

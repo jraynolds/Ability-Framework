@@ -1,19 +1,19 @@
 extends Effect
 ## The runtime instance of an EffectResource that temporarily modifies an Entity.
 ## Like an Effect but with lifetime, duration, etc.
-class_name StatusEffect
+class_name LifetimeEffect
 
-var is_visible : bool ## Whether the StatusEffect should be visible on the GUI.
-#var tracking_lifetime : bool ## Whether the StatusEffect is currently tracking its lifetime.
-var _lifetime : ValueResource ## The lifetimes before this StatusEffect expires.
+var is_visible : bool ## Whether the LifetimeEffect should be visible on the GUI.
+#var tracking_lifetime : bool ## Whether the LifetimeEffect is currently tracking its lifetime.
+var _lifetime : ValueResource ## The lifetimes before this LifetimeEffect expires.
 var lifetime_remaining : float :
 	get :
 		if !_lifetime:
 			return NAN
 		return _lifetime.get_value(_caster, _targets) - _time_active
-var _expirations : Array[ExpirationResource] = [] ## A list of triggers that cause this StatusEffect to end early.
+var _expirations : Array[ExpirationResource] = [] ## A list of triggers that cause this LifetimeEffect to end early.
 
-## The duration the associated StatusEffect has been active. Compared with the lifetime.
+## The duration the associated LifetimeEffect has been active. Compared with the lifetime.
 var _time_active : float = 0 :
 	set(val):
 		#var old_value = _time_active
@@ -22,7 +22,7 @@ var _time_active : float = 0 :
 		if lifetime_remaining < 0:
 			end()
 
-## Updates this StatusEffect's Resource with another. Overloaded.
+## Updates this LifetimeEffect's Resource with another. Overloaded.
 func update_resource(res: EffectResource):
 	super(res)
 	_time_active = 0
@@ -65,7 +65,7 @@ func from_effect(effect: Effect) -> Effect:
 
 
 ## Returns an instance of this initialized with the given lifetime and expirations.
-func with_expiration(lifetime: ValueResource, expirations: Array[ExpirationResource]) -> StatusEffect:
+func with_expiration(lifetime: ValueResource, expirations: Array[ExpirationResource]) -> LifetimeEffect:
 	_lifetime = lifetime
 	for expiration in expirations:
 		_expirations.append(expiration)
@@ -73,8 +73,8 @@ func with_expiration(lifetime: ValueResource, expirations: Array[ExpirationResou
 	return self
 
 
-## Returns an instance of this initialized with the given StatusEffect.
-func from_status_effect(status: StatusEffect) -> StatusEffect:
+## Returns an instance of this initialized with the given LifetimeEffect.
+func from_status_effect(status: LifetimeEffect) -> LifetimeEffect:
 	from_effect(status)
 	_lifetime = status._lifetime
 	for expiration in status._expirations:
@@ -90,26 +90,26 @@ func register(caster: Entity, targets: Array[Entity]):
 	_targets = targets
 	
 	DebugManager.debug_log(
-		"Attempting to register StatusEffect " + _title
+		"Attempting to register LifetimeEffect " + _title
 	, self)
 	
 	for conditional in _conditionals_positive:
 		if !conditional.is_met(self, _ability, caster, targets):
 			DebugManager.debug_log(
-				"Couldn't register StatusEffect " + _title + 
+				"Couldn't register LifetimeEffect " + _title + 
 				" because it didn't meet conditional " + conditional.resource_name
 			, self)
 			return
 	for conditional in _conditionals_negative:
 		if conditional.is_met(self, _ability, caster, targets):
 			DebugManager.debug_log(
-				"Couldn't register StatusEffect " + _title + 
+				"Couldn't register LifetimeEffect " + _title + 
 				" because it met conditional " + conditional.resource_name
 			, self)
 			return
 	
 	DebugManager.debug_log(
-		"Registering StatusEffect " + _title
+		"Registering LifetimeEffect " + _title
 	, self)
 	
 	for trigger in _triggers:
@@ -119,14 +119,14 @@ func register(caster: Entity, targets: Array[Entity]):
 	on_registered.emit()
 	
 	DebugManager.debug_log(
-		"Registered StatusEffect " + _title
+		"Registered LifetimeEffect " + _title
 	, self)
 
 
 ## Performs this Effect on the given targets, from the given caster, from the given trigger. Overloaded.
 func affect(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
 	DebugManager.debug_log(
-		"Affecting targets with StatusEffect " + _title + " from the trigger " + trigger.resource_path
+		"Affecting targets with LifetimeEffect " + _title + " from the trigger " + trigger.resource_path
 	, self)
 	
 	if trigger in times_triggered:
@@ -136,17 +136,17 @@ func affect(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
 	
 	for target in targets:
 		DebugManager.debug_log(
-			"Affecting target " + target._resource.title + " with StatusEffect " + _title +
+			"Affecting target " + target._resource.title + " with LifetimeEffect " + _title +
 			" from the trigger " + trigger.resource_path
 		, self)
 		_resource.on_affect(self, _ability, caster, targets)
 
 
-## Causes this StatusEffect to expire according to the behavior of the given ExpirationResource.
+## Causes this LifetimeEffect to expire according to the behavior of the given ExpirationResource.
 ## c(caster) and t(arget) are extraneous parameters necessary to square with how our triggers work.
 func expire_from_resource(_c: Entity, _t: Array[Entity], trigger: TriggerResource, expiration: ExpirationResource):
 	DebugManager.debug_log(
-		"StatusEffect " + _title + " is expiring from effect " + expiration.resource_name + " given trigger " +
+		"LifetimeEffect " + _title + " is expiring from effect " + expiration.resource_name + " given trigger " +
 		trigger.resource_name
 	, self)
 	expiration.expire_effect(self, _ability, _caster, _targets)

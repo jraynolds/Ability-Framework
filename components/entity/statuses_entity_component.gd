@@ -3,25 +3,25 @@ extends EntityComponent
 class_name StatusesEntityComponent
 
 ## The Array of Effects ongoing on this Entity, ordered by when they were added.
-var statuses : Array[StatusEffect]
+var statuses : Array[LifetimeEffect]
 ## The Dictionary of Effects ongoing on this Entity, paired with how many stacks of the same Effect exist.
-var status_stacks : Dictionary[StatusEffect, int] = {} 
+var status_stacks : Dictionary[LifetimeEffect, int] = {} 
 @export var initial_statuses : Array[StatusAddEffectResource] ## Statuses the Entity begins with can be added here.
-@export var status_effect_scene : PackedScene ## A default StatusEffect scene in case we have to construct one.
+@export var status_effect_scene : PackedScene ## A default LifetimeEffect scene in case we have to construct one.
 
-var stat_transform_statuses : Array[StatusEffect] : ## The statuses that transform changes made to stats.
+var stat_transform_statuses : Array[LifetimeEffect] : ## The statuses that transform changes made to stats.
 	get :
-		return entity.statuses_component.statuses.filter(func(status: StatusEffect): 
+		return entity.statuses_component.statuses.filter(func(status: LifetimeEffect): 
 			return status._resource as StatTransformEffectResource
 		)
-var keyword_transform_statuses : Array[StatusEffect] : ## The statuses that transform changes made to keywords.
+var keyword_transform_statuses : Array[LifetimeEffect] : ## The statuses that transform changes made to keywords.
 	get :
-		return entity.statuses_component.statuses.filter(func(status: StatusEffect): 
+		return entity.statuses_component.statuses.filter(func(status: LifetimeEffect): 
 			return status._resource as KeywordTransformEffectResource
 		)
 
-signal on_status_added(status: StatusEffect) ## Emitted when we add a new status.
-signal on_status_removed(status: StatusEffect) ## Emitted when we remove a status.
+signal on_status_added(status: LifetimeEffect) ## Emitted when we add a new status.
+signal on_status_removed(status: LifetimeEffect) ## Emitted when we remove a status.
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
@@ -45,15 +45,15 @@ func on_battle_tick(delta: float) -> void:
 		status._time_active += delta
 
 
-## Returns a StatusEffect with a matching EffectResource, if it's present.
-func get_status(effect: Effect) -> StatusEffect:
+## Returns a LifetimeEffect with a matching EffectResource, if it's present.
+func get_status(effect: Effect) -> LifetimeEffect:
 	for status in statuses:
 		if status.shares_resource(effect):
 			return status
 	return null
 
 
-## Gets the number of stacks on a given StatusEffect. Returns -1 if there are none.
+## Gets the number of stacks on a given LifetimeEffect. Returns -1 if there are none.
 func get_status_stacks(effect: Effect) -> int:
 	var matching_status = get_status(effect)
 	if matching_status:
@@ -61,7 +61,7 @@ func get_status_stacks(effect: Effect) -> int:
 	return -1
 
 
-## Gets the given StatusEffect by its resource, if it's present.
+## Gets the given LifetimeEffect by its resource, if it's present.
 func get_status_by_resource(effect_resource: EffectResource) -> Effect:
 	for status in statuses:
 		if effect_resource == status._resource:
@@ -69,7 +69,7 @@ func get_status_by_resource(effect_resource: EffectResource) -> Effect:
 	return null
 
 
-## Returns an array of StatusEffects matching the given positivity.
+## Returns an array of LifetimeEffects matching the given positivity.
 func get_statuses(status_positivity: Math.Positivity) -> Array[Effect]:
 	var matching_statuses : Array[Effect] = []
 	for status in statuses:
@@ -80,7 +80,7 @@ func get_statuses(status_positivity: Math.Positivity) -> Array[Effect]:
 
 ## Adds a given Effect with the given stacking behavior and given stacks (by default, 1).
 func add_status(
-	status: StatusEffect,
+	status: LifetimeEffect,
 	adding_effect: Effect,
 	adding_ability: Ability,
 	caster: Entity,
@@ -123,8 +123,8 @@ func add_status(
 			status_stacks[_add_status(status, caster)] = num_stacks
 
 
-## Does the actual work of adding a Status. Creates a StatusEffect from the given Effect and lifetime, adds it, and returns it.
-func _add_status(status: StatusEffect, caster: Entity) -> StatusEffect:
+## Does the actual work of adding a Status. Creates a LifetimeEffect from the given Effect and lifetime, adds it, and returns it.
+func _add_status(status: LifetimeEffect, caster: Entity) -> LifetimeEffect:
 	DebugManager.debug_log(
 		"Creating a status effect from " + status._title + " and adding it to " + entity.title + "'s statuses",
 		self
@@ -140,15 +140,15 @@ func _add_status(status: StatusEffect, caster: Entity) -> StatusEffect:
 	return status_effect
 
 
-## Converts the given Effect into a StatusEffect and removes it.
+## Converts the given Effect into a LifetimeEffect and removes it.
 func remove_effect(effect: Effect):
-	var status = effect as StatusEffect
+	var status = effect as LifetimeEffect
 	assert(status, "This effect is not a Status!")
 	remove_status(status)
 
 
-## Removes a StatusEffect. Called AFTER the status expires.
-func remove_status(status: StatusEffect):
+## Removes a LifetimeEffect. Called AFTER the status expires.
+func remove_status(status: LifetimeEffect):
 	DebugManager.debug_log(
 		"Removing status " + status._title + " from entity " + entity.title,
 		self
@@ -160,7 +160,7 @@ func remove_status(status: StatusEffect):
 
 
 ## Modifies the given status's stacks by adding the given amount to them.
-func modify_stacks(status: StatusEffect, amount: int) -> int:
+func modify_stacks(status: LifetimeEffect, amount: int) -> int:
 	DebugManager.debug_log(
 		"Modifying the number of stacks for status " + status._title + " on " + entity.title + " by " + str(amount),
 		self
@@ -190,5 +190,5 @@ func modify_stacks(status: StatusEffect, amount: int) -> int:
 	#expiration_behavior: StatusAddEffectResource.ExpirationBehavior
 #):
 	#var targets : Array[Entity] = [entity]
-	#var effect : StatusEffect = status_effect_scene.instantiate().from_resource(resource, caster, ability, targets)
+	#var effect : LifetimeEffect = status_effect_scene.instantiate().from_resource(resource, caster, ability, targets)
 	#add_effect(effect, caster, stacking_behavior)

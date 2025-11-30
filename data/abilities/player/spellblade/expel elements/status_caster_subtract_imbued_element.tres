@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_db4pn"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="4_4wjyr"]
 [ext_resource type="Resource" uid="uid://drdc6r1gop77e" path="res://data/values/flats/flat_9999.tres" id="4_mm5g4"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="5_woutc"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="5_woutc"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="6_whftd"]
 [ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="7_4wjyr"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="7_arfmg"]
