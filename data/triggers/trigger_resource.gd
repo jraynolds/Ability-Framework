@@ -24,15 +24,25 @@ enum Trigger {
 ## Whatever Signal gets bound needs to emit 0 variables--if it emits more, we untangle its parameters to put caster and targets last.
 func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
 	var num_unbind_params = get_parameters_to_unbind(trigger)
+	DebugManager.debug_log(
+		"Registering an effect named " + effect.name + " to its signals. It has " + str(num_unbind_params) + 
+		" params we have to unbind first" 
+	, self)
 	for s in get_signals_to_bind(trigger, effect, ability, caster, targets):
-		if !num_unbind_params:
-			s.connect(function.bind(self))
+		if num_unbind_params > 0:
+			var fn = function.bindv([caster, targets, self])
+			fn = fn.unbind(num_unbind_params)
+			s.connect(fn)
 		else :
-			s.connect(
-				function
-					.bind(self)
-					.unbind(num_unbind_params)
-			)
+			s.connect(function.bind(self))
+		#if !num_unbind_params:
+			#s.connect(function.bind(self))
+		#else :
+			#s.connect(
+				#function
+					#.bind(self)
+					#.unbind(num_unbind_params)
+			#)
 
 
 ### Calls the given callable, if the given Effect has been running for enough time.
@@ -80,7 +90,7 @@ func get_signals_to_bind(
 		Trigger.OnGetStatValue:
 			return [] ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
 		Trigger.OnTakeDamage:
-			var signals = []
+			var signals : Array[Signal] = []
 			for target in targets:
 				signals.append(target.stats_component.on_take_damage)
 			return signals
@@ -103,7 +113,7 @@ func get_parameters_to_unbind(trigger_type: Trigger) -> int:
 		Trigger.OnGetStatValue:
 			return 0 ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
 		Trigger.OnTakeDamage:
-			return 0
+			return 3
 		Trigger.OnTick:
 			return 0 ##TODO
 		Trigger.OnBattleTick:

@@ -11,11 +11,11 @@ func register(status: StatusEffect, ability: Ability, caster: Entity, targets: A
 		"StatusEffect " + status._title + "'s expiration effects are being registered to its triggers"
 	, self)
 	for trigger in triggers:
+		trigger.register(status, ability, caster, targets, status.expire_from_resource.bind(self))
 		DebugManager.debug_log(
-			"StatusEffect " + status._title + "'s expiration effects are being registered to trigger " + 
+			"StatusEffect " + status._title + "'s expiration effects has been registered to trigger " + 
 			trigger.title
 		, self)
-		trigger.register(status, ability, caster, targets, status.expire_from_resource.bind(self))
 
 
 ## Causes the selected expiration behavior to happen for the StatusEffect.

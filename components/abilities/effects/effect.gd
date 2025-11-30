@@ -152,11 +152,11 @@ func affect_if_trigger_ready(caster: Entity, targets: Array[Entity], trigger: Tr
 	
 	if !trigger.cooldown or time_since_last_trigger[trigger] > trigger.cooldown.get_value(caster, targets):
 		affect(caster, targets, trigger)
-	
-	DebugManager.debug_log(
-		"Failed to affect with " + _title + " from the trigger " + trigger.resource_path +
-		", because its cooldown wasn't ready"
-	, self)
+	else :
+		DebugManager.debug_log(
+			"Failed to affect with " + _title + " from the trigger " + trigger.resource_path +
+			", because its cooldown wasn't ready"
+		, self)
 
 
 ## Performs this Effect on the given targets, from the given caster, from the given trigger.

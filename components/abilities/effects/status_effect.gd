@@ -144,9 +144,10 @@ func affect(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
 
 ## Causes this StatusEffect to expire according to the behavior of the given ExpirationResource.
 ## c(caster) and t(arget) are extraneous parameters necessary to square with how our triggers work.
-func expire_from_resource(expiration: ExpirationResource, _c: Entity, _t: Array[Entity]):
+func expire_from_resource(_c: Entity, _t: Array[Entity], trigger: TriggerResource, expiration: ExpirationResource):
 	DebugManager.debug_log(
-		"StatusEffect " + _title + " is expiring from effect " + expiration.resource_name
+		"StatusEffect " + _title + " is expiring from effect " + expiration.resource_name + " given trigger " +
+		trigger.resource_name
 	, self)
 	expiration.expire_effect(self, _ability, _caster, _targets)
 
