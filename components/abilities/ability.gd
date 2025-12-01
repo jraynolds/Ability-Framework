@@ -77,13 +77,15 @@ var channeling : bool : ## Whether or not the Ability is currently being channel
 var max_channel_time : float :
 	get: return _max_channel_time.get_value(_caster, _targets) if _max_channel_time else 0.0
 var active : bool : ## Whether this Ability is being cast or channeled.
-	set(val):
-		var old_val = active
-		active = val
-		if val and !old_val:
-			on_channel_begin.emit(_caster, _targets)
-		if !val and old_val:
-			on_channel_ended.emit(_caster, _targets)
+	get :
+		return casting or channeling
+	#set(val):
+		#var old_val = active
+		#active = val
+		#if val and !old_val:
+			#on_cast_begin.emit(_caster, _targets)
+		#if !val and old_val:
+			#on_cast.emit(_caster, _targets)
 
 @export var effect_scene : PackedScene ## The default Effect scene.
 

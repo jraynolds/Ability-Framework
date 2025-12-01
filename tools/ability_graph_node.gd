@@ -57,6 +57,7 @@ func set_entity(e: Entity):
 				if resources[i].resource_path == resource_path_to_load:
 					ability_resource_index = i
 			option_button.select(ability_resource_index)
+			title = resources[ability_resource_index].title
 			resource_path_to_load = ""
 
 
@@ -64,13 +65,21 @@ func set_entity(e: Entity):
 func tick(_delta: float):
 	if entity.abilities_component.ability_casting :
 		return
-	elif ability._gcd_type == AbilityResource.GCD.OnGCD and entity.abilities_component.gcd_remaining > 0.0:
+	if entity.abilities_component.ability_channeling :
 		return
-	elif !entity.abilities_component.can_cast_at(ability, entity.targeting_component.targets):
+	if ability._cooldown_left > 0.0:
 		modulate = Color.RED
-		on_proceed.emit(4)
-	else :
-		entity.abilities_component.cast(ability, entity.targeting_component.targets)
+		on_proceed.emit(3)
+		return
+	if ability._gcd_type == AbilityResource.GCD.OnGCD and entity.abilities_component.gcd_remaining > 0.0:
+		return
+	
+	if !entity.abilities_component.can_cast_at(ability, entity.targeting_component.targets):
+		modulate = Color.RED
+		on_proceed.emit(3)
+		return
+	
+	entity.abilities_component.cast(ability, entity.targeting_component.targets)
 
 
 ## Called when our Entity casts an Ability. Ignored if it's not ours.
@@ -107,3 +116,8 @@ func save(resource: AbilityGraphNodeResource):
 func load(resource: AbilityGraphNodeResource):
 	super(resource)
 	resource_path_to_load = resource.node_data.ability_resource_path
+
+
+## Connected to the option select button.
+func _on_option_button_item_selected(index: int) -> void:
+	title = resources[index].title

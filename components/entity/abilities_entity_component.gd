@@ -139,14 +139,19 @@ func _on_ability_finished_channel(ability: Ability, targets: Array[Entity]):
 
 ## Performs the cleanup for the finish of an Ability.
 func _on_ability_end(ability: Ability, targets: Array[Entity]):
+	DebugManager.debug_log(
+		"Entity " + entity.title + " is performing cleanup for ability " + ability._title +
+		" at targets " + ",".join(targets.map(func(t: Entity): return t.title))
+	, self)
 	ability.end()
 	if ability._gcd_type == AbilityResource.GCD.OnGCD:
 		if ability._gcd_cooldown:
 			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
-		gcd_remaining = gcd_max_cached
-	else :
-		gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
-		gcd_remaining = gcd_max_cached
+			gcd_remaining = gcd_max_cached
+		else :
+			print("offgcd")
+			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
+			gcd_remaining = gcd_max_cached
 
 
 ## Returns whether the given Ability can be cast by this Entity.

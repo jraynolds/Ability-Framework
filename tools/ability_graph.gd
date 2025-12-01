@@ -35,8 +35,8 @@ var ai_node_active : GraphNodeBase :
 		var prev_node = ai_node_active
 		ai_node_active = val
 		DebugManager.debug_log(
-			"New AI node in the graph is active: " + val.name + ", was previously " +
-			(prev_node.name if prev_node else "nothing")
+			"New AI node in the graph is active: " + val.title + ", was previously " +
+			(prev_node.title if prev_node else "nothing")
 		, self)
 		if prev_node:
 			prev_node.active = false

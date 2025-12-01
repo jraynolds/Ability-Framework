@@ -52,3 +52,5 @@ horizontal_alignment = 2
 layout_mode = 2
 text = "Unable to cast"
 horizontal_alignment = 2
+
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

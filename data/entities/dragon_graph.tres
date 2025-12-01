@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityGraphResource" load_steps=10 format=3 uid="uid://colj6qlgdxpyo"]
+[gd_resource type="Resource" script_class="AbilityGraphResource" load_steps=10 format=3 uid="uid://dtei8tkvbwfdy"]
 
 [ext_resource type="Script" uid="uid://b0jgoy0lfkoee" path="res://tools/resources/ability_graph_node_resource.gd" id="1_x34qj"]
 [ext_resource type="Script" uid="uid://ciktqkdlurfmq" path="res://tools/resources/ability_graph_resource.gd" id="2_350wg"]
@@ -77,22 +77,16 @@ connections = Array[Dictionary]([{
 "to_node": &"AbilityGraphNode",
 "to_port": 0
 }, {
-"from_node": &"AbilityGraphNode4",
+"from_node": &"AbilityGraphNode",
 "from_port": 3,
 "keep_alive": false,
-"to_node": &"AbilityGraphNode5",
+"to_node": &"AbilityGraphNode3",
 "to_port": 0
 }, {
 "from_node": &"AbilityGraphNode3",
 "from_port": 3,
 "keep_alive": false,
 "to_node": &"AbilityGraphNode4",
-"to_port": 0
-}, {
-"from_node": &"AbilityGraphNode",
-"from_port": 3,
-"keep_alive": false,
-"to_node": &"AbilityGraphNode3",
 "to_port": 0
 }])
 nodes = Array[ExtResource("1_x34qj")]([SubResource("Resource_jylh2"), SubResource("Resource_fvuo6"), SubResource("Resource_ba654"), SubResource("Resource_qui58"), SubResource("Resource_axija"), SubResource("Resource_1ofgp"), SubResource("Resource_ug2vq")])
