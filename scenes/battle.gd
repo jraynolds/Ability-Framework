@@ -3,6 +3,7 @@ extends Node2D
 class_name Battle
 
 @export var ability_overlay : AbilityOverlay ## The buttons overlay for the player.
+@export var enemy_ability_overlay : SimpleAbilitiesContainer ## The simplistic ability overlay for the enemy.
 @export var health_bar_enemy : HealthBar ## The health bar for the enemy.
 @export var health_bar_player : HealthBar ## The health bar for the player.
 @export var cast_bar_enemy : AbilityCastBar ## The cast bar for the enemy.
@@ -16,6 +17,7 @@ class_name Battle
 var enemy : Entity : ## The enemy the player is fighting against. Changing this alters the UI.
 	set(val):
 		enemy = val
+		enemy_ability_overlay.entity = enemy
 		health_bar_enemy.entity = enemy
 		statuses_container_enemy_positive.entity = enemy
 		statuses_container_enemy_negative.entity = enemy

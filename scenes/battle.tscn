@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://27bka5t3aalm"]
+[gd_scene load_steps=9 format=3 uid="uid://27bka5t3aalm"]
 
 [ext_resource type="Script" uid="uid://doo7asqx51qab" path="res://scenes/battle.gd" id="1_p1qf1"]
 [ext_resource type="PackedScene" uid="uid://ngaorlvir3mf" path="res://ui/ability_overlay.tscn" id="1_th188"]
 [ext_resource type="PackedScene" uid="uid://b64vcadfmbtx7" path="res://ui/ability_cast_bar.tscn" id="3_6vh42"]
 [ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
+[ext_resource type="PackedScene" uid="uid://f4ggy7cglldx" path="res://ui/simple_abilities_container.tscn" id="4_4k1nj"]
 [ext_resource type="PackedScene" uid="uid://dh1uxqh1ntq1h" path="res://ui/statuses_container.tscn" id="4_a12nh"]
 [ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/ability_graph.tscn" id="6_6vh42"]
 
@@ -19,17 +20,18 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
-[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "health_bar_enemy", "health_bar_player", "cast_bar_enemy", "cast_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative", "ability_graph")]
+[node name="Battle" type="Node2D" node_paths=PackedStringArray("ability_overlay", "enemy_ability_overlay", "health_bar_enemy", "health_bar_player", "cast_bar_enemy", "cast_bar_player", "statuses_container_enemy_positive", "statuses_container_enemy_negative", "statuses_container_player_positive", "statuses_container_player_negative", "ability_graph")]
 script = ExtResource("1_p1qf1")
 ability_overlay = NodePath("CanvasLayer/AbilityOverlay")
+enemy_ability_overlay = NodePath("CanvasLayer/SimpleAbilitiesContainer")
 health_bar_enemy = NodePath("CanvasLayer/HealthBar")
 health_bar_player = NodePath("CanvasLayer/HealthBar2")
 cast_bar_enemy = NodePath("CanvasLayer/EnemyCastBar")
 cast_bar_player = NodePath("CanvasLayer/PlayerCastBar")
-statuses_container_enemy_positive = NodePath("CanvasLayer/Statuses/StatusesContainer")
-statuses_container_enemy_negative = NodePath("CanvasLayer/Statuses/StatusesContainer2")
-statuses_container_player_positive = NodePath("CanvasLayer/Statuses2/StatusesContainer")
-statuses_container_player_negative = NodePath("CanvasLayer/Statuses2/StatusesContainer2")
+statuses_container_enemy_positive = NodePath("CanvasLayer/Statuses/PositiveEnemyStatuses")
+statuses_container_enemy_negative = NodePath("CanvasLayer/Statuses/NegativeEnemyStatuses")
+statuses_container_player_positive = NodePath("CanvasLayer/PositivePlayerStatuses")
+statuses_container_player_negative = NodePath("CanvasLayer/NegativePlayerStatuses")
 ability_graph = NodePath("AbilityGraphWindow/AbilityGraph")
 queued_ability_duration = 0.5
 
@@ -38,46 +40,50 @@ queued_ability_duration = 0.5
 [node name="Statuses" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 25.0
+offset_left = 263.0
 offset_top = 61.0
-offset_right = -24.0
+offset_right = -1.0
 offset_bottom = 80.0
 grow_horizontal = 2
 
-[node name="StatusesContainer" parent="CanvasLayer/Statuses" instance=ExtResource("4_a12nh")]
+[node name="PositiveEnemyStatuses" parent="CanvasLayer/Statuses" instance=ExtResource("4_a12nh")]
 layout_mode = 2
 
-[node name="StatusesContainer2" parent="CanvasLayer/Statuses" instance=ExtResource("4_a12nh")]
+[node name="NegativeEnemyStatuses" parent="CanvasLayer/Statuses" instance=ExtResource("4_a12nh")]
 layout_mode = 2
 alignment = 2
 status_positivity = 2
 
-[node name="Statuses2" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PositivePlayerStatuses" parent="CanvasLayer" instance=ExtResource("4_a12nh")]
+offset_left = 12.0
+offset_top = 428.0
+offset_right = 155.0
+offset_bottom = 585.0
+
+[node name="NegativePlayerStatuses" parent="CanvasLayer" instance=ExtResource("4_a12nh")]
 offset_left = 43.0
-offset_top = -249.0
-offset_right = -25.0
-offset_bottom = -232.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="StatusesContainer" parent="CanvasLayer/Statuses2" instance=ExtResource("4_a12nh")]
-layout_mode = 2
-
-[node name="StatusesContainer2" parent="CanvasLayer/Statuses2" instance=ExtResource("4_a12nh")]
-layout_mode = 2
+offset_top = 399.0
+offset_right = 1127.0
+offset_bottom = 416.0
 alignment = 2
 status_positivity = 2
 
 [node name="EnemyCastBar" parent="CanvasLayer" instance=ExtResource("3_6vh42")]
+custom_minimum_size = Vector2(600, 30)
+offset_left = -300.0
 offset_top = -146.0
+offset_right = 300.0
 offset_bottom = -116.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_lpir7")
 
+[node name="SimpleAbilitiesContainer" parent="CanvasLayer" instance=ExtResource("4_4k1nj")]
+
 [node name="PlayerCastBar" parent="CanvasLayer" instance=ExtResource("3_6vh42")]
+custom_minimum_size = Vector2(600, 30)
+offset_left = -300.0
+offset_top = -15.0
+offset_right = 300.0
+offset_bottom = 15.0
 
 [node name="AbilityOverlay" parent="CanvasLayer" instance=ExtResource("1_th188")]
 offset_bottom = -55.0
@@ -91,6 +97,12 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -49.0
 grow_vertical = 0
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="AbilityGraphWindow" type="Window" parent="."]
 transparent_bg = true
@@ -113,4 +125,4 @@ battle = NodePath("../..")
 [connection signal="on_tick" from="." to="AbilityGraphWindow/AbilityGraph" method="_on_battle_tick"]
 [connection signal="close_requested" from="AbilityGraphWindow" to="." method="_on_ability_graph_window_close_requested"]
 
-[editable path="CanvasLayer/Statuses/StatusesContainer"]
+[editable path="CanvasLayer/Statuses/PositiveEnemyStatuses"]

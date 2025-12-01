@@ -149,6 +149,7 @@ func cast():
 		"Ability " + _title + " has successfully been cast by " + _caster.title + 
 		" at targets " + ",".join(_targets.map(func(t: Entity): return t.title))
 	, self)
+	_cooldown_left = cooldown
 
 
 ## Performs this ability's channel on the given targets, from our owner.
@@ -165,7 +166,6 @@ func end():
 	DebugManager.debug_log(
 		"Ability " + _title + " is performing cleanup"
 	, self)
-	_cooldown_left = cooldown
 	channeling = false
 	active = false
 	for effect in _effects:

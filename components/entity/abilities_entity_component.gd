@@ -149,7 +149,6 @@ func _on_ability_end(ability: Ability, targets: Array[Entity]):
 			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
 			gcd_remaining = gcd_max_cached
 		else :
-			print("offgcd")
 			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 			gcd_remaining = gcd_max_cached
 

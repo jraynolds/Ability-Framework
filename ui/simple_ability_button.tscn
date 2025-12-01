@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://djuabllvg66t0"]
+
+[ext_resource type="Script" uid="uid://boguuhs5yisay" path="res://ui/simple_ability_button.gd" id="1_f4m60"]
+[ext_resource type="Texture2D" uid="uid://b4w485w6w2ohv" path="res://assets/black square.png" id="1_klj65"]
+
+[node name="SimpleAbilityButton" type="Button" node_paths=PackedStringArray("cooldown_bar")]
+text = "Fire"
+script = ExtResource("1_f4m60")
+cooldown_bar = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.43137255)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 30.0
+nine_patch_stretch = true
+texture_progress = ExtResource("1_klj65")
