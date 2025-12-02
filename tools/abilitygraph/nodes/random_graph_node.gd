@@ -17,15 +17,23 @@ func _ready() -> void:
 func tick(_delta: float):
 	var max_rolling_slot_index : int = 1
 	var max_roll : float = 0.0
+	DebugManager.debug_log(
+		"Calculating a random output port"
+	, self)
 	for i in range(len(slots)):
 		var spin_box = slots[i] as SpinBox
 		if spin_box:
 			for j in range(spin_box.value):
 				var roll = randf()
 				if roll > max_roll:
-					max_rolling_slot_index = i + 1
+					max_rolling_slot_index = i
 					max_roll = roll
 	
+	DebugManager.debug_log(
+		"The highest-rolling port is " + str(max_rolling_slot_index) + " with a roll of " + str(max_roll)
+	, self)
+	
+	print(max_rolling_slot_index)
 	on_proceed.emit(max_rolling_slot_index)
 	modulate = colors[max_rolling_slot_index]
 
@@ -44,11 +52,10 @@ func save(resource: AbilityGraphNodeResource):
 ## Called to load into this node with the given resource.
 func load(resource: AbilityGraphNodeResource):
 	super(resource)
-	resource.node_data.num_slots = len(slots)
 	for i in range(resource.node_data.num_slots - 3):
 		add_slot()
 	for i in range(len(slots)):
 		if i == 0:
 			continue
 		var spin_box = slots[i] as SpinBox
-		spin_box.value = slots[i-1]
+		spin_box.value = resource.node_data.weights[i-1]

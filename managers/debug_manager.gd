@@ -11,7 +11,7 @@ class_name DebugManagerGlobal
 ## Whether debugging should be output for Effects.
 @export var effects : bool
 ## Whether debugging should be output for LifetimeEffects.
-@export var status_effects : bool
+@export var lifetime_effects : bool
 ## Whether debugging should be output for StatusAddEffectResources.
 @export var status_add_effect_resources : bool
 
@@ -46,6 +46,8 @@ class_name DebugManagerGlobal
 
 ## Whether debugging should be output for the AbilityGraph.
 @export var ability_graph : bool
+## Whether debugging should be output for RandomGraphNodes.
+@export var random_graph_nodes : bool
 
 ## Outputs a detailed log if the log's source is one2 we're outputting.
 func debug_log(message: String, source: Variant):
@@ -56,9 +58,9 @@ func debug_log(message: String, source: Variant):
 		print("ABILITY: " + message + ", from '" + source.name + "'")
 	
 	elif is_instance_of(source, Effect):
-		if is_instance_of(source, LifetimeEffect) and status_effects:
+		if is_instance_of(source, LifetimeEffect) and lifetime_effects:
 			print("LifetimeEffect: " + message + ", from '" + source.name + "'")
-		else:
+		elif effects:
 			print("EFFECT: " + message + ", from '" + source.name + "'")
 	
 	elif is_instance_of(source, EntityComponent):
@@ -101,3 +103,6 @@ func debug_log(message: String, source: Variant):
 	## AbilityGraph
 	elif is_instance_of(source, AbilityGraph) and ability_graph:
 		print("ABILITYGRAPH: " + message + ", from '" + source.name + "'")
+	elif is_instance_of(source, GraphNodeBase):
+		if is_instance_of(source, RandomGraphNode):
+			print("RANDOMGRAPHNODE: " + message + ", from '" + source.name + "'")

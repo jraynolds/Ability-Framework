@@ -35,22 +35,22 @@ text = "Weights"
 [node name="OptionButton" parent="." index="2"]
 visible = false
 
-[node name="SpinBox" type="SpinBox" parent="." index="3"]
-layout_mode = 2
-value = 1.0
-rounded = true
-allow_greater = true
-alignment = 2
-
-[node name="SpinBox2" type="SpinBox" parent="." index="4"]
-layout_mode = 2
-value = 1.0
-rounded = true
-allow_greater = true
-alignment = 2
-
-[node name="HBoxContainer" parent="." index="5"]
+[node name="HBoxContainer" parent="." index="3"]
 alignment = 1
 
 [node name="Remove" parent="HBoxContainer" index="0"]
 visible = false
+
+[node name="SpinBox" type="SpinBox" parent="." index="4"]
+layout_mode = 2
+value = 1.0
+rounded = true
+allow_greater = true
+alignment = 2
+
+[node name="SpinBox2" type="SpinBox" parent="." index="5"]
+layout_mode = 2
+value = 1.0
+rounded = true
+allow_greater = true
+alignment = 2

@@ -6,8 +6,6 @@
 script = ExtResource("1_f7v61")
 battle = true
 abilities = true
-effects = true
-status_effects = true
 status_add_effect_resources = true
 stats_entity_components = true
 abilities_entity_components = true
@@ -20,3 +18,4 @@ stats = true
 statuses_containers = true
 ability_cast_bars = true
 ability_graph = true
+random_graph_nodes = true
