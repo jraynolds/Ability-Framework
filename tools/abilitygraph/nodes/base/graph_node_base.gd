@@ -77,12 +77,14 @@ func _on_resize_request(new_size: Vector2) -> void:
 func add_slot(has_input: bool=false, has_output: bool=true, output_color: Color=colors[len(slots)]):
 	var node = slot_object.duplicate()
 	slots.append(node)
-	slots[-1].add_sibling(node)
-	set_slot(len(slots), has_input, 0, Color.PURPLE, has_output, 0, output_color)
+	slots[-2].add_sibling(node, true)
+	set_slot(len(slots)-1, has_input, 0, Color.PURPLE, has_output, 0, output_color)
 	if len(slots) > min_slots:
 		slot_button_remove.disabled = false
+		slot_button_remove.visible = true
 	if len(slots) == max_slots:
 		slot_button_add.disabled = true
+		slot_button_add.visible = false
 	get_rect().size = get_minimum_size()
 
 
@@ -96,8 +98,10 @@ func remove_last_slot():
 	remove_child(slots.pop_back())
 	if len(slots) == min_slots:
 		slot_button_remove.disabled = true
+		slot_button_remove.visible = false
 	if len(slots) < max_slots:
 		slot_button_add.disabled = false
+		slot_button_add.visible = true
 
 
 ## Called when the "add slot" button is pressed. Adds a slot.

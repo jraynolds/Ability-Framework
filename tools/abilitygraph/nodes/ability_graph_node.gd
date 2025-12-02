@@ -16,10 +16,10 @@ var resource_path_to_load : String ## The resource we're waiting to load, if any
 ## Called when the node enters the scene.
 func _ready() -> void:
 	super()
-	add_slot(false, true, Color.GREEN) ## On casted
-	add_slot(false, true, Color.YELLOW) ## On canceled
-	add_slot(false, true, Color.ORANGE) ## On interrupted
-	add_slot(false, true, Color.RED) ## Unable to cast (for a reason besides GCD)
+	set_slot(1, false, 0, Color.PURPLE, true, 0, Color.GREEN) ## On casted
+	set_slot(2, false, 0, Color.PURPLE, true, 0, Color.YELLOW) ## On canceled
+	set_slot(3, false, 0, Color.PURPLE, true, 0, Color.ORANGE) ## On interrupted
+	set_slot(4, false, 0, Color.PURPLE, true, 0, Color.RED) ## Unable to cast (for a reason besides GCD)
 
 
 ## Initializes much of our setup.
@@ -94,9 +94,7 @@ func _on_cast_interrupted(cast_ability: Ability, _targets: Array[Entity], interr
 ## Called to save this node into the given Resource for later retrieval.
 func save(resource: AbilityGraphNodeResource):
 	super(resource)
-	print(resource)
 	var resource_path = ability_resource.resource_path
-	print(resource_path)
 	resource.node_data.ability_resource_path = resource_path
 
 

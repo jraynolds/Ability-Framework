@@ -15,8 +15,8 @@ var resource_path_to_load : String ## The resource we're waiting to load, if any
 ## Called when the nodee enters the scene for the first time.
 func _ready() -> void:
 	super()
-	add_slot(false, true, Color.GREEN) ## True
-	add_slot(false, true, Color.RED) ## False
+	set_slot(1, false, 0, Color.PURPLE, true, 0, Color.GREEN) ## True
+	set_slot(2, false, 0, Color.PURPLE, true, 0, Color.RED) ## False
 
 	for file_path in get_all_file_paths("res://data/"):
 		if file_path.ends_with(".tres"):

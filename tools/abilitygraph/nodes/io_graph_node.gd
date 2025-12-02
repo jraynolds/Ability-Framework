@@ -4,4 +4,4 @@ class_name IOGraphNode
 
 ## Called when this node enters the scene.
 func _ready() -> void:
-	add_slot(true, true, Color.PURPLE)
+	set_slot(1, true, 0, Color.PURPLE, true, 0, Color.PURPLE)

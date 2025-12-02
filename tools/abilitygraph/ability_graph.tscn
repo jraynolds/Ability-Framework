@@ -1,92 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://wq0bycheyfy8"]
+[gd_scene load_steps=7 format=3 uid="uid://wq0bycheyfy8"]
 
 [ext_resource type="Script" uid="uid://t1v6f55vtv3r" path="res://tools/abilitygraph/ability_graph.gd" id="1_7kxcf"]
-[ext_resource type="PackedScene" uid="uid://b1vxlda83m0ca" path="res://tools/abilitygraph/nodes/conditional_graph_node.tscn" id="2_r650a"]
-[ext_resource type="PackedScene" uid="uid://clk18d4fq55oi" path="res://tools/abilitygraph/nodes/io_graph_node.tscn" id="2_y6qk3"]
-[ext_resource type="PackedScene" uid="uid://c6mq0rdmboduc" path="res://tools/abilitygraph/nodes/enter_graph_node.tscn" id="3_y6qk3"]
-[ext_resource type="PackedScene" uid="uid://bawqyxxy0s1u1" path="res://tools/abilitygraph/nodes/ability_graph_node.tscn" id="4_eld2d"]
-[ext_resource type="PackedScene" uid="uid://cpt8hpkrbrsgd" path="res://tools/abilitygraph/nodes/basic/graph_node_option.tscn" id="6_rbnvm"]
-
-[sub_resource type="GDScript" id="GDScript_u3k3f"]
-script/source = "extends GraphNodeBase
-class_name PriorityGraphNode
-## From top to bottom, each of the Abilities attached to this priority node are tested to see if they can be cast.
-## The first one that can, is.
-
-var num_slots = 0 ## How many slots this node has.
-@export var remove_slot_button : Button ## A button that removes a new slot.
-@export var add_slot_button : Button ## A button that adds a new slot.
-
-var graph_edit : GraphEdit : ## The graph edit parent of this node.
-	get :
-		return get_parent() as GraphEdit
-
-## Called when the node enters the scene.
-func _ready() -> void:
-	super()
-	set_slot(1, false, 0, Color.PURPLE, true, 0, Color(Color.GREEN, 1.0))
-	set_slot(2, false, 0, Color.PURPLE, true, 0, Color(Color.GREEN, .9))
-	num_slots = 3
-
-
-## Called when the \"add slot\" button is pressed. Adds a slot.
-func _on_add_slot_pressed():
-	num_slots += 1
-	var new_label = Label.new()
-	new_label.text = str(num_slots - 1)
-	new_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	get_children()[-2].add_sibling(new_label)
-	set_slot(
-		num_slots-1, false, 0, Color.PURPLE, true, 0, Color(
-			Color.GREEN, maxf(
-				1.2 - (num_slots * .1), .1
-			)
-		)
-	)
-	if num_slots > 3:
-		remove_slot_button.disabled = false
-
-
-## Called when the \"remove slot\" button is pressed. Removes a slot.
-func _on_remove_slot_pressed():
-	num_slots -= 1
-	for connection in graph_edit.connections:
-		if connection.from_node == name:
-			if connection.from_port == num_slots - 1:
-				graph_edit.disconnect_node(name, connection.from_port, connection.to_node, connection.to_port)
-	set_slot(num_slots, false, 0, Color.PURPLE, false, 0, Color(Color.GREEN, 1.0))
-	remove_child(get_children()[-2])
-	if num_slots <= 3:
-		remove_slot_button.disabled = true
-	get_rect().size = get_minimum_size()
-
-
-## Called to save this node into the given Resource for later retrieval.
-func save(resource: AbilityGraphNodeResource): 
-	super(resource)
-	resource.node_data.num_slots = num_slots
-
-
-## Called to load into this node with the given resource.
-func load(resource: AbilityGraphNodeResource):
-	super(resource)
-	for i in range(resource.node_data.num_slots - num_slots):
-		_on_add_slot_pressed()
-"
-
-[sub_resource type="PackedScene" id="PackedScene_ag2vc"]
-_bundled = {
-"base_scene": 0,
-"conn_count": 2,
-"conns": PackedInt32Array(1073741832, 1073741831, 60, 59, 2, 0, 0, 1073741834, 1073741833, 62, 61, 2, 0, 0),
-"editable_instances": [],
-"names": PackedStringArray("PriorityGraphNode", "title", "slot/2/left_enabled", "slot/2/left_type", "slot/2/left_color", "slot/2/left_icon", "slot/2/right_enabled", "slot/2/right_type", "slot/2/right_color", "slot/2/right_icon", "slot/2/draw_stylebox", "slot/3/left_enabled", "slot/3/left_type", "slot/3/left_color", "slot/3/left_icon", "slot/3/right_enabled", "slot/3/right_type", "slot/3/right_color", "slot/3/right_icon", "slot/3/draw_stylebox", "slot/4/left_enabled", "slot/4/left_type", "slot/4/left_color", "slot/4/left_icon", "slot/4/right_enabled", "slot/4/right_type", "slot/4/right_color", "slot/4/right_icon", "slot/4/draw_stylebox", "script", "remove_slot_button", "add_slot_button", "OptionButton", "visible", "Label", "text", "Label2", "Label", "layout_mode", "text", "horizontal_alignment", "Label3", "Label", "layout_mode", "text", "horizontal_alignment", "HBoxContainer", "HBoxContainer", "layout_mode", "RemoveButton", "Button", "layout_mode", "size_flags_horizontal", "text", "AddButton", "Button", "layout_mode", "size_flags_horizontal", "text", "_on_remove_slot_pressed", "pressed", "_on_add_slot_pressed", "pressed"),
-"node_count": 8,
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("./HBoxContainer"), NodePath("./HBoxContainer"), NodePath("."), NodePath("HBoxContainer/RemoveButton"), NodePath("."), NodePath("HBoxContainer/AddButton")],
-"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 31, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 1073741854, 30, 1073741855, 31, 0, 1073741824, -1, 2147483647, 524320, -1, 1, 33, 32, 0, 1073741825, -1, 2147483647, 786466, -1, 1, 35, 33, 0, 1073741826, 0, 37, 1310756, -1, 3, 38, 34, 39, 35, 40, 36, 0, 1073741827, 0, 42, 1572905, -1, 3, 43, 37, 44, 38, 45, 39, 0, 1073741828, 0, 47, 1835054, -1, 1, 48, 40, 0, 1073741829, 0, 50, 262193, -1, 3, 51, 41, 52, 42, 53, 43, 0, 1073741830, 0, 55, 524342, -1, 3, 56, 44, 57, 45, 58, 46, 0),
-"variants": [ExtResource("6_rbnvm"), "Priority node", false, 0, Color(1, 1, 1, 1), null, false, 0, Color(1, 1, 1, 1), null, true, false, 0, Color(1, 1, 1, 1), null, false, 0, Color(1, 1, 1, 1), null, true, false, 0, Color(1, 1, 1, 1), null, false, 0, Color(1, 1, 1, 1), null, true, SubResource("GDScript_u3k3f"), NodePath("HBoxContainer/RemoveButton"), NodePath("HBoxContainer/AddButton"), false, "Input", 2, "1", 2, 2, "2", 2, 2, 2, 3, "-", 2, 3, "+"],
-"version": 3
-}
+[ext_resource type="PackedScene" uid="uid://ny2yxai3pt38" path="res://tools/abilitygraph/nodes/conditional_graph_node.tscn" id="2_r650a"]
+[ext_resource type="PackedScene" uid="uid://wvonpgsum1wq" path="res://tools/abilitygraph/nodes/io_graph_node.tscn" id="2_y6qk3"]
+[ext_resource type="PackedScene" uid="uid://fsygw8utosg0" path="res://tools/abilitygraph/nodes/enter_graph_node.tscn" id="3_y6qk3"]
+[ext_resource type="PackedScene" uid="uid://eu7qtcna1f0f" path="res://tools/abilitygraph/nodes/ability_graph_node.tscn" id="4_eld2d"]
+[ext_resource type="PackedScene" uid="uid://vib021s5abpg" path="res://tools/abilitygraph/nodes/random_graph_node.tscn" id="6_rbnvm"]
 
 [node name="AbilityGraph" type="Control" node_paths=PackedStringArray("graph_edit", "node_option_dropdown", "add_node_dropdown")]
 layout_mode = 3
@@ -103,7 +22,7 @@ enter_node_scene = ExtResource("3_y6qk3")
 io_node_scene = ExtResource("2_y6qk3")
 conditional_node_scene = ExtResource("2_r650a")
 ability_node_scene = ExtResource("4_eld2d")
-priority_node_scene = SubResource("PackedScene_ag2vc")
+random_node_scene = ExtResource("6_rbnvm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -126,7 +45,7 @@ popup/item_1/text = "Conditional node"
 popup/item_1/id = 1
 popup/item_2/text = "Ability node"
 popup/item_2/id = 2
-popup/item_3/text = "Priority node"
+popup/item_3/text = "Random node"
 popup/item_3/id = 3
 
 [node name="AddNode" type="Button" parent="VBoxContainer/HBoxContainer"]

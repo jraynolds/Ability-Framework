@@ -20,13 +20,13 @@ var node_index = 0 ## The index of the current node.
 @export var add_node_dropdown : Button ## The button to add a node, chosen by our node_option_dropdown.
 var node_options : Array[PackedScene] : ## An Array of PackedScenes, for the dropdown.
 	get :
-		return [ io_node_scene, conditional_node_scene, ability_node_scene, priority_node_scene ]
+		return [ io_node_scene, conditional_node_scene, ability_node_scene, random_node_scene ]
 
 @export var enter_node_scene : PackedScene ## The PackedScene version of an entry node.
 @export var io_node_scene : PackedScene ## The PackedScene version of an input/output node.
 @export var conditional_node_scene : PackedScene ## The PackedScene version of a conditional node.
 @export var ability_node_scene : PackedScene ## The PackedScene version of an ability node.
-@export var priority_node_scene : PackedScene ## The PackedScene version of a priority node.
+@export var random_node_scene : PackedScene ## The PackedScene version of a random node.
 
 @export var battle : Battle ## The Battle we're part of.
 ## The GraphNode the AI brain is currently in. Changing this changes the animation for the active node.
@@ -73,8 +73,8 @@ func init_graph(graph_data: AbilityGraphResource):
 			instantiated_node = conditional_node_scene.instantiate() as ConditionalGraphNode
 		elif node_resource.title.contains("AbilityGraphNode"):
 			instantiated_node = ability_node_scene.instantiate() as AbilityGraphNode
-		elif node_resource.title.contains("PriorityGraphNode"):
-			instantiated_node = priority_node_scene.instantiate() as PriorityGraphNode
+		elif node_resource.title.contains("RandomGraphNode"):
+			instantiated_node = random_node_scene.instantiate() as RandomGraphNode
 		#assert(scene, "No matching PackedScene!")
 		if !instantiated_node:
 			continue
