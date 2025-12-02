@@ -1,6 +1,6 @@
 extends GraphNodeBase
-class_name ConditionalGraphNode
 ## A graph node in the AbilityGraph that directs one way if it evaluates to true, another if false.
+class_name ConditionalGraphNode
 
 var resources : Array[ConditionalResource] ## The ConditionalResources available to us.
 var conditional_resource : ConditionalResource : ## The ConditionalResource we choose.
@@ -15,8 +15,8 @@ var resource_path_to_load : String ## The resource we're waiting to load, if any
 ## Called when the nodee enters the scene for the first time.
 func _ready() -> void:
 	super()
-	set_slot(1, false, 0, Color.PURPLE, true, 0, Color.GREEN)
-	set_slot(2, false, 0, Color.PURPLE, true, 0, Color.RED)
+	add_slot(false, true, Color.GREEN) ## True
+	add_slot(false, true, Color.RED) ## False
 
 	for file_path in get_all_file_paths("res://data/"):
 		if file_path.ends_with(".tres"):
@@ -32,6 +32,9 @@ func _ready() -> void:
 				ability_resource_index = i
 		option_button.select(ability_resource_index)
 		resource_path_to_load = ""
+		
+		option_button.visible = true
+		option_button.disabled = false
 
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain. Meant to be overloaded.

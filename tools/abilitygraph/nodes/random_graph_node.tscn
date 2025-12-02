@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://vib021s5abpg"]
+
+[ext_resource type="PackedScene" uid="uid://cy5ubymjh80ah" path="res://tools/abilitygraph/nodes/base/graph_node_base.tscn" id="1_vdme5"]
+[ext_resource type="Script" uid="uid://bc31qm0mhftkv" path="res://tools/abilitygraph/nodes/random_graph_node.gd" id="2_vhbbb"]
+
+[node name="RandomGraphNode" instance=ExtResource("1_vdme5")]
+title = "Random node"
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+script = ExtResource("2_vhbbb")
+
+[node name="Label" parent="." index="1"]
+text = "Weights"
+
+[node name="OptionButton" parent="." index="2"]
+visible = false
+
+[node name="SpinBox" type="SpinBox" parent="." index="3"]
+layout_mode = 2
+rounded = true
+allow_greater = true
+alignment = 2
+
+[node name="SpinBox2" type="SpinBox" parent="." index="4"]
+layout_mode = 2
+rounded = true
+allow_greater = true
+alignment = 2

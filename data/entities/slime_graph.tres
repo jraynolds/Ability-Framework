@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AbilityGraphResource" load_steps=5 format=3 uid="uid://bgr5h74qymmi5"]
 
-[ext_resource type="Script" uid="uid://b0jgoy0lfkoee" path="res://tools/resources/ability_graph_node_resource.gd" id="1_m3mi0"]
-[ext_resource type="Script" uid="uid://ciktqkdlurfmq" path="res://tools/resources/ability_graph_resource.gd" id="2_38itl"]
+[ext_resource type="Script" uid="uid://b0jgoy0lfkoee" path="res://tools/abilitygraph/resources/ability_graph_node_resource.gd" id="1_m3mi0"]
+[ext_resource type="Script" uid="uid://ciktqkdlurfmq" path="res://tools/abilitygraph/resources/ability_graph_resource.gd" id="2_38itl"]
 
 [sub_resource type="Resource" id="Resource_4uque"]
 script = ExtResource("1_m3mi0")

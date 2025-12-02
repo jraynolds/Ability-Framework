@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://fsygw8utosg0"]
+
+[ext_resource type="PackedScene" uid="uid://cy5ubymjh80ah" path="res://tools/abilitygraph/nodes/base/graph_node_base.tscn" id="1_35sg2"]
+[ext_resource type="Script" uid="uid://inlgfxwnlpbx" path="res://tools/abilitygraph/nodes/enter_graph_node.gd" id="2_euwx1"]
+
+[node name="EnterGraphNode" instance=ExtResource("1_35sg2")]
+title = "Graph entry"
+script = ExtResource("2_euwx1")
+
+[node name="Label" parent="." index="1"]
+text = "Enter"
+horizontal_alignment = 1
+
+[node name="OptionButton" parent="." index="2"]
+visible = false
+
+[node name="HBoxContainer" parent="." index="3"]
+visible = false

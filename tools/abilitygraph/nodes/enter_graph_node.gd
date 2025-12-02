@@ -4,4 +4,4 @@ class_name EnterGraphNode
 
 ## Called when this node enters the scene.
 func _ready() -> void:
-	set_slot(0, false, 0, Color.PURPLE, true, 0, Color.PURPLE)
+	add_slot(false, true, Color.PURPLE)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://wvonpgsum1wq"]
+
+[ext_resource type="PackedScene" uid="uid://cy5ubymjh80ah" path="res://tools/abilitygraph/nodes/base/graph_node_base.tscn" id="1_5ckk6"]
+[ext_resource type="Script" uid="uid://bdp6edcrh5bcy" path="res://tools/abilitygraph/nodes/io_graph_node.gd" id="2_kwibr"]
+
+[node name="IOGraphNode" instance=ExtResource("1_5ckk6")]
+title = "Input/Output node"
+script = ExtResource("2_kwibr")
+
+[node name="Label" parent="." index="1"]
+text = "In/Out"
+horizontal_alignment = 1
+
+[node name="OptionButton" parent="." index="2"]
+visible = false
+
+[node name="HBoxContainer" parent="." index="3"]
+visible = false

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpt8hpkrbrsgd"]
+[gd_scene load_steps=5 format=3 uid="uid://cy5ubymjh80ah"]
 
-[ext_resource type="Script" uid="uid://4x5c0md8b52u" path="res://tools/graph_node_base.gd" id="1_ypw0o"]
+[ext_resource type="Script" uid="uid://du86a3l18loia" path="res://tools/abilitygraph/nodes/base/graph_node_base.gd" id="1_a1bxe"]
 
 [sub_resource type="Animation" id="Animation_b0rem"]
 length = 0.001
@@ -39,7 +39,7 @@ _data = {
 &"pulsate": SubResource("Animation_ypw0o")
 }
 
-[node name="GraphNodeBase" type="GraphNode" node_paths=PackedStringArray("option_button", "animation_player")]
+[node name="GraphNodeBase" type="GraphNode" node_paths=PackedStringArray("option_button", "animation_player", "slot_button_add", "slot_button_remove")]
 offset_right = 9.0
 offset_bottom = 55.0
 resizable = true
@@ -62,17 +62,40 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-script = ExtResource("1_ypw0o")
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+script = ExtResource("1_a1bxe")
 option_button = NodePath("OptionButton")
 animation_player = NodePath("AnimationPlayer")
-metadata/_custom_type_script = "uid://4x5c0md8b52u"
+slot_button_add = NodePath("HBoxContainer/Add")
+slot_button_remove = NodePath("HBoxContainer/Remove")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Slot"
 
 [node name="OptionButton" type="OptionButton" parent="."]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-text = "Port"
+
+[node name="Remove" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Add" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -80,3 +103,6 @@ libraries = {
 }
 
 [connection signal="resize_request" from="." to="." method="_on_resize_request"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="HBoxContainer/Remove" to="." method="_on_remove_slot_pressed"]
+[connection signal="pressed" from="HBoxContainer/Add" to="." method="_on_add_slot_pressed"]

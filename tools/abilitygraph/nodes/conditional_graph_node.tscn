@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://ny2yxai3pt38"]
+
+[ext_resource type="PackedScene" uid="uid://cy5ubymjh80ah" path="res://tools/abilitygraph/nodes/base/graph_node_base.tscn" id="1_cc0od"]
+[ext_resource type="Script" uid="uid://dlhc3qkfv013t" path="res://tools/abilitygraph/nodes/conditional_graph_node.gd" id="2_5ohxh"]
+
+[node name="ConditionalGraphNode" instance=ExtResource("1_cc0od")]
+title = "Conditional node"
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+script = ExtResource("2_5ohxh")
+min_slots = 3
+max_slots = 3
+
+[node name="Label" parent="." index="1"]
+visible = false
+
+[node name="HBoxContainer" parent="." index="3"]
+visible = false
+
+[node name="Label2" type="Label" parent="." index="4"]
+layout_mode = 2
+text = "True"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="." index="5"]
+layout_mode = 2
+text = "False"
+horizontal_alignment = 2

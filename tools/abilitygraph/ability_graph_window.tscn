@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dy27yw1fb26hp"]
 
-[ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/ability_graph.tscn" id="1_yodcc"]
+[ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/abilitygraph/ability_graph.tscn" id="1_yodcc"]
 
 [node name="AbilityGraphWindow" type="Window"]
 transparent_bg = true

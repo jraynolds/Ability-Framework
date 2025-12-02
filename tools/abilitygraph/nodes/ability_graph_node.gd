@@ -1,6 +1,6 @@
 extends GraphNodeBase
-class_name AbilityGraphNode
 ## A node in the AbilityGraph that holds a single Ability castable by an Entity.
+class_name AbilityGraphNode
 
 var resources : Array[AbilityResource] ## The AbilityResources available to us.
 var ability_resource : AbilityResource : ## The AbilityResource we choose.
@@ -16,25 +16,10 @@ var resource_path_to_load : String ## The resource we're waiting to load, if any
 ## Called when the node enters the scene.
 func _ready() -> void:
 	super()
-	set_slot(1, false, 0, Color.PURPLE, true, 0, Color.GREEN) ## On casted
-	set_slot(2, false, 0, Color.PURPLE, true, 0, Color.YELLOW) ## On canceled
-	set_slot(3, false, 0, Color.PURPLE, true, 0, Color.ORANGE) ## On interrupted
-	set_slot(4, false, 0, Color.PURPLE, true, 0, Color.RED) ## Unable to cast (for a reason besides GCD)
-
-	#for file_path in get_all_file_paths("res://data/"):
-		#if file_path.ends_with(".tres"):
-			#var resource = ResourceLoader.load(file_path) as AbilityResource
-			#if resource:
-				#resources.append(resource)
-	#for resource in resources:
-		#option_button.add_item(resource.resource_path.split("/")[-1])
-	#if resource_path_to_load:
-		#var ability_resource_index = -1
-		#for i in range(len(resources)):
-			#if resources[i].resource_path == resource_path_to_load:
-				#ability_resource_index = i
-		#option_button.select(ability_resource_index)
-		#resource_path_to_load = ""
+	add_slot(false, true, Color.GREEN) ## On casted
+	add_slot(false, true, Color.YELLOW) ## On canceled
+	add_slot(false, true, Color.ORANGE) ## On interrupted
+	add_slot(false, true, Color.RED) ## Unable to cast (for a reason besides GCD)
 
 
 ## Initializes much of our setup.
@@ -59,6 +44,9 @@ func set_entity(e: Entity):
 			option_button.select(ability_resource_index)
 			title = resources[ability_resource_index].title
 			resource_path_to_load = ""
+		
+		option_button.visible = true
+		option_button.disabled = false
 
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain and tries to cast this Ability.

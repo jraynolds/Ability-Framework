@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dpwnis50royqw" path="res://ui/health_bar.tscn" id="3_a12nh"]
 [ext_resource type="PackedScene" uid="uid://f4ggy7cglldx" path="res://ui/simple_abilities_container.tscn" id="4_4k1nj"]
 [ext_resource type="PackedScene" uid="uid://dh1uxqh1ntq1h" path="res://ui/statuses_container.tscn" id="4_a12nh"]
-[ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/ability_graph.tscn" id="6_6vh42"]
+[ext_resource type="PackedScene" uid="uid://wq0bycheyfy8" path="res://tools/abilitygraph/ability_graph.tscn" id="6_6vh42"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 content_margin_left = 2.0
