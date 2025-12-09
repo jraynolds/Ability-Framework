@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=8 format=3 uid="uid://d084m8rokkgil"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_7au1v"]
+[ext_resource type="Resource" uid="uid://cevhfpya5oxve" path="res://data/values/flats/breakpoints/cast times/enemy_ability_cast_time_must_interrupt.tres" id="1_p2wb4"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_rxq4q"]
+[ext_resource type="Resource" uid="uid://bei5gkrr7mgl7" path="res://data/values/flats/breakpoints/cooldowns/enemy_cooldown_twice_a_fight.tres" id="3_8rau4"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_rdola"]
+[ext_resource type="Resource" uid="uid://b2d8ftap2180k" path="res://data/abilities/enemy/gorgon/status_add_petrified.tres" id="5_jrxt6"]
+[ext_resource type="Resource" uid="uid://d0c2ip1lfxmqt" path="res://data/values/flats/breakpoints/cooldowns/enemy_cooldown_wait_a_gcd.tres" id="6_8rau4"]
+
+[resource]
+script = ExtResource("3_rdola")
+title = "Petrify"
+description = "Your skin begins to turn to stone under the Gorgon's glare."
+effects = Array[ExtResource("2_rxq4q")]([ExtResource("5_jrxt6")])
+casting_time = ExtResource("1_p2wb4")
+cooldown = ExtResource("3_8rau4")
+gcd_cooldown = ExtResource("6_8rau4")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

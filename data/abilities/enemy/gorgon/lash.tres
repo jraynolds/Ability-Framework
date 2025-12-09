@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=7 format=3 uid="uid://dke4hma1ok5wy"]
+
+[ext_resource type="Resource" uid="uid://yb22w4yet02m" path="res://data/values/flats/breakpoints/cast times/enemy_ability_cast_time_can_interrupt.tres" id="1_kv5ph"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_s5rpj"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_fl3wc"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_8qtri"]
+[ext_resource type="Resource" uid="uid://bb4hdloudimm6" path="res://data/values/flats/breakpoints/cooldowns/enemy_cooldown_wait_none.tres" id="3_qiljy"]
+[ext_resource type="Resource" uid="uid://t7cbv7k36x4g" path="res://data/effects/damage/damage_80%.tres" id="5_mdrse"]
+
+[resource]
+script = ExtResource("3_8qtri")
+title = "Lash"
+description = "The Gorgon's snakelike hair strikes out with a hiss."
+effects = Array[ExtResource("2_fl3wc")]([ExtResource("5_mdrse")])
+casting_time = ExtResource("1_kv5ph")
+cooldown = ExtResource("3_qiljy")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

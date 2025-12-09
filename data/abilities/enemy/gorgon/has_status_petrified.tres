@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EntityStatusConditionalResource" load_steps=3 format=3 uid="uid://hs72tvnpbjav"]
+
+[ext_resource type="Script" uid="uid://y5lbihft5yxd" path="res://data/conditionals/entity_status_conditional_resource.gd" id="1_afrvl"]
+[ext_resource type="Resource" uid="uid://blp5amml67ut" path="res://data/abilities/enemy/gorgon/status_petrified.tres" id="2_v2y1y"]
+
+[resource]
+script = ExtResource("1_afrvl")
+status = ExtResource("2_v2y1y")
+metadata/_custom_type_script = "uid://y5lbihft5yxd"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://d4in6bychxpo1"]
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://d4in6bychxpo1"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_fklqa"]
 [ext_resource type="Resource" uid="uid://bd7eq48y2elxm" path="res://data/abilities/player/spellblade/absorb elements/status_caster_add_imbued_element.tres" id="2_r402t"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bc8by5gv4xxas" path="res://assets/abilities/r_39.png" id="5_bqsa7"]
 [ext_resource type="Resource" uid="uid://bgtjntwikwvl3" path="res://data/values/flats/flat_2.tres" id="6_ordp7"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_w5jkc"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="8_6fjof"]
 [ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_c85at"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="10_h1te4"]
 
@@ -16,7 +15,6 @@ script = ExtResource("7_w5jkc")
 effect_added = ExtResource("2_r402t")
 lifetime = ExtResource("6_ordp7")
 expirations = Array[ExtResource("3_e3xoq")]([ExtResource("4_k56u1")])
-status_effect_scene = ExtResource("8_6fjof")
 title = "Absorb elements"
 description = "Absorb the damage type of the next incoming damage source."
 icon = ExtResource("5_bqsa7")

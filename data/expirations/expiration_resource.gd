@@ -6,30 +6,44 @@ class_name ExpirationResource
 @export var stacks_removed : ValueResource ## The amount of stacks removed from the LifetimeEffect. By default, all.
 
 ## Registers a listener to expire the Effect.
-func register(lifetime: LifetimeEffect, ability: Ability, caster: Entity, targets: Array[Entity]):
+func register(effect_info: EffectInfo, overrides: Dictionary={}):
+	var effect : StatusEffect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	#var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	#if targeting_resource_override:
+		#targets = targeting_resource_override.get_targets(effect_info, overrides)
+		#overrides.targets = targets
+	
 	DebugManager.debug_log(
-		"LifetimeEffect " + lifetime._title + "'s expiration effects are being registered to its triggers"
+		"StatusEffect " + effect._title + "'s expiration effects are being registered to its triggers"
 	, self)
 	for trigger in triggers:
-		trigger.register(lifetime, ability, caster, targets, lifetime.expire_from_resource.bind(self))
+		trigger.register(effect_info, overrides, effect.expire_from_resource.bind(self))
 		DebugManager.debug_log(
-			"LifetimeEffect " + lifetime._title + "'s expiration effects has been registered to trigger " + 
+			"StatusEffect " + effect._title + "'s expiration effects have been registered to trigger " + 
 			trigger.title
 		, self)
 
 
-## Causes the selected expiration behavior to happen for the LifetimeEffect.
-func expire_effect(
-	lifetime: LifetimeEffect, 
-	ability: Ability = lifetime._ability, 
-	caster: Entity = ability._caster, 
-	targets: Array[Entity] = []
-):
+## Causes the selected expiration behavior to happen for the StatusEffect.
+func expire_effect(effect_info: EffectInfo, overrides: Dictionary={}):
+	var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	#var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	#if targeting_resource_override:
+		#targets = targeting_resource_override.get_targets(effect_info, overrides)
+		#overrides.targets = targets
+		
 	DebugManager.debug_log(
-		"LifetimeEffect " + lifetime._title + "'s expiration effect is being triggered"
+		"StatusEffect " + effect._title + "'s expiration effect is being triggered"
 	, self)
 	if stacks_removed:
-		for target in lifetime._targets:
-			target.statuses_component.modify_stacks(lifetime, -stacks_removed.get_value_int(caster, targets))
+		for target in effect._targets:
+			target.statuses_component.modify_stacks(
+				effect, 
+				-stacks_removed.get_value_int(effect_info, overrides)
+			)
 	else :
-		lifetime.end()
+		effect.end()

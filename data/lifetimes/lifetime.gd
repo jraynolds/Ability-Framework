@@ -20,15 +20,15 @@ func from_resource(resource: LifetimeResource) -> Lifetime:
 
 ## Called when the associated Effect is triggered. 
 ## Increases the trigger amount and emits on_lifetime_expired if it's more than the LifetimeResource's triggers.
-func on_effect_triggered(caster: Entity, targets: Array[Entity]):
+func on_effect_triggered(effect_info: EffectInfo, overrides: Dictionary={}):
 	_triggers += 1
-	if _resource.is_lifetime_expired(caster, targets, 0, _triggers):
+	if _resource.is_lifetime_expired(effect_info, overrides, 0, _triggers):
 		on_lifetime_expired.emit()
 
 
 ## Called when the game ticks.
 ## Increases the duration and emits on_lifetime_expired if it's longer than the LifetimeResource's duration.
-func on_game_tick(caster: Entity, targets: Array[Entity], delta: float):
+func on_game_tick(effect_info: EffectInfo, overrides: Dictionary, delta: float):
 	_duration += delta
-	if _resource.is_lifetime_expired(caster, targets, _duration, 0):
+	if _resource.is_lifetime_expired(effect_info, overrides, _duration, 0):
 		on_lifetime_expired.emit()

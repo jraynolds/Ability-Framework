@@ -16,6 +16,7 @@ var resource_path_to_load : String ## The resource we're waiting to load, if any
 ## Called when the node enters the scene.
 func _ready() -> void:
 	super()
+	## Technically these output ports are all port = slot-1
 	set_slot(1, false, 0, Color.PURPLE, true, 0, Color.GREEN) ## On casted
 	set_slot(2, false, 0, Color.PURPLE, true, 0, Color.YELLOW) ## On canceled
 	set_slot(3, false, 0, Color.PURPLE, true, 0, Color.ORANGE) ## On interrupted
@@ -56,14 +57,14 @@ func tick(_delta: float):
 	if entity.abilities_component.ability_channeling :
 		return
 	if ability._cooldown_left > 0.0:
-		modulate = Color.RED
+		set_color(Color.RED)
 		on_proceed.emit(3)
 		return
 	if ability._gcd_type == AbilityResource.GCD.OnGCD and entity.abilities_component.gcd_remaining > 0.0:
 		return
 	
 	if !entity.abilities_component.can_cast_at(ability, entity.targeting_component.targets):
-		modulate = Color.RED
+		set_color(Color.RED)
 		on_proceed.emit(3)
 		return
 	
@@ -74,8 +75,8 @@ func tick(_delta: float):
 func _on_cast(cast_ability: Ability, _targets: Array[Entity]):
 	if cast_ability != ability:
 		return
-	modulate = Color.GREEN
-	on_proceed.emit(1)
+	set_color(Color.GREEN)
+	on_proceed.emit(0)
 
 
 ## Called when our Entity's Ability is interrupted. Ignored if it's not ours.
@@ -84,11 +85,11 @@ func _on_cast_interrupted(cast_ability: Ability, _targets: Array[Entity], interr
 		return
 	
 	if interrupter == entity:
-		modulate = Color.YELLOW
-		on_proceed.emit(2)
+		set_color(Color.YELLOW)
+		on_proceed.emit(1)
 	else:
-		modulate = Color.ORANGE
-		on_proceed.emit(3)
+		set_color(Color.ORANGE)
+		on_proceed.emit(2)
 
 
 ## Called to save this node into the given Resource for later retrieval.

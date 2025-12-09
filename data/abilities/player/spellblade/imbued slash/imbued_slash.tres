@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_uhk72"]
 [ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_65y7p"]
-[ext_resource type="Resource" uid="uid://du6q4lw35scao" path="res://data/abilities/player/spellblade/imbued slash/caster_chain_0_slash.tres" id="2_i4yrm"]
+[ext_resource type="Resource" uid="uid://du6q4lw35scao" path="res://data/abilities/player/spellblade/imbued slash/caster_chain_is_slash.tres" id="2_mhman"]
 [ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_6jgeg"]
 [ext_resource type="Texture2D" uid="uid://badik1qfta6v7" path="res://assets/abilities/r_02.png" id="3_65y7p"]
-[ext_resource type="Resource" uid="uid://cnkovqw15yv4r" path="res://data/abilities/player/spellblade/imbued slash/damage_1_2x_chain_slash.tres" id="4_myufp"]
-[ext_resource type="Resource" uid="uid://dkgedk7476kpo" path="res://data/abilities/player/spellblade/imbued slash/damage__8x_chainless_slash.tres" id="5_axs18"]
+[ext_resource type="Resource" uid="uid://dkgedk7476kpo" path="res://data/abilities/player/spellblade/imbued slash/damage_80%_chainless_slash.tres" id="4_nsw3s"]
+[ext_resource type="Resource" uid="uid://cnkovqw15yv4r" path="res://data/abilities/player/spellblade/imbued slash/damage_120%_chain_slash.tres" id="5_djrwi"]
 [ext_resource type="Resource" uid="uid://ddk47a47hxb3a" path="res://data/abilities/player/spellblade/imbued slash/damage_caster_stacks_imbued_element.tres" id="5_myufp"]
 
 [resource]
@@ -14,6 +14,6 @@ script = ExtResource("3_6jgeg")
 title = "Imbued Slash"
 icon = ExtResource("3_65y7p")
 description = "Combo attack after Slash. Deals additional damage if you have Imbued Elements."
-effects = Array[ExtResource("2_65y7p")]([ExtResource("4_myufp"), ExtResource("5_myufp"), ExtResource("5_axs18")])
-conditionals_highlight = Array[ExtResource("1_uhk72")]([ExtResource("2_i4yrm")])
+effects = Array[ExtResource("2_65y7p")]([ExtResource("4_nsw3s"), ExtResource("5_djrwi"), ExtResource("5_myufp")])
+conditionals_highlight = Array[ExtResource("1_uhk72")]([ExtResource("2_mhman")])
 metadata/_custom_type_script = "uid://ciejt41n7j2sf"

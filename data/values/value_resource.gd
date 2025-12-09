@@ -7,21 +7,21 @@ class_name ValueResource
 @export var rounding_behavior : Math.Rounding = Math.Rounding.Ceiling
 
 ## Returns a calculated value. Meant to be overloaded.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
-	var value = calc_value(caster, targets)
+func get_value(effect_info: EffectInfo, overrides: Dictionary={}) -> float:
+	var value = calc_value(effect_info, overrides)
 	if is_int:
 		return val_to_int(value)
 	return value
 	
 	
 ## Returns a calculated value as an int.
-func get_value_int(caster: Entity, targets: Array[Entity]) -> int:
-	var value = calc_value(caster, targets)
+func get_value_int(effect_info: EffectInfo, overrides: Dictionary={}) -> int:
+	var value = calc_value(effect_info, overrides)
 	return val_to_int(value)
 
 
 ## Returns the value calculated according to our purposes. Meant to be overloaded.
-func calc_value(_caster: Entity, _targets: Array[Entity]) -> float:
+func calc_value(_effect_info: EffectInfo, _overrides: Dictionary={}) -> float:
 	return 0.0
 
 

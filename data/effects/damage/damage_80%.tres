@@ -8,15 +8,8 @@
 
 [resource]
 script = ExtResource("3_fcb5g")
-entity_target = 11
 damage_amount = ExtResource("2_k2875")
-ignore_caster_statuses = false
-ignore_target_statuses = false
-ignore_transforms = false
-title = ""
-description = ""
-positivity = 2
+title = "Deal 80% attack damage"
+description = "Inflict damage to the target equal to 80% your attack."
 triggers = Array[ExtResource("4_bty2s")]([ExtResource("5_x2ul3")])
-conditionals_positive = Array[ExtResource("1_nvl85")]([])
-conditionals_negative = Array[ExtResource("1_nvl85")]([])
 metadata/_custom_type_script = "uid://dljqmx2nfwymn"

@@ -117,7 +117,7 @@ func _on_remove_slot_pressed():
 ## Called when the battle proceeds to the next frame. Proceeds through the graph along the first output port. Meant to be overloaded.
 func tick(_delta: float):
 	on_proceed.emit(0)
-	modulate = Color.PURPLE
+	set_color(Color.PURPLE)
 
 
 ## Called to save this node into the given Resource for later retrieval. Meant to be overloaded.
@@ -135,3 +135,8 @@ func load(resource: AbilityGraphNodeResource):
 ## Called when the option button is selected.
 func _on_option_button_item_selected(_index: int) -> void:
 	pass # Replace with function body.
+
+
+## Sets the self modulate color for this node.
+func set_color(color: Color):
+	self_modulate = color

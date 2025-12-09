@@ -6,6 +6,6 @@ class_name ConditionalResource
 @export_multiline var description : String ## The description of this Condition.
 
 
-## Returns whether the conditions are met. False by default.
-func is_met(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]) -> bool:
+## Returns whether the conditions are met for the given effect info snapshot and any overrides. False by default.
+func is_met(_effect_info: EffectInfo, _overrides: Dictionary={}) -> bool:
 	return false

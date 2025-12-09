@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=11 format=3 uid="uid://bbhrkolepluiy"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_j6oyd"]
+[ext_resource type="Resource" uid="uid://hs72tvnpbjav" path="res://data/abilities/enemy/gorgon/has_status_petrified.tres" id="2_jg5ci"]
+[ext_resource type="Resource" uid="uid://blp5amml67ut" path="res://data/abilities/enemy/gorgon/status_petrified.tres" id="3_5bgcv"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="4_66uc3"]
+[ext_resource type="Resource" uid="uid://bvj28fpqkfcg6" path="res://data/values/flats/breakpoints/lifetimes/lifetime_short.tres" id="5_gwal0"]
+[ext_resource type="Resource" uid="uid://drdc6r1gop77e" path="res://data/values/flats/flat_9999.tres" id="6_6iuhy"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_s8cky"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="8_83ff5"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="9_ub1ls"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="10_fr625"]
+
+[resource]
+script = ExtResource("7_s8cky")
+effect_added = ExtResource("3_5bgcv")
+stacking_behavior = 30
+num_stacks = ExtResource("6_6iuhy")
+lifetime = ExtResource("5_gwal0")
+status_effect_scene = ExtResource("8_83ff5")
+title = "Unpetrify"
+description = "Removes the Petrified condition from the target."
+positivity = 0
+triggers = Array[ExtResource("9_ub1ls")]([ExtResource("10_fr625")])
+conditionals_positive = Array[ExtResource("1_j6oyd")]([ExtResource("2_jg5ci")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

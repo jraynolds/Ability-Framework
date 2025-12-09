@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="EntityResource" load_steps=21 format=3 uid="uid://b7m0fo13x34i3"]
+
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="1_jhq8b"]
+[ext_resource type="Resource" uid="uid://cf1japlaxbad3" path="res://data/entities/gorgon_graph.tres" id="2_02c56"]
+[ext_resource type="Resource" uid="uid://dke4hma1ok5wy" path="res://data/abilities/enemy/gorgon/lash.tres" id="2_42k4l"]
+[ext_resource type="Resource" uid="uid://d084m8rokkgil" path="res://data/abilities/enemy/gorgon/petrify.tres" id="3_jhq8b"]
+[ext_resource type="Resource" uid="uid://7nwebt3aprif" path="res://data/abilities/enemy/gorgon/smash.tres" id="4_flu7q"]
+[ext_resource type="Resource" uid="uid://b8ubn0byfhpkn" path="res://data/abilities/enemy/gorgon/incandescence.tres" id="5_cw30i"]
+[ext_resource type="Script" uid="uid://2e885iqyhq3n" path="res://data/entities/entity_resource.gd" id="8_ng43u"]
+[ext_resource type="Script" uid="uid://6ssi82iq1dbg" path="res://data/stats/stat_resource.gd" id="9_log82"]
+[ext_resource type="Script" uid="uid://bgp77rh6iljgb" path="res://data/values/value_resource.gd" id="10_prrgf"]
+[ext_resource type="Resource" uid="uid://cm64xruinaaqx" path="res://data/stats/max_hp.tres" id="11_dluti"]
+[ext_resource type="Resource" uid="uid://bprtwqbua4hdp" path="res://data/values/flats/breakpoints/stats/hp_enemy_high.tres" id="11_mqbb6"]
+[ext_resource type="Resource" uid="uid://b2ievbk4n2m7u" path="res://data/stats/hp.tres" id="13_6q8mh"]
+[ext_resource type="Resource" uid="uid://bbppm7tpldnnr" path="res://data/stats/attack.tres" id="14_fe7r6"]
+[ext_resource type="Resource" uid="uid://dlsnroy6i2hoo" path="res://data/values/flats/breakpoints/stats/attack_enemy_low.tres" id="14_kw2ss"]
+[ext_resource type="Resource" uid="uid://d0rqp0fsp54sa" path="res://data/values/flats/breakpoints/stats/defense_enemy_low.tres" id="16_6mp68"]
+[ext_resource type="Resource" uid="uid://bk53y5hldyf1u" path="res://data/stats/defense.tres" id="16_vrh4p"]
+[ext_resource type="Resource" uid="uid://b8m8pdnudlcrg" path="res://data/values/flats/breakpoints/stats/ability_speed_player_low.tres" id="18_w1yqy"]
+[ext_resource type="Resource" uid="uid://0cdkdryyaugb" path="res://data/stats/ability_speed.tres" id="18_w3qa0"]
+[ext_resource type="Resource" uid="uid://dodhwet73lma8" path="res://data/stats/gcd_cooldown.tres" id="20_6jag0"]
+[ext_resource type="Resource" uid="uid://bcrjt37cl6x6" path="res://data/values/flats/breakpoints/stats/gcd_player_low.tres" id="20_ng43u"]
+
+[resource]
+script = ExtResource("8_ng43u")
+title = "Gorgon"
+description = "A petrify-inducing monster."
+stats = Dictionary[ExtResource("9_log82"), ExtResource("10_prrgf")]({
+ExtResource("11_dluti"): ExtResource("11_mqbb6"),
+ExtResource("13_6q8mh"): ExtResource("11_mqbb6"),
+ExtResource("14_fe7r6"): ExtResource("14_kw2ss"),
+ExtResource("16_vrh4p"): ExtResource("16_6mp68"),
+ExtResource("18_w3qa0"): ExtResource("18_w1yqy"),
+ExtResource("20_6jag0"): ExtResource("20_ng43u")
+})
+abilities = Dictionary[ExtResource("1_jhq8b"), int]({
+ExtResource("2_42k4l"): 0,
+ExtResource("3_jhq8b"): 1,
+ExtResource("4_flu7q"): 2,
+ExtResource("5_cw30i"): 3
+})
+ability_graph = ExtResource("2_02c56")
+metadata/_custom_type_script = "uid://2e885iqyhq3n"

@@ -19,7 +19,7 @@ func tick(_delta: float):
 	var max_roll : float = 0.0
 	DebugManager.debug_log(
 		"Calculating a random output port"
-	, self)
+	, self) 
 	for i in range(len(slots)):
 		var spin_box = slots[i] as SpinBox
 		if spin_box:

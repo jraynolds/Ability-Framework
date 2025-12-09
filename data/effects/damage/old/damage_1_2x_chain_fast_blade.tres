@@ -9,16 +9,11 @@
 
 [resource]
 script = ExtResource("4_y2sel")
-entity_target = 11
-stat_type = 0
 modifier = ExtResource("3_autns")
 math_operation = 1
-ignore_statuses = false
-ignore_transforms = false
 title = "Damage 1.2x attack"
 description = "Inflict damage to the target equal to 1.2x your attack. Must be combo'd with Fast Blade."
 positivity = null
 triggers = Array[ExtResource("5_wp581")]([ExtResource("6_fvgsr")])
 conditionals_positive = Array[ExtResource("1_sfogm")]([ExtResource("2_5kdwd")])
-conditionals_negative = null
 metadata/_custom_type_script = "uid://8lptu87j3jgg"

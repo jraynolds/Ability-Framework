@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DamageEffectResource" load_steps=7 format=3 uid="uid://c2hru35osukg2"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_w4xhe"]
+[ext_resource type="Resource" uid="uid://bamboengxh5d1" path="res://data/values/computed/caster_attack_300%.tres" id="2_n6bg2"]
+[ext_resource type="Resource" uid="uid://hs72tvnpbjav" path="res://data/abilities/enemy/gorgon/has_status_petrified.tres" id="2_wyt6s"]
+[ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="3_wyt6s"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="4_0jd77"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="5_n6bg2"]
+
+[resource]
+script = ExtResource("3_wyt6s")
+damage_amount = ExtResource("2_n6bg2")
+title = "Deal 300% damage to petrified"
+description = "Deal damage equal to 300% your attack. Target must be petrified."
+triggers = Array[ExtResource("4_0jd77")]([ExtResource("5_n6bg2")])
+conditionals_positive = Array[ExtResource("1_w4xhe")]([ExtResource("2_wyt6s")])
+metadata/_custom_type_script = "uid://dljqmx2nfwymn"

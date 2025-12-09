@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=9 format=3 uid="uid://b2d8ftap2180k"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_b8ga3"]
+[ext_resource type="Resource" uid="uid://blp5amml67ut" path="res://data/abilities/enemy/gorgon/status_petrified.tres" id="2_gh5a1"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_e6ff2"]
+[ext_resource type="Resource" uid="uid://bvj28fpqkfcg6" path="res://data/values/flats/breakpoints/lifetimes/lifetime_short.tres" id="4_csyvc"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="5_4qtgo"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="6_7p0mh"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="7_qsbhb"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="8_ws42b"]
+
+[resource]
+script = ExtResource("5_4qtgo")
+effect_added = ExtResource("2_gh5a1")
+lifetime = ExtResource("4_csyvc")
+status_effect_scene = ExtResource("6_7p0mh")
+title = "Petrifaction"
+description = "Renders the target Petrified, unable to act for a short duration."
+triggers = Array[ExtResource("7_qsbhb")]([ExtResource("8_ws42b")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

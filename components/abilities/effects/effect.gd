@@ -13,7 +13,13 @@ var _conditionals_negative : Array[ConditionalResource] = [] ## The conditionals
 
 var _caster : Entity ## The Entity responsible for the creation of this Effect.
 var _ability : Ability ## The Ability that created this Effect.
-var _targets : Array[Entity] ## The Entities targeted by this Effect.
+var _targets : Array[Entity] = [] ## The Entities targeted by this Effect, if any.
+var _self_as_effect_info : EffectInfo : ## Returns an EffectInfo object with our effect, ability, caster and target values.
+	get :
+		return EffectInfo.new(self, _ability, _caster, _targets)
+var _self_as_override : Dictionary : ## Returns a Dictionary with effect, ability, caster and targets according to our values.
+	get :
+		return { "effect": self, "ability": _ability, "caster": _caster, "targets": _targets }
 
 var _sub_effects : Array[Effect] = [] ## Sub-effects this Effect also tracks.
 
@@ -42,13 +48,12 @@ signal on_registered ## Emitted when this Effect is fully registered on all its 
 signal on_expired ## Emitted when this Effect expires.
 
 ## Returns an instance of this initialized with the given EffectResource.
-func from_resource(res: EffectResource, ability: Ability, caster: Entity, targets: Array[Entity]) -> Effect:
+func from_resource(res: EffectResource, ability: Ability, caster: Entity) -> Effect:
 	update_resource(res)
 	_caster = caster
 	_ability = ability
-	_targets = targets
 	name = _title
-	_resource.on_created(self, ability, caster, targets)
+	_resource.on_created(EffectInfo.new(), _self_as_override)
 	
 	return self
 
@@ -70,7 +75,7 @@ func from_effect(effect: Effect) -> Effect:
 	_ability = effect._ability
 	_targets = effect._targets
 	name = _title
-	_resource.on_created(self, _ability, _caster, _targets)
+	_resource.on_created(_self_as_effect_info)
 	
 	return self
 
@@ -102,20 +107,24 @@ func on_battle_tick(delta: float):
 
 
 ## If usable, makes a copy and registers this effect on the appropriate triggers.
-func register(caster: Entity, targets: Array[Entity]):
+func register(ability: Ability, caster: Entity, targets: Array[Entity]):
+	_ability = ability
+	_caster = caster
+	_targets = targets
+	
 	DebugManager.debug_log(
 		"Attempting to register effect " + _title
 	, self)
 	
 	for conditional in _conditionals_positive:
-		if !conditional.is_met(self, _ability, caster, targets):
+		if !conditional.is_met(EffectInfo.new(self, _ability, caster, targets)):
 			DebugManager.debug_log(
 				"Couldn't register effect " + _title + 
 				" because it didn't meet conditional " + conditional.resource_name
 			, self)
 			return
 	for conditional in _conditionals_negative:
-		if conditional.is_met(self, _ability, caster, targets):
+		if conditional.is_met(EffectInfo.new(self, _ability, caster, targets)):
 			DebugManager.debug_log(
 				"Couldn't register effect " + _title + 
 				" because it met conditional " + conditional.resource_name
@@ -126,16 +135,13 @@ func register(caster: Entity, targets: Array[Entity]):
 		"Registering effect " + _title
 	, self)
 	
-	_caster = caster
-	_targets = targets
-	
 	var effect_temp : Effect = self.duplicate(10).from_effect(self) ## Duplicates with values
-	effect_temp.name = _title + " targeting " + ", ".join(targets.map(func(t: Entity): return t.title))
+	effect_temp.name = "temp " + _title + " targeting " + ", ".join(targets.map(func(t: Entity): return t.title))
 	_temp_effects.append(effect_temp)
 	add_child(effect_temp, true)
 	
 	for trigger in _triggers:
-		trigger.register(self, _ability, caster, targets, effect_temp.affect_if_trigger_ready)
+		trigger.register(_self_as_effect_info, {}, effect_temp.affect_if_trigger_ready)
 	on_registered.emit()
 	
 	DebugManager.debug_log(
@@ -143,12 +149,12 @@ func register(caster: Entity, targets: Array[Entity]):
 	, self)
 
 
-## Performs this Effect on the given targets, from the given caster, from the given trigger.
+## Performs this Effect on its targets from the given trigger.
 ## Only works if we've exceeded the cooldown for the given trigger.
-func affect_if_trigger_ready(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
+func affect_if_trigger_ready(trigger: TriggerResource):
 	DebugManager.debug_log(
-		"Attempting to affect targets with effect " + _title + " from the trigger " + trigger.resource_path +
-		", if its cooldown is ready"
+		"Attempting to affect targets " + ",".join(_targets.map(func(t: Entity): return t.title)) + " with effect " + _title 
+		+ " from ability " + _ability._title + " due to the trigger " + trigger.resource_path + ", if its cooldown is ready"
 	, self)
 	
 	if trigger.cooldown:
@@ -156,7 +162,7 @@ func affect_if_trigger_ready(caster: Entity, targets: Array[Entity], trigger: Tr
 			DebugManager.debug_log(
 				"Time since last trigger is " + str(time_since_last_trigger[trigger])
 			, self)
-			if time_since_last_trigger[trigger] < trigger.cooldown.get_value(caster, targets):
+			if time_since_last_trigger[trigger] < trigger.cooldown.get_value(EffectInfo.new(self, _ability, _caster, _targets)):
 				DebugManager.debug_log(
 					"Failed to affect with " + _title + " from the trigger " + trigger.resource_path +
 					", because its cooldown wasn't ready"
@@ -168,27 +174,28 @@ func affect_if_trigger_ready(caster: Entity, targets: Array[Entity], trigger: Tr
 			, self)
 			time_since_last_trigger[trigger] = 0.0
 	
-	affect(caster, targets, trigger)
+	affect(trigger)
 
 
-## Performs this Effect on the given targets, from the given caster, from the given trigger.
-func affect(caster: Entity, targets: Array[Entity], trigger: TriggerResource):
+## Performs this Effect on our targets, from the given trigger.
+func affect(trigger: TriggerResource):
 	DebugManager.debug_log(
-		"Affecting targets with effect " + _title + " from the trigger " + trigger.resource_path
+		"Affecting targets " + ",".join(_targets.map(func(t: Entity): return t.title)) + " with effect " + _title + 
+		" from ability " + _ability._title + " due to the trigger " + trigger.resource_path + ", if its cooldown is ready"
 	, self)
 	
-	if trigger in times_triggered:
+	if trigger in times_triggered: 
 		times_triggered[trigger] += 1
 	else :
 		times_triggered[trigger] = 1
 	time_since_last_trigger[trigger] = 0.0
 	
-	for target in targets:
+	for target in _targets:
 		DebugManager.debug_log(
 			"Affecting target " + target._resource.title + " with effect " + _title + 
-			" from the trigger " + trigger.resource_path
+			" from ability " + _ability._title + " due to the trigger " + trigger.resource_path
 		, self)
-		_resource.on_affect(self, _ability, caster, targets)
+		_resource.on_affect(_self_as_effect_info)
 	
 	#end() ## By default, we have no duration--so we should just get rid of ourselves
 
@@ -226,7 +233,7 @@ func has_resource(resource: EffectResource) -> bool:
 ## Ends this Effect.
 func end():
 	DebugManager.debug_log(
-		"Effect " + _title + " is expiring"
+		"Effect " + _title + " is ending"
 	, self)
 	
 	on_expired.emit()

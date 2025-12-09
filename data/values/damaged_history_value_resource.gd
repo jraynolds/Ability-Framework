@@ -3,17 +3,25 @@ extends ValueResource
 ## Tracks backwards the given number of changes.
 class_name DamagedHistoryValueResource
 
-@export var target_resource : TargetingResource ## The resource that finds our target. If left empty, we check the first given target.
+## An optional targeting resource to use for this value getter. If left empty, takes from the first given target.
+@export var targeting_resource_override : TargetingResource
 @export var index_resource : ValueResource ## How many changes back we look. By default, none.
 ## What we want to return. By default, damage taken.
 @export var returned_information : HistoryEntityComponent.DamageHistoryInfo = HistoryEntityComponent.DamageHistoryInfo.DamageTaken
 
 ## Returns the magnitude of the target's previous stat change.
-func calc_value(caster: Entity, targets: Array[Entity]):
-	var target = target_resource.get_targets(caster)[0] if target_resource else caster
-	var index = index_resource.get_value(caster, targets) if index_resource else 0.0
+func calc_value(effect_info: EffectInfo, overrides: Dictionary={}):
+	#var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	if targeting_resource_override:
+		targets = targeting_resource_override.get_targets(effect_info, overrides)
+		overrides.targets = targets
+		
+	var index = index_resource.get_value(effect_info) if index_resource else 0.0
 	
-	var damage = target.history_component.get_damage_history(index)
+	var damage = targets[0].history_component.get_damage_history(index)
 	if !damage:
 		return NAN
 	match returned_information:

@@ -26,21 +26,26 @@ class EffectHistory:
 
 ## A history of damage dealt to this Entity.
 ## Stored as heap (front-recent) of DamageHistory type, which has
-## damage_type: DamageEffectResource.DamageType, damage_taken: float and damage_assigned: float fields.
+## damage_type: DamageEffectResource.DamageType, damage_taken: float, damage_assigned: float, and EffectInfo fields
 var damages_received : Array[DamageHistory]
 class DamageHistory :
 	var damage_taken: float
 	var damage_assigned: float
 	var damage_type: DamageEffectResource.DamageType
-	func _init(taken: float, assigned: float, type: DamageEffectResource.DamageType):
+	var damaging_effect_info : EffectInfo
+	func _init(taken: float, assigned: float, type: DamageEffectResource.DamageType, info: EffectInfo):
 		damage_taken = taken
 		damage_assigned = assigned
 		damage_type = type
+		damaging_effect_info = info
 enum DamageHistoryInfo {
 	DamageTaken,
 	DamageAssigned,
 	DamageMitigated,
-	DamageType
+	DamageType,
+	DamagingEffect,
+	DamagingAbility,
+	DamagingEntity
 }
 
 ## A history of stat changes this Entity experiences.
@@ -68,8 +73,8 @@ func _ready() -> void:
 			stats_changed[stat_type].insert(0, FloatHistory.new(new_value, old_value))
 	)
 	entity.stats_component.on_take_damage.connect(
-		func(damage_taken: float, damage_assigned: float, damage_type: DamageEffectResource.DamageType):
-			damages_received.insert(0, DamageHistory.new(damage_taken, damage_assigned, damage_type))
+		func(damage_taken: float, damage_assigned: float, damage_type: DamageEffectResource.DamageType, info: EffectInfo):
+			damages_received.insert(0, DamageHistory.new(damage_taken, damage_assigned, damage_type, info))
 	)
 	
 

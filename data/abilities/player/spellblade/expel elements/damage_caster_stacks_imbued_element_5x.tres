@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DamageEffectResource" load_steps=8 format=3 uid="uid://dcf0c6l5w3eq5"]
 
 [ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_l1gk8"]
-[ext_resource type="Resource" uid="uid://gl36hcxaxmn" path="res://data/abilities/player/spellblade/caster_status_imbued_element.tres" id="2_fb5sg"]
+[ext_resource type="Resource" uid="uid://gl36hcxaxmn" path="res://data/abilities/player/spellblade/caster_has_status_imbued_element.tres" id="2_fb5sg"]
 [ext_resource type="Resource" uid="uid://dpqxvyvesxjpc" path="res://data/abilities/player/spellblade/expel elements/caster_stacks_imbued_element_5x.tres" id="3_l1gk8"]
 [ext_resource type="Resource" uid="uid://dt5x5k7nwv7ru" path="res://data/abilities/player/spellblade/expel elements/damage_type_status_imbued_element.tres" id="4_hsthx"]
 [ext_resource type="Script" uid="uid://dljqmx2nfwymn" path="res://data/effects/damage/damage_effect_resource.gd" id="5_hu8og"]

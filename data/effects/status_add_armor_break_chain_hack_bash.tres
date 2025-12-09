@@ -9,21 +9,16 @@
 [ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="5_yofyx"]
 [ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_tcksw"]
 [ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="6_yofyx"]
-[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/lifetime_effect.tscn" id="7_71dne"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_71dne"]
 
 [resource]
 script = ExtResource("6_tcksw")
-entity_target = 11
 effect_added = ExtResource("2_adn3f")
 stacking_behavior = 21
 lifetime = ExtResource("5_tcksw")
-expirations = Array[ExtResource("5_yofyx")]([])
-status_effect_scene = ExtResource("7_71dne")
-visible_status = true
+lifetime_effect_scene = ExtResource("7_71dne")
 title = "Break Armor"
 description = "Add a stack of Armor Break to the targets, reducing their Defense by 5%. Must be comboed with Hack and Bash."
-positivity = 2
 triggers = Array[ExtResource("5_71dne")]([ExtResource("6_yofyx")])
 conditionals_positive = Array[ExtResource("1_adn3f")]([ExtResource("2_q28x2"), ExtResource("3_tcksw")])
-conditionals_negative = Array[ExtResource("1_adn3f")]([])
 metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

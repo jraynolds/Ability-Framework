@@ -21,17 +21,17 @@ func is_targetable():
 			return trigger.trigger == TriggerResource.Trigger.OnGetKeywordValue
 		):
 			continue
-		## Skip any Effects without KeywordModifyEffectResource.
-		var keyword_resource = effect._resource as KeywordModifyEffectResource
+		## Skip any Effects without KeywordTransformEffectResource.
+		var keyword_resource = effect._resource as KeywordTransformEffectResource
 		if !keyword_resource:
 			continue
 		## Skip any KeywordModifyEffectResource without this keyword as the one it modifies.
-		if keyword_resource.keyword != KeywordModifyEffectResource.Keyword.Targetable:
+		if keyword_resource.keyword != KeywordTransformEffectResource.Keyword.Targetable:
 			continue
-		for i in range(entity.statuses_component.status_stacks[effect]):
-			targetable = keyword_resource.get_modified_value(
-				targetable, 
-				effect._ability._caster,
-				[entity]
-			)
+		targetable = keyword_resource.try_transform(
+			targetable, 
+			EffectInfo.new(effect, effect._ability, effect._caster, [entity]),
+			{},
+			entity.statuses_component.status_stacks[effect]
+		) 
 	return targetable

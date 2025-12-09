@@ -12,30 +12,36 @@ enum DamageType {
 	Acid,
 	None
 }
-@export var ignore_caster_statuses : bool ## Whether we should find the base stat value, no matter the caster's ongoing LifetimeEffects.
-@export var ignore_target_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing LifetimeEffects.
+@export var ignore_caster_statuses : bool ## Whether we should find the base stat value, no matter the caster's ongoing StatusEffects.
+@export var ignore_target_statuses : bool ## Whether we should find the base stat value, no matter the target's ongoing StatusEffects.
 @export var ignore_transforms : bool ## Whether we should modify the base stat, bypassing the target's Transforms.
 
 ## Called when an Effect containing this Resource affects targets.
-## Deals the given damage of type to the targets.
-func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]):
+## Deals our amount of damage of our type to the targets.
+func on_affect(effect_info: EffectInfo, overrides: Dictionary={}):	
+	#var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	if targeting_resource_override:
+		targets = targeting_resource_override.get_targets(effect_info, overrides)
+		overrides.targets = targets
+	
 	#print(
 		#"Affecting " + Natives.enum_name(Targeting.Target, entity_target) + 
 		#"'s " + Natives.enum_name(StatResource.StatType, stat_type) +
 		#" with " + Natives.enum_name(Math.Operation, math_operation)
 	#)
 	
-	if targeting_override:
-		targets = targeting_override.get_targets(caster, ability)
-	
-	var damage_dealt = get_damage_dealt(caster, targets)
-	var damage_dealt_type = get_damage_type(caster, targets)
+	var damage_dealt = get_damage_dealt(effect_info, overrides)
+	var damage_dealt_type = get_damage_type(effect_info, overrides)
 	
 	for target in targets:
 		target.stats_component.take_damage(
 			damage_dealt,
 			damage_dealt_type,
-			effect,
+			effect_info,
+			overrides,
 			ignore_target_statuses,
 			ignore_transforms
 		)
@@ -48,13 +54,23 @@ func on_affect(effect: Effect, ability: Ability, caster: Entity, targets: Array[
 		#stat_target.stats_component.set_stat_value(stat_type, new_stat_value)
 
 ## Returns the amount of damage this effect does. If none is set, it does an amount equal to the caster's Attack.
-func get_damage_dealt(caster: Entity, targets: Array[Entity]) -> float:
-	return damage_amount.get_value(caster, targets) if damage_amount else caster.stats_component.get_stat_value(StatResource.StatType.Attack)
+func get_damage_dealt(effect_info: EffectInfo, overrides: Dictionary={}) -> float:
+	#var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	#var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	#if targeting_resource_override:
+		#targets = targeting_resource_override.get_targets(effect_info, overrides)
+		#overrides.targets = targets
+	
+	if damage_amount:
+		return damage_amount.get_value(effect_info, overrides)
+	return caster.stats_component.get_stat_value(StatResource.StatType.Attack)
 	
 	
 ## Returns the type of damage this effect does. If none is set, it does physical.
-func get_damage_type(caster: Entity, targets: Array[Entity]) -> DamageType:
-	return damage_type.get_value_int(caster, targets) as DamageType if damage_type else DamageType.Physical
+func get_damage_type(effect_info: EffectInfo, overrides: Dictionary={}) -> DamageType:
+	return damage_type.get_value_int(effect_info, overrides) as DamageType if damage_type else DamageType.Physical
 
 ### Returns what our modification to the given value would result in.
 #func get_modified_value(value: float, caster: Entity, targets: Array[Entity]) -> float:

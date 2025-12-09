@@ -7,16 +7,16 @@ class_name EffectResource
 @export var icon : Texture2D ## The icon for this Effect.
 ## Whether this Effect is good, bad, or neither for the target. By default, it's bad.
 @export var positivity : Math.Positivity = Math.Positivity.Negative 
-@export var targeting_override : TargetingResource ## An optional override for whom this effect affects.
+@export var targeting_resource_override : TargetingResource ## An optional override for whom this effect affects.
 @export var triggers : Array[TriggerResource] ## The triggers for this Effect.
 @export var conditionals_positive : Array[ConditionalResource] ## The conditionals that allow this Effect.
 @export var conditionals_negative : Array[ConditionalResource] ## The conditionals that disallow this Effect.
 
 ## Called when an Effect containing this Resource is created. Meant to be overloaded.
-func on_created(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]):
+func on_created(_effect_info: EffectInfo, _overrides: Dictionary={}):
 	pass
 
 
 ## Called when an Effect containing this Resource affects targets. Meant to be overloaded.
-func on_affect(_effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]):
+func on_affect(_effect_info: EffectInfo, _overrides: Dictionary={}):
 	pass

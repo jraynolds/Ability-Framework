@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4hsyxju8rui7"]
+
+[ext_resource type="Script" uid="uid://j8xbm1k14prl" path="res://managers/debug_manager.gd" id="1_f7v61"]
+
+[node name="DebugManager" type="Node2D"]
+script = ExtResource("1_f7v61")
+battle = true
+abilities = true
+status_add_effect_resources = true
+stats_entity_components = true
+abilities_entity_components = true
+statuses_entity_components = true
+transform_resource = true
+trigger_resources = true
+stat_modify = true
+expiration_resources = true
+conditional_resources = true
+stats = true
+statuses_containers = true
+ability_cast_bars = true

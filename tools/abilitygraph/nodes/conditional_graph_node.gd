@@ -39,7 +39,7 @@ func _ready() -> void:
 
 ## Called when the battle proceeds to the next frame. Proceeds through the AI's brain. Meant to be overloaded.
 func tick(_delta: float):
-	var eval = conditional_resource.is_met(null, null, entity, entity.targeting_component.targets)
+	var eval = conditional_resource.is_met(EffectInfo.new(), {"caster": entity, "targets": entity.targeting_component.targets})
 	if eval:
 		on_proceed.emit(0)
 		modulate = Color.GREEN

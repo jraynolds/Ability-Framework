@@ -20,17 +20,27 @@ enum Trigger {
 @export var cooldown : ValueResource ## The optional minimum duration in seconds between each activation of this trigger.
 
 ## Adds a listener to the appropriate game trigger for the given Ability, calling the given function.
-## For this to work properly, we're expecting the function to need, as its final parameters, caster: Entity and targets: Array[Entity].
-## Whatever Signal gets bound needs to emit 0 variables--if it emits more, we untangle its parameters to put caster and targets last.
-func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
+## For this to work properly, the function's parameters must be ONLY trigger: TriggerResource.
+## We unbind everything else.
+func register(effect_info: EffectInfo, overrides: Dictionary={}, function: Callable=Callable()):
+	var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	#var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	#if targeting_resource_override:
+		#targets = targeting_resource_override.get_targets(effect_info, overrides)
+		#overrides.targets = targets
+	
 	var num_unbind_params = get_parameters_to_unbind(trigger)
+	var signals_to_bind = get_signals_to_bind(trigger, effect_info, overrides)
+	
 	DebugManager.debug_log(
-		"Registering an effect named " + effect.name + " to its signals. It has " + str(num_unbind_params) + 
-		" params we have to unbind first" 
+		"Registering an effect named " + effect.name + " to signal type " + Natives.enum_name(Trigger, trigger) + 
+		". It has " + str(num_unbind_params) + " params we have to unbind first" 
 	, self)
-	for s in get_signals_to_bind(trigger, effect, ability, caster, targets):
+	for s in signals_to_bind:
 		if num_unbind_params > 0:
-			var fn = function.bindv([caster, targets, self])
+			var fn = function.bindv([self])
 			fn = fn.unbind(num_unbind_params)
 			s.connect(fn)
 		else :
@@ -45,26 +55,10 @@ func register(effect: Effect, ability: Ability, caster: Entity, targets: Array[E
 			#)
 
 
-### Calls the given callable, if the given Effect has been running for enough time.
-#func call_if_cooldown_exceeded(effect: Effect, _ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
-	#DebugManager.debug_log(
-		#"The trigger " + resource_path + " is attempting to call effect " + effect.name
-	#, self)
-	#if !cooldown:
-		#function.call(caster, targets, self)
-	#elif cooldown.get_value(caster, targets) < effect.time_since_last_trigger[self]:
-		#function.call(caster, targets, self)
-	#DebugManager.debug_log(
-		#"The trigger " + resource_path + " attempted to call effect " + effect.name +
-		#" but our cooldown time of " + str(cooldown.get_value(caster, targets)) + 
-		#" is greater than the duration since it was triggered by us, " + str(effect.time_since_last_trigger[self])
-	#, self)
-
-
 ## Removes a listener from the appropriate game trigger for the given Effect.
-func unregister(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], function: Callable):
+func unregister(effect_info: EffectInfo, overrides: Dictionary={}, function: Callable=Callable()):
 	var num_unbind_params = get_parameters_to_unbind(trigger)
-	for s in get_signals_to_bind(trigger, effect, ability, caster, targets):
+	for s in get_signals_to_bind(trigger, effect_info, overrides):
 		if !num_unbind_params:
 			s.disconnect(function)
 		else :
@@ -77,16 +71,22 @@ func unregister(effect: Effect, ability: Ability, caster: Entity, targets: Array
 ## Returns an Array of Signals that correspond to the given Trigger and the given parameters.
 func get_signals_to_bind(
 	trigger_type: Trigger, 
-	_effect: Effect, 
-	ability: Ability, 
-	_caster: Entity, 
-	targets: Array[Entity]
+	effect_info: EffectInfo,
+	overrides: Dictionary={}
 ) -> Array[Signal]:
+	#var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	#if targeting_resource_override:
+		#targets = targeting_resource_override.get_targets(effect_info, overrides)
+		#overrides.targets = targets
+	
 	match trigger_type :
 		Trigger.OnThisAbilityCast:
 			return [ability.on_cast]
 		Trigger.OnRegistered:
-			return [ability.on_registered]
+			return [ability.on_registered] ##TODO
 		Trigger.OnGetStatValue:
 			return [] ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
 		Trigger.OnTakeDamage:
@@ -107,17 +107,17 @@ func get_signals_to_bind(
 func get_parameters_to_unbind(trigger_type: Trigger) -> int:
 	match trigger_type :
 		Trigger.OnThisAbilityCast:
-			return 0
+			return 1
 		Trigger.OnRegistered:
-			return 0
+			return 1
 		Trigger.OnGetStatValue:
 			return 0 ## Not used to connect listeners; instead, EntityStatusComponent and EntityStatsComponent look for this.
 		Trigger.OnTakeDamage:
-			return 3
+			return 4
 		Trigger.OnTick:
 			return 0 ##TODO
 		Trigger.OnBattleTick:
 			return 1
 		Trigger.OnChannelTick:
-			return 3
+			return 2
 	return 0

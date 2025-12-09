@@ -10,8 +10,8 @@ var _resource : AbilityResource :
 		_icon = _resource.icon
 		_targeting_resource = _resource.targeting
 		for effect_resource in _resource.effects:
-			var targets : Array[Entity] = []
-			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, self,  _caster, targets)
+			#var targets : Array[Entity] = []
+			var effect : Effect = effect_scene.instantiate().from_resource(effect_resource, self, _caster)
 			_effects.append(effect)
 			add_child(effect)
 			effect.name = effect._title
@@ -50,32 +50,41 @@ var _conditionals_negative : Array[ConditionalResource] = []
 var _conditionals_highlight : Array[ConditionalResource] = []
 
 var _caster : Entity ## The Entity who owns this Ability.
-var _targets : Array[Entity] ## The Entities who this Ability is targeting.
+var _targets : Array[Entity] = [] ## The Entities who this Ability is targeting.
 
 var casting_time : float : ## The duration in seconds this Ability takes to cast. By default, 0 seconds.
-	get: return _casting_time.get_value(_caster, _targets) if _casting_time else 0.0
+	get:
+		if _casting_time:
+			return _casting_time.get_value(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": _targets}) 
+		return 0.0
 var cooldown : float : ## The duration in seconds before this Ability can be cast again. By default, 0 seconds.
-	get: return _cooldown.get_value(_caster, _targets) if _cooldown else 0.0
+	get: 
+		if _cooldown:
+			return _cooldown.get_value(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": _targets}) 
+		return 0.0
 var casting : bool : ## Whether or not the Ability is currently being cast by its caster. Changing this emits signals.
 	set(val):
 		var old_val = casting
 		casting = val
 		if val and !old_val:
-			on_cast_begin.emit(_caster, _targets)
+			on_cast_begin.emit(_targets.duplicate())
 		if !val and old_val:
-			on_cast.emit(_caster, _targets)
+			on_cast.emit(_targets.duplicate())
 var channeling : bool : ## Whether or not the Ability is currently being channeled by its caster. Changing this emits signals.
 	set(val):
 		var old_val = channeling
 		channeling = val
 		if val and !old_val:
 			_channel_time_left = max_channel_time
-			on_channel_begin.emit(_caster, _targets)
+			on_channel_begin.emit(_targets.duplicate())
 		if !val and old_val:
-			on_channel_ended.emit(_caster, _targets)
+			on_channel_ended.emit(_targets.duplicate())
 ## The maximum duration in seconds (if any) this Ability can be "held," producing its effects repeatedly. By default, 0 seconds.
 var max_channel_time : float :
-	get: return _max_channel_time.get_value(_caster, _targets) if _max_channel_time else 0.0
+	get: 
+		if _max_channel_time:
+			return _max_channel_time.get_value(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": _targets}) 
+		return 0.0
 var active : bool : ## Whether this Ability is being cast or channeled.
 	get :
 		return casting or channeling
@@ -94,13 +103,13 @@ var active : bool : ## Whether this Ability is being cast or channeled.
 ## Emitted when this Ability becomes inactive, usually by the cast or channel finishing.
 #signal on_become_inactive(caster: Entity, targets: Array[Entity])
 
-signal on_cast_begin(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability begins to cast.
-#signal on_cast_failed(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability is interrupted or canceled.
-signal on_cast(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability is successfully cast.
-signal on_channel_begin(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability begins to channel after a successful cast.
-signal on_channel_tick(caster: Entity, targets: Array[Entity], tick_time: float) ## Emitted every frame this Ability channels.
-#signal on_channel_failed(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability's channeling is interrupted or canceled.
-signal on_channel_ended(caster: Entity, targets: Array[Entity]) ## Emitted when this Ability's channeling ends.
+signal on_cast_begin(targets: Array[Entity]) ## Emitted when this Ability begins to cast.
+#signal on_cast_failed(targets: Array[Entity]) ## Emitted when this Ability is interrupted or canceled.
+signal on_cast(targets: Array[Entity]) ## Emitted when this Ability is successfully cast.
+signal on_channel_begin(targets: Array[Entity]) ## Emitted when this Ability begins to channel after a successful cast.
+signal on_channel_tick(targets: Array[Entity], tick_time: float) ## Emitted every frame this Ability channels.
+#signal on_channel_failed(targets: Array[Entity]) ## Emitted when this Ability's channeling is interrupted or canceled.
+signal on_channel_ended(targets: Array[Entity]) ## Emitted when this Ability's channeling ends.
 
 ## Called every frame. Reduces the cooldown left.
 func on_battle_tick(delta: float) -> void:
@@ -114,9 +123,9 @@ func on_battle_tick(delta: float) -> void:
 	if channeling and _channel_time_left >= 0.0:
 		_channel_time_left -= delta
 		if _channel_time_left <= 0.0:
-			on_channel_ended.emit(_caster, _targets)
+			on_channel_ended.emit(_targets)
 		else :
-			on_channel_tick.emit(_caster, _targets, delta)
+			on_channel_tick.emit(_targets, delta)
 	if _cooldown_left > 0.0:
 		_cooldown_left -= delta
 
@@ -137,7 +146,7 @@ func begin_cast(targets: Array[Entity]):
 	_targets = targets
 	_cast_time_left = casting_time
 	for effect in _effects:
-		effect.register(_caster, _targets)
+		effect.register(self, _caster, _targets)
 	casting = true
 	active = true
 
@@ -168,6 +177,7 @@ func end():
 	, self)
 	channeling = false
 	active = false
+	_targets = []
 	for effect in _effects:
 		effect.clear_temp_effects()
 
@@ -179,7 +189,9 @@ func is_resource_equal(resource: AbilityResource):
 
 ## Returns whether this Ability can be cast. Finds the default targets.
 func is_castable() -> bool:
-	var targets = _targeting_resource.get_targets(_caster, self) if _targeting_resource else _caster.targeting_component.targets
+	var targets = _targeting_resource.get_targets(
+		EffectInfo.new(null, null, _caster, _targets)
+	) if _targeting_resource else _caster.targeting_component.targets
 	return is_castable_at(targets)
 
 
@@ -189,10 +201,10 @@ func is_castable_at(targets: Array[Entity]) -> bool:
 		if !target.targeting_component.is_targetable():
 			return false
 	for conditional in _conditionals_positive:
-		if !conditional.is_met(null, self, _caster, targets):
+		if !conditional.is_met(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": _targets}):
 			return false
 	for conditional in _conditionals_negative:
-		if conditional.is_met(null, self, _caster, targets):
+		if conditional.is_met(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": _targets}):
 			return false
 	return true
 
@@ -202,7 +214,7 @@ func _is_highlighted(targets: Array[Entity]) -> bool:
 	if _conditionals_highlight.is_empty():
 		return false
 	for conditional in _conditionals_highlight:
-		if !conditional.is_met(null, self, _caster, targets):
+		if !conditional.is_met(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": targets}):
 			return false
 	return true
 
@@ -211,7 +223,7 @@ func _is_highlighted(targets: Array[Entity]) -> bool:
 func get_targets() -> Array[Entity]:
 	var targets =  _caster.targeting_component.targets
 	if _targeting_resource:
-		targets = _targeting_resource.get_targets(_caster, self)
+		targets = _targeting_resource.get_targets(EffectInfo.new(), {"ability": self, "caster": _caster, "targets": targets})
 	return targets
 
 

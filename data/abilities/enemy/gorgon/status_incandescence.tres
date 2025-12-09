@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://dd7xnourwb3yb"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_abpmn"]
+[ext_resource type="Resource" uid="uid://blp5amml67ut" path="res://data/abilities/enemy/gorgon/status_petrified.tres" id="2_abpmn"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_1inau"]
+[ext_resource type="Texture2D" uid="uid://cmblaahhl7t2m" path="res://assets/abilities/p_05.png" id="4_m3p76"]
+[ext_resource type="Resource" uid="uid://bvj28fpqkfcg6" path="res://data/values/flats/breakpoints/lifetimes/lifetime_short.tres" id="5_dptx8"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="7_6xfkw"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="7_j57au"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="8_bb2ql"]
+[ext_resource type="Resource" uid="uid://dt4kgw1tvdm7h" path="res://data/triggers/on_take_damage.tres" id="9_3di3m"]
+
+[resource]
+script = ExtResource("7_6xfkw")
+effect_added = ExtResource("2_abpmn")
+stacking_behavior = 21
+lifetime = ExtResource("5_dptx8")
+status_effect_scene = ExtResource("7_j57au")
+title = "Incandescence"
+description = "Petrifies any attackers."
+icon = ExtResource("4_m3p76")
+triggers = Array[ExtResource("8_bb2ql")]([ExtResource("9_3di3m")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

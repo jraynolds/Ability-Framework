@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=9 format=3 uid="uid://b8ubn0byfhpkn"]
+
+[ext_resource type="Resource" uid="uid://cevhfpya5oxve" path="res://data/values/flats/breakpoints/cast times/enemy_ability_cast_time_must_interrupt.tres" id="1_85xut"]
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_r51ie"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_5ylpn"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_g1c4n"]
+[ext_resource type="Resource" uid="uid://bei5gkrr7mgl7" path="res://data/values/flats/breakpoints/cooldowns/enemy_cooldown_twice_a_fight.tres" id="3_l4tak"]
+[ext_resource type="Resource" uid="uid://d0c2ip1lfxmqt" path="res://data/values/flats/breakpoints/cooldowns/enemy_cooldown_wait_a_gcd.tres" id="5_3avki"]
+[ext_resource type="Resource" uid="uid://celg7a51oq7wn" path="res://data/abilities/enemy/gorgon/status_caster_add_incandescence.tres" id="5_l4tak"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="7_61v5f"]
+
+[resource]
+script = ExtResource("3_g1c4n")
+title = "Incandescence"
+description = "The Gorgon glows brightly, emitting its dangerous gaze from each snake. Attackers become Petrified."
+targeting = ExtResource("7_61v5f")
+effects = Array[ExtResource("2_5ylpn")]([ExtResource("5_l4tak")])
+casting_time = ExtResource("1_85xut")
+cooldown = ExtResource("3_l4tak")
+gcd_cooldown = ExtResource("5_3avki")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"

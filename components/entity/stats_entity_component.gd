@@ -6,18 +6,28 @@ class_name StatsEntityComponent
 var stats : Dictionary[StatResource.StatType, Stat] ## The Entity's stats, paired with the kind of Stat each is.
 
 ## An Array of Transforms that alter modifications made to stats.
-var stat_transform_statuses : Array[LifetimeEffect] :
+var stat_transform_statuses : Array[StatusEffect] :
 	get :
 		return entity.statuses_component.stat_transform_statuses
 ## An Array of Transforms that alter modifications made to keyworded values.
-var keyword_transform_statuses : Array[LifetimeEffect] :
+var keyword_transform_statuses : Array[StatusEffect] :
 	get :
 		return entity.statuses_component.keyword_transform_statuses
 
 ## Emitted when a Stat we're tracking changes.
-signal on_stat_change(stat: StatResource.StatType, new_val: float, old_val: float)
+signal on_stat_change(
+	stat: StatResource.StatType, 
+	new_val: float, 
+	old_val: float,
+	effect_info : EffectInfo
+)
 ## Emitted when our HP is changed by damage.
-signal on_take_damage(damage_taken: float, damage_assigned: float, damage_type: DamageEffectResource.DamageType)
+signal on_take_damage(
+	damage_taken: float, 
+	damage_assigned: float, 
+	damage_type: DamageEffectResource.DamageType,
+	effect_info : EffectInfo
+)
 
 ## Overloaded method for logic that happens when the Entity's resource is changed.
 ## We rebuild from the ground up, so don't do this unless you want to wipe instanced changes.
@@ -26,8 +36,8 @@ func load_entity_resource(resource: EntityResource):
 	stats = {}
 	for stat_resource in resource.stats.keys():
 		var stat : Stat = stat_scene.instantiate().from_resource(
-			stat_resource, 
-			resource.stats[stat_resource].get_value(entity, [])
+			stat_resource,
+			resource.stats[stat_resource].get_value(EffectInfo.new(), {"caster": entity})
 		)
 		stats[stat._type] = stat
 		stat.name = Natives.enum_name(StatResource.StatType, stat._type)
@@ -46,7 +56,7 @@ func on_entity_updated():
 
 
 ## Returns the value of a stat of the given type. 
-## By default, applies the modifications of any ongoing status Effects.
+## By default, applies the transforms of any ongoing status Effects.
 func get_stat_value(stat: StatResource.StatType, ignore_statuses: bool = false) -> float:
 	#DebugManager.debug_log(
 		#"Returning the value of stat " + Natives.enum_name(StatResource.StatType, stat) +
@@ -66,19 +76,18 @@ func get_stat_value(stat: StatResource.StatType, ignore_statuses: bool = false) 
 				return trigger.trigger == TriggerResource.Trigger.OnGetStatValue
 			):
 				continue
-			## Skip any Effects without StatModifyEffectResource.
-			var stat_resource = effect._resource as StatModifyEffectResource
+			## Skip any Effects without StatTransformEffectResource.
+			var stat_resource = effect._resource as StatTransformEffectResource
 			if !stat_resource:
 				continue
-			## Skip any StatAddEffectResource without this stat as the one it modifies
+			## Skip any StatTransformEffectResource without this stat as the one it transforms.
 			if stat_resource.stat_type != stat:
 				continue
-			for i in range(entity.statuses_component.status_stacks[effect]):
-				stat_value = stat_resource.get_modified_value(
-					stat_value, 
-					effect._ability._caster,
-					[entity]
-				)
+			stat_value = stat_resource.get_modified_value(
+				stat_value,
+				EffectInfo.new(),
+				{"effect": effect, "ability": effect._ability, "caster": effect._ability._caster}
+			)
 		#DebugManager.debug_log(
 			#"The value of stat " + Natives.enum_name(StatResource.StatType, stat) +
 			#" is " + str(stat_value)
@@ -97,15 +106,21 @@ func get_stat_value(stat: StatResource.StatType, ignore_statuses: bool = false) 
 func modify_stat_value(
 	stat: StatResource.StatType, 
 	value_modifier: float,
-	effect : Effect,
+	effect_info : EffectInfo,
+	overrides: Dictionary={},
 	math_operation: Math.Operation = Math.Operation.Addition, 
 	ignore_statuses: bool = false,
 	ignore_transforms: bool = false
 ) -> float:
+	var effect = overrides.effect if "effect" in overrides else effect_info.effect
+	var ability = overrides.ability if "ability" in overrides else effect_info.ability
+	var caster = overrides.caster if "caster" in overrides else effect_info.caster
+	var targets = overrides.targets if "targets" in overrides else effect_info.targets
+	
 	DebugManager.debug_log(
 		"Modifying stat " + Natives.enum_name(StatResource.StatType, stat) +
 		" by " + str(value_modifier) + " using " + Natives.enum_name(Math.Operation, math_operation) +
-		" from effect " + effect.name +
+		" from " + str(effect) +
 		(" ignoring statuses " if ignore_statuses else "") +
 		(" ignoring transforms " if ignore_transforms else "")
 	, self)
@@ -116,9 +131,9 @@ func modify_stat_value(
 				value_modifier = transform._resource.try_transform(
 					value_modifier, 
 					effect, 
-					effect._ability, 
-					effect._ability._caster, 
-					effect._ability._targets,
+					ability, 
+					caster, 
+					targets,
 					entity.statuses_component.get_status_stacks(transform)
 				)
 	return set_stat_value(stat, Math.perform_operation(stat_value, value_modifier, math_operation))
@@ -127,7 +142,6 @@ func modify_stat_value(
 ## Sets the base value of the given stat type to the given value. 
 ## Returns the value of the stat afterwards.
 func set_stat_value(stat: StatResource.StatType, value: float) -> float:
-	#print("Setting " + entity.title + "'s " + Natives.enum_name(StatResource.StatType, stat) + " to " + str(value))
 	stats[stat].set_value(value)
 	return stats[stat].get_value()
 
@@ -137,16 +151,23 @@ func set_stat_value(stat: StatResource.StatType, value: float) -> float:
 func take_damage(
 	damage_dealt: float, 
 	damage_type: DamageEffectResource.DamageType, 
-	effect: Effect, 
+	effect_info: EffectInfo,
+	overrides: Dictionary = {},
 	ignore_statuses: bool = false,
 	ignore_transforms: bool = false,
 	bypass_defense: bool = false
 ) -> float:
+	var effect = overrides.effect if "effect" in overrides else effect_info.effect
+	var ability = overrides.ability if "ability" in overrides else effect_info.ability
+	var caster = overrides.caster if "caster" in overrides else effect_info.caster
+	var targets = overrides.targets if "targets" in overrides else effect_info.targets
+		
 	var incoming_damage = damage_dealt
 	DebugManager.debug_log(
 		"Taking damage equal to " + str(damage_dealt) + 
 		" of type " + Natives.enum_name(DamageEffectResource.DamageType, damage_type) +
-		" from effect " + effect.name +
+		" from effect " + effect.name + " in ability " + ability._title +
+		" cast by " + caster.title + " at targets " + ",".join(targets.map(func(t: Entity): return t.title)) +
 		(" ignoring statuses " if ignore_statuses else "") +
 		(" ignoring transforms " if ignore_transforms else "")
 	, self)
@@ -161,13 +182,12 @@ func take_damage(
 	var hp_value = get_stat_value(StatResource.StatType.HP, ignore_statuses)
 	if !ignore_transforms:
 		for transform in keyword_transform_statuses:
-			if transform._resource.keyword == KeywordTransformEffectResource.Keyword.Damaged:
-				damage_dealt = transform._resource.try_transform(
+			var transform_resource = transform._resource as KeywordTransformEffectResource
+			if transform_resource.keyword == KeywordTransformEffectResource.Keyword.Damaged:
+				damage_dealt = transform_resource.try_transform(
 					damage_dealt, 
-					effect, 
-					effect._ability, 
-					effect._ability._caster, 
-					effect._ability._targets,
+					effect_info, 
+					overrides,
 					entity.statuses_component.get_status_stacks(transform)
 				)
 	var hp_before_damage = get_stat_value(StatResource.StatType.HP)
@@ -179,7 +199,12 @@ func take_damage(
 	DebugManager.debug_log(
 		"We've been dealt " + str(actual_damage_dealt) + " actual damage"
 	, self)
-	on_take_damage.emit(actual_damage_dealt, incoming_damage, damage_type)
+	on_take_damage.emit(
+		actual_damage_dealt, 
+		incoming_damage, 
+		damage_type,
+		effect_info
+	)
 	#DebugManager.debug_log(
 		#"Our new HP is " + str(new_hp_value)
 	#, self)

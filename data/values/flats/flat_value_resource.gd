@@ -4,6 +4,6 @@ class_name FlatValueResource
 
 @export var value : float ## The value of this Value.
 
-## Returns a flat value.
-func calc_value(_caster: Entity, _targets: Array[Entity]) -> float:
+## Returns our value.
+func calc_value(_effect_info: EffectInfo, _overrides: Dictionary={}) -> float:
 	return value

@@ -12,8 +12,16 @@ enum EffectResourceType {
 }
 @export var matches : bool = true ## Whether we return true if a match is found. By default, yes.
 
-## Returns whether the ability caster last cast the given Ability.
-func is_met(effect: Effect, _ability: Ability, _caster: Entity, _targets: Array[Entity]) -> bool:
+## Returns whether the given effect is of our type.
+func is_met(effect_info: EffectInfo, overrides: Dictionary={}) -> bool:
+	var effect : Effect = overrides.effect if "effect" in overrides else effect_info.effect
+	#var ability : Ability = overrides.ability if "ability" in overrides else effect_info.ability
+	#var caster : Entity = overrides.caster if "caster" in overrides else effect_info.caster
+	#var targets : Array[Entity] = overrides.targets if "targets" in overrides else effect_info.targets
+	#if targeting_resource_override:
+		#targets = targeting_resource_override.get_targets(effect_info, overrides)
+		#overrides.targets = targets
+	
 	match effect_resource:
 		EffectResourceType.Base:
 			if effect._resource as DamageEffectResource:

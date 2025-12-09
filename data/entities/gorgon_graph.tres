@@ -1,0 +1,98 @@
+[gd_resource type="Resource" script_class="AbilityGraphResource" load_steps=10 format=3 uid="uid://cf1japlaxbad3"]
+
+[ext_resource type="Script" uid="uid://b0jgoy0lfkoee" path="res://tools/abilitygraph/resources/ability_graph_node_resource.gd" id="1_63wsc"]
+[ext_resource type="Script" uid="uid://ciktqkdlurfmq" path="res://tools/abilitygraph/resources/ability_graph_resource.gd" id="2_aqbxq"]
+
+[sub_resource type="Resource" id="Resource_ydybc"]
+script = ExtResource("1_63wsc")
+title = "EnterGraphNode2"
+position_offset = Vector2(40, 40)
+
+[sub_resource type="Resource" id="Resource_q6jtd"]
+script = ExtResource("1_63wsc")
+title = "ConditionalGraphNode"
+position_offset = Vector2(180, 140)
+node_data = {
+&"conditional_resource_path": "res://data/abilities/enemy/gorgon/has_status_petrified.tres"
+}
+
+[sub_resource type="Resource" id="Resource_yd4rf"]
+script = ExtResource("1_63wsc")
+title = "AbilityGraphNode3"
+position_offset = Vector2(620, 60)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/gorgon/smash.tres"
+}
+
+[sub_resource type="Resource" id="Resource_wwwip"]
+script = ExtResource("1_63wsc")
+title = "AbilityGraphNode2"
+position_offset = Vector2(600, 340)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/gorgon/petrify.tres"
+}
+
+[sub_resource type="Resource" id="Resource_s5j0w"]
+script = ExtResource("1_63wsc")
+title = "AbilityGraphNode4"
+position_offset = Vector2(900, 480)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/gorgon/incandescence.tres"
+}
+
+[sub_resource type="Resource" id="Resource_yxsdw"]
+script = ExtResource("1_63wsc")
+title = "AbilityGraphNode"
+position_offset = Vector2(1160, 680)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/gorgon/lash.tres"
+}
+
+[sub_resource type="Resource" id="Resource_1ew10"]
+script = ExtResource("1_63wsc")
+title = "AbilityGraphNode5"
+position_offset = Vector2(880, 180)
+node_data = {
+&"ability_resource_path": "res://data/abilities/enemy/gorgon/smash.tres"
+}
+
+[resource]
+script = ExtResource("2_aqbxq")
+connections = Array[Dictionary]([{
+"from_node": &"EnterGraphNode2",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"ConditionalGraphNode",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode3",
+"to_port": 0
+}, {
+"from_node": &"ConditionalGraphNode",
+"from_port": 1,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode2",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode2",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode4",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode4",
+"from_port": 3,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode",
+"to_port": 0
+}, {
+"from_node": &"AbilityGraphNode2",
+"from_port": 0,
+"keep_alive": false,
+"to_node": &"AbilityGraphNode5",
+"to_port": 0
+}])
+nodes = Array[ExtResource("1_63wsc")]([SubResource("Resource_ydybc"), SubResource("Resource_q6jtd"), SubResource("Resource_yd4rf"), SubResource("Resource_wwwip"), SubResource("Resource_s5j0w"), SubResource("Resource_yxsdw"), SubResource("Resource_1ew10")])

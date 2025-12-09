@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=9 format=3 uid="uid://celg7a51oq7wn"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_k5o6u"]
+[ext_resource type="Resource" uid="uid://dd7xnourwb3yb" path="res://data/abilities/enemy/gorgon/status_incandescence.tres" id="2_gpabb"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_s4322"]
+[ext_resource type="Resource" uid="uid://dja1dbxhwreew" path="res://data/values/flats/breakpoints/lifetimes/lifetime_default.tres" id="4_mujy6"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_62o4n"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="6_kqglu"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="8_hcun5"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="9_5jxdk"]
+
+[resource]
+script = ExtResource("6_62o4n")
+effect_added = ExtResource("2_gpabb")
+stacking_behavior = 21
+lifetime = ExtResource("4_mujy6")
+status_effect_scene = ExtResource("6_kqglu")
+title = "Add Incandescence"
+description = "Applies a short duration of Incandescence to the caster, petrifying its attackers."
+positivity = 0
+triggers = Array[ExtResource("8_hcun5")]([ExtResource("9_5jxdk")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

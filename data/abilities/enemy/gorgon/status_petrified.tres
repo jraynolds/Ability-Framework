@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="KeywordTransformEffectResource" load_steps=7 format=3 uid="uid://blp5amml67ut"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_xtvlh"]
+[ext_resource type="Script" uid="uid://chpfuld7ro0c3" path="res://data/effects/keyword_transform_effect_resource.gd" id="2_2veeo"]
+[ext_resource type="Texture2D" uid="uid://df1sjuxse5wnd" path="res://assets/abilities/r_36.png" id="2_72t73"]
+[ext_resource type="Resource" uid="uid://b3ymktfi0p7ie" path="res://data/values/flats/bool_false.tres" id="3_q7oj3"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="3_rugji"]
+[ext_resource type="Resource" uid="uid://b6k5dbp7vidiw" path="res://data/triggers/on_get_keyword_value.tres" id="6_xqi0v"]
+
+[resource]
+script = ExtResource("2_2veeo")
+keyword = 3
+modifier = ExtResource("3_q7oj3")
+modifier_operation = 5
+title = "Petrified"
+description = "Lithified flesh prevents any actions."
+icon = ExtResource("2_72t73")
+triggers = Array[ExtResource("3_rugji")]([ExtResource("6_xqi0v")])
+metadata/_custom_type_script = "uid://chpfuld7ro0c3"

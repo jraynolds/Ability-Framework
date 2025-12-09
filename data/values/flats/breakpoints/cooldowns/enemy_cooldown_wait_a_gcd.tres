@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="FlatValueResource" load_steps=2 format=3 uid="uid://d0c2ip1lfxmqt"]
+
+[ext_resource type="Script" uid="uid://dnuf3s07uu1mo" path="res://data/values/flats/flat_value_resource.gd" id="1_1u3hf"]
+
+[resource]
+script = ExtResource("1_1u3hf")
+value = 2.0
+metadata/_custom_type_script = "uid://dnuf3s07uu1mo"

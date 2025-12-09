@@ -19,7 +19,12 @@ var gcd : float : ## The total duration in seconds a global cooldown ability dis
 	get :
 		return entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 var gcd_max_cached : float ## The stored GCD duration for the last Ability cast.
-var can_act : bool = true ## Whether the Entity can act or not.
+#var _can_act : bool = true ## Whether the Entity can act or not.
+
+## An Array of Transforms that alter modifications made to keyworded values.
+var keyword_transform_statuses : Array[StatusEffect] :
+	get :
+		return entity.statuses_component.keyword_transform_statuses
 
 @export var ability_scene : PackedScene ## The default Ability scene.
 
@@ -68,8 +73,8 @@ func on_battle_tick(delta: float):
 
 ## Connects an Ability's signals to our functions.
 func connect_signals(ability: Ability):
-	ability.on_cast.connect(func(_caster: Entity, targets: Array[Entity]): _on_ability_finished_cast(ability, targets))
-	ability.on_channel_ended.connect(func(_caster: Entity, targets: Array[Entity]): _on_ability_finished_channel(ability, targets))
+	ability.on_cast.connect(func(targets: Array[Entity]): _on_ability_finished_cast(ability, targets))
+	ability.on_channel_ended.connect(func(targets: Array[Entity]): _on_ability_finished_channel(ability, targets))
 
 
 ## Returns the Ability that matches the given AbilityResource.
@@ -146,16 +151,31 @@ func _on_ability_end(ability: Ability, targets: Array[Entity]):
 	ability.end()
 	if ability._gcd_type == AbilityResource.GCD.OnGCD:
 		if ability._gcd_cooldown:
-			gcd_max_cached = ability._gcd_cooldown.get_value(entity, targets)
+			gcd_max_cached = ability._gcd_cooldown.get_value(EffectInfo.new(null, ability, entity, targets))
 			gcd_remaining = gcd_max_cached
 		else :
 			gcd_max_cached = entity.stats_component.get_stat_value(StatResource.StatType.GCD)
 			gcd_remaining = gcd_max_cached
 
 
+## Returns whether the Entity can act.
+func can_act() -> bool:
+	var out = true
+	for keyword_transform in keyword_transform_statuses:
+		var keyword_transform_resource = keyword_transform._resource as KeywordTransformEffectResource
+		if keyword_transform_resource and keyword_transform_resource.keyword == KeywordTransformEffectResource.Keyword.CanAct:
+			out = keyword_transform_resource.try_transform(
+				out,
+				EffectInfo.new(),
+				{"caster": entity, "targets": entity.targeting_component.targets},
+				entity.statuses_component.get_status_stacks(keyword_transform)
+			)
+	return out
+
+
 ## Returns whether the given Ability can be cast by this Entity.
 func can_cast(ability: Ability) -> bool:
-	if !can_act:
+	if !can_act():
 		return false
 	if ability_casting:
 		return false
@@ -170,7 +190,7 @@ func can_cast(ability: Ability) -> bool:
 
 ## Returns whether the given Ability can be cast by this Entity on the given targets.
 func can_cast_at(ability: Ability, targets: Array[Entity]) -> bool:
-	if !can_act:
+	if !can_act():
 		return false
 	if ability_casting:
 		return false

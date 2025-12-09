@@ -13,8 +13,8 @@ func from_resource(resource: ValueResource) -> Value:
 
 
 ## Returns the value of this Value added and multiplied by any additional values.
-func get_value(caster: Entity, targets: Array[Entity]) -> float:
-	var value = _resource.get_value(caster, targets)
+func get_value(effect_info: EffectInfo) -> float:
+	var value = _resource.get_value(effect_info)
 	value += _added_value
 	value *= _added_multiplication
 	return value

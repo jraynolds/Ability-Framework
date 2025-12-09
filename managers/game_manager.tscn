@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cowxflwgtt3iq" path="res://managers/game_manager.gd" id="1_atyjh"]
 [ext_resource type="Resource" uid="uid://dnguhhq4lvfvh" path="res://data/entities/spellblade.tres" id="2_ou16m"]
-[ext_resource type="Resource" uid="uid://d3tm0gr5e5ivq" path="res://data/entities/dragon.tres" id="3_ou16m"]
+[ext_resource type="Resource" uid="uid://b7m0fo13x34i3" path="res://data/entities/gorgon.tres" id="3_ou16m"]
 [ext_resource type="PackedScene" uid="uid://bw7igfy1003t4" path="res://components/entity/entity.tscn" id="4_ou16m"]
 [ext_resource type="PackedScene" uid="uid://27bka5t3aalm" path="res://scenes/battle.tscn" id="4_yawit"]
 

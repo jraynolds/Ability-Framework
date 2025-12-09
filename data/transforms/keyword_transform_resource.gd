@@ -10,10 +10,10 @@ enum Keyword {
 }
 
 ## Attempts to modify the given value. If the conditionals aren't met, just returns the incoming value.
-func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], stacks: int=1) -> float:
-	super(value, effect, ability, caster, targets, stacks)
+func try_transform(value: float, effect_info: EffectInfo, overrides: Dictionary={}, stacks: int=1) -> float:
+	super(value, effect_info, overrides, stacks)
 	
-	var modifier_value = get_modifying_value(value, effect, ability, caster, targets, stacks)
+	var modifier_value = get_modifying_value(value, effect_info, overrides, stacks)
 	
 	DebugManager.debug_log(
 		"Modification of " + str(value) + " on keyword " + Natives.enum_name(Keyword, keyword) +
@@ -29,5 +29,5 @@ func try_transform(value: float, effect: Effect, ability: Ability, caster: Entit
 	, self)
 	
 	if multistack_behavior == MultistackBehavior.Recursive and stacks > 1:
-		return try_transform(transformed_value, effect, ability, caster, targets, stacks-1)
+		return try_transform(transformed_value, effect_info, overrides, stacks-1)
 	return transformed_value

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="StatusAddEffectResource" load_steps=10 format=3 uid="uid://cov242tkxrdli"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_ighm5"]
+[ext_resource type="Resource" uid="uid://mpfhupyolpaq" path="res://data/abilities/player/spellblade/absorb elements/status_imbued_element.tres" id="2_p8146"]
+[ext_resource type="Script" uid="uid://d027ldw58hbct" path="res://data/expirations/expiration_resource.gd" id="3_e5mp7"]
+[ext_resource type="PackedScene" uid="uid://by62w1pj46ro7" path="res://components/abilities/effects/status_effect.tscn" id="4_mpgrt"]
+[ext_resource type="Resource" uid="uid://drdc6r1gop77e" path="res://data/values/flats/flat_9999.tres" id="5_kfx7x"]
+[ext_resource type="Script" uid="uid://dd4xfe0r34mvo" path="res://data/effects/status_add_effect_resource.gd" id="6_vdhvb"]
+[ext_resource type="Resource" uid="uid://tasbvblmeedq" path="res://data/targeting/get_caster.tres" id="7_n4ilo"]
+[ext_resource type="Script" uid="uid://bwdmmov3abjck" path="res://data/triggers/trigger_resource.gd" id="8_jk35y"]
+[ext_resource type="Resource" uid="uid://dswjtbjgx24kd" path="res://data/triggers/on_this_ability_cast.tres" id="9_j2uft"]
+
+[resource]
+script = ExtResource("6_vdhvb")
+effect_added = ExtResource("2_p8146")
+stacking_behavior = 30
+num_stacks = ExtResource("5_kfx7x")
+lifetime_effect_scene = ExtResource("4_mpgrt")
+title = "Expire Imbued Element status"
+description = "The Imbued Element status is removed."
+targeting_override = ExtResource("7_n4ilo")
+triggers = Array[ExtResource("8_jk35y")]([ExtResource("9_j2uft")])
+metadata/_custom_type_script = "uid://dd4xfe0r34mvo"

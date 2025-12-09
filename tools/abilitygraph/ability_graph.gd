@@ -44,7 +44,7 @@ var ai_node_active : GraphNodeBase :
 			ai_node_active.active = true
 			if ai_node_active == enter_node:
 				for node in graph_nodes:
-					node.modulate = Color.WHITE
+					node.set_color(Color.WHITE)
 var entity : Entity : ## The entity whose AI we're watching. Changing this loads the graph file.
 	set(val):
 		entity = val
@@ -151,10 +151,21 @@ func get_nodes_connected_at_port(node: GraphNodeBase, port: int) -> Array[GraphN
 
 ## Triggered when a graph node makes a connection request.
 func _on_graph_edit_connection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int) -> void:
+	DebugManager.debug_log(
+		"Attempting to connect two graph nodes, from node " + from_node + " at port " + str(from_port) + " to node " + 
+		to_node + " at port " + str(to_port)
+	, self)
 	for connection in get_connections_from_node(get_node_from_name(from_node)):
 		if connection.from_port == from_port:
+			DebugManager.debug_log(
+				"Can't connect those nodes: they already have their own connections!"
+			, self)
 			return
 	graph_edit.connect_node(from_node, from_port, to_node, to_port)
+	DebugManager.debug_log(
+		"Connection made from node " + from_node + " at port " + str(from_port) + " to node " + 
+		to_node + " at port " + str(to_port)
+	, self)
 
 
 ## Triggered when a graph node makes a disconnection request.

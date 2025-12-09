@@ -1,6 +1,6 @@
 extends Resource
 ## A Resource that acts as an intermediate layer when a number would be applied to an Entity, and modifies that number.
-## Used exclusively in LifetimeEffects.
+## Used exclusively in StatusEffects.
 class_name TransformResource
 
 @export var modifier : ValueResource ## The value we modify the incoming number with.
@@ -17,13 +17,11 @@ enum MultistackBehavior { ## The behavior multiple stacks results in.
 ## Gets the modifying value. If given more than 1 stack, each stack is tallied according to the MultistackBehavior.
 func get_modifying_value(
 	_value: float, 
-	_effect: Effect, 
-	_ability: Ability, 
-	caster: Entity, 
-	targets: Array[Entity], 
+	effect_info: EffectInfo,
+	overrides: Dictionary={},
 	stacks: int=1
 ) -> float:
-	var modifier_value = modifier.get_value(caster, targets)
+	var modifier_value = modifier.get_value(effect_info, overrides)
 	
 	assert(stacks >= 1, "No plan for negative stacks!")
 	if stacks > 1:
@@ -39,15 +37,15 @@ func get_modifying_value(
 
 
 ## Attempts to modify the given value. If the conditionals aren't met, just returns the incoming value.
-func try_transform(value: float, effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity], _stacks: int=1) -> float:
-	if !can_transform(effect, ability, caster, targets):
+func try_transform(value: float, effect_info: EffectInfo, overrides: Dictionary={}, _stacks: int=1) -> float:
+	if !can_transform(effect_info, overrides):
 		return value
 	return value
 
 
 ## Returns whether this Transform can be used on an incoming value.
-func can_transform(effect: Effect, ability: Ability, caster: Entity, targets: Array[Entity]) -> bool:
+func can_transform(effect_info: EffectInfo, overrides: Dictionary={}) -> bool:
 	for conditional in conditionals:
-		if !conditional.is_met(effect, ability, caster, targets):
+		if !conditional.is_met(effect_info, overrides):
 			return false
 	return true

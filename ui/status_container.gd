@@ -22,7 +22,7 @@ var _lifetime_left : float : ## How much time left in seconds the Effect has. Ch
 			_lifetime_label.text = str(floori(_lifetime_left))
 @export var _lifetime_label : Label ## The label that displays how much time left the Effect has.
 
-var _status : LifetimeEffect : ## The LifetimeEffect this container is representing. Changing this updates our visuals.
+var _status : StatusEffect : ## The StatusEffect this container is representing. Changing this updates our visuals.
 	set(val):
 		_status = val
 		name = _status._title
@@ -33,7 +33,7 @@ var _status : LifetimeEffect : ## The LifetimeEffect this container is represent
 
 
 ## Constructs and returns an instance of this, initialized with the given status Effect.
-func from_status(status: LifetimeEffect) -> StatusContainer:
+func from_status(status: StatusEffect) -> StatusContainer:
 	_status = status
 	return self
 
@@ -45,6 +45,6 @@ func _process(_delta: float) -> void:
 	_lifetime_left = _status.lifetime_remaining
 
 
-## Sets the number of stacks for our LifetimeEffect.
+## Sets the number of stacks for our StatusEffect.
 func set_stacks(stacks: int):
 	_stacks = stacks

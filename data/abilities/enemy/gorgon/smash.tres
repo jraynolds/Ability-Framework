@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AbilityResource" load_steps=9 format=3 uid="uid://7nwebt3aprif"]
+
+[ext_resource type="Script" uid="uid://36tst1rif02x" path="res://data/conditionals/conditional_resource.gd" id="1_1p8ra"]
+[ext_resource type="Resource" uid="uid://bprk2op2o83od" path="res://data/values/flats/breakpoints/cast times/enemy_ability_cast_time_short.tres" id="1_x20f1"]
+[ext_resource type="Script" uid="uid://des8hnti281sm" path="res://data/effects/effect_resource.gd" id="2_renjt"]
+[ext_resource type="Script" uid="uid://ciejt41n7j2sf" path="res://data/abilities/ability_resource.gd" id="3_bsd3f"]
+[ext_resource type="Resource" uid="uid://c2hru35osukg2" path="res://data/abilities/enemy/gorgon/damage_300%_if_petrified.tres" id="3_hkfv4"]
+[ext_resource type="Resource" uid="uid://d0c2ip1lfxmqt" path="res://data/values/flats/breakpoints/cooldowns/enemy_cooldown_wait_a_gcd.tres" id="3_ovhlf"]
+[ext_resource type="Resource" uid="uid://d38a07ch13d0k" path="res://data/abilities/enemy/gorgon/damage_50%_if_not_petrified.tres" id="4_oig3d"]
+[ext_resource type="Resource" uid="uid://bbhrkolepluiy" path="res://data/abilities/enemy/gorgon/status_remove_petrified.tres" id="5_x20f1"]
+
+[resource]
+script = ExtResource("3_bsd3f")
+title = "Smash"
+description = "The Gorgon lashes out with her fists, crumbling and breaking stone. Removes Petrify: if it does, deals 250% more damage."
+effects = Array[ExtResource("2_renjt")]([ExtResource("3_hkfv4"), ExtResource("4_oig3d"), ExtResource("5_x20f1")])
+casting_time = ExtResource("1_x20f1")
+cooldown = ExtResource("3_ovhlf")
+metadata/_custom_type_script = "uid://ciejt41n7j2sf"
